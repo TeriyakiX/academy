@@ -41,6 +41,8 @@
 @foreach ($seo['js'] ?? [] as $script)
     <script src="{{ $script['src'] }}"@if ($script['type']) type="{{ $script['type'] }}"@endif @if ($script['defer']) defer @endif @if ($script['async']) async @endif></script>
 @endforeach
+@include('partials.site.modal')
+
 @stack('scripts')
 
 </body>

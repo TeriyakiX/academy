@@ -113,18 +113,24 @@ Route::get('/constructor.html', fn () => view('pages.constructor', ['seo' => [
 ]]))->name('constructor');
 
 /*
- | Приём заявки с главной.
- | Пока только логирование и редирект на «спасибо».
- | Отправку в CRM/Telegram подключим, когда заказчик определится с системой.
+ | Приём заявок со всех форм сайта.
+ | Дальше их разбирает LeadService: лог + Telegram + Битрикс24.
+ | Каналы включаются в .env, поэтому подключение CRM не требует правок кода.
  */
-Route::post('/lead', function (\Illuminate\Http\Request $request) {
+Route::post('/lead', function (
+    \Illuminate\Http\Request $request,
+    \App\Services\LeadService $leads
+) {
     $data = $request->validate([
-        'name'   => ['required', 'string', 'max:120'],
-        'phone'  => ['required', 'string', 'max:40'],
-        'source' => ['nullable', 'string', 'max:200'],
+        'name'    => ['required', 'string', 'max:120'],
+        'phone'   => ['required', 'string', 'max:40'],
+        'source'  => ['nullable', 'string', 'max:200'],
+        'page'    => ['nullable', 'string', 'max:200'],
+        'comment' => ['nullable', 'string', 'max:1000'],
+        'courses' => ['nullable', 'string', 'max:1000'],
     ]);
 
-    \Illuminate\Support\Facades\Log::channel('single')->info('Заявка с сайта', $data);
+    $leads->handle($data);
 
     return redirect('/thank-you.html');
 })->name('lead.store');
