@@ -8,7 +8,7 @@
 <div class="wrapper">
     @include('partials.site.header')
 
-    <main>
+    <main class="ab-page ab-page--course">
         {{-- ---------- Шапка курса ---------- --}}
         <section class="ab-cpage__hero">
             <div class="ab-container">
