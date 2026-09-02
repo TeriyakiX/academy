@@ -17,10 +17,26 @@ return array (
       array (
         0 => '/assets/article.css',
       ),
+      'body_attrs' => 
+      array (
+        'class' => 'body',
+      ),
       'js' => 
       array (
-        0 => 'https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU',
-        1 => '/assets/article.js',
+        0 => 
+        array (
+          'src' => 'https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU',
+          'type' => NULL,
+          'defer' => false,
+          'async' => false,
+        ),
+        1 => 
+        array (
+          'src' => '/assets/article.js',
+          'type' => 'module',
+          'defer' => false,
+          'async' => false,
+        ),
       ),
     ),
     '/barnoe-delo/koktel-metodom-bild.html' => 
@@ -38,10 +54,26 @@ return array (
         0 => '/assets/splide.css',
         1 => '/assets/vstryakhni-i-poday.css',
       ),
+      'body_attrs' => 
+      array (
+        'class' => 'body',
+      ),
       'js' => 
       array (
-        0 => 'https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU',
-        1 => '/assets/barnoeDeloKoktelMetodomBild.js',
+        0 => 
+        array (
+          'src' => 'https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU',
+          'type' => NULL,
+          'defer' => false,
+          'async' => false,
+        ),
+        1 => 
+        array (
+          'src' => '/assets/barnoeDeloKoktelMetodomBild.js',
+          'type' => 'module',
+          'defer' => false,
+          'async' => false,
+        ),
       ),
     ),
     '/barnoe-delo/metod-ctir.html' => 
@@ -59,10 +91,26 @@ return array (
         0 => '/assets/splide.css',
         1 => '/assets/vstryakhni-i-poday.css',
       ),
+      'body_attrs' => 
+      array (
+        'class' => 'body',
+      ),
       'js' => 
       array (
-        0 => 'https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU',
-        1 => '/assets/barnoeDeloKoktelMetodomCtir.js',
+        0 => 
+        array (
+          'src' => 'https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU',
+          'type' => NULL,
+          'defer' => false,
+          'async' => false,
+        ),
+        1 => 
+        array (
+          'src' => '/assets/barnoeDeloKoktelMetodomCtir.js',
+          'type' => 'module',
+          'defer' => false,
+          'async' => false,
+        ),
       ),
     ),
     '/barnoe-delo/vstryakhni-i-poday.html' => 
@@ -80,10 +128,26 @@ return array (
         0 => '/assets/splide.css',
         1 => '/assets/vstryakhni-i-poday.css',
       ),
+      'body_attrs' => 
+      array (
+        'class' => 'body',
+      ),
       'js' => 
       array (
-        0 => 'https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU',
-        1 => '/assets/barnoeDeloVstryakhniIpoday.js',
+        0 => 
+        array (
+          'src' => 'https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU',
+          'type' => NULL,
+          'defer' => false,
+          'async' => false,
+        ),
+        1 => 
+        array (
+          'src' => '/assets/barnoeDeloVstryakhniIpoday.js',
+          'type' => 'module',
+          'defer' => false,
+          'async' => false,
+        ),
       ),
     ),
     '/blog.html' => 
@@ -100,10 +164,26 @@ return array (
       array (
         0 => '/assets/blog.css',
       ),
+      'body_attrs' => 
+      array (
+        'class' => 'body',
+      ),
       'js' => 
       array (
-        0 => 'https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU',
-        1 => '/assets/blog.js',
+        0 => 
+        array (
+          'src' => 'https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU',
+          'type' => NULL,
+          'defer' => false,
+          'async' => false,
+        ),
+        1 => 
+        array (
+          'src' => '/assets/blog.js',
+          'type' => 'module',
+          'defer' => false,
+          'async' => false,
+        ),
       ),
     ),
     '/busines.html' => 
@@ -120,10 +200,26 @@ return array (
       array (
         0 => '/assets/busines.css',
       ),
+      'body_attrs' => 
+      array (
+        'class' => 'body',
+      ),
       'js' => 
       array (
-        0 => 'https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU',
-        1 => '/assets/busines.js',
+        0 => 
+        array (
+          'src' => 'https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU',
+          'type' => NULL,
+          'defer' => false,
+          'async' => false,
+        ),
+        1 => 
+        array (
+          'src' => '/assets/busines.js',
+          'type' => 'module',
+          'defer' => false,
+          'async' => false,
+        ),
       ),
     ),
     '/contact.html' => 
@@ -141,10 +237,26 @@ return array (
         0 => '/assets/splide.css',
         1 => '/assets/contact.css',
       ),
+      'body_attrs' => 
+      array (
+        'class' => 'body',
+      ),
       'js' => 
       array (
-        0 => 'https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU',
-        1 => '/assets/contact.js',
+        0 => 
+        array (
+          'src' => 'https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU',
+          'type' => NULL,
+          'defer' => false,
+          'async' => false,
+        ),
+        1 => 
+        array (
+          'src' => '/assets/contact.js',
+          'type' => 'module',
+          'defer' => false,
+          'async' => false,
+        ),
       ),
     ),
     '/courses.html' => 
@@ -162,10 +274,26 @@ return array (
         0 => '/assets/splide.css',
         1 => '/assets/courses.css',
       ),
+      'body_attrs' => 
+      array (
+        'class' => 'body',
+      ),
       'js' => 
       array (
-        0 => 'https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU',
-        1 => '/assets/courses.js',
+        0 => 
+        array (
+          'src' => 'https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU',
+          'type' => NULL,
+          'defer' => false,
+          'async' => false,
+        ),
+        1 => 
+        array (
+          'src' => '/assets/courses.js',
+          'type' => 'module',
+          'defer' => false,
+          'async' => false,
+        ),
       ),
     ),
     '/courses/barista-advanced.html' => 
@@ -183,10 +311,26 @@ return array (
         0 => '/assets/splide.css',
         1 => '/assets/baristaAdvanced.css',
       ),
+      'body_attrs' => 
+      array (
+        'class' => 'body',
+      ),
       'js' => 
       array (
-        0 => 'https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU',
-        1 => '/assets/baristaAdvanced.js',
+        0 => 
+        array (
+          'src' => 'https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU',
+          'type' => NULL,
+          'defer' => false,
+          'async' => false,
+        ),
+        1 => 
+        array (
+          'src' => '/assets/baristaAdvanced.js',
+          'type' => 'module',
+          'defer' => false,
+          'async' => false,
+        ),
       ),
     ),
     '/courses/barista-base.html' => 
@@ -204,10 +348,26 @@ return array (
         0 => '/assets/splide.css',
         1 => '/assets/baristaBase.css',
       ),
+      'body_attrs' => 
+      array (
+        'class' => 'body',
+      ),
       'js' => 
       array (
-        0 => 'https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU',
-        1 => '/assets/baristaBase.js',
+        0 => 
+        array (
+          'src' => 'https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU',
+          'type' => NULL,
+          'defer' => false,
+          'async' => false,
+        ),
+        1 => 
+        array (
+          'src' => '/assets/baristaBase.js',
+          'type' => 'module',
+          'defer' => false,
+          'async' => false,
+        ),
       ),
     ),
     '/courses/barista-courses.html' => 
@@ -225,10 +385,26 @@ return array (
         0 => '/assets/splide.css',
         1 => '/assets/baristaCourses.css',
       ),
+      'body_attrs' => 
+      array (
+        'class' => 'body',
+      ),
       'js' => 
       array (
-        0 => 'https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU',
-        1 => '/assets/baristaCourses.js',
+        0 => 
+        array (
+          'src' => 'https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU',
+          'type' => NULL,
+          'defer' => false,
+          'async' => false,
+        ),
+        1 => 
+        array (
+          'src' => '/assets/baristaCourses.js',
+          'type' => 'module',
+          'defer' => false,
+          'async' => false,
+        ),
       ),
     ),
     '/courses/barista-professional.html' => 
@@ -246,10 +422,26 @@ return array (
         0 => '/assets/splide.css',
         1 => '/assets/baristaProfessional.css',
       ),
+      'body_attrs' => 
+      array (
+        'class' => 'body',
+      ),
       'js' => 
       array (
-        0 => 'https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU',
-        1 => '/assets/baristaProfessional.js',
+        0 => 
+        array (
+          'src' => 'https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU',
+          'type' => NULL,
+          'defer' => false,
+          'async' => false,
+        ),
+        1 => 
+        array (
+          'src' => '/assets/baristaProfessional.js',
+          'type' => 'module',
+          'defer' => false,
+          'async' => false,
+        ),
       ),
     ),
     '/courses/barista-technician.html' => 
@@ -267,10 +459,26 @@ return array (
         0 => '/assets/splide.css',
         1 => '/assets/coursesBaristaTechnician.css',
       ),
+      'body_attrs' => 
+      array (
+        'class' => 'body',
+      ),
       'js' => 
       array (
-        0 => 'https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU',
-        1 => '/assets/coursesBaristaTechnician.js',
+        0 => 
+        array (
+          'src' => 'https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU',
+          'type' => NULL,
+          'defer' => false,
+          'async' => false,
+        ),
+        1 => 
+        array (
+          'src' => '/assets/coursesBaristaTechnician.js',
+          'type' => 'module',
+          'defer' => false,
+          'async' => false,
+        ),
       ),
     ),
     '/courses/barnoe-delo.html' => 
@@ -288,10 +496,26 @@ return array (
         0 => '/assets/splide.css',
         1 => '/assets/masterClass.css',
       ),
+      'body_attrs' => 
+      array (
+        'class' => 'body',
+      ),
       'js' => 
       array (
-        0 => 'https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU',
-        1 => '/assets/barnoeDelo.js',
+        0 => 
+        array (
+          'src' => 'https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU',
+          'type' => NULL,
+          'defer' => false,
+          'async' => false,
+        ),
+        1 => 
+        array (
+          'src' => '/assets/barnoeDelo.js',
+          'type' => 'module',
+          'defer' => false,
+          'async' => false,
+        ),
       ),
     ),
     '/courses/master-class.html' => 
@@ -309,10 +533,26 @@ return array (
         0 => '/assets/splide.css',
         1 => '/assets/masterClass.css',
       ),
+      'body_attrs' => 
+      array (
+        'class' => 'body',
+      ),
       'js' => 
       array (
-        0 => 'https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU',
-        1 => '/assets/masterClass.js',
+        0 => 
+        array (
+          'src' => 'https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU',
+          'type' => NULL,
+          'defer' => false,
+          'async' => false,
+        ),
+        1 => 
+        array (
+          'src' => '/assets/masterClass.js',
+          'type' => 'module',
+          'defer' => false,
+          'async' => false,
+        ),
       ),
     ),
     '/courses/upravlyayushchiy-kofeyni.html' => 
@@ -330,10 +570,26 @@ return array (
         0 => '/assets/splide.css',
         1 => '/assets/coursesUpravlyayushchiyKofeyni.css',
       ),
+      'body_attrs' => 
+      array (
+        'class' => 'body',
+      ),
       'js' => 
       array (
-        0 => 'https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU',
-        1 => '/assets/coursesUpravlyayushchiyKofeyni.js',
+        0 => 
+        array (
+          'src' => 'https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU',
+          'type' => NULL,
+          'defer' => false,
+          'async' => false,
+        ),
+        1 => 
+        array (
+          'src' => '/assets/coursesUpravlyayushchiyKofeyni.js',
+          'type' => 'module',
+          'defer' => false,
+          'async' => false,
+        ),
       ),
     ),
     '/' => 
@@ -350,9 +606,19 @@ return array (
       array (
         0 => '/assets/main.css',
       ),
+      'body_attrs' => 
+      array (
+        'class' => 'body',
+      ),
       'js' => 
       array (
-        0 => '/assets/main.js',
+        0 => 
+        array (
+          'src' => '/assets/main.js',
+          'type' => 'module',
+          'defer' => false,
+          'async' => false,
+        ),
       ),
     ),
     '/master-class/barista-v-take-away.html' => 
@@ -370,10 +636,26 @@ return array (
         0 => '/assets/splide.css',
         1 => '/assets/masterClassBaristaTakeAwau.css',
       ),
+      'body_attrs' => 
+      array (
+        'class' => 'body',
+      ),
       'js' => 
       array (
-        0 => 'https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU',
-        1 => '/assets/masterClassBaristaTakeAwau.js',
+        0 => 
+        array (
+          'src' => 'https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU',
+          'type' => NULL,
+          'defer' => false,
+          'async' => false,
+        ),
+        1 => 
+        array (
+          'src' => '/assets/masterClassBaristaTakeAwau.js',
+          'type' => 'module',
+          'defer' => false,
+          'async' => false,
+        ),
       ),
     ),
     '/master-class/domashniy-barista.html' => 
@@ -391,10 +673,26 @@ return array (
         0 => '/assets/splide.css',
         1 => '/assets/masterClassDomashniyBarista.css',
       ),
+      'body_attrs' => 
+      array (
+        'class' => 'body',
+      ),
       'js' => 
       array (
-        0 => 'https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU',
-        1 => '/assets/masterClassDomashniyBarista.js',
+        0 => 
+        array (
+          'src' => 'https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU',
+          'type' => NULL,
+          'defer' => false,
+          'async' => false,
+        ),
+        1 => 
+        array (
+          'src' => '/assets/masterClassDomashniyBarista.js',
+          'type' => 'module',
+          'defer' => false,
+          'async' => false,
+        ),
       ),
     ),
     '/master-class/domashnyaya-kofeynya.html' => 
@@ -412,10 +710,26 @@ return array (
         0 => '/assets/splide.css',
         1 => '/assets/masterClassDomashnyayaKofeynya.css',
       ),
+      'body_attrs' => 
+      array (
+        'class' => 'body',
+      ),
       'js' => 
       array (
-        0 => 'https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU',
-        1 => '/assets/masterClassDomashnyayaKofeynya.js',
+        0 => 
+        array (
+          'src' => 'https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU',
+          'type' => NULL,
+          'defer' => false,
+          'async' => false,
+        ),
+        1 => 
+        array (
+          'src' => '/assets/masterClassDomashnyayaKofeynya.js',
+          'type' => 'module',
+          'defer' => false,
+          'async' => false,
+        ),
       ),
     ),
     '/master-class/latte-art.html' => 
@@ -433,10 +747,26 @@ return array (
         0 => '/assets/splide.css',
         1 => '/assets/masterClassLatterArt.css',
       ),
+      'body_attrs' => 
+      array (
+        'class' => 'body',
+      ),
       'js' => 
       array (
-        0 => 'https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU',
-        1 => '/assets/masterClassLatterArt.js',
+        0 => 
+        array (
+          'src' => 'https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU',
+          'type' => NULL,
+          'defer' => false,
+          'async' => false,
+        ),
+        1 => 
+        array (
+          'src' => '/assets/masterClassLatterArt.js',
+          'type' => 'module',
+          'defer' => false,
+          'async' => false,
+        ),
       ),
     ),
     '/master-class/young-barista.html' => 
@@ -454,10 +784,26 @@ return array (
         0 => '/assets/splide.css',
         1 => '/assets/masterClassYoungBarista.css',
       ),
+      'body_attrs' => 
+      array (
+        'class' => 'body',
+      ),
       'js' => 
       array (
-        0 => 'https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU',
-        1 => '/assets/masterClassYoungBarista.js',
+        0 => 
+        array (
+          'src' => 'https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU',
+          'type' => NULL,
+          'defer' => false,
+          'async' => false,
+        ),
+        1 => 
+        array (
+          'src' => '/assets/masterClassYoungBarista.js',
+          'type' => 'module',
+          'defer' => false,
+          'async' => false,
+        ),
       ),
     ),
     '/oferta.html' => 
@@ -473,6 +819,10 @@ return array (
       'css' => 
       array (
         0 => '/assets/mainTest.css',
+      ),
+      'body_attrs' => 
+      array (
+        'class' => 'body',
       ),
       'js' => 
       array (
@@ -491,6 +841,10 @@ return array (
       'css' => 
       array (
         0 => '/assets/mainTest.css',
+      ),
+      'body_attrs' => 
+      array (
+        'class' => 'body',
       ),
       'js' => 
       array (
@@ -511,10 +865,26 @@ return array (
         0 => '/assets/splide.css',
         1 => '/assets/sertifikat.css',
       ),
+      'body_attrs' => 
+      array (
+        'class' => 'body',
+      ),
       'js' => 
       array (
-        0 => 'https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU',
-        1 => '/assets/sertifikat.js',
+        0 => 
+        array (
+          'src' => 'https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU',
+          'type' => NULL,
+          'defer' => false,
+          'async' => false,
+        ),
+        1 => 
+        array (
+          'src' => '/assets/sertifikat.js',
+          'type' => 'module',
+          'defer' => false,
+          'async' => false,
+        ),
       ),
     ),
     '/thank-you.html' => 
@@ -531,9 +901,19 @@ return array (
       array (
         0 => '/assets/thankYou.css',
       ),
+      'body_attrs' => 
+      array (
+        'class' => 'body',
+      ),
       'js' => 
       array (
-        0 => '/assets/thankYou.js',
+        0 => 
+        array (
+          'src' => '/assets/thankYou.js',
+          'type' => 'module',
+          'defer' => false,
+          'async' => false,
+        ),
       ),
     ),
     '/user-agreement.html' => 
@@ -549,6 +929,10 @@ return array (
       'css' => 
       array (
         0 => '/assets/mainTest.css',
+      ),
+      'body_attrs' => 
+      array (
+        'class' => 'body',
       ),
       'js' => 
       array (
