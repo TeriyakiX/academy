@@ -4,12 +4,6 @@
 @endphp
 
 <section class="ab-hero">
-    {{-- Декоративный пар над текстом --}}
-    <svg class="ab-hero__steam" viewBox="0 0 120 160" aria-hidden="true">
-        <path d="M30 150c0-30 18-32 18-58S30 62 30 34" />
-        <path d="M60 152c0-34 20-36 20-64S60 56 60 24" />
-        <path d="M90 150c0-30 18-32 18-58S90 62 90 40" />
-    </svg>
 
     <div class="ab-container">
         <div class="ab-hero__grid">
