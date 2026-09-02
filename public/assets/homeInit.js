@@ -12,10 +12,16 @@ function initFaq() {
     const items = document.querySelectorAll('.faq__accordion-item');
     if (!items.length) return;
 
+    // Раскрытие идёт через inline max-height — этого требует вёрстка сайта,
+    // одного класса .active недостаточно.
     const close = (item) => {
-        item.querySelector('.faq__accordion-body')?.classList.remove('active');
-        item.querySelector('.faq__accordion-icon svg')?.classList.remove('active');
-        item.querySelector('.faq__accordion-top')?.classList.remove('active');
+        const body = item.querySelector('.faq__accordion-body');
+        const icon = item.querySelector('.faq__accordion-icon svg');
+        if (body) {
+            body.classList.remove('active');
+            body.style.maxHeight = '0';
+        }
+        if (icon) icon.style.transform = 'rotate(0deg)';
     };
 
     items.forEach((item) => {
@@ -25,13 +31,35 @@ function initFaq() {
 
         head.addEventListener('click', () => {
             const isOpen = body.classList.contains('active');
-            items.forEach((other) => other !== item && close(other));
+            items.forEach(close);
 
-            body.classList.toggle('active', !isOpen);
-            item.querySelector('.faq__accordion-icon svg')?.classList.toggle('active', !isOpen);
-            head.classList.toggle('active', !isOpen);
+            if (!isOpen) {
+                body.classList.add('active');
+
+                body.style.maxHeight = body.scrollHeight + 'px';
+
+                const icon = item.querySelector('.faq__accordion-icon svg');
+                if (icon) icon.style.transform = 'rotate(-46deg)';
+            }
         });
     });
+}
+
+/** Фильтр месяцев в блоке «Расписание мероприятий». */
+function initEvents() {
+    const buttons = document.querySelectorAll('.events__filters-button');
+    const panels = document.querySelectorAll('.events__content');
+    if (!buttons.length || !panels.length) return;
+
+    const activate = (index) => {
+        buttons.forEach((b) => b.classList.remove('events__filters-button-active'));
+        panels.forEach((p) => p.classList.remove('active'));
+        buttons[index]?.classList.add('events__filters-button-active');
+        panels[index]?.classList.add('active');
+    };
+
+    buttons.forEach((btn, i) => btn.addEventListener('click', () => activate(i)));
+    activate(0);
 }
 
 /** Аккордеон колонок подвала на мобильных (старая разметка на внутренних страницах). */
@@ -148,6 +176,7 @@ async function initForms() {
 
 initFaq();
 initFooterAccordion();
+initEvents();
 initHeroSliders();
 initLazyMaps();
 initModals();
