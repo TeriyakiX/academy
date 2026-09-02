@@ -1,0 +1,20 @@
+/* Стили блока отзывов. Извлечены из sertifikat.css —
+   подключать целиком чужой файл нельзя: он переопределяет .header/.footer/.container. */
+.reviews{background-color:var(--pine-cone-50)}
+@media (max-width: 900px){.reviews__title{margin-bottom:20px}}
+.reviews__slider-slide{border-radius:10px;padding:30px;max-height:298px;background-color:var(--white-color)}
+@media (max-width: 600px){.reviews__slider-slide{padding:22px}}
+@media (max-width: 500px){.reviews__slider-slide{max-height:260px}}
+.reviews__slider-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:20px}
+.reviews__slider-person{display:flex;align-items:center;gap:15px}
+@media (max-width: 500px){.reviews__slider-person{gap:8px}}
+.reviews__slider-avatar{position:relative;overflow:hidden;border-radius:50%;width:40px;height:40px;background-color:var(--pine-cone-50)}
+@media (max-width: 500px){.reviews__slider-avatar{width:30px;height:30px}}
+.reviews__slider-avatar svg{position:absolute;right:50%;bottom:0;width:30px;height:30px;transform:translate(50%)}
+@media (max-width: 500px){.reviews__slider-avatar svg{width:25px;height:25px}}
+@media (max-width: 500px){.reviews__slider-link img{width:120px}}
+.reviews__slider-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:25px}
+@media (max-width: 500px){.reviews__slider-row{margin-bottom:16px}}
+.reviews__slider-stars svg{width:120px;height:22px}
+.reviews__slider-body{overflow-y:auto;height:126px}
+@media (max-width: 1000px){.reviews__slider-body{height:110px}}

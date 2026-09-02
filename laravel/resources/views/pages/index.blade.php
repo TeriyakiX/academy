@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @push('head')
-    @vite('resources/css/constructor.css')
-    <link rel="stylesheet" href="/assets/sertifikat.css">
+    @vite(['resources/css/constructor.css', 'resources/css/reviews.css'])
 @endpush
 
 @push('scripts')
