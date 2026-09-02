@@ -1,0 +1,30 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+Redirect 301 /barista-bazovyj/ /courses/barista-base.html
+
+Redirect 301 /barista-v-take-away/ /master-class/barista-v-take-away.html
+Redirect 301 /metod-stir/ /barnoe-delo/metod-ctir.html
+Redirect 301 /latte-art/ /master-class/latte-art.html
+Redirect 301 /upravlyayushhij-kofejni/ /courses/upravlyayushchiy-kofeyni.html
+
+RewriteRule ^category/курсы-бариста/$ - [G]
+RewriteRule ^category/barmenskoe-delo/$ - [G]
+RewriteRule ^tag/sekrety-varki/$ - [G]
+RewriteRule ^tag/vybor-zeren/$ - [G]
+RewriteRule ^tag/penka-v-turke/$ - [G]
+RewriteRule ^tag/kofe-v-turke/$ - [G]
+RewriteRule ^category/podarochnye-sertifikaty/$ - [G]
+RewriteRule ^tag/keramicheskaya-turka/$ - [G]
+RewriteRule ^tag/pomol-kofe/$ - [G]
+RewriteRule ^tag/stalnaya-turka/$ - [G]
+RewriteRule ^tag/kak-varit-kofe/$ - [G]
+RewriteRule ^tag/reczept-kofe-v-turke/$ - [G]
+RewriteRule ^tag/mednaya-turka/$ - [G]
+
+RewriteRule ^category-sitemap.xml$ - [G]
+RewriteRule ^lesson-sitemap.xml$ - [G]
+RewriteRule ^page-sitemap.xml$ - [G]
+RewriteRule ^project-sitemap.xml$ - [G]
+RewriteRule ^teacher-sitemap.xml$ - [G]
+</IfModule>

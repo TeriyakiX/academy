@@ -1,0 +1,16 @@
+RewriteEngine On
+RewriteCond %{ENV:FORCE_HTTPS} ^(1|true|on)$ [NC]
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Deny access to dotfiles
+<Files ~ "^\.">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Basic PHP security
+<Files *.php>
+    Order allow,deny
+    Allow from all
+</Files>

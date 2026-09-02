@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>	<!-- Создаём обычный xml документ. Я, как пример, взял данные, которые передаёт плагин «Яндекс.Турбо» от Flector. Спасибо ему большое -->
+<rss
+    xmlns:yandex="http://news.yandex.ru"
+    xmlns:media="http://search.yahoo.com/mrss/"
+    xmlns:turbo="http://turbo.yandex.ru"
+    version="2.0">
+<channel>
+	<title>Курсы бариста Москва</title>	<!-- Не знаю, насколько важен параметр title, link, language и description для Яндекс Турбо. Без них не пробовал, а с ними работает. Если нашли ошибку, я не гуру xml, напишите я исправлю. Для чистоты кода, как говорится. Но главное, робот Яндекс Турбо понимает. -->
+    <link>hhttps://academy-barista.ru/</link>
+    <description>Курсы бариста, мастер классы Москва и Московская область.</description>
+                                <language>ru</language>
+
+<item turbo="false">	<!-- Самый главный параметр. Отдаёт команду роботу Яндекс Турбо удалить страницу. Полное удаление может занять несколько дней. -->
+<link>https://academy-barista.ru/</link>	<!-- Ссылка на страницу, которая должна быть удалена -->
+</item>
+
+</channel>
+</rss>
