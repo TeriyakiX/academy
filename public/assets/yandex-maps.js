@@ -1,0 +1,1 @@
+const o=()=>{ymaps.ready(a);function a(){const e=new ymaps.Map("map",{center:[55.773872,37.684367],zoom:10,controls:[]}),n=new ymaps.Placemark([55.77356,37.684075],{hintContent:"Академия бариста",balloonContent:"Академия бариста"},{iconLayout:"default#image",iconImageHref:"/assets/marker.svg",iconImageSize:[40,40],iconImageOffset:[-25,-50]});e.geoObjects.add(n)}};export{o as y};
