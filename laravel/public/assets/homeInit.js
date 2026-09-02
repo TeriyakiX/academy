@@ -98,37 +98,6 @@ async function initHeroSliders() {
     }
 }
 
-/**
- * Карты в блоке контактов — ленивые iframe: настоящий src подставляется,
- * когда блок подъезжает к экрану.
- */
-function initLazyMaps() {
-    const maps = document.querySelectorAll('.lazy-map');
-    if (!maps.length) return;
-
-    const load = (el) => {
-        if (el.dataset.src && el.src !== el.dataset.src) el.src = el.dataset.src;
-    };
-
-    if (!('IntersectionObserver' in window)) {
-        maps.forEach(load);
-        return;
-    }
-
-    const observer = new IntersectionObserver(
-        (entries) => {
-            entries.forEach((entry) => {
-                if (!entry.isIntersecting) return;
-                load(entry.target);
-                observer.unobserve(entry.target);
-            });
-        },
-        { rootMargin: '0px 0px 300px 0px' }
-    );
-
-    maps.forEach((el) => observer.observe(el));
-}
-
 /** Модальные окна: кнопки [data-modal-path] открывают [data-modal-target]. */
 function initModals() {
     const triggers = document.querySelectorAll('[data-modal-path]');
@@ -178,6 +147,5 @@ initFaq();
 initFooterAccordion();
 initEvents();
 initHeroSliders();
-initLazyMaps();
 initModals();
 initForms();

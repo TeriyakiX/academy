@@ -85,3 +85,36 @@ if (menu && burger) {
         if (e.key === 'Escape') closeAll();
     });
 })();
+
+/**
+ * Ленивые карты.
+ * Iframe хранит адрес в data-src и подгружается, когда блок подъезжает к экрану.
+ * Раньше это работало только на главной (логика жила в homeInit.js), из-за чего
+ * на странице контактов карта оставалась пустой. Теперь — на всех страницах.
+ */
+(() => {
+    const maps = document.querySelectorAll('.lazy-map[data-src]');
+    if (!maps.length) return;
+
+    const load = (el) => {
+        if (el.dataset.src && el.src !== el.dataset.src) el.src = el.dataset.src;
+    };
+
+    if (!('IntersectionObserver' in window)) {
+        maps.forEach(load);
+        return;
+    }
+
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                load(entry.target);
+                observer.unobserve(entry.target);
+            });
+        },
+        { rootMargin: '0px 0px 300px 0px' }
+    );
+
+    maps.forEach((el) => observer.observe(el));
+})();
