@@ -85,13 +85,13 @@ return [
              'note'  => 'опыт работы кофейной школы',
              'icon'  => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>'],
 
-            ['value' => 90,   'suffix' => '%', 'label' => 'практики',
-             'note'  => 'занятий за реальным оборудованием',
+            ['value' => 160,  'suffix' => '+', 'label' => 'мастер-классов',
+             'note'  => 'провели за время работы',
              'icon'  => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h13a4 4 0 0 0 0-8h-1"/><path d="M4 5h12v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V5Z"/></svg>'],
 
-            ['value' => 13,   'suffix' => '',  'label' => 'программ',
-             'note'  => 'от базового курса до управления',
-             'icon'  => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19v15H6.5A2.5 2.5 0 0 0 4 20.5V5.5Z"/><path d="M9 8h6"/></svg>'],
+            ['value' => 50,   'suffix' => '+', 'label' => 'кофеен',
+             'note'  => 'помогли открыть с нуля',
+             'icon'  => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V9l7-5 7 5v12"/><path d="M10 21v-6h4v6"/></svg>'],
         ],
     ],
 
