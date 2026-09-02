@@ -17,8 +17,40 @@ use Throwable;
  */
 class LeadService
 {
+    /** Минимальное время на заполнение формы человеком, секунды. */
+    private const MIN_FILL_SECONDS = 3;
+
+    /**
+     * Похожа ли отправка на работу бота.
+     *
+     * Проверяем две вещи: заполнено ли скрытое поле-ловушка
+     * и не отправлена ли форма мгновенно после загрузки.
+     */
+    public static function looksAutomated(array $data): bool
+    {
+        // ловушку заполняют только автоматические скрипты
+        if (!empty($data['website'])) {
+            return true;
+        }
+
+        if (empty($data['loaded_at'])) {
+            return false; // метки нет — не наказываем, вдруг старый кэш страницы
+        }
+
+        try {
+            $loadedAt = (int) decrypt($data['loaded_at']);
+        } catch (Throwable) {
+            return true; // метку подделали
+        }
+
+        return (time() - $loadedAt) < self::MIN_FILL_SECONDS;
+    }
+
     public function handle(array $lead): void
     {
+        // служебные поля в CRM не нужны
+        unset($lead['website'], $lead['loaded_at']);
+
         // В лог пишем всегда — это страховка, если внешний канал недоступен.
         Log::channel('single')->info('Заявка с сайта', $lead);
 

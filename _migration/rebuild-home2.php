@@ -31,8 +31,8 @@ $order = [
     '@reasons',
     '@directions',
     '@business-cta',
-    '@certificate',
     '@events',
+    '@certificate',
     '@partners',
     '@faq',
     '@lead',             // заявка перед контактами

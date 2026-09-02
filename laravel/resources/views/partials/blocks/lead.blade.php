@@ -23,6 +23,8 @@
 
             <form class="ab-lead-form" method="post" action="/lead">
                 @csrf
+                @include('partials.form-guard')
+
                 <input type="hidden" name="source" value="Блок «Поможем выбрать курс»">
 
                 <label class="ab-lead-form__field">
