@@ -11,9 +11,36 @@ use Illuminate\Support\Facades\Route;
 | поисковой индексации. Менять их нельзя.
 */
 
+/*
+ | 13 страниц курсов имеют одинаковую структуру, поэтому рендерятся
+ | общим шаблоном pages/course с данными из config/course-pages.php.
+ | Остальные страницы отдаются как есть.
+ */
+$coursePages = config('course-pages', []);
+$catalog = collect(config('courses.schools'))
+    ->flatMap(fn ($list, $school) => collect($list)->map(fn ($c) => $c + ['school' => $school]))
+    ->keyBy('url');
+
 foreach (config('site.pages') as $uri => $page) {
-    Route::get($uri, fn () => view('pages.' . $page['view'], ['seo' => $page]))
-        ->name('page' . str_replace(['/', '.html', '.'], ['.', '', '_'], rtrim($uri, '/')) ?: 'home');
+    $routeName = 'page' . str_replace(['/', '.html', '.'], ['.', '', '_'], rtrim($uri, '/')) ?: 'home';
+
+    if (isset($coursePages[$uri])) {
+        $data = $coursePages[$uri];
+        $card = $catalog->get($uri, []);
+
+        Route::get($uri, fn () => view('pages.course', [
+            'seo'    => $page,
+            'course' => $data + [
+                'school'    => $card['school']    ?? 'Курсы',
+                'price'     => $card['price']     ?? null,
+                'old_price' => $card['old']       ?? null,
+            ],
+        ]))->name($routeName);
+
+        continue;
+    }
+
+    Route::get($uri, fn () => view('pages.' . $page['view'], ['seo' => $page]))->name($routeName);
 }
 
 // Дубли страниц -> 301 на оригинал
