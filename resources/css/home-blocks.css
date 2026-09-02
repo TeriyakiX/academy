@@ -844,3 +844,8 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 .ab-docs__req-list span { font-size: 14px; line-height: 1.55; color: var(--ab-500); }
 
 .ab-docs__note { margin: 22px 0 0; font-size: 15px; color: var(--ab-600); }
+
+/* Порядок блоков поменялся (мероприятия перед сертификатом) —
+   правим фоны, чтобы соседние секции снова отличались. */
+.ab-events { background: var(--ab-white); }
+.ab-cert   { background: var(--ab-50); }
