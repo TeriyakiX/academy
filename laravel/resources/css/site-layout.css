@@ -128,3 +128,36 @@
 .site-footer__legal a:hover { color: #fff; }
 
 body.site-no-scroll { overflow: hidden; }
+
+/* ---------------- Модалка заявки ---------------- */
+.ab-modal { position: fixed; inset: 0; z-index: 200; display: flex;
+    align-items: center; justify-content: center; padding: 20px; }
+.ab-modal__overlay { position: absolute; inset: 0; background: rgba(26,22,22,.6); }
+.ab-modal__dialog { position: relative; width: min(460px, 100%); max-height: 92vh; overflow-y: auto;
+    padding: 34px; border-radius: 20px; background: #fff;
+    box-shadow: 0 30px 80px rgba(0,0,0,.35);
+    animation: ab-modal-in .25s ease both; }
+@keyframes ab-modal-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .ab-modal__dialog { animation: none; } }
+
+.ab-modal__close { position: absolute; top: 14px; right: 14px; width: 38px; height: 38px;
+    border: none; border-radius: 50%; background: #f4f3f2; font-size: 24px; line-height: 1;
+    color: #1a1a1a; cursor: pointer; transition: background .2s; }
+.ab-modal__close:hover { background: #e4e1dd; }
+
+.ab-modal__title { margin: 0 0 10px; font-family: Involve, Circe, sans-serif;
+    font-size: 26px; font-weight: 800; color: #1a1a1a; }
+.ab-modal__text { margin: 0 0 22px; font-size: 15px; line-height: 1.55; color: #88756a; }
+
+.ab-modal__form { display: grid; gap: 14px; }
+.ab-modal__field { display: grid; gap: 6px; }
+.ab-modal__field > span { font-size: 13px; color: #88756a; }
+.ab-modal__field i { font-style: normal; color: #aea196; }
+.ab-modal__field input, .ab-modal__field textarea {
+    width: 100%; padding: 14px 16px; border: 1px solid #e4e1dd; border-radius: 10px;
+    background: #fff; font: inherit; font-size: 15px; color: #1a1a1a;
+    transition: border-color .2s; resize: vertical; }
+.ab-modal__field input:focus, .ab-modal__field textarea:focus {
+    outline: none; border-color: #6b5a53; }
+.ab-modal__note { margin: 0; font-size: 12px; line-height: 1.5; color: #aea196; }
+.ab-modal__note a { color: #6b5a53; }

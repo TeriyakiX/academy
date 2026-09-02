@@ -44,3 +44,44 @@ if (menu && burger) {
         });
     });
 }
+
+/**
+ * Модальное окно заявки.
+ * Кнопки с data-modal-path открывают блок с соответствующим data-modal-target.
+ * Раньше это делал бандл страницы; после перехода на единый шаблон
+ * логика живёт здесь и работает на всех страницах.
+ */
+(() => {
+    const modals = document.querySelectorAll('[data-modal-target]');
+    if (!modals.length) return;
+
+    const open = (modal) => {
+        modal.hidden = false;
+        document.body.classList.add('site-no-scroll');
+        modal.querySelector('input:not([type=hidden])')?.focus();
+    };
+
+    const closeAll = () => {
+        modals.forEach((m) => (m.hidden = true));
+        document.body.classList.remove('site-no-scroll');
+    };
+
+    document.querySelectorAll('[data-modal-path]').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const target = document.querySelector(`[data-modal-target="${btn.dataset.modalPath}"]`);
+            // если конкретной модалки нет — открываем общую форму заявки
+            open(target || document.querySelector('[data-modal-target="consultation"]'));
+        });
+    });
+
+    modals.forEach((modal) => {
+        modal.querySelectorAll('[data-modal-close]').forEach((el) =>
+            el.addEventListener('click', closeAll)
+        );
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeAll();
+    });
+})();
