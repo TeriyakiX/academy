@@ -1,0 +1,327 @@
+{
+    "/article.html": {
+        "view": "article",
+        "bytes": 23937,
+        "css": [
+            "/assets/article.css"
+        ],
+        "js": [
+            "https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU",
+            "/assets/article.js"
+        ]
+    },
+    "/barnoe-delo/koktel-metodom-bild.html": {
+        "view": "barnoe-delo.koktel-metodom-bild",
+        "bytes": 79985,
+        "css": [
+            "/assets/splide.css",
+            "/assets/vstryakhni-i-poday.css"
+        ],
+        "js": [
+            "https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU",
+            "/assets/barnoeDeloKoktelMetodomBild.js"
+        ]
+    },
+    "/barnoe-delo/metod-ctir.html": {
+        "view": "barnoe-delo.metod-ctir",
+        "bytes": 79951,
+        "css": [
+            "/assets/splide.css",
+            "/assets/vstryakhni-i-poday.css"
+        ],
+        "js": [
+            "https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU",
+            "/assets/barnoeDeloKoktelMetodomCtir.js"
+        ]
+    },
+    "/barnoe-delo/vstryakhni-i-poday.html": {
+        "view": "barnoe-delo.vstryakhni-i-poday",
+        "bytes": 80004,
+        "css": [
+            "/assets/splide.css",
+            "/assets/vstryakhni-i-poday.css"
+        ],
+        "js": [
+            "https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU",
+            "/assets/barnoeDeloVstryakhniIpoday.js"
+        ]
+    },
+    "/blog.html": {
+        "view": "blog",
+        "bytes": 23999,
+        "css": [
+            "/assets/blog.css"
+        ],
+        "js": [
+            "https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU",
+            "/assets/blog.js"
+        ]
+    },
+    "/busines.html": {
+        "view": "busines",
+        "bytes": 91996,
+        "css": [
+            "/assets/busines.css"
+        ],
+        "js": [
+            "https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU",
+            "/assets/busines.js"
+        ]
+    },
+    "/contact.html": {
+        "view": "contact",
+        "bytes": 20212,
+        "css": [
+            "/assets/splide.css",
+            "/assets/contact.css"
+        ],
+        "js": [
+            "https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU",
+            "/assets/contact.js"
+        ]
+    },
+    "/courses.html": {
+        "view": "courses",
+        "bytes": 126353,
+        "css": [
+            "/assets/splide.css",
+            "/assets/courses.css"
+        ],
+        "js": [
+            "https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU",
+            "/assets/courses.js"
+        ]
+    },
+    "/courses/barista-advanced.html": {
+        "view": "courses.barista-advanced",
+        "bytes": 106790,
+        "css": [
+            "/assets/splide.css",
+            "/assets/baristaAdvanced.css"
+        ],
+        "js": [
+            "https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU",
+            "/assets/baristaAdvanced.js"
+        ]
+    },
+    "/courses/barista-base.html": {
+        "view": "courses.barista-base",
+        "bytes": 103792,
+        "css": [
+            "/assets/splide.css",
+            "/assets/baristaBase.css"
+        ],
+        "js": [
+            "https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU",
+            "/assets/baristaBase.js"
+        ]
+    },
+    "/courses/barista-courses.html": {
+        "view": "courses.barista-courses",
+        "bytes": 55834,
+        "css": [
+            "/assets/splide.css",
+            "/assets/baristaCourses.css"
+        ],
+        "js": [
+            "https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU",
+            "/assets/baristaCourses.js"
+        ]
+    },
+    "/courses/barista-professional.html": {
+        "view": "courses.barista-professional",
+        "bytes": 108320,
+        "css": [
+            "/assets/splide.css",
+            "/assets/baristaProfessional.css"
+        ],
+        "js": [
+            "https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU",
+            "/assets/baristaProfessional.js"
+        ]
+    },
+    "/courses/barista-technician.html": {
+        "view": "courses.barista-technician",
+        "bytes": 89939,
+        "css": [
+            "/assets/splide.css",
+            "/assets/coursesBaristaTechnician.css"
+        ],
+        "js": [
+            "https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU",
+            "/assets/coursesBaristaTechnician.js"
+        ]
+    },
+    "/courses/barista-test.html": {
+        "view": "courses.barista-test",
+        "bytes": 262440,
+        "css": [
+            "/assets/baristaTest.css"
+        ],
+        "js": [
+            "/assets/baristaTest.js"
+        ]
+    },
+    "/courses/barnoe-delo.html": {
+        "view": "courses.barnoe-delo",
+        "bytes": 49378,
+        "css": [
+            "/assets/splide.css",
+            "/assets/masterClass.css"
+        ],
+        "js": [
+            "https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU",
+            "/assets/barnoeDelo.js"
+        ]
+    },
+    "/courses/master-class.html": {
+        "view": "courses.master-class",
+        "bytes": 64595,
+        "css": [
+            "/assets/splide.css",
+            "/assets/masterClass.css"
+        ],
+        "js": [
+            "https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU",
+            "/assets/masterClass.js"
+        ]
+    },
+    "/courses/upravlyayushchiy-kofeyni.html": {
+        "view": "courses.upravlyayushchiy-kofeyni",
+        "bytes": 102768,
+        "css": [
+            "/assets/splide.css",
+            "/assets/coursesUpravlyayushchiyKofeyni.css"
+        ],
+        "js": [
+            "https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU",
+            "/assets/coursesUpravlyayushchiyKofeyni.js"
+        ]
+    },
+    "/glavnaya.html": {
+        "view": "glavnaya",
+        "bytes": 219249,
+        "css": [
+            "/assets/mainTest.css"
+        ],
+        "js": [
+            "/assets/mainTest.js"
+        ]
+    },
+    "/index.html": {
+        "view": "index",
+        "bytes": 213190,
+        "css": [
+            "/assets/main.css"
+        ],
+        "js": [
+            "/assets/main.js"
+        ]
+    },
+    "/master-class/barista-v-take-away.html": {
+        "view": "master-class.barista-v-take-away",
+        "bytes": 96680,
+        "css": [
+            "/assets/splide.css",
+            "/assets/masterClassBaristaTakeAwau.css"
+        ],
+        "js": [
+            "https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU",
+            "/assets/masterClassBaristaTakeAwau.js"
+        ]
+    },
+    "/master-class/domashniy-barista.html": {
+        "view": "master-class.domashniy-barista",
+        "bytes": 81641,
+        "css": [
+            "/assets/splide.css",
+            "/assets/masterClassDomashniyBarista.css"
+        ],
+        "js": [
+            "https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU",
+            "/assets/masterClassDomashniyBarista.js"
+        ]
+    },
+    "/master-class/domashnyaya-kofeynya.html": {
+        "view": "master-class.domashnyaya-kofeynya",
+        "bytes": 88010,
+        "css": [
+            "/assets/splide.css",
+            "/assets/masterClassDomashnyayaKofeynya.css"
+        ],
+        "js": [
+            "https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU",
+            "/assets/masterClassDomashnyayaKofeynya.js"
+        ]
+    },
+    "/master-class/latte-art.html": {
+        "view": "master-class.latte-art",
+        "bytes": 96922,
+        "css": [
+            "/assets/splide.css",
+            "/assets/masterClassLatterArt.css"
+        ],
+        "js": [
+            "https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU",
+            "/assets/masterClassLatterArt.js"
+        ]
+    },
+    "/master-class/young-barista.html": {
+        "view": "master-class.young-barista",
+        "bytes": 93806,
+        "css": [
+            "/assets/splide.css",
+            "/assets/masterClassYoungBarista.css"
+        ],
+        "js": [
+            "https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU",
+            "/assets/masterClassYoungBarista.js"
+        ]
+    },
+    "/oferta.html": {
+        "view": "oferta",
+        "bytes": 15149,
+        "css": [
+            "/assets/mainTest.css"
+        ],
+        "js": []
+    },
+    "/privacy-policy.html": {
+        "view": "privacy-policy",
+        "bytes": 7820,
+        "css": [
+            "/assets/mainTest.css"
+        ],
+        "js": []
+    },
+    "/sertifikat.html": {
+        "view": "sertifikat",
+        "bytes": 118196,
+        "css": [
+            "/assets/splide.css",
+            "/assets/sertifikat.css"
+        ],
+        "js": [
+            "https://api-maps.yandex.ru/2.1/?apikey=70a77979-e30b-4df8-abe5-88008940b1e0&lang=ru_RU",
+            "/assets/sertifikat.js"
+        ]
+    },
+    "/thank-you.html": {
+        "view": "thank-you",
+        "bytes": 20011,
+        "css": [
+            "/assets/thankYou.css"
+        ],
+        "js": [
+            "/assets/thankYou.js"
+        ]
+    },
+    "/user-agreement.html": {
+        "view": "user-agreement",
+        "bytes": 6424,
+        "css": [
+            "/assets/mainTest.css"
+        ],
+        "js": []
+    }
+}
