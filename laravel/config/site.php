@@ -614,7 +614,7 @@ return array (
       array (
         0 => 
         array (
-          'src' => '/assets/main.js',
+          'src' => '/assets/homeInit.js',
           'type' => 'module',
           'defer' => false,
           'async' => false,
