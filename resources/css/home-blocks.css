@@ -417,3 +417,63 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 .ab-stats__rating-count { grid-column: 1; font-size: 12px; color: var(--ab-400); }
 .ab-stats__rating-score { grid-column: 2; grid-row: 1 / span 2;
     font-family: var(--ab-font-display); font-size: 26px; font-weight: 800; color: var(--ab-300); }
+
+/* ---- вход элементов первого экрана ---- */
+@keyframes ab-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+.ab-in { animation: ab-in .7s cubic-bezier(.22,.7,.3,1) both; animation-delay: var(--d, 0s); }
+@media (prefers-reduced-motion: reduce) { .ab-in { animation: none; } }
+
+/* ---- акцент в заголовке ---- */
+.ab-hero__title em { position: relative; font-style: normal; color: var(--ab-600); white-space: nowrap; }
+.ab-hero__title em::after { content: ''; position: absolute; left: 0; right: 0; bottom: .08em;
+    height: .1em; border-radius: 3px; background: var(--ab-200);
+    transform: scaleX(0); transform-origin: left; animation: ab-underline .8s ease .55s forwards; }
+@keyframes ab-underline { to { transform: scaleX(1); } }
+@media (prefers-reduced-motion: reduce) { .ab-hero__title em::after { animation: none; transform: scaleX(1); } }
+
+/* ---- декоративный пар ---- */
+.ab-hero__steam { position: absolute; top: 40px; right: 46%; width: 120px; height: 160px;
+    fill: none; stroke: var(--ab-200); stroke-width: 3; stroke-linecap: round;
+    opacity: .5; pointer-events: none; }
+.ab-hero__steam path { stroke-dasharray: 6 10; animation: ab-steam 9s linear infinite; }
+.ab-hero__steam path:nth-child(2) { animation-duration: 11s; }
+.ab-hero__steam path:nth-child(3) { animation-duration: 8s; }
+@keyframes ab-steam { to { stroke-dashoffset: -160; } }
+@media (max-width: 1100px) { .ab-hero__steam { display: none; } }
+@media (prefers-reduced-motion: reduce) { .ab-hero__steam path { animation: none; } }
+
+/* ---- соцдоказательство ---- */
+.ab-hero__proof { display: flex; flex-wrap: wrap; align-items: center; gap: 16px;
+    margin-top: 32px; padding-top: 26px; border-top: 1px solid var(--ab-100); }
+.ab-hero__faces { display: flex; }
+.ab-hero__faces img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover;
+    object-position: top center; border: 3px solid var(--ab-white); background: var(--ab-100); }
+.ab-hero__faces img + img { margin-left: -14px; }
+.ab-hero__proof-text { margin: 0; font-size: 13px; line-height: 1.5; color: var(--ab-500); }
+.ab-hero__proof-text strong { color: var(--ab-dark); }
+.ab-hero__phone { margin-left: auto; font-size: 16px; font-weight: 800;
+    color: var(--ab-dark); text-decoration: none; white-space: nowrap; }
+.ab-hero__phone span { display: block; font-size: 12px; font-weight: 400; color: var(--ab-400); }
+@media (max-width: 560px) { .ab-hero__phone { margin-left: 0; } }
+
+/* ---- цифры: появление по очереди и блик ---- */
+.ab-stats__item { opacity: 0; transform: translateY(20px); }
+.is-visible .ab-stats__item { animation: ab-in .65s cubic-bezier(.22,.7,.3,1) both; }
+.is-visible .ab-stats__item:nth-child(2) { animation-delay: .1s; }
+.is-visible .ab-stats__item:nth-child(3) { animation-delay: .2s; }
+.is-visible .ab-stats__item:nth-child(4) { animation-delay: .3s; }
+
+.ab-stats__num { background-size: 200% 100%; }
+.is-visible .ab-stats__num { animation: ab-shine 2.6s ease-in-out .8s infinite; }
+@keyframes ab-shine { 0%, 65%, 100% { background-position: 0 0; } 30% { background-position: 100% 0; } }
+
+.ab-stats__ratings li { opacity: 0; }
+.is-visible .ab-stats__ratings li { animation: ab-in .55s ease both; animation-delay: .45s; }
+.is-visible .ab-stats__ratings li:nth-child(2) { animation-delay: .52s; }
+.is-visible .ab-stats__ratings li:nth-child(3) { animation-delay: .59s; }
+.is-visible .ab-stats__ratings li:nth-child(4) { animation-delay: .66s; }
+
+@media (prefers-reduced-motion: reduce) {
+    .ab-stats__item, .ab-stats__ratings li { opacity: 1; transform: none; animation: none; }
+    .is-visible .ab-stats__num { animation: none; }
+}
