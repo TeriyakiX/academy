@@ -2,15 +2,8 @@
 
 <section class="ab-hero">
     <div class="ab-container">
-
-        {{-- Вкладки направлений: человек сразу выбирает, зачем пришёл --}}
-        <nav class="ab-hero__dirs" aria-label="Направления обучения">
-            @foreach ($h['directions'] as $d)
-                <a class="ab-hero__dir" href="{{ $d['href'] }}">{{ $d['title'] }}</a>
-            @endforeach
-        </nav>
-
         <div class="ab-hero__grid">
+
             <div class="ab-hero__main">
                 <h1 class="ab-hero__title">{{ $h['title'] }}</h1>
                 <p class="ab-hero__text">{{ $h['text'] }}</p>
@@ -28,29 +21,21 @@
                 </ul>
 
                 <div class="ab-hero__actions">
-                    <button class="ab-btn ab-btn--primary ab-btn--lg js-open-modal" type="button" data-modal-path="consultation">
+                    <button class="ab-btn ab-btn--primary ab-btn--lg" type="button" data-modal-path="consultation">
                         Оставить заявку
                     </button>
-                    <a class="ab-btn ab-btn--ghost-light ab-btn--lg" href="/constructor.html">Собрать свой курс</a>
+                    <a class="ab-btn ab-btn--outline ab-btn--lg" href="/constructor.html">Собрать свой курс</a>
                 </div>
             </div>
 
-            {{-- Карточка с тем, что получает ученик --}}
-            <aside class="ab-hero__card">
-                <h2 class="ab-hero__card-title">{{ $h['card']['title'] }}</h2>
-                <ul class="ab-hero__card-list">
-                    @foreach ($h['card']['items'] as $item)
-                        <li>
-                            <strong>{{ $item['title'] }}</strong>
-                            <span>{{ $item['text'] }}</span>
-                        </li>
-                    @endforeach
-                </ul>
-                <a class="ab-hero__card-link" href="{{ $h['card']['href'] }}">{{ $h['card']['link'] }} &rarr;</a>
-            </aside>
+            {{-- Направления с живым фото --}}
+            <div class="ab-hero__side"
+                 data-island="HeroDirections"
+                 data-props="{{ json_encode(['directions' => $h['directions']], JSON_UNESCAPED_UNICODE) }}"></div>
+
         </div>
 
-        {{-- Оценки площадок --}}
+        {{-- Оценки на площадках --}}
         <ul class="ab-hero__ratings">
             @foreach (config('home.ratings.items') as $r)
                 <li>
@@ -70,6 +55,5 @@
                 </li>
             @endforeach
         </ul>
-
     </div>
 </section>
