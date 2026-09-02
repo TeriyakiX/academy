@@ -140,3 +140,38 @@
     font-size: 14px; color: var(--ab-400); }
 .ab-thanks__phone a { font-weight: 800; color: var(--ab-dark); text-decoration: none; }
 @media (prefers-reduced-motion: reduce) { .ab-thanks__icon { animation: none; } }
+
+/* ================================================================
+   РИТМ ФОНОВ НА ВНУТРЕННИХ СТРАНИЦАХ
+   Порядок блоков на них отличается от главной, поэтому фоны
+   назначаются под каждую страницу отдельно.
+   ================================================================ */
+
+/* --- страница курса --- */
+.ab-page--course .ab-cprog    { background: var(--ab-50); }
+.ab-page--course .ab-clearn   { background: var(--ab-white); }
+.ab-page--course .ab-programs { background: var(--ab-50); }
+.ab-page--course .ab-lead-block { background: var(--ab-white); }
+
+/* --- каталог и подборки --- */
+.ab-page--catalog .ab-programs   { background: var(--ab-white); }
+.ab-page--catalog .ab-ctor       { background: var(--ab-50); }
+.ab-page--catalog .ab-schedule   { background: var(--ab-white); }
+.ab-page--catalog .ab-reviews    { background: var(--ab-50); }
+.ab-page--catalog .ab-faq        { background: var(--ab-white); }
+.ab-page--catalog .ab-lead-block { background: var(--ab-50); }
+
+/* --- для бизнеса --- */
+.ab-page--business .ab-bus        { background: var(--ab-50); }
+.ab-page--business .ab-lead-block { background: var(--ab-white); }
+
+/* --- сертификат --- */
+.ab-page--cert .ab-programs   { background: var(--ab-white); }
+.ab-page--cert .ab-lead-block { background: var(--ab-50); }
+
+/* --- контакты --- */
+.ab-page--contact .ab-contacts   { background: var(--ab-white); padding-top: 0; }
+.ab-page--contact .ab-lead-block { background: var(--ab-50); }
+
+/* у всех внутренних страниц заявка получает одинаковый отступ */
+.ab-page .ab-lead-block { padding: 76px 0; }
