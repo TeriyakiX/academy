@@ -704,3 +704,105 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 .ab-cert__media img { display: block; width: 100%; height: auto; border-radius: 18px;
     box-shadow: 0 24px 56px rgba(0,0,0,.4); transition: transform var(--ab-transition); }
 .ab-cert__media img:hover { transform: translateY(-6px); }
+
+/* ================================================================
+   РИТМ ФОНОВ
+   Проблема: подряд шло много белых секций, границы блоков не читались.
+   Решение: чередование белый / кремовый, тёмные секции — акценты.
+   Этот блок идёт последним, поэтому переопределяет фоны выше.
+   ================================================================ */
+
+/* убираем тонкие линии — разделение теперь фоном */
+.ab-programs, .ab-steps, .ab-about, .ab-reasons,
+.ab-faq, .ab-dirs, .ab-contacts-home { border-top: none; }
+
+/* --- кремовые --- */
+.ab-ctor,
+.ab-steps,
+.ab-reviews,
+.ab-reasons,
+.ab-buscta,
+.ab-events,
+.ab-faq,
+.ab-contacts-home { background: var(--ab-50); }
+
+/* --- белые --- */
+.ab-programs,
+.ab-schedule,
+.ab-about,
+.ab-dirs,
+.ab-cert,
+.ab-partners,
+.ab-lead-block { background: var(--ab-white); }
+
+/* блоки шли впритык: у секций на одном фоне разъезжаются отступы */
+.ab-ctor      { padding: 76px 0; }
+.ab-cert      { padding: 76px 0; }
+.ab-buscta    { padding: 76px 0; }
+.ab-lead-block{ padding: 76px 0; }
+.ab-dirs      { padding: 76px 0; }
+.ab-contacts-home { padding: 76px 0; }
+
+/* документы — были на белом, ставим кремовый и общий отступ */
+.docs.main-section { padding: 76px 0; background: var(--ab-white); }
+.docs__container { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
+
+/* ================================================================
+   ПЕРЕРАБОТАННЫЕ БЛОКИ (идут после ритма фонов)
+   ================================================================ */
+
+/* ---- Топ причин: слева заголовок, справа список ---- */
+.ab-reasons__grid { display: grid; grid-template-columns: minmax(0, 380px) minmax(0, 1fr);
+    gap: 56px; align-items: start; }
+@media (max-width: 1000px) { .ab-reasons__grid { grid-template-columns: 1fr; gap: 28px; } }
+.ab-reasons__intro .ab-lead { margin-bottom: 24px; }
+
+.ab-reasons__list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px;
+    margin: 0; padding: 0; list-style: none; }
+@media (max-width: 700px) { .ab-reasons__list { grid-template-columns: 1fr; } }
+.ab-reasons__item { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 16px;
+    padding: 24px; border-radius: var(--ab-radius-lg); background: var(--ab-white);
+    border: 1px solid transparent;
+    transition: border-color var(--ab-transition), transform var(--ab-transition); }
+.ab-reasons__item:hover { border-color: var(--ab-200); transform: translateY(-3px); }
+.ab-reasons__n { display: flex; align-items: center; justify-content: center;
+    width: 42px; height: 42px; flex: none; border-radius: 12px; background: var(--ab-50);
+    font-family: var(--ab-font-display); font-size: 15px; font-weight: 800; color: var(--ab-600);
+    transition: all var(--ab-transition); }
+.ab-reasons__item:hover .ab-reasons__n { background: var(--ab-600); color: var(--ab-white); }
+.ab-reasons__title { margin: 0 0 7px; font-size: 16px; font-weight: 800; line-height: 1.3; }
+.ab-reasons__text { margin: 0; font-size: 14px; line-height: 1.55; color: var(--ab-500); }
+
+/* ---- Все программы: три колонки со списком и ценой ---- */
+.ab-dirs__head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    gap: 16px; margin-bottom: 28px; }
+.ab-dirs__head .ab-h2 { margin: 0; }
+.ab-dirs__cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+@media (max-width: 900px) { .ab-dirs__cols { grid-template-columns: 1fr; } }
+.ab-dirs__col { padding: 26px; border: 1px solid var(--ab-100);
+    border-radius: var(--ab-radius-lg); background: var(--ab-50); }
+.ab-dirs__col-title { margin: 0 0 16px; font-size: 13px; font-weight: 800;
+    text-transform: uppercase; letter-spacing: .05em; color: var(--ab-400); }
+.ab-dirs__links { display: grid; gap: 4px; margin: 0; padding: 0; list-style: none; }
+.ab-dirs__links a { display: flex; align-items: baseline; justify-content: space-between; gap: 14px;
+    padding: 11px 14px; border-radius: var(--ab-radius); color: var(--ab-dark);
+    font-size: 15px; text-decoration: none; transition: background var(--ab-transition); }
+.ab-dirs__links a:hover { background: var(--ab-white); }
+.ab-dirs__links b { white-space: nowrap; font-size: 14px; color: var(--ab-600); }
+
+/* ---- Конструктор: текст слева, превью справа ---- */
+.ab-ctor__inner { grid-template-columns: minmax(0, 1fr) minmax(0, 420px); }
+@media (max-width: 1000px) { .ab-ctor__inner { grid-template-columns: 1fr; } }
+.ab-ctor__points { grid-template-columns: repeat(3, 1fr); display: grid; gap: 10px; }
+@media (max-width: 600px) { .ab-ctor__points { grid-template-columns: 1fr; } }
+.ab-ctor__points li { display: grid; gap: 2px; padding: 14px 16px; border-radius: var(--ab-radius);
+    background: rgba(255,255,255,.07); }
+.ab-ctor__points li::before { display: none; }
+.ab-ctor__points b { font-size: 15px; font-weight: 800; color: var(--ab-white); }
+.ab-ctor__points span { font-size: 13px; color: var(--ab-300); }
+.ab-ctor__screen-sale { display: flex; align-items: center; justify-content: space-between; }
+.ab-ctor__screen-sale b { font-family: var(--ab-font-display); font-size: 20px; }
+
+/* ---- Заявка: акцент на времени ответа ---- */
+.ab-lead-block__promise span { display: inline-block; padding: 3px 10px; border-radius: 8px;
+    background: var(--ab-600); color: var(--ab-white); }

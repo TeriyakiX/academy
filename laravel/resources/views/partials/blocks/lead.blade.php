@@ -4,7 +4,7 @@
 
             <div class="ab-lead-block__text">
                 <h2 class="ab-h2 ab-h2--light">Поможем выбрать курс</h2>
-                <p class="ab-lead-block__promise">Перезвоним в течение 15 минут</p>
+                <p class="ab-lead-block__promise"><span>15 минут</span> — среднее время ответа менеджера</p>
                 <p class="ab-lead-block__note">
                     Расскажем про программы, сроки и стоимость, подберём вариант под вашу цель и уровень.
                 </p>
