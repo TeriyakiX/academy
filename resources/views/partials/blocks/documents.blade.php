@@ -1,32 +1,45 @@
-{{--
-    Блок «Документы об обучении».
-    Тексты и изображения — заглушки до получения материалов от заказчика.
-    Реальные сканы класть в public/assets/docs/, подписи править в config/documents.php.
---}}
-<section class="docs main-section">
-    <div class="docs__container container">
-        <h2 class="docs__title heading-title-section">Документы государственного образца</h2>
-        <p class="docs__description text-18">
-            Академия Бариста работает по образовательной лицензии. После обучения вы получаете
-            документ, который подтверждает квалификацию при трудоустройстве.
-        </p>
+@php $d = config('documents'); @endphp
 
-        <ul class="docs__list">
-            @foreach (config('documents.items') as $doc)
-                <li class="docs__item">
-                    <div class="docs__item-preview">
-                        @if (!empty($doc['image']))
-                            <img class="docs__item-image" src="{{ $doc['image'] }}" alt="{{ $doc['title'] }}" loading="lazy" width="280" height="200">
+<section class="ab-docs ab-reveal">
+    <div class="ab-container">
+        <div class="ab-docs__head">
+            <div>
+                <h2 class="ab-h2">{{ $d['title'] }}</h2>
+                <p class="ab-lead">{{ $d['lead'] }}</p>
+            </div>
+            <span class="ab-docs__badge">Квалификация «бармен 3–4 разряда»</span>
+        </div>
+
+        <ul class="ab-docs__list">
+            @foreach ($d['items'] as $item)
+                <li class="ab-docs__item">
+                    <div class="ab-docs__preview">
+                        @if (!empty($item['image']))
+                            <img src="{{ $item['image'] }}" alt="{{ $item['title'] }}"
+                                 loading="lazy" width="320" height="230">
                         @else
-                            <div class="docs__item-placeholder">Образец документа</div>
+                            <span class="ab-docs__placeholder">Образец документа</span>
                         @endif
                     </div>
-                    <h3 class="docs__item-title text-20">{{ $doc['title'] }}</h3>
-                    <p class="docs__item-text text-16">{{ $doc['text'] }}</p>
+                    <h3 class="ab-docs__title">{{ $item['title'] }}</h3>
+                    <p class="ab-docs__text">{{ $item['text'] }}</p>
                 </li>
             @endforeach
         </ul>
 
-        <p class="docs__note text-16">{{ config('documents.note') }}</p>
+        {{-- Условия приёма --}}
+        <div class="ab-docs__req">
+            <h3 class="ab-docs__req-title">{{ $d['requirements']['title'] }}</h3>
+            <ul class="ab-docs__req-list">
+                @foreach ($d['requirements']['items'] as $r)
+                    <li>
+                        <b>{{ $r['title'] }}</b>
+                        <span>{{ $r['text'] }}</span>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+
+        <p class="ab-docs__note">{{ $d['note'] }}</p>
     </div>
 </section>
