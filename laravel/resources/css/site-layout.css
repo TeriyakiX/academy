@@ -18,10 +18,13 @@
 .site-icons { position: absolute; width: 0; height: 0; overflow: hidden; }
 .site-icon { width: 18px; height: 18px; flex: none; }
 
+/* Иконки используются и вне шапки/подвала, где переменные --c-* не объявлены,
+   поэтому берём глобальные токены с запасным значением. */
 .site-social { display: inline-flex; align-items: center; justify-content: center;
-    width: 32px; height: 32px; border-radius: 50%; background: var(--c-brown);
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--c-brown, var(--ab-600, #6b5a53));
     color: #fff; transition: background .15s; }
-.site-social:hover { background: var(--c-dark); }
+.site-social:hover { background: var(--c-dark, var(--ab-dark, #1a1a1a)); }
 
 /* ---------------- Шапка ---------------- */
 .site-header { position: relative; z-index: 50; background: #fff; border-bottom: 1px solid var(--c-line); }
