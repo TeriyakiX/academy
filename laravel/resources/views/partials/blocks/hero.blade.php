@@ -1,16 +1,27 @@
-@php $h = config('home.hero'); @endphp
+@php
+    $h = config('home.hero');
+    $teachers = config('home.teachers.items');
+@endphp
 
 <section class="ab-hero">
+    {{-- Декоративный пар над текстом --}}
+    <svg class="ab-hero__steam" viewBox="0 0 120 160" aria-hidden="true">
+        <path d="M30 150c0-30 18-32 18-58S30 62 30 34" />
+        <path d="M60 152c0-34 20-36 20-64S60 56 60 24" />
+        <path d="M90 150c0-30 18-32 18-58S90 62 90 40" />
+    </svg>
+
     <div class="ab-container">
         <div class="ab-hero__grid">
 
             <div class="ab-hero__main">
-                <span class="ab-hero__badge">Набор открыт · Москва</span>
+                <span class="ab-hero__badge ab-in" style="--d:0s">Набор открыт · Москва</span>
 
-                <h1 class="ab-hero__title">{{ $h['title'] }}</h1>
-                <p class="ab-hero__text">{{ $h['text'] }}</p>
+                <h1 class="ab-hero__title ab-in" style="--d:.06s">{!! $h['title_html'] ?? e($h['title']) !!}</h1>
 
-                <ul class="ab-hero__facts">
+                <p class="ab-hero__text ab-in" style="--d:.12s">{{ $h['text'] }}</p>
+
+                <ul class="ab-hero__facts ab-in" style="--d:.18s">
                     @foreach ($h['facts'] as $fact)
                         <li>
                             <svg class="ab-hero__check" viewBox="0 0 24 24" aria-hidden="true">
@@ -22,12 +33,24 @@
                     @endforeach
                 </ul>
 
-                <div class="ab-hero__actions">
+                <div class="ab-hero__actions ab-in" style="--d:.24s">
                     <button class="ab-btn ab-btn--primary ab-btn--lg" type="button" data-modal-path="consultation">
                         Подобрать курс
                     </button>
                     <a class="ab-btn ab-btn--outline ab-btn--lg" href="/constructor.html">Собрать свой курс</a>
+                </div>
 
+                {{-- Соцдоказательство: лица тренеров и телефон --}}
+                <div class="ab-hero__proof ab-in" style="--d:.3s">
+                    <div class="ab-hero__faces">
+                        @foreach ($teachers as $t)
+                            <img src="{{ $t['photo'] }}" alt="{{ $t['name'] }}" width="44" height="44" loading="lazy">
+                        @endforeach
+                    </div>
+                    <p class="ab-hero__proof-text">
+                        <strong>1000+ учеников</strong> уже прошли обучение<br>
+                        у практикующих тренеров школы
+                    </p>
                     <a class="ab-hero__phone" href="{{ config('nav.contacts.phone_href') }}">
                         {{ config('nav.contacts.phone') }}
                         <span>{{ config('nav.contacts.hours') }}</span>
@@ -36,7 +59,7 @@
             </div>
 
             {{-- Направления с живым фото --}}
-            <div class="ab-hero__side"
+            <div class="ab-hero__side ab-in" style="--d:.16s"
                  data-island="HeroDirections"
                  data-props="{{ json_encode(['directions' => $h['directions']], JSON_UNESCAPED_UNICODE) }}"></div>
 
