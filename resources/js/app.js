@@ -1,3 +1,5 @@
+import './site-layout.js';
+
 import { createApp } from 'vue';
 
 /**
