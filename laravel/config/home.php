@@ -78,13 +78,20 @@ return [
         'lead'  => 'Учим профессии, а не теории: за каждой цифрой — люди, которые уже работают в кофейнях Москвы.',
         'items' => [
             ['value' => 1000, 'suffix' => '+', 'label' => 'выпускников',
-             'note'  => 'прошли обучение в школе'],
+             'note'  => 'прошли обучение в школе',
+             'icon'  => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2 8l10 5 10-5-10-5Z"/><path d="M6 10.5V16c0 1.7 2.7 3 6 3s6-1.3 6-3v-5.5"/></svg>'],
+
             ['value' => 4,    'suffix' => ' года', 'label' => 'в индустрии',
-             'note'  => 'опыт работы кофейной школы'],
+             'note'  => 'опыт работы кофейной школы',
+             'icon'  => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>'],
+
             ['value' => 90,   'suffix' => '%', 'label' => 'практики',
-             'note'  => 'занятий за реальным оборудованием'],
+             'note'  => 'занятий за реальным оборудованием',
+             'icon'  => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h13a4 4 0 0 0 0-8h-1"/><path d="M4 5h12v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V5Z"/></svg>'],
+
             ['value' => 13,   'suffix' => '',  'label' => 'программ',
-             'note'  => 'от базового курса до управления'],
+             'note'  => 'от базового курса до управления',
+             'icon'  => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19v15H6.5A2.5 2.5 0 0 0 4 20.5V5.5Z"/><path d="M9 8h6"/></svg>'],
         ],
     ],
 
@@ -208,6 +215,81 @@ return [
   array (
     'src' => 'data:image/webp;base64,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',
     'alt' => 'Кофемашина Elektra',
+  ),
+),
+    ],
+
+    'reviews' => [
+        'items' => array (
+  0 => 
+  array (
+    'name' => 'Кира Сурогина',
+    'date' => '15 декабря 2024',
+    'text' => 'Проходила курс «бариста продвинутый» все очень понравилось, ребята приветливые , все очень классно, приятная атмосфера , все понятно и интересно , классная подача',
+    'rating' => 5,
+    'href' => 'https://yandex.ru/maps/org/39301833905/reviews?reviews%5BpublicId%5D=xkt24kpew4yqebjd2g33g6dnhg&si=5rm3pv9jexuu3gvw5nwcr7vc2c&utm_source=review',
+  ),
+  1 => 
+  array (
+    'name' => 'Евгений Поляков',
+    'date' => '26 октября 2024',
+    'text' => 'Проходил обучение в "Академия бариста", очень доволен результатом. Преподаватели объясняют просто и понятно, одним словом профессионалы своего дела. Всем те кто желает освоить профессию " Бариста" Очень советую посетить.)))',
+    'rating' => 5,
+    'href' => 'https://yandex.ru/maps/org/39301833905/reviews?reviews%5BpublicId%5D=7fvy84jz262brc050uatygx91g&si=5rm3pv9jexuu3gvw5nwcr7vc2c&utm_source=review',
+  ),
+  2 => 
+  array (
+    'name' => 'Надежда Созинова',
+    'date' => '1 ноября 2024',
+    'text' => 'Ходила с подругой на мастер класс бариста домашний. Узнала много нового и интересного о кофе и способов заваривания. Объясняют всё доступно, на понятном языке. Помогают, если что-то не получается. Всем советую. Даже людям, ничего не смыслящим в приготовлении кофе, всё далось очень легко',
+    'rating' => 5,
+    'href' => 'https://yandex.ru/maps/org/39301833905/reviews?reviews%5BpublicId%5D=phyunj1zmbhwd4jw07bq0at8pr&si=5rm3pv9jexuu3gvw5nwcr7vc2c&utm_source=review',
+  ),
+  3 => 
+  array (
+    'name' => 'Вероника Порецкая',
+    'date' => '7 февраля 2024',
+    'text' => 'Мне очень понравился курс! Прекрасный тренер Виталий Козлов, всё понятно, позитивно и интересно. Очень понравился подход к работе и ученикам. Много практики и полезной информации! Всем советую.',
+    'rating' => 5,
+    'href' => 'https://yandex.ru/maps/org/39301833905/reviews?reviews%5BpublicId%5D=r9zhhtvwjeng2huwuy04jwg4ac&si=5rm3pv9jexuu3gvw5nwcr7vc2c&utm_source=review',
+  ),
+  4 => 
+  array (
+    'name' => 'Ирина Степняк',
+    'date' => '14 февраля 2024',
+    'text' => 'Крутой мастер класс, спасибо теперь знаю какой кофе выбрать для себя, а так же вернусь что бы при их помощи открыть свою кофейню, все доходчиво и индивидуально',
+    'rating' => 5,
+    'href' => 'https://yandex.ru/maps/org/39301833905/reviews?reviews%5BpublicId%5D=xkt24kpew4yqebjd2g33g6dnhg&si=5rm3pv9jexuu3gvw5nwcr7vc2c&utm_source=review',
+  ),
+),
+    ],
+
+    'faq' => [
+        'items' => array (
+  0 => 
+  array (
+    'q' => 'Какие навыки я получу на курсах бариста для начинающих?',
+    'a' => 'За пару дней обучения вы пройдете путь от теории происхождения зерна и настройки помола до профессиональной работы с оборудованием, освоив технику приготовления классических напитков и искусство создания правильной текстуры молочной пены.',
+  ),
+  1 => 
+  array (
+    'q' => 'Выдаете ли вы сертификат после окончания курсов?',
+    'a' => 'Да, каждый выпускник нашей академии получает именной сертификат, подтверждающий прохождение профессиональной подготовки.',
+  ),
+  2 => 
+  array (
+    'q' => 'Сколько длится обучение и какой график занятий?',
+    'a' => 'Мы предлагаем гибкий график обучения: после получения заявки мы связываемся с вами и подбираем максимально удобные даты и время занятий. Курсы бариста проходят интенсивно за 1-2 дня, а остальные программы обучения можно успешно завершить всего за 1 день.',
+  ),
+  3 => 
+  array (
+    'q' => 'Есть ли у вас курсы для тех, кто хочет открыть свою кофейню?',
+    'a' => 'Да, у нас есть специализированные программы для тех, кто уже владеет или только планирует открыть кофейню: мы поможем разобрать все тонкости бизнеса, от проектирования бара и разработки авторского меню до подбора и обучения персонала, обеспечивая экспертную поддержку на каждом этапе открытия с нуля.',
+  ),
+  4 => 
+  array (
+    'q' => 'Нужно ли покупать свое оборудование и расходники для занятий?',
+    'a' => 'Нет, всё профессиональное оборудование (кофемашины, кофемолки) и расходные материалы (свежеобжаренное зерно, молоко) уже включены в стоимость курса.',
   ),
 ),
     ],

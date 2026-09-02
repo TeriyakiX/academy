@@ -1,0 +1,44 @@
+    'reviews' => [
+        'items' => array (
+  0 => 
+  array (
+    'name' => 'Кира Сурогина',
+    'date' => '15 декабря 2024',
+    'text' => 'Проходила курс «бариста продвинутый» все очень понравилось, ребята приветливые , все очень классно, приятная атмосфера , все понятно и интересно , классная подача',
+    'rating' => 5,
+    'href' => 'https://yandex.ru/maps/org/39301833905/reviews?reviews%5BpublicId%5D=xkt24kpew4yqebjd2g33g6dnhg&si=5rm3pv9jexuu3gvw5nwcr7vc2c&utm_source=review',
+  ),
+  1 => 
+  array (
+    'name' => 'Евгений Поляков',
+    'date' => '26 октября 2024',
+    'text' => 'Проходил обучение в "Академия бариста", очень доволен результатом. Преподаватели объясняют просто и понятно, одним словом профессионалы своего дела. Всем те кто желает освоить профессию " Бариста" Очень советую посетить.)))',
+    'rating' => 5,
+    'href' => 'https://yandex.ru/maps/org/39301833905/reviews?reviews%5BpublicId%5D=7fvy84jz262brc050uatygx91g&si=5rm3pv9jexuu3gvw5nwcr7vc2c&utm_source=review',
+  ),
+  2 => 
+  array (
+    'name' => 'Надежда Созинова',
+    'date' => '1 ноября 2024',
+    'text' => 'Ходила с подругой на мастер класс бариста домашний. Узнала много нового и интересного о кофе и способов заваривания. Объясняют всё доступно, на понятном языке. Помогают, если что-то не получается. Всем советую. Даже людям, ничего не смыслящим в приготовлении кофе, всё далось очень легко',
+    'rating' => 5,
+    'href' => 'https://yandex.ru/maps/org/39301833905/reviews?reviews%5BpublicId%5D=phyunj1zmbhwd4jw07bq0at8pr&si=5rm3pv9jexuu3gvw5nwcr7vc2c&utm_source=review',
+  ),
+  3 => 
+  array (
+    'name' => 'Вероника Порецкая',
+    'date' => '7 февраля 2024',
+    'text' => 'Мне очень понравился курс! Прекрасный тренер Виталий Козлов, всё понятно, позитивно и интересно. Очень понравился подход к работе и ученикам. Много практики и полезной информации! Всем советую.',
+    'rating' => 5,
+    'href' => 'https://yandex.ru/maps/org/39301833905/reviews?reviews%5BpublicId%5D=r9zhhtvwjeng2huwuy04jwg4ac&si=5rm3pv9jexuu3gvw5nwcr7vc2c&utm_source=review',
+  ),
+  4 => 
+  array (
+    'name' => 'Ирина Степняк',
+    'date' => '14 февраля 2024',
+    'text' => 'Крутой мастер класс, спасибо теперь знаю какой кофе выбрать для себя, а так же вернусь что бы при их помощи открыть свою кофейню, все доходчиво и индивидуально',
+    'rating' => 5,
+    'href' => 'https://yandex.ru/maps/org/39301833905/reviews?reviews%5BpublicId%5D=xkt24kpew4yqebjd2g33g6dnhg&si=5rm3pv9jexuu3gvw5nwcr7vc2c&utm_source=review',
+  ),
+),
+    ],

@@ -34,7 +34,7 @@ $order = [
     'certificate',
     'events',
     '@partners',
-    'faq',
+    '@faq',
     '@lead',             // заявка перед контактами
     'contact',
 ];
@@ -52,7 +52,7 @@ foreach ($order as $key) {
 }
 if ($missing) echo 'НЕ НАЙДЕНЫ: ' . implode(', ', $missing) . "\n";
 // эти секции заменены новыми блоками — старые версии не переносим
-unset($found['team'], $found['programs'], $found['partners'], $found['hero']);
+unset($found['team'], $found['programs'], $found['partners'], $found['hero'], $found['faq']);
 if ($found)   echo 'не размещены, добавлены в конец: ' . implode(', ', array_keys($found)) . "\n";
 foreach ($found as $frag) $out[] = $frag;
 
