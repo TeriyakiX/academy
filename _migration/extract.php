@@ -1,6 +1,6 @@
 <?php
 $root = realpath(__DIR__ . '/..');
-$skip = ['/admin/', '/.tmb/', '/uploads/', '/.1/', '/_migration/'];
+$skip = ['/laravel/', '/admin/', '/.tmb/', '/uploads/', '/.1/', '/_migration/'];
 $rii = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($root, FilesystemIterator::SKIP_DOTS));
 $pages = [];
 foreach ($rii as $f) {
@@ -36,10 +36,16 @@ foreach ($rii as $f) {
         'h2'          => $all('//h2'),
         'h3'          => $all('//h3'),
         'css'         => array_values(array_filter(array_map(fn($n)=>$n->getAttribute('href'), iterator_to_array($x->query('//link[@rel="stylesheet"]'))))),
-        'js'          => array_values(array_filter(array_map(fn($n)=>$n->getAttribute('src'), iterator_to_array($x->query('//script[@src]'))))),
+        'js'          => array_values(array_map(fn($n) => ['src' => $n->getAttribute('src'), 'type' => $n->getAttribute('type') ?: null, 'defer' => $n->hasAttribute('defer'), 'async' => $n->hasAttribute('async')], array_filter(iterator_to_array($x->query('//script[@src]')), fn($n) => $n->getAttribute('src') !== ''))),
         'ld_json'     => count($x->query('//script[@type="application/ld+json"]')),
         'imgs'        => count($x->query('//img')),
         'forms'       => count($x->query('//form')),
+        'body_attrs'  => (function () use ($x) {
+            $b = $x->query('//body')->item(0);
+            $a = [];
+            if ($b) foreach ($b->attributes as $at) $a[$at->name] = $at->value;
+            return $a;
+        })(),
     ];
 }
 usort($pages, fn($a,$b) => strcmp($a['url'], $b['url']));

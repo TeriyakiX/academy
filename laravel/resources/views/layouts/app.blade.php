@@ -32,16 +32,12 @@
     @stack('head')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body>
-
-@include('partials.header')
+<body @foreach ($seo['body_attrs'] ?? [] as $k => $v) {{ $k }}="{{ $v }}" @endforeach>
 
 @yield('content')
 
-@include('partials.footer')
-
-@foreach ($seo['js'] ?? [] as $src)
-    <script type="module" src="{{ $src }}"></script>
+@foreach ($seo['js'] ?? [] as $script)
+    <script src="{{ $script['src'] }}"@if ($script['type']) type="{{ $script['type'] }}"@endif @if ($script['defer']) defer @endif @if ($script['async']) async @endif></script>
 @endforeach
 @stack('scripts')
 

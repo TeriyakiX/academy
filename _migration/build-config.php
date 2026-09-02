@@ -27,6 +27,7 @@ foreach ($pages as $p) {
         'canonical'   => $base . $route,                     // <- всегда сам на себя
         'robots'      => in_array($url, $noindex, true) ? 'noindex, follow' : null,
         'css'         => $p['css'],
+        'body_attrs'  => $p['body_attrs'] ?? [],
         'js'          => $p['js'],
     ];
 }

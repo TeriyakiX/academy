@@ -1,6 +1,6 @@
 <?php
-$root = realpath(__DIR__ . '/..');
-$lv   = $root . '/laravel';
+$root  = realpath(__DIR__ . '/..');
+$lv    = $root . '/laravel';
 $pages = json_decode(file_get_contents(__DIR__ . '/pages.json'), true);
 
 function dom(string $file): array {
@@ -9,48 +9,67 @@ function dom(string $file): array {
     libxml_clear_errors();
     return [$d, new DOMXPath($d)];
 }
-function pretty(string $h): string { return preg_replace('/>\s*</', ">\n<", trim($h)); }
 
-// ---------- 1. Эталонные шапка/футер из index.html ----------
-[$d, $x] = dom($root . '/index.html');
-$header = pretty($d->saveHTML($x->query('//header')->item(0)));
-$footer = pretty($d->saveHTML($x->query('//footer')->item(0)));
+/** Абсолютные ссылки -> относительные ТОЛЬКО в атрибутах. Текст не трогаем. */
+function relinkAttrs(DOMXPath $x, DOMNode $scope): void {
+    foreach (['href', 'src'] as $attr) {
+        foreach ($x->query(".//@{$attr}", $scope) as $a) {
+            $v = $a->value;
+            if (str_starts_with($v, 'https://academy-barista.ru')) {
+                $a->value = substr($v, strlen('https://academy-barista.ru')) ?: '/';
+            }
+        }
+    }
+}
 
-@mkdir("$lv/resources/views/partials", 0777, true);
-@mkdir("$lv/resources/views/pages", 0777, true);
-@mkdir("$lv/resources/views/layouts", 0777, true);
+foreach (['partials', 'pages', 'layouts'] as $dir) @mkdir("$lv/resources/views/$dir", 0777, true);
 
-// абсолютные ссылки -> относительные (чтобы работало на любом домене/стенде)
-$rel = fn($h) => str_replace(['https://academy-barista.ru/', 'https://academy-barista.ru'], ['/', ''], $h);
-file_put_contents("$lv/resources/views/partials/header.blade.php", $rel($header));
-file_put_contents("$lv/resources/views/partials/footer.blade.php", $rel($footer));
-
-// ---------- 2. Тело каждой страницы ----------
+$variants = ['header' => [], 'footer' => []];
 $made = [];
+
 foreach ($pages as $p) {
     if (isset($p['skipped'])) continue;
-    $url  = $p['url'];
-    $file = $root . str_replace('/', DIRECTORY_SEPARATOR, $url);
+    $file = $root . str_replace('/', DIRECTORY_SEPARATOR, $p['url']);
     if (!is_file($file)) continue;
 
     [$d, $x] = dom($file);
     $body = $x->query('//body')->item(0);
     if (!$body) continue;
 
-    // выкидываем header/footer/script/noscript — они уедут в layout
-    foreach (['header', 'footer', 'script', 'noscript'] as $t) {
+    relinkAttrs($x, $body);
+
+    $uses = [];
+    foreach (['header', 'footer'] as $t) {
+        $n = $x->query("//body//{$t}")->item(0);
+        if (!$n) continue;
+        $html = $d->saveHTML($n);
+        $key  = md5($html);
+        if (!isset($variants[$t][$key])) {
+            $variants[$t][$key] = ['name' => $t . '-' . (count($variants[$t]) + 1), 'html' => $html, 'pages' => []];
+        }
+        $variants[$t][$key]['pages'][] = $p['url'];
+        $uses[$t] = $variants[$t][$key]['name'];
+        $n->parentNode->replaceChild($d->createTextNode("[[INC:{$t}]]"), $n);
+    }
+    foreach (['script', 'noscript'] as $t) {
         foreach (iterator_to_array($x->query("//body//{$t}")) as $n) $n->parentNode->removeChild($n);
     }
+
     $inner = '';
     foreach ($body->childNodes as $c) $inner .= $d->saveHTML($c);
+    foreach ($uses as $t => $partial) {
+        $inner = str_replace("[[INC:{$t}]]", "@include('partials.{$partial}')", $inner);
+    }
 
-    $name = trim(str_replace(['/', '.html'], ['.', ''], $url), '.');
+    $name = trim(str_replace(['/', '.html'], ['.', ''], $p['url']), '.');
     $path = "$lv/resources/views/pages/" . str_replace('.', '/', $name) . '.blade.php';
     @mkdir(dirname($path), 0777, true);
+    file_put_contents($path, "@extends('layouts.app')\n@section('content')\n{$inner}\n@endsection\n");
+    $made[$p['url']] = ['view' => $name, 'css' => $p['css'], 'js' => $p['js']];
+}
 
-    $tpl  = "@extends('layouts.app')\n\n@section('content')\n" . $rel(pretty($inner)) . "\n@endsection\n";
-    file_put_contents($path, $tpl);
-    $made[$url] = ['view' => $name, 'bytes' => strlen($tpl), 'css' => $p['css'], 'js' => $p['js']];
+foreach ($variants as $t => $set) {
+    foreach ($set as $v) file_put_contents("$lv/resources/views/partials/{$v['name']}.blade.php", $v['html']);
 }
 file_put_contents(__DIR__ . '/views.json', json_encode($made, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
-echo "шаблонов: " . count($made) . "\n";
+echo "шаблонов: " . count($made) . " | шапок: " . count($variants['header']) . " | футеров: " . count($variants['footer']) . "\n";
