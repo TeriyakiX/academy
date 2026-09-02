@@ -20,7 +20,7 @@ echo 'секций сайта: ' . count($found) . ' (' . implode(', ', array_ke
 $order = [
     'hero',              // кто мы
     '@ratings',          // соцдоказательство сразу под первым экраном
-    'programs',          // курсы
+    '@courses-tabs',     // курсы с вкладками направлений
     '@constructor-cta',  // не выбрал — собери сам
     '@schedule',         // когда учиться
     '@steps',            // как проходит обучение
@@ -33,7 +33,7 @@ $order = [
     'business-courses',
     'certificate',
     'events',
-    'partners',
+    '@partners',
     'faq',
     '@lead',             // заявка перед контактами
     'contact',
@@ -51,8 +51,8 @@ foreach ($order as $key) {
     unset($found[$key]);
 }
 if ($missing) echo 'НЕ НАЙДЕНЫ: ' . implode(', ', $missing) . "\n";
-// старая секция «Наша команда» заменена слайдером преподавателей — не переносим
-unset($found['team']);
+// эти секции заменены новыми блоками — старые версии не переносим
+unset($found['team'], $found['programs'], $found['partners']);
 if ($found)   echo 'не размещены, добавлены в конец: ' . implode(', ', array_keys($found)) . "\n";
 foreach ($found as $frag) $out[] = $frag;
 

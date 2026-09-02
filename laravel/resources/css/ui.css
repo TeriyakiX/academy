@@ -1,0 +1,97 @@
+/* ================================================================
+   UI-слой проекта: токены и общие компоненты.
+   Подключается на всех страницах (layouts/app.blade.php).
+
+   Токены — те же значения, что в main.css сайта (шкала pine-cone),
+   продублированы под именами --ab-*, чтобы работать и на страницах,
+   где main.css не подключён.
+   ================================================================ */
+
+:root {
+    --ab-100: #e4e1dd;
+    --ab-200: #ccc4bc;
+    --ab-300: #aea196;
+    --ab-400: #978578;
+    --ab-500: #88756a;
+    --ab-600: #6b5a53;  /* основной кофейный */
+    --ab-700: #5e4e4a;
+    --ab-800: #514442;
+    --ab-900: #483c3b;
+    --ab-950: #282020;  /* тёмный фон блоков */
+    --ab-50:  #f4f3f2;
+
+    --ab-dark: #1a1a1a;
+    --ab-cream: #c9c9c8;
+    --ab-white: #fff;
+
+    --ab-radius: 10px;
+    --ab-radius-lg: 18px;
+    --ab-transition: .25s ease;
+
+    --ab-font: Circe, sans-serif;
+    --ab-font-display: Involve, Circe, sans-serif;
+}
+
+/* ---------------- Кнопки ----------------
+   Один компонент на весь проект: .ab-btn + модификатор вида.
+   Размеры: --sm / --lg. По умолчанию средний.
+*/
+.ab-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 26px;
+    border: 2px solid transparent;
+    border-radius: var(--ab-radius);
+    font-family: var(--ab-font);
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color var(--ab-transition), border-color var(--ab-transition), color var(--ab-transition);
+}
+.ab-btn:disabled { opacity: .45; cursor: not-allowed; }
+
+.ab-btn--primary { background: var(--ab-600); border-color: var(--ab-600); color: var(--ab-white); }
+.ab-btn--primary:hover:not(:disabled) { background: var(--ab-800); border-color: var(--ab-800); }
+
+.ab-btn--dark { background: var(--ab-dark); border-color: var(--ab-dark); color: var(--ab-white); }
+.ab-btn--dark:hover:not(:disabled) { background: var(--ab-600); border-color: var(--ab-600); }
+
+.ab-btn--outline { background: transparent; border-color: var(--ab-600); color: var(--ab-600); }
+.ab-btn--outline:hover:not(:disabled) { background: var(--ab-600); color: var(--ab-white); }
+
+/* на тёмном фоне */
+.ab-btn--light { background: var(--ab-white); border-color: var(--ab-white); color: var(--ab-dark); }
+.ab-btn--light:hover:not(:disabled) { background: var(--ab-600); border-color: var(--ab-600); color: var(--ab-white); }
+
+.ab-btn--ghost-light { background: transparent; border-color: rgba(255,255,255,.35); color: var(--ab-white); }
+.ab-btn--ghost-light:hover:not(:disabled) { background: rgba(255,255,255,.12); border-color: var(--ab-white); }
+
+.ab-btn--sm { padding: 10px 18px; font-size: 14px; }
+.ab-btn--lg { padding: 17px 34px; font-size: 16px; }
+.ab-btn--block { width: 100%; }
+
+.ab-btn__icon { width: 16px; height: 16px; flex: none; }
+
+/* ---------------- Приведение старых кнопок к общему виду ----------------
+   На legacy-страницах кнопки свёрстаны классами .button/.button-brown.
+   Выравниваем скругление, регистр и насыщенность, чтобы по всему сайту
+   кнопки читались одинаково. Цвета остаются из main.css.
+*/
+.button {
+    border-radius: var(--ab-radius) !important;
+    text-transform: none !important;
+    font-weight: 700 !important;
+    font-size: 15px !important;
+}
+
+/* ---------------- Мелочи ---------------- */
+.ab-visually-hidden {
+    position: absolute; width: 1px; height: 1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}
