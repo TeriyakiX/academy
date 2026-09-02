@@ -114,21 +114,33 @@ Route::get('/constructor.html', fn () => view('pages.constructor', ['seo' => [
 
 /*
  | Приём заявок со всех форм сайта.
- | Дальше их разбирает LeadService: лог + Telegram + Битрикс24.
- | Каналы включаются в .env, поэтому подключение CRM не требует правок кода.
+ |
+ | Перед обработкой отсекаем автоматические отправки:
+ |  - заполнена скрытая ловушка (человек её не видит);
+ |  - форма отправлена быстрее, чем её реально можно заполнить.
+ | Боту отвечаем как обычно, чтобы он не подбирал обход.
  */
 Route::post('/lead', function (
     \Illuminate\Http\Request $request,
     \App\Services\LeadService $leads
 ) {
     $data = $request->validate([
-        'name'    => ['required', 'string', 'max:120'],
-        'phone'   => ['required', 'string', 'max:40'],
-        'source'  => ['nullable', 'string', 'max:200'],
-        'page'    => ['nullable', 'string', 'max:200'],
-        'comment' => ['nullable', 'string', 'max:1000'],
-        'courses' => ['nullable', 'string', 'max:1000'],
+        'name'      => ['required', 'string', 'max:120'],
+        'phone'     => ['required', 'string', 'max:40'],
+        'source'    => ['nullable', 'string', 'max:200'],
+        'page'      => ['nullable', 'string', 'max:200'],
+        'comment'   => ['nullable', 'string', 'max:1000'],
+        'courses'   => ['nullable', 'string', 'max:1000'],
+        'website'   => ['nullable', 'string', 'max:200'],
+        'loaded_at' => ['nullable', 'string'],
     ]);
+
+    if (\App\Services\LeadService::looksAutomated($data)) {
+        \Illuminate\Support\Facades\Log::channel('single')
+            ->info('Заявка отброшена как автоматическая', ['page' => $data['page'] ?? null]);
+
+        return redirect('/thank-you.html');
+    }
 
     $leads->handle($data);
 

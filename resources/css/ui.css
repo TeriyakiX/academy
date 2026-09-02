@@ -95,3 +95,7 @@
     position: absolute; width: 1px; height: 1px;
     overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
 }
+
+/* Ловушка для ботов: поле есть в разметке, но человек его не видит */
+.ab-guard { position: absolute !important; left: -9999px !important;
+    width: 1px; height: 1px; overflow: hidden; }

@@ -13,6 +13,8 @@
 
         <form class="ab-modal__form" method="post" action="/lead">
             @csrf
+            @include('partials.form-guard')
+
             <input type="hidden" name="source" value="Модальное окно">
             <input type="hidden" name="page" value="{{ request()->getPathInfo() }}">
 
