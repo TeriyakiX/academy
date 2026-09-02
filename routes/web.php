@@ -32,3 +32,13 @@ foreach ([
     Route::redirect($from, $to, 301);
     Route::redirect($from . '/', $to, 301);
 }
+
+// Конструктор курсов
+Route::get('/constructor.html', fn () => view('pages.constructor', ['seo' => [
+    'title'       => 'Конструктор курсов — соберите свою программу | Академия Бариста',
+    'description' => 'Соберите собственный набор курсов и мастер-классов Академии Бариста. Чем больше направлений — тем выше скидка.',
+    'canonical'   => 'https://academy-barista.ru/constructor.html',
+    'body_attrs'  => ['class' => 'body'],
+    'css'         => ['/assets/splide.css', '/assets/masterClass.css'],
+    'js'          => [],
+]]))->name('constructor');
