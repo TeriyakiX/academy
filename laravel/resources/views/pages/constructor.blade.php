@@ -5,8 +5,7 @@
 @endpush
 @section('content')
 <div class="wrapper">
-    @include('partials.mobile-menu')
-    @include('partials.header-2')
+    @include('partials.site.header')
 
     <main class="constructor-page">
         <div class="container">
@@ -23,6 +22,6 @@
         </div>
     </main>
 
-    @include('partials.footer-2')
+    @include('partials.site.footer')
 </div>
 @endsection

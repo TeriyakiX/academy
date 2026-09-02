@@ -2,7 +2,7 @@
 @section('content')
 
 <div class="wrapper">
-    @include('partials.header-5')
+    @include('partials.site.header')
 
     <main class="main">
         <div class="document-container">
@@ -95,7 +95,7 @@
         </div>
     </main>
 
-    @include('partials.footer-6')
+    @include('partials.site.footer')
 </div>
 
 @endsection

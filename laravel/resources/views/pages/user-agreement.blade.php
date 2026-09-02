@@ -3,7 +3,7 @@
 
 <div class="wrapper">
     <!-- ХЕДЕР -->
-    @include('partials.header-5')
+    @include('partials.site.header')
 
     <!-- ОСНОВНОЙ КОНТЕНТ -->
     <main class="main">
@@ -85,7 +85,7 @@
         </div>
     </main>
 
-    @include('partials.footer-6')
+    @include('partials.site.footer')
 </div>
 
 
