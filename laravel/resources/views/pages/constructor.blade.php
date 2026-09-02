@@ -5,6 +5,7 @@
 @endpush
 @section('content')
 <div class="wrapper">
+    @include('partials.mobile-menu')
     @include('partials.header-2')
 
     <main class="constructor-page">
