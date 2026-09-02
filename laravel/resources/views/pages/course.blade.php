@@ -53,7 +53,7 @@
                         <ul class="ab-cpage__buy-list">
                             <li>Обучение по образовательной лицензии</li>
                             <li>Практика на профессиональном оборудовании</li>
-                            <li>Документ об обучении</li>
+                            <li>Свидетельство о присвоении квалификации</li>
                         </ul>
 
                         <button class="ab-btn ab-btn--primary ab-btn--block ab-btn--lg"
