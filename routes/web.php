@@ -42,3 +42,20 @@ Route::get('/constructor.html', fn () => view('pages.constructor', ['seo' => [
     'css'         => ['/assets/splide.css', '/assets/masterClass.css'],
     'js'          => [['src' => '/assets/pageCommon.js', 'type' => 'module', 'defer' => false, 'async' => false]],
 ]]))->name('constructor');
+
+/*
+ | Приём заявки с главной.
+ | Пока только логирование и редирект на «спасибо».
+ | Отправку в CRM/Telegram подключим, когда заказчик определится с системой.
+ */
+Route::post('/lead', function (\Illuminate\Http\Request $request) {
+    $data = $request->validate([
+        'name'   => ['required', 'string', 'max:120'],
+        'phone'  => ['required', 'string', 'max:40'],
+        'source' => ['nullable', 'string', 'max:200'],
+    ]);
+
+    \Illuminate\Support\Facades\Log::channel('single')->info('Заявка с сайта', $data);
+
+    return redirect('/thank-you.html');
+})->name('lead.store');
