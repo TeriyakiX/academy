@@ -47,9 +47,6 @@
             </div>
         </section>
 
-        @include('partials.blocks.steps')
-        @include('partials.blocks.reviews')
-        @include('partials.blocks.faq')
         @include('partials.blocks.lead')
     </main>
 

@@ -2,52 +2,48 @@
     <div class="ab-container">
         <div class="ab-lead-block__inner">
 
-            {{-- Превью входящего звонка --}}
-            <div class="ab-lead-block__phone" aria-hidden="true">
-                <div class="ab-phone">
-                    <div class="ab-phone__top">9:41</div>
-                    <div class="ab-phone__caller">
-                        <img src="/assets/logo.png" alt="" width="44" height="44">
-                        <div>
-                            <strong>Академия Бариста</strong>
-                            <span>входящий звонок</span>
-                        </div>
-                    </div>
-                    <div class="ab-phone__actions">
-                        <span class="ab-phone__btn ab-phone__btn--decline">✕</span>
-                        <span class="ab-phone__btn ab-phone__btn--accept">✆</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="ab-lead-block__form">
-                <h2 class="ab-h2 ab-h2--light">Не знаете, что выбрать?</h2>
-                <p class="ab-lead-block__promise">
-                    Перезвоним в течение 15 минут<br>
-                    ежедневно с {{ str_replace('Пн-Вс ', '', config('nav.contacts.hours')) }}
-                </p>
-                <p class="ab-lead-block__text">
-                    Расскажем про программы, сроки и стоимость, поможем подобрать курс под вашу цель.
+            <div class="ab-lead-block__text">
+                <h2 class="ab-h2 ab-h2--light">Поможем выбрать курс</h2>
+                <p class="ab-lead-block__promise">Перезвоним в течение 15 минут</p>
+                <p class="ab-lead-block__note">
+                    Расскажем про программы, сроки и стоимость, подберём вариант под вашу цель и уровень.
                 </p>
 
-                <form class="ab-lead-form" method="post" action="/lead">
-                    @csrf
-                    <input type="hidden" name="source" value="Главная — блок «Не знаете, что выбрать»">
-                    <label class="ab-lead-form__field">
-                        <span class="ab-visually-hidden">Имя</span>
-                        <input type="text" name="name" placeholder="Имя" required autocomplete="name">
-                    </label>
-                    <label class="ab-lead-form__field">
-                        <span class="ab-visually-hidden">Телефон</span>
-                        <input type="tel" name="phone" placeholder="Телефон" required autocomplete="tel">
-                    </label>
-                    <button class="ab-btn ab-btn--primary ab-btn--block" type="submit">Отправить</button>
-                    <p class="ab-lead-form__note">
-                        Нажимая кнопку, вы соглашаетесь с
-                        <a href="/privacy-policy.html">политикой конфиденциальности</a>
-                    </p>
-                </form>
+                <ul class="ab-lead-block__list">
+                    <li>Подберём программу под ваш опыт</li>
+                    <li>Расскажем про даты и свободные места</li>
+                    <li>Посчитаем стоимость со скидкой за объём</li>
+                </ul>
+
+                <a class="ab-lead-block__phone" href="{{ config('nav.contacts.phone_href') }}">
+                    {{ config('nav.contacts.phone') }}
+                    <span>{{ config('nav.contacts.hours') }}</span>
+                </a>
             </div>
+
+            <form class="ab-lead-form" method="post" action="/lead">
+                @csrf
+                <input type="hidden" name="source" value="Блок «Поможем выбрать курс»">
+
+                <label class="ab-lead-form__field">
+                    <span class="ab-lead-form__label">Как вас зовут</span>
+                    <input type="text" name="name" placeholder="Имя" required autocomplete="name">
+                </label>
+
+                <label class="ab-lead-form__field">
+                    <span class="ab-lead-form__label">Телефон для связи</span>
+                    <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required autocomplete="tel">
+                </label>
+
+                <button class="ab-btn ab-btn--primary ab-btn--block ab-btn--lg" type="submit">
+                    Оставить заявку
+                </button>
+
+                <p class="ab-lead-form__note">
+                    Нажимая кнопку, вы соглашаетесь с
+                    <a href="/privacy-policy.html">политикой конфиденциальности</a>
+                </p>
+            </form>
 
         </div>
     </div>

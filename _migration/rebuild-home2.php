@@ -32,7 +32,7 @@ $order = [
     '@directions',
     '@business-cta',
     '@certificate',
-    'events',
+    '@events',
     '@partners',
     '@faq',
     '@lead',             // заявка перед контактами
@@ -55,7 +55,8 @@ if ($missing) echo 'НЕ НАЙДЕНЫ: ' . implode(', ', $missing) . "\n";
 unset(
     $found['team'], $found['programs'], $found['partners'],
     $found['hero'], $found['faq'], $found['about'], $found['certificate'],
-    $found['reasons'], $found['directions'], $found['business-courses'], $found['contact']
+    $found['reasons'], $found['directions'], $found['business-courses'], $found['contact'],
+    $found['events']
 );
 if ($found)   echo 'не размещены, добавлены в конец: ' . implode(', ', array_keys($found)) . "\n";
 foreach ($found as $frag) $out[] = $frag;
