@@ -53,8 +53,6 @@
         </section>
 
         @include('partials.blocks.stats')
-        @include('partials.blocks.teachers')
-        @include('partials.blocks.faq')
         @include('partials.blocks.lead')
     </main>
 

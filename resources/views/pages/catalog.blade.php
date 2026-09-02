@@ -31,7 +31,6 @@
 
         @include('partials.blocks.constructor-cta')
         @include('partials.blocks.schedule')
-        @include('partials.blocks.teachers')
         @include('partials.blocks.reviews')
         @include('partials.blocks.faq')
         @include('partials.blocks.lead')
