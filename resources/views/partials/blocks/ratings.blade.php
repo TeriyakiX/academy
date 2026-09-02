@@ -1,4 +1,4 @@
-<section class="ab-ratings">
+<section class="ab-ratings ab-reveal">
     <div class="ab-container">
         <ul class="ab-ratings__list">
             @foreach (config('home.ratings.items') as $r)

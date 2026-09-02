@@ -1,6 +1,6 @@
 @php $s = config('home.schedule'); @endphp
 
-<section class="ab-schedule">
+<section class="ab-schedule ab-reveal">
     <div class="ab-container">
         <h2 class="ab-h2">{{ $s['title'] }}</h2>
         <p class="ab-lead">{{ $s['lead'] }}</p>
@@ -25,12 +25,12 @@
                         @else
                             <div class="ab-schedule__free" aria-hidden="true">
                                 <svg viewBox="0 0 120 120">
-                                    <circle cx="60" cy="60" r="46" fill="none" stroke="#e3e0dd" stroke-width="9"
+                                    <circle cx="60" cy="60" r="46" fill="none" stroke="#e4e1dd" stroke-width="9"
                                             stroke-dasharray="14 10" stroke-linecap="round"/>
-                                    <circle cx="60" cy="60" r="46" fill="none" stroke="#6b5a53" stroke-width="9"
-                                            stroke-dasharray="14 10" stroke-linecap="round"
-                                            transform="rotate(28 60 60)" opacity=".85"
-                                            stroke-dashoffset="12"/>
+                                    <g class="ab-schedule__free-spin">
+                                        <circle cx="60" cy="60" r="46" fill="none" stroke="#6b5a53" stroke-width="9"
+                                                stroke-dasharray="14 76" stroke-linecap="round"/>
+                                    </g>
                                 </svg>
                             </div>
                         @endif

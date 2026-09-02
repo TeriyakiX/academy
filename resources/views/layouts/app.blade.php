@@ -30,7 +30,7 @@
     @endforeach
 
     @stack('head')
-    @vite(['resources/css/app.css', 'resources/css/site-layout.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/css/ui.css', 'resources/css/site-layout.css', 'resources/js/app.js'])
 </head>
 <body @foreach ($seo['body_attrs'] ?? [] as $k => $v) {{ $k }}="{{ $v }}" @endforeach>
 

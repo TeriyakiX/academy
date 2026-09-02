@@ -1,4 +1,4 @@
-<section class="ab-lead-block">
+<section class="ab-lead-block ab-reveal">
     <div class="ab-container">
         <div class="ab-lead-block__inner">
 
@@ -41,7 +41,7 @@
                         <span class="ab-visually-hidden">Телефон</span>
                         <input type="tel" name="phone" placeholder="Телефон" required autocomplete="tel">
                     </label>
-                    <button class="ab-btn ab-btn--accent" type="submit">Отправить</button>
+                    <button class="ab-btn ab-btn--primary ab-btn--block" type="submit">Отправить</button>
                     <p class="ab-lead-form__note">
                         Нажимая кнопку, вы соглашаетесь с
                         <a href="/privacy-policy.html">политикой конфиденциальности</a>

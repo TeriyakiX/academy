@@ -1,4 +1,4 @@
-<section class="ab-ctor">
+<section class="ab-ctor ab-reveal">
     <div class="ab-container">
         <div class="ab-ctor__inner">
 
@@ -32,7 +32,7 @@
                     <li>Скидка растёт вместе с количеством курсов</li>
                 </ul>
 
-                <a class="ab-btn ab-btn--accent" href="/constructor.html">Перейти к конструктору</a>
+                <a class="ab-btn ab-btn--light ab-btn--lg" href="/constructor.html">Перейти к конструктору</a>
             </div>
 
         </div>

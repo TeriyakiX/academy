@@ -1,6 +1,6 @@
 @php $s = config('home.steps'); @endphp
 
-<section class="ab-steps">
+<section class="ab-steps ab-reveal">
     <div class="ab-container">
         <h2 class="ab-h2">{{ $s['title'] }}</h2>
         <p class="ab-lead">{{ $s['lead'] }}</p>
