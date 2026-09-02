@@ -21,8 +21,50 @@ $catalog = collect(config('courses.schools'))
     ->flatMap(fn ($list, $school) => collect($list)->map(fn ($c) => $c + ['school' => $school]))
     ->keyBy('url');
 
+/*
+ | Каталог и страницы-подборки. Показывают карточки курсов вкладками:
+ | либо все направления, либо одно.
+ */
+$catalogPages = [
+    '/courses.html' => [
+        'h1'     => 'курсы и программы',
+        'lead'   => 'Все программы Академии Бариста: от первого дня за кофемашиной до управления кофейней.',
+        'school' => null,
+    ],
+    '/courses/barista-courses.html' => [
+        'h1'     => 'курсы бариста',
+        'lead'   => 'Профессиональные программы для тех, кто хочет работать в кофейне или расти в профессии.',
+        'school' => 'Курсы бариста',
+    ],
+    '/courses/master-class.html' => [
+        'h1'     => 'Мастер Классы',
+        'lead'   => 'Короткие практические занятия для любителей кофе и тех, кто хочет попробовать профессию.',
+        'school' => 'Мастер-классы',
+    ],
+    '/courses/barnoe-delo.html' => [
+        'h1'     => 'Барное Дело',
+        'lead'   => 'Курсы бармена: методы приготовления коктейлей, баланс вкуса и подача.',
+        'school' => 'Барное дело',
+    ],
+];
+
 foreach (config('site.pages') as $uri => $page) {
     $routeName = 'page' . str_replace(['/', '.html', '.'], ['.', '', '_'], rtrim($uri, '/')) ?: 'home';
+
+    if (isset($catalogPages[$uri])) {
+        $meta = $catalogPages[$uri];
+        $schools = config('courses.schools');
+        if ($meta['school']) {
+            $schools = array_intersect_key($schools, [$meta['school'] => true]);
+        }
+
+        Route::get($uri, fn () => view('pages.catalog', [
+            'seo'     => $page,
+            'catalog' => $meta + ['schools' => $schools],
+        ]))->name($routeName);
+
+        continue;
+    }
 
     if (isset($coursePages[$uri])) {
         $data = $coursePages[$uri];
