@@ -1,0 +1,71 @@
+/* Конструктор курсов. Палитра и шрифты — из main.css сайта. */
+.ctor { --brown: #6b5a53; --dark: #1a1a1a; --line: #e3e0dd; --bg: #faf9f8;
+    font-family: Circe, sans-serif; color: var(--dark); }
+
+.ctor__tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+.ctor__tab { position: relative; padding: 12px 22px; border: 1px solid var(--line);
+    border-radius: 999px; background: #fff; font: inherit; font-size: 15px;
+    cursor: pointer; transition: .15s; }
+.ctor__tab:hover { border-color: var(--brown); }
+.ctor__tab.is-active { background: var(--dark); border-color: var(--dark); color: #fff; }
+.ctor__tab-badge { display: inline-block; min-width: 20px; margin-left: 8px; padding: 1px 6px;
+    border-radius: 999px; background: var(--brown); color: #fff; font-size: 12px; }
+.ctor__tab.is-active .ctor__tab-badge { background: #fff; color: var(--dark); }
+
+.ctor__body { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 24px; align-items: start; }
+@media (max-width: 900px) { .ctor__body { grid-template-columns: 1fr; } }
+
+.ctor__list { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+.ctor__item { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 16px;
+    align-items: start; padding: 20px; border: 1px solid var(--line); border-radius: 14px;
+    background: #fff; transition: .15s; }
+.ctor__item.is-selected { border-color: var(--dark); background: var(--bg); }
+
+.ctor__toggle { width: 36px; height: 36px; flex: none; border: 1px solid var(--line);
+    border-radius: 50%; background: #fff; font-size: 20px; line-height: 1; color: var(--dark);
+    cursor: pointer; transition: .15s; }
+.ctor__toggle:hover { border-color: var(--dark); }
+.ctor__item.is-selected .ctor__toggle { background: var(--dark); border-color: var(--dark); color: #fff; }
+
+.ctor__item-title { margin: 0 0 6px; font-size: 17px; font-weight: 700; }
+.ctor__item-desc { margin: 0 0 8px; font-size: 14px; line-height: 1.5; color: #5c5c5c; }
+.ctor__item-meta { margin: 0; font-size: 13px; color: var(--brown); }
+.ctor__item-price { text-align: right; white-space: nowrap; font-size: 17px; }
+.ctor__item-old { display: block; font-size: 13px; color: #9a9a9a; }
+
+.ctor__result { position: sticky; top: 20px; padding: 24px; border: 1px solid var(--line);
+    border-radius: 14px; background: var(--bg); }
+.ctor__result-title { margin: 0 0 16px; font-size: 18px; text-transform: uppercase; letter-spacing: .02em; }
+.ctor__empty { margin: 0; font-size: 14px; line-height: 1.5; color: #7a7a7a; }
+
+.ctor__chosen { margin: 0 0 18px; padding: 0; list-style: none; display: grid; gap: 10px; }
+.ctor__chosen-item { display: grid; grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 10px; align-items: center; font-size: 14px; }
+.ctor__remove { width: 22px; height: 22px; border: none; border-radius: 50%;
+    background: #e8e4e1; color: #555; font-size: 15px; line-height: 1; cursor: pointer; }
+.ctor__remove:hover { background: var(--dark); color: #fff; }
+.ctor__chosen-price { white-space: nowrap; color: #5c5c5c; }
+
+.ctor__stats { display: grid; gap: 6px; margin: 0 0 12px; padding: 14px 0;
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.ctor__stats > div { display: flex; justify-content: space-between; font-size: 14px; }
+.ctor__stats dt { color: #7a7a7a; }
+.ctor__stats dd { margin: 0; font-weight: 700; }
+
+.ctor__hint { margin: 0 0 14px; font-size: 13px; line-height: 1.4; color: var(--brown); }
+
+.ctor__total { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 16px; }
+.ctor__total-old { font-size: 15px; color: #9a9a9a; }
+.ctor__total-sum { font-size: 26px; font-weight: 800; margin-left: auto; }
+
+.ctor__submit { width: 100%; padding: 15px; border: none; border-radius: 999px;
+    background: var(--dark); color: #fff; font: inherit; font-size: 15px; cursor: pointer; transition: .15s; }
+.ctor__submit:hover:not(:disabled) { background: var(--brown); }
+.ctor__submit:disabled { opacity: .4; cursor: not-allowed; }
+
+.constructor-page { padding: 40px 0 80px; }
+.constructor-page .container { max-width: 1240px; margin: 0 auto; padding: 0 20px; }
+.constructor-page__title { margin: 0 0 12px; font-family: Involve, sans-serif;
+    font-size: clamp(32px, 5vw, 56px); font-weight: 800; text-transform: uppercase; }
+.constructor-page__lead { max-width: 640px; margin: 0 0 32px; font-family: Circe, sans-serif;
+    font-size: 16px; line-height: 1.6; color: #5c5c5c; }
