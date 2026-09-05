@@ -10,6 +10,8 @@
 @section('content')
 <div class="wrapper">@include('partials.site.header')<main class="main">@include('partials.blocks.hero')
 
+@include('partials.blocks.license-bar')
+
 @include('partials.blocks.stats')
 
 @include('partials.blocks.courses-tabs')

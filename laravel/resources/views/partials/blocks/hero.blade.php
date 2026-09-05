@@ -29,9 +29,9 @@
 
                 <div class="ab-hero__actions ab-in" style="--d:.24s">
                     <button class="ab-btn ab-btn--primary ab-btn--lg" type="button" data-modal-path="consultation">
-                        Подобрать курс
+                        Оставить заявку
                     </button>
-                    <a class="ab-btn ab-btn--outline ab-btn--lg" href="/constructor.html">Собрать свой курс</a>
+                    <a class="ab-btn ab-btn--outline ab-btn--lg" href="/courses.html">Выбрать курс</a>
                 </div>
 
                 {{-- Соцдоказательство: лица тренеров и телефон --}}

@@ -916,3 +916,25 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 /* Блок документов убран с главной — отзывы встали сразу после «как проходит
    обучение», фон совпал. Разводим соседние секции. */
 .ab-reviews { background: var(--ab-white); }
+
+/* Полоса с лицензией под первым экраном.
+   Заменяет большой блок документов: то же доверие, но без длинной прокрутки. */
+.ab-licbar { padding: 14px 0; background: var(--ab-100);
+    border-top: 1px solid var(--ab-200); border-bottom: 1px solid var(--ab-200);
+    font-family: var(--ab-font); }
+.ab-licbar__inner { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.ab-licbar__icon { display: flex; flex: none; color: var(--ab-600); }
+.ab-licbar__icon svg { width: 22px; height: 22px; }
+.ab-licbar__text { flex: 1 1 320px; margin: 0; font-size: 14px; line-height: 1.5;
+    color: var(--ab-600); }
+.ab-licbar__text b { font-weight: 800; color: var(--ab-dark); }
+.ab-licbar__sep { margin: 0 8px; color: var(--ab-300); }
+.ab-licbar__link { display: inline-flex; align-items: center; gap: 7px; flex: none;
+    font-size: 14px; font-weight: 700; color: var(--ab-700); text-decoration: none;
+    border-bottom: 1px solid currentColor; transition: color .2s ease; }
+.ab-licbar__link:hover { color: var(--ab-900); }
+.ab-licbar__link svg { width: 14px; height: 14px; }
+@media (max-width: 620px) {
+    .ab-licbar__text { flex-basis: 100%; font-size: 13px; }
+    .ab-licbar__sep { display: block; height: 0; margin: 0; overflow: hidden; }
+}
