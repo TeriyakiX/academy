@@ -20,8 +20,6 @@
 
 @include('partials.blocks.steps')
 
-@include('partials.blocks.documents')
-
 @include('partials.blocks.reviews')
 
 @include('partials.blocks.teachers')
