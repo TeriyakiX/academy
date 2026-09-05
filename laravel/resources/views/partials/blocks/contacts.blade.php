@@ -1,4 +1,4 @@
-<section class="ab-contacts-home ab-reveal">
+<section class="ab-contacts-home ab-reveal" id="contacts">
     <div class="ab-container">
         <div class="ab-contacts__grid">
             <div class="ab-contacts__info">

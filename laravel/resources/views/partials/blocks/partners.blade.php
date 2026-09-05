@@ -5,7 +5,7 @@
 
 <section class="ab-partners ab-reveal">
     <div class="ab-container">
-        <h2 class="ab-h2">Партнёры школы</h2>
+        <h2 class="ab-h2">Наши партнёры</h2>
         <p class="ab-lead">
             Учим на профессиональном оборудовании и премиальных ингредиентах —
             тех же, с которыми вы встретитесь на реальной работе.

@@ -2,10 +2,13 @@
     <div class="ab-container">
         <div class="ab-events__head">
             <div>
-                <h2 class="ab-h2">Расписание мероприятий</h2>
-                <p class="ab-lead">Открытые мастер-классы и встречи — можно прийти без записи на курс.</p>
+                <h2 class="ab-h2">Приходите на однодневные мероприятия</h2>
+                <p class="ab-lead">
+                    Окунитесь в атмосферу Академии на мастер-классе
+                    или просто <a href="#contacts">приходите на экскурсию</a>.
+                </p>
             </div>
-            <a class="ab-btn ab-btn--outline" href="{{ config('nav.contacts.phone_href') }}">Узнать даты</a>
+            <a class="ab-btn ab-btn--outline" href="/events.html">Расписание мероприятий</a>
         </div>
 
         <div data-island="EventsSchedule"

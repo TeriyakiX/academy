@@ -41,7 +41,7 @@
                     @foreach (config('nav.main') as $item)
                         @php $current = request()->getPathInfo() === $item['href']; @endphp
                         <li class="site-nav__item @if (!empty($item['children'])) site-nav__item--has-children @endif">
-                            <a class="site-nav__link @if ($current) is-current @endif"
+                            <a class="site-nav__link @if (!empty($item['accent'])) site-nav__link--accent @endif @if ($current) is-current @endif"
                                href="{{ $item['href'] }}" @if ($current) aria-current="page" @endif>
                                 {{ $item['title'] }}
                                 @if (!empty($item['children']))
@@ -60,7 +60,7 @@
                 </ul>
             </nav>
 
-            <button class="site-header__cta button button-brown js-open-modal" type="button" data-modal-path="consultation">
+            <button class="site-header__cta ab-btn ab-btn--primary js-open-modal" type="button" data-modal-path="consultation">
                 Оставить заявку
             </button>
 
