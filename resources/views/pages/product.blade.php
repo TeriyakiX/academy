@@ -1,0 +1,189 @@
+@extends('layouts.app')
+
+@push('head')
+    @vite(['resources/css/home-blocks.css', 'resources/css/course.css', 'resources/css/shop.css'])
+@endpush
+
+@section('content')
+<div class="wrapper">
+    @include('partials.site.header')
+
+    <main class="ab-page ab-page--product">
+        <section class="ab-product">
+            <div class="ab-container">
+                <nav class="ab-crumbs" aria-label="Хлебные крошки">
+                    <a href="/">Главная</a>
+                    <span>/</span>
+                    <a href="/shop.html">Оборудование</a>
+                    @if ($product->category)
+                        <span>/</span>
+                        <a href="/shop.html?category={{ $product->category->slug }}">{{ $product->category->title }}</a>
+                    @endif
+                    <span>/</span>
+                    <b>{{ $product->title }}</b>
+                </nav>
+
+                <div class="ab-product__grid">
+                    <div class="ab-product__media">
+                        @if ($product->image)
+                            <img src="{{ $product->image }}" alt="{{ $product->title }}"
+                                 width="640" height="480" loading="eager">
+                        @else
+                            <span class="ab-shop__noimage">{{ $product->brand ?: 'Фото скоро' }}</span>
+                        @endif
+
+                        @if ($product->gallery)
+                            <ul class="ab-product__thumbs">
+                                @foreach ($product->gallery as $shot)
+                                    <li><img src="{{ $shot }}" alt="{{ $product->title }}"
+                                             width="120" height="90" loading="lazy"></li>
+                                @endforeach
+                            </ul>
+                        @endif
+                    </div>
+
+                    <div class="ab-product__body">
+                        @if ($product->brand)
+                            <span class="ab-shop__brand">{{ $product->brand }}</span>
+                        @endif
+
+                        <h1 class="ab-product__title">{{ $product->title }}</h1>
+
+                        @if ($product->summary)
+                            <p class="ab-lead">{{ $product->summary }}</p>
+                        @endif
+
+                        <div class="ab-product__pricebox">
+                            <div class="ab-product__price">
+                                <b>{{ $product->price_label }}</b>
+                                @if ($product->old_price_label)
+                                    <s>{{ $product->old_price_label }}</s>
+                                @endif
+                            </div>
+                            <span class="ab-shop__stock ab-shop__stock--{{ $product->availability }}">
+                                {{ $product->availability_label }}
+                                @if ($product->stock)
+                                    — {{ $product->stock }} шт.
+                                @endif
+                            </span>
+                        </div>
+
+                        <div class="ab-product__actions">
+                            <button class="ab-btn ab-btn--primary ab-btn--lg js-open-modal" type="button"
+                                    data-modal-path="consultation">Оставить заявку</button>
+                            <a class="ab-btn ab-btn--outline ab-btn--lg"
+                               href="{{ config('nav.contacts.phone_href') }}">{{ config('nav.contacts.phone') }}</a>
+                        </div>
+
+                        @if ($product->sku)
+                            <p class="ab-product__sku">Артикул: {{ $product->sku }}</p>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        @if ($product->description || $product->specs)
+            <section class="ab-product__details">
+                <div class="ab-container">
+                    <div class="ab-product__details-grid">
+                        @if ($product->description)
+                            <div>
+                                <h2 class="ab-h2">Описание</h2>
+                                <p class="ab-product__text">{{ $product->description }}</p>
+                            </div>
+                        @endif
+
+                        @if ($product->specs)
+                            <div>
+                                <h2 class="ab-h2">Характеристики</h2>
+                                <dl class="ab-product__specs">
+                                    @foreach ($product->specs as $row)
+                                        <div>
+                                            <dt>{{ $row[0] }}</dt>
+                                            <dd>{{ $row[1] }}</dd>
+                                        </div>
+                                    @endforeach
+                                </dl>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            </section>
+        @endif
+
+        {{-- Заявка именно по этому товару: в Telegram придёт название позиции --}}
+        <section class="ab-product__order">
+            <div class="ab-container">
+                <div class="ab-product__order-inner">
+                    <div>
+                        <h2 class="ab-h2 ab-h2--light">Нужен расчёт под вашу кофейню?</h2>
+                        <p class="ab-product__order-note">
+                            Подберём конфигурацию, посчитаем доставку и подключение,
+                            обучим персонал работе на оборудовании.
+                        </p>
+                    </div>
+
+                    <form class="ab-lead-form" method="post" action="/lead">
+                        @csrf
+                        @include('partials.form-guard')
+
+                        <input type="hidden" name="source" value="Товар: {{ $product->title }}">
+                        <input type="hidden" name="page" value="{{ $product->url }}">
+
+                        <label class="ab-lead-form__field">
+                            <span class="ab-lead-form__label">Как вас зовут</span>
+                            <input type="text" name="name" placeholder="Имя" required autocomplete="name">
+                        </label>
+
+                        <label class="ab-lead-form__field">
+                            <span class="ab-lead-form__label">Телефон для связи</span>
+                            <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required autocomplete="tel">
+                        </label>
+
+                        <button class="ab-btn ab-btn--primary ab-btn--block ab-btn--lg" type="submit">
+                            Получить расчёт
+                        </button>
+
+                        <p class="ab-lead-form__note">
+                            Нажимая кнопку, вы соглашаетесь с
+                            <a href="/privacy-policy.html">политикой конфиденциальности</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        @if ($similar->isNotEmpty())
+            <section class="ab-shop ab-shop--similar">
+                <div class="ab-container">
+                    <h2 class="ab-h2">Похожие позиции</h2>
+                    <ul class="ab-shop__grid">
+                        @foreach ($similar as $p)
+                            <li class="ab-shop__card ab-reveal">
+                                <a class="ab-shop__media" href="{{ $p->url }}">
+                                    @if ($p->image)
+                                        <img src="{{ $p->image }}" alt="{{ $p->title }}"
+                                             loading="lazy" width="360" height="260">
+                                    @else
+                                        <span class="ab-shop__noimage">{{ $p->brand ?: 'Фото скоро' }}</span>
+                                    @endif
+                                </a>
+                                <div class="ab-shop__body">
+                                    <h3 class="ab-shop__name"><a href="{{ $p->url }}">{{ $p->title }}</a></h3>
+                                    <div class="ab-shop__foot">
+                                        <div class="ab-shop__price"><b>{{ $p->price_label }}</b></div>
+                                        <a class="ab-btn ab-btn--outline ab-btn--sm" href="{{ $p->url }}">Подробнее</a>
+                                    </div>
+                                </div>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </section>
+        @endif
+    </main>
+
+    @include('partials.site.footer')
+</div>
+@endsection
