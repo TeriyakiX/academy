@@ -815,22 +815,44 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 .ab-docs__badge { flex: none; padding: 10px 18px; border-radius: 999px;
     background: var(--ab-600); color: var(--ab-white); font-size: 13px; font-weight: 700; }
 
-.ab-docs__list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
-    margin: 0 0 24px; padding: 0; list-style: none; }
-@media (max-width: 950px) { .ab-docs__list { grid-template-columns: 1fr; } }
-.ab-docs__item { padding: 24px; border: 1px solid var(--ab-100);
-    border-radius: var(--ab-radius-lg); background: var(--ab-white);
-    transition: transform var(--ab-transition), box-shadow var(--ab-transition); }
-.ab-docs__item:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(26,26,26,.09); }
-.ab-docs__preview { margin-bottom: 18px; }
-.ab-docs__preview img { display: block; width: 100%; height: auto; border-radius: var(--ab-radius); }
-.ab-docs__placeholder { display: flex; align-items: center; justify-content: center;
-    aspect-ratio: 7 / 5; border: 1px dashed var(--ab-200); border-radius: var(--ab-radius);
-    background: var(--ab-50); font-size: 14px; color: var(--ab-300); }
-.ab-docs__title { margin: 0 0 9px; font-size: 17px; font-weight: 800; line-height: 1.3; }
-.ab-docs__text { margin: 0; font-size: 14px; line-height: 1.6; color: var(--ab-500); }
+/* Документы: широкая строка — скан слева, описание справа */
+.ab-docs__list { display: grid; gap: 20px; margin: 0 0 26px; padding: 0; list-style: none; }
+.ab-docs__item { display: grid; grid-template-columns: 300px 1fr; gap: 30px; align-items: center;
+    padding: 26px; border: 1px solid var(--ab-100); border-radius: var(--ab-radius-lg);
+    background: var(--ab-50); transition: box-shadow .25s ease, transform .25s ease; }
+.ab-docs__item:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(26,26,26,.09); }
+.ab-docs__preview { display: flex; align-items: center; justify-content: center; }
+.ab-docs__preview img { display: block; width: 100%; height: auto;
+    border-radius: 10px; background: var(--ab-white);
+    box-shadow: 0 10px 30px rgba(26,26,26,.14); }
+/* пока скана нет — иконка, чтобы строка не выглядела пустой рамкой */
+.ab-docs__icon { display: flex; align-items: center; justify-content: center;
+    width: 100%; aspect-ratio: 5 / 7; max-height: 260px;
+    border: 1px dashed var(--ab-200); border-radius: 10px;
+    background: var(--ab-white); color: var(--ab-400); }
+.ab-docs__icon svg { width: 54px; height: 54px; }
+.ab-docs__item:hover .ab-docs__icon { color: var(--ab-600); }
+.ab-docs__title { margin: 0 0 10px; font-size: 21px; font-weight: 800; line-height: 1.3; }
+.ab-docs__text { margin: 0; font-size: 15px; line-height: 1.65; color: var(--ab-500); }
+@media (max-width: 760px) {
+    .ab-docs__item { grid-template-columns: 1fr; gap: 20px; padding: 20px; }
+    .ab-docs__preview { max-width: 220px; }
+    .ab-docs__title { font-size: 18px; }
+}
 
-/* условия приёма */
+/* Что написано в свидетельстве */
+.ab-docs__details { margin-bottom: 20px; padding: 30px;
+    border-radius: var(--ab-radius-lg); background: var(--ab-white);
+    border: 1px solid var(--ab-100); }
+.ab-docs__sub { margin: 0 0 20px; font-size: 19px; font-weight: 800; }
+.ab-docs__facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    margin: 0; padding: 0; list-style: none; }
+@media (max-width: 950px) { .ab-docs__facts { grid-template-columns: 1fr; } }
+.ab-docs__facts li { display: grid; gap: 5px; padding-left: 16px;
+    border-left: 3px solid var(--ab-200); }
+.ab-docs__facts b { font-size: 15px; font-weight: 800; }
+.ab-docs__facts span { font-size: 14px; line-height: 1.55; color: var(--ab-500); }
+
 .ab-docs__req { padding: 30px; border-radius: var(--ab-radius-lg); background: var(--ab-50); }
 .ab-docs__req-title { margin: 0 0 20px; font-size: 19px; font-weight: 800; }
 .ab-docs__req-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
@@ -849,3 +871,16 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
    правим фоны, чтобы соседние секции снова отличались. */
 .ab-events { background: var(--ab-white); }
 .ab-cert   { background: var(--ab-50); }
+
+/* кнопки блока отзывов: «все отзывы» + «оставить отзыв» */
+.ab-reviews__actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* текст «коротко о школе» перед списком фактов */
+.ab-about__text { margin: 0 0 20px; color: var(--ab-700); }
+
+/* ссылка внутри подзаголовка блока мероприятий */
+.ab-events__head .ab-lead a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.ab-events__head .ab-lead a:hover { text-decoration: none; }
+
+/* стаж преподавателя — показываем, когда поле заполнено */
+.ab-teachers__exp { margin: 4px 0 0; font-weight: 600; color: var(--ab-700); }
