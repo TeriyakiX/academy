@@ -1,0 +1,104 @@
+/*
+ | Мобильная компоновка.
+ |
+ | На узком экране каждая сетка складывалась в одну колонку, а отступы
+ | секций оставались десктопными — главная растягивалась почти на 29 экранов.
+ | Здесь: единые компактные отступы и горизонтальная прокрутка карточек
+ | вместо бесконечного столбца.
+ |
+ | Файл подключается последним, поэтому переопределяет блочные стили.
+ */
+
+@media (max-width: 760px) {
+
+    /* ---------- Отступы секций ---------- */
+    main section:not(.ab-licbar) { padding-top: 44px; padding-bottom: 44px; }
+
+    .ab-h2 { margin-bottom: 12px; }
+    .ab-lead { margin-bottom: 22px; }
+
+    /* ---------- Карточки листаются вбок ---------- */
+    .ab-tabs__grid,
+    .ab-rv__list,
+    .ab-schedule__list,
+    .ab-dirs__cols,
+    .ab-ev__list,
+    .ab-steps__list,
+    .ab-reasons__list,
+    .ab-courses__grid,
+    .ab-catalog__grid,
+    .ab-shop__grid {
+        display: flex;
+        grid-template-columns: none;
+        gap: 14px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        overscroll-behavior-x: contain;
+        -webkit-overflow-scrolling: touch;
+        /* вылезаем за контейнер, чтобы карточки уходили под край экрана */
+        margin-inline: -16px;
+        padding: 4px 16px 12px;
+        scrollbar-width: none;
+    }
+
+    .ab-tabs__grid::-webkit-scrollbar,
+    .ab-rv__list::-webkit-scrollbar,
+    .ab-schedule__list::-webkit-scrollbar,
+    .ab-dirs__cols::-webkit-scrollbar,
+    .ab-ev__list::-webkit-scrollbar,
+    .ab-steps__list::-webkit-scrollbar,
+    .ab-reasons__list::-webkit-scrollbar,
+    .ab-courses__grid::-webkit-scrollbar,
+    .ab-catalog__grid::-webkit-scrollbar,
+    .ab-shop__grid::-webkit-scrollbar { display: none; }
+
+    .ab-tabs__grid > *,
+    .ab-rv__list > *,
+    .ab-schedule__list > *,
+    .ab-dirs__cols > *,
+    .ab-ev__list > *,
+    .ab-steps__list > *,
+    .ab-reasons__list > *,
+    .ab-courses__grid > *,
+    .ab-catalog__grid > *,
+    .ab-shop__grid > * {
+        flex: 0 0 84%;
+        scroll-snap-align: start;
+    }
+
+    /* Короткие плитки помещаются по две в ряд — прокрутка им не нужна */
+    .ab-stats__list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    /* ---------- Плотнее содержимое крупных блоков ---------- */
+
+    /* Плитки с цифрами: кольцо и отступы были рассчитаны на десктоп */
+    .ab-stats__item { padding: 16px 14px; }
+    .ab-stats__value { margin-bottom: 6px; font-size: 30px; }
+    .ab-stats__ring { width: 46px; height: 46px; }
+
+    /* Вкладки направлений переносились на четыре строки */
+    .ab-tabs__nav { flex-wrap: nowrap; overflow-x: auto; margin-inline: -16px;
+        padding: 0 16px 6px; margin-bottom: 18px; scrollbar-width: none; }
+    .ab-tabs__nav::-webkit-scrollbar { display: none; }
+    .ab-tabs__nav > * { flex: none; }
+
+    /* Лица преподавателей дублируют слайдер — на телефоне не нужны */
+    .ab-teachers__thumbs { display: none; }
+
+    /* Крупная карточка отзыва */
+    .ab-rv__stage { padding: 22px; }
+
+    .ab-ctor__inner, .ab-cert__inner, .ab-about__grid,
+    .ab-contacts__grid, .ab-reasons__grid { gap: 20px; }
+
+    /* ---------- Подсказка, что блок листается ---------- */
+    .ab-swipe-hint { display: block; margin: -4px 0 14px; font-size: 13px; color: var(--ab-400); }
+}
+
+@media (min-width: 761px) {
+    .ab-swipe-hint { display: none; }
+}
