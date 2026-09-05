@@ -834,6 +834,34 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 .ab-docs__item:hover .ab-docs__icon { color: var(--ab-600); }
 .ab-docs__title { margin: 0 0 10px; font-size: 21px; font-weight: 800; line-height: 1.3; }
 .ab-docs__text { margin: 0; font-size: 15px; line-height: 1.65; color: var(--ab-500); }
+
+/* Документ в PDF: обложка-ссылка вместо картинки */
+.ab-docs__file { display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 12px; width: 100%; aspect-ratio: 5 / 7; max-height: 260px;
+    border: 1px solid var(--ab-200); border-radius: 10px; background: var(--ab-white);
+    color: var(--ab-600); text-decoration: none;
+    box-shadow: 0 10px 30px rgba(26,26,26,.10);
+    transition: transform .25s ease, box-shadow .25s ease, color .25s ease; }
+.ab-docs__file:hover { transform: translateY(-3px); color: var(--ab-700);
+    box-shadow: 0 16px 40px rgba(26,26,26,.16); }
+.ab-docs__file-icon svg { width: 58px; height: 58px; }
+.ab-docs__file-type { font-size: 12px; font-weight: 800; letter-spacing: .08em;
+    padding: 4px 10px; border-radius: 999px; background: var(--ab-50); color: var(--ab-500); }
+
+/* Реквизиты документа */
+.ab-docs__meta { display: grid; gap: 10px; margin: 18px 0 0; }
+.ab-docs__meta > div { display: grid; grid-template-columns: 170px 1fr; gap: 12px; }
+.ab-docs__meta dt { font-size: 14px; color: var(--ab-400); }
+.ab-docs__meta dd { margin: 0; font-size: 14px; font-weight: 700; color: var(--ab-dark); }
+@media (max-width: 620px) {
+    .ab-docs__meta > div { grid-template-columns: 1fr; gap: 2px; }
+}
+
+.ab-docs__link { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px;
+    font-size: 15px; font-weight: 700; color: var(--ab-700); text-decoration: none;
+    border-bottom: 1px solid currentColor; transition: color .2s ease; }
+.ab-docs__link:hover { color: var(--ab-900); }
+.ab-docs__link svg { width: 16px; height: 16px; }
 @media (max-width: 760px) {
     .ab-docs__item { grid-template-columns: 1fr; gap: 20px; padding: 20px; }
     .ab-docs__preview { max-width: 220px; }

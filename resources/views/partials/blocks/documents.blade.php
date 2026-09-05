@@ -10,7 +10,7 @@
             <span class="ab-docs__badge">{{ $d['badge'] }}</span>
         </div>
 
-        {{-- Сами документы: скан слева, описание справа --}}
+        {{-- Документы: слева сам документ, справа описание и реквизиты --}}
         <ul class="ab-docs__list">
             @foreach ($d['items'] as $item)
                 <li class="ab-docs__item">
@@ -19,14 +19,43 @@
                             <img src="{{ $item['image'] }}"
                                  alt="{{ $item['alt'] ?? $item['title'] }}"
                                  loading="lazy" width="300" height="420">
+                        @elseif (!empty($item['file']))
+                            {{-- документ в PDF: показываем обложку-ссылку --}}
+                            <a class="ab-docs__file" href="{{ $item['file'] }}"
+                               target="_blank" rel="noopener"
+                               aria-label="{{ $item['file_label'] ?? $item['title'] }}">
+                                <span class="ab-docs__file-icon">{!! $item['icon'] !!}</span>
+                                <span class="ab-docs__file-type">PDF</span>
+                            </a>
                         @else
-                            {{-- скана ещё нет: иконка вместо пустой рамки --}}
                             <span class="ab-docs__icon">{!! $item['icon'] !!}</span>
                         @endif
                     </div>
+
                     <div class="ab-docs__body">
                         <h3 class="ab-docs__title">{{ $item['title'] }}</h3>
                         <p class="ab-docs__text">{{ $item['text'] }}</p>
+
+                        @if (!empty($item['meta']))
+                            <dl class="ab-docs__meta">
+                                @foreach ($item['meta'] as $key => $value)
+                                    <div>
+                                        <dt>{{ $key }}</dt>
+                                        <dd>{{ $value }}</dd>
+                                    </div>
+                                @endforeach
+                            </dl>
+                        @endif
+
+                        @if (!empty($item['file']))
+                            <a class="ab-docs__link" href="{{ $item['file'] }}"
+                               target="_blank" rel="noopener">
+                                {{ $item['file_label'] ?? 'Открыть документ' }}
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                     stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                                     aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+                            </a>
+                        @endif
                     </div>
                 </li>
             @endforeach
