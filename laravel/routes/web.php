@@ -102,6 +102,21 @@ foreach ([
     Route::redirect($from . '/', $to, 301);
 }
 
+// Каталог оборудования
+Route::get('/shop.html', [\App\Http\Controllers\ShopController::class, 'index'])->name('shop');
+Route::get('/shop/{slug}.html', [\App\Http\Controllers\ShopController::class, 'show'])
+    ->where('slug', '[a-z0-9-]+')->name('shop.show');
+
+// Расписание мероприятий отдельной страницей
+Route::get('/events.html', fn () => view('pages.events', ['seo' => [
+    'title'       => 'Расписание мероприятий — мастер-классы и открытые встречи | Академия Бариста',
+    'description' => 'Однодневные мастер-классы и открытые встречи Академии Бариста в Москве. Расписание ближайших мероприятий, стоимость и запись.',
+    'canonical'   => 'https://academy-barista.ru/events.html',
+    'body_attrs'  => ['class' => 'body'],
+    'css'         => [],
+    'js'          => [],
+]]))->name('events');
+
 // Конструктор курсов
 Route::get('/constructor.html', fn () => view('pages.constructor', ['seo' => [
     'title'       => 'Конструктор курсов — соберите свою программу | Академия Бариста',

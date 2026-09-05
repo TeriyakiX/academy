@@ -1,0 +1,133 @@
+/* ================================================================
+   Каталог оборудования: /shop.html и карточка товара
+   Соседние секции держим на разных фонах — как на остальных страницах.
+   ================================================================ */
+
+/* ---------- Ритм фонов ---------- */
+.ab-page--shop .ab-cpage__hero  { background: var(--ab-50); }
+.ab-page--shop .ab-shop         { background: var(--ab-white); padding: 60px 0 76px; }
+.ab-page--shop .ab-lead-block   { background: var(--ab-50); }
+
+.ab-page--product .ab-product          { background: var(--ab-50); padding: 32px 0 60px; }
+.ab-page--product .ab-product__details { background: var(--ab-white); padding: 60px 0; }
+.ab-page--product .ab-product__order   { background: var(--ab-950); padding: 60px 0; }
+.ab-page--product .ab-shop--similar    { background: var(--ab-50); padding: 60px 0 76px; }
+
+/* ---------- Фильтры категорий ---------- */
+.ab-shop__filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+.ab-shop__filter {
+    display: inline-flex; align-items: center; padding: 9px 16px;
+    border: 1px solid var(--ab-100); border-radius: 999px;
+    background: var(--ab-white); color: var(--ab-800);
+    font-size: 14px; font-weight: 600; text-decoration: none;
+    transition: var(--ab-transition);
+}
+.ab-shop__filter:hover { border-color: var(--ab-300); }
+.ab-shop__filter.is-active { background: var(--ab-800); border-color: var(--ab-800); color: #fff; }
+
+/* ---------- Сетка карточек ---------- */
+.ab-shop__grid {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px;
+}
+@media (max-width: 1000px) { .ab-shop__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px)  { .ab-shop__grid { grid-template-columns: 1fr; } }
+
+.ab-shop__card {
+    display: flex; flex-direction: column;
+    background: var(--ab-white); border: 1px solid var(--ab-100);
+    border-radius: var(--ab-radius-lg); overflow: hidden;
+    transition: var(--ab-transition);
+}
+.ab-shop__card:hover { border-color: var(--ab-300); transform: translateY(-2px); }
+.ab-shop--similar .ab-shop__card { background: var(--ab-white); }
+
+.ab-shop__media {
+    display: flex; align-items: center; justify-content: center;
+    aspect-ratio: 4 / 3; background: var(--ab-50); text-decoration: none;
+}
+.ab-shop__media img { width: 100%; height: 100%; object-fit: contain; }
+.ab-shop__noimage { color: var(--ab-300); font-size: 15px; font-weight: 700; letter-spacing: .04em; }
+
+.ab-shop__body { display: flex; flex-direction: column; gap: 8px; padding: 18px; flex: 1; }
+.ab-shop__brand {
+    align-self: flex-start; font-size: 12px; font-weight: 700;
+    letter-spacing: .08em; text-transform: uppercase; color: var(--ab-400);
+}
+.ab-shop__name { margin: 0; font-size: 17px; line-height: 1.3; }
+.ab-shop__name a { color: var(--ab-900); text-decoration: none; }
+.ab-shop__name a:hover { color: var(--ab-600); }
+.ab-shop__summary { margin: 0; font-size: 14px; line-height: 1.5; color: var(--ab-700); }
+
+.ab-shop__foot {
+    margin-top: auto; padding-top: 14px;
+    display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+}
+.ab-shop__price { display: flex; flex-direction: column; gap: 2px; }
+.ab-shop__price b { font-size: 19px; color: var(--ab-900); }
+.ab-shop__price s { font-size: 14px; color: var(--ab-300); }
+
+.ab-shop__stock { font-size: 13px; font-weight: 600; }
+.ab-shop__stock--in_stock     { color: #2e7d32; }
+.ab-shop__stock--on_order     { color: var(--ab-500); }
+.ab-shop__stock--out_of_stock { color: #b3261e; }
+
+.ab-shop__empty { font-size: 16px; color: var(--ab-700); }
+
+/* ---------- Карточка товара ---------- */
+.ab-product__grid {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 40px; align-items: start; margin-top: 24px;
+}
+@media (max-width: 900px) { .ab-product__grid { grid-template-columns: 1fr; gap: 24px; } }
+
+.ab-product__media {
+    display: flex; flex-direction: column; gap: 12px;
+    background: var(--ab-white); border-radius: var(--ab-radius-lg); padding: 24px;
+}
+.ab-product__media > img { width: 100%; height: auto; object-fit: contain; }
+.ab-product__thumbs {
+    list-style: none; margin: 0; padding: 0;
+    display: flex; gap: 10px; flex-wrap: wrap;
+}
+.ab-product__thumbs img {
+    width: 84px; height: 64px; object-fit: contain;
+    background: var(--ab-50); border-radius: var(--ab-radius);
+}
+
+.ab-product__title { margin: 8px 0 12px; font-family: var(--ab-font-display); font-size: 34px; line-height: 1.15; }
+@media (max-width: 640px) { .ab-product__title { font-size: 26px; } }
+
+.ab-product__pricebox {
+    display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap;
+    margin: 22px 0 20px; padding: 18px 20px;
+    background: var(--ab-white); border-radius: var(--ab-radius-lg);
+}
+.ab-product__price { display: flex; align-items: baseline; gap: 10px; }
+.ab-product__price b { font-size: 28px; color: var(--ab-900); }
+.ab-product__price s { font-size: 16px; color: var(--ab-300); }
+
+.ab-product__actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.ab-product__sku { margin: 16px 0 0; font-size: 13px; color: var(--ab-400); }
+
+.ab-product__details-grid {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: start;
+}
+@media (max-width: 900px) { .ab-product__details-grid { grid-template-columns: 1fr; gap: 28px; } }
+.ab-product__text { margin: 12px 0 0; font-size: 16px; line-height: 1.65; color: var(--ab-700); }
+
+.ab-product__specs { margin: 12px 0 0; display: grid; gap: 0; }
+.ab-product__specs > div {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 12px; padding: 11px 0; border-bottom: 1px solid var(--ab-100);
+}
+.ab-product__specs dt { margin: 0; color: var(--ab-500); font-size: 15px; }
+.ab-product__specs dd { margin: 0; color: var(--ab-900); font-size: 15px; font-weight: 600; }
+
+/* ---------- Заявка по товару ---------- */
+.ab-product__order-inner {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 420px);
+    gap: 40px; align-items: center;
+}
+@media (max-width: 900px) { .ab-product__order-inner { grid-template-columns: 1fr; gap: 24px; } }
+.ab-product__order-note { margin: 12px 0 0; font-size: 16px; line-height: 1.6; color: var(--ab-cream); }
