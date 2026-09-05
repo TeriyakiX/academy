@@ -53,6 +53,12 @@
     font-size: 15px; text-decoration: none; white-space: nowrap; transition: background .15s, color .15s; }
 .site-nav__link:hover { background: #f4f2f0; }
 .site-nav__link.is-current { color: var(--c-brown); font-weight: 700; }
+
+/* выделенный пункт меню — заказчик просил подсветить «Для бизнеса» */
+/* «Для бизнеса» выделяем тёмной плашкой — просьба заказчика */
+.site-nav__link--accent { background: #241d1b; color: #fff; font-weight: 600; }
+.site-nav__link--accent:hover { background: #3a302f; }
+.site-nav__link--accent.is-current { color: #fff; }
 .site-nav__chevron { width: 14px; height: 14px; transition: transform .15s; }
 .site-nav__item--has-children:hover .site-nav__chevron { transform: rotate(180deg); }
 
