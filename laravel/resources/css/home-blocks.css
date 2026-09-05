@@ -912,3 +912,7 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 
 /* стаж преподавателя — показываем, когда поле заполнено */
 .ab-teachers__exp { margin: 4px 0 0; font-weight: 600; color: var(--ab-700); }
+
+/* Блок документов убран с главной — отзывы встали сразу после «как проходит
+   обучение», фон совпал. Разводим соседние секции. */
+.ab-reviews { background: var(--ab-white); }
