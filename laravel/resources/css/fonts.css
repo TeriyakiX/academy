@@ -1,0 +1,100 @@
+/*
+ | Шрифты сайта.
+ |
+ | Раньше @font-face лежал только внутри старых постраничных бандлов
+ | (/assets/contact.css и т.п.). Новые страницы их не подключают, поэтому
+ | текст на них рисовался системным шрифтом. Объявления вынесены сюда,
+ | чтобы шрифт был на любой странице независимо от старых стилей.
+ */
+
+
+@font-face {
+    src:local(Circe),url(/assets/Circe-Bold.woff2) format("woff2");
+    font-family:Circe;
+    font-weight:700;
+    font-style:normal;
+    font-display:swap
+}
+
+@font-face {
+    src:local(Circe),url(/assets/Circe-ExtraBold.woff2) format("woff2");
+    font-family:Circe;
+    font-weight:800;
+    font-style:normal;
+    font-display:swap
+}
+
+@font-face {
+    src:local(Circe),url(/assets/Circe-Light.woff2) format("woff2");
+    font-family:Circe;
+    font-weight:300;
+    font-style:normal;
+    font-display:swap
+}
+
+@font-face {
+    src:local(Circe),url(/assets/Circe-Regular.woff2) format("woff2");
+    font-family:Circe;
+    font-weight:400;
+    font-style:normal;
+    font-display:swap
+}
+
+@font-face {
+    src:local(Montserrat),url(/assets/Montserrat-ExtraBold.woff2) format("woff2");
+    font-family:Montserrat;
+    font-weight:800;
+    font-style:normal;
+    font-display:swap
+}
+
+@font-face {
+    src:local(Montserrat),url(/assets/Montserrat-Bold.woff2) format("woff2");
+    font-family:Montserrat;
+    font-weight:700;
+    font-style:normal;
+    font-display:swap
+}
+
+@font-face {
+    src:local(Montserrat),url(/assets/Montserrat-Medium.woff2) format("woff2");
+    font-family:Montserrat;
+    font-weight:500;
+    font-style:normal;
+    font-display:swap
+}
+
+@font-face {
+    src:local(Montserrat),url(/assets/Montserrat-Regular.woff2) format("woff2");
+    font-family:Montserrat;
+    font-weight:400;
+    font-style:normal;
+    font-display:swap
+}
+
+@font-face {
+    src:local(Involve),url(/assets/Involve-Bold.woff2) format("woff2");
+    font-family:Involve;
+    font-weight:700;
+    font-style:normal;
+    font-display:swap
+}
+
+@font-face {
+    src:local(Involve),url(/assets/Involve-Medium.woff2) format("woff2");
+    font-family:Involve;
+    font-weight:500;
+    font-style:normal;
+    font-display:swap
+}
+
+@font-face {
+    src:local(Involve),url(/assets/Involve-Regular.woff2) format("woff2");
+    font-family:Involve;
+    font-weight:400;
+    font-style:normal;
+    font-display:swap
+}
+
+/* Базовый шрифт документа — для страниц без старых стилей. */
+body { font-family: var(--ab-font); }
