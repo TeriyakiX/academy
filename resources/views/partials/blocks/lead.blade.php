@@ -3,10 +3,10 @@
         <div class="ab-lead-block__inner">
 
             <div class="ab-lead-block__text">
-                <h2 class="ab-h2 ab-h2--light">Поможем выбрать курс</h2>
-                <p class="ab-lead-block__promise"><span>15 минут</span> — среднее время ответа менеджера</p>
+                <h2 class="ab-h2 ab-h2--light">Если не знаете, с чего начать</h2>
+                <p class="ab-lead-block__promise">Оставьте заявку — свяжемся с вами <span>в течение рабочего дня</span></p>
                 <p class="ab-lead-block__note">
-                    Расскажем про программы, сроки и стоимость, подберём вариант под вашу цель и уровень.
+                    Расскажем об обучении, ответим на вопросы и подберём программу под вашу цель и уровень.
                 </p>
 
                 <ul class="ab-lead-block__list">
@@ -25,7 +25,7 @@
                 @csrf
                 @include('partials.form-guard')
 
-                <input type="hidden" name="source" value="Блок «Поможем выбрать курс»">
+                <input type="hidden" name="source" value="Блок «Если не знаете, с чего начать»">
 
                 <label class="ab-lead-form__field">
                     <span class="ab-lead-form__label">Как вас зовут</span>
@@ -38,7 +38,7 @@
                 </label>
 
                 <button class="ab-btn ab-btn--primary ab-btn--block ab-btn--lg" type="submit">
-                    Оставить заявку
+                    Подобрать курс
                 </button>
 
                 <p class="ab-lead-form__note">

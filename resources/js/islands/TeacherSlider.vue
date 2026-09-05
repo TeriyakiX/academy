@@ -12,6 +12,7 @@
                 <div class="ab-teachers__info">
                     <h3 class="ab-teachers__name">{{ active.name }}</h3>
                     <p class="ab-teachers__role">{{ active.role }}</p>
+                    <p v-if="active.experience" class="ab-teachers__exp">{{ active.experience }}</p>
 
                     <p class="ab-teachers__skills-title">Направления:</p>
                     <ul class="ab-teachers__skills">

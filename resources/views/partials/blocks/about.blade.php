@@ -1,32 +1,32 @@
+@php $a = config('home.about'); @endphp
+
 <section class="ab-about ab-reveal">
     <div class="ab-container">
         <div class="ab-about__grid">
             <div class="ab-about__media">
                 <img src="/assets/about.webp" alt="Академия Бариста в Москве" loading="lazy" width="640" height="520">
                 <div class="ab-about__badge">
-                    <strong>4 года</strong>
-                    <span>в кофейном бизнесе</span>
+                    <strong>{{ $a['badge']['value'] }}</strong>
+                    <span>{{ $a['badge']['label'] }}</span>
                 </div>
             </div>
 
             <div class="ab-about__body">
-                <h2 class="ab-h2">Коротко о нашей школе</h2>
-                <p class="ab-lead">
-                    Мы обучаем профессионалов для сегмента HoReCa. Десятки выпускников уже работают бариста,
-                    применяя наши знания на практике. Гарантируем результат, качество обучения
-                    и поддержку на каждом этапе вашего пути.
-                </p>
+                <h2 class="ab-h2">{{ $a['title'] }}</h2>
+                <p class="ab-lead">{{ $a['lead'] }}</p>
+                <p class="ab-about__text">{{ $a['text'] }}</p>
 
-                <h3 class="ab-about__subtitle">Наши курсы подходят:</h3>
                 <ul class="ab-about__list">
-                    <li>Тем, кто только начинает путь в профессии и хочет освоить основы с нуля</li>
-                    <li>Опытным бариста, которые хотят выйти на новый уровень</li>
-                    <li>Владельцам кофеен — для грамотного управления и развития бизнеса</li>
+                    @foreach ($a['facts'] as $fact)
+                        <li>{{ $fact }}</li>
+                    @endforeach
                 </ul>
 
                 <div class="ab-about__actions">
-                    <a class="ab-btn ab-btn--primary" href="/courses.html">Выбрать программу</a>
-                    <a class="ab-btn ab-btn--outline" href="/contact.html">Приехать на экскурсию</a>
+                    <button class="ab-btn ab-btn--primary js-open-modal" type="button" data-modal-path="consultation">
+                        Оставить заявку
+                    </button>
+                    <a class="ab-btn ab-btn--outline" href="/courses.html">Выбрать курс</a>
                 </div>
             </div>
         </div>

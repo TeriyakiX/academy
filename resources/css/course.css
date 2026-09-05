@@ -175,3 +175,9 @@
 
 /* у всех внутренних страниц заявка получает одинаковый отступ */
 .ab-page .ab-lead-block { padding: 76px 0; }
+
+/* ---------- Страница «Мероприятия» ---------- */
+.ab-page--events .ab-cpage__hero   { background: var(--ab-50); }
+.ab-page--events .ab-events        { background: var(--ab-white); }
+.ab-page--events .ab-lead-block    { background: var(--ab-50); }
+.ab-page--events .ab-contacts-home { background: var(--ab-white); }
