@@ -485,9 +485,10 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 }
 
 /* оценки площадок внутри блока цифр */
-.ab-stats__ratings { position: relative; display: grid; grid-template-columns: repeat(4, 1fr);
+.ab-stats__ratings { position: relative; display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 14px; margin: 20px 0 0; padding: 0; list-style: none; }
-@media (max-width: 900px) { .ab-stats__ratings { grid-template-columns: repeat(2, 1fr); } }
+
 .ab-stats__ratings a, .ab-stats__ratings div { display: grid; grid-template-columns: 1fr auto;
     align-items: center; gap: 2px 14px; padding: 15px 22px; border-radius: var(--ab-radius);
     background: rgba(255,255,255,.04); color: var(--ab-white); text-decoration: none;
@@ -938,3 +939,17 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
     .ab-licbar__text { flex-basis: 100%; font-size: 13px; }
     .ab-licbar__sep { display: block; height: 0; margin: 0; overflow: hidden; }
 }
+
+/* Строка управления слайдером преподавателей: нужна там, где боковые
+   стрелки не помещаются. На широком экране скрыта. */
+.ab-teachers__nav { display: none; align-items: center; justify-content: center;
+    gap: 16px; margin-top: 18px; }
+.ab-teachers__nav-btn { display: inline-flex; align-items: center; justify-content: center;
+    width: 44px; height: 44px; padding: 0; border-radius: 50%;
+    border: 1px solid rgba(255,255,255,.28); background: transparent;
+    color: #fff; font-size: 22px; line-height: 1; cursor: pointer;
+    transition: background-color .2s ease, border-color .2s ease; }
+.ab-teachers__nav-btn:hover { background: var(--ab-600); border-color: var(--ab-600); }
+.ab-teachers__counter { min-width: 52px; text-align: center;
+    font-size: 15px; font-weight: 700; color: rgba(255,255,255,.75); }
+@media (max-width: 900px) { .ab-teachers__nav { display: flex; } }

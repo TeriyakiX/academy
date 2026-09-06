@@ -25,6 +25,16 @@
                     aria-label="Следующий преподаватель" @click="next">›</button>
         </div>
 
+        <!-- На телефоне боковые стрелки не помещаются: показываем строку
+             управления со счётчиком, как в блоке отзывов. -->
+        <div class="ab-teachers__nav">
+            <button class="ab-teachers__nav-btn" type="button"
+                    aria-label="Предыдущий преподаватель" @click="prev">‹</button>
+            <span class="ab-teachers__counter">{{ index + 1 }} / {{ teachers.length }}</span>
+            <button class="ab-teachers__nav-btn" type="button"
+                    aria-label="Следующий преподаватель" @click="next">›</button>
+        </div>
+
         <ul class="ab-teachers__thumbs">
             <li v-for="(t, i) in teachers" :key="t.name">
                 <button class="ab-teachers__thumb" :class="{ 'is-active': i === index }"
