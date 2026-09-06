@@ -7,7 +7,9 @@
                 <h2 class="ab-h2">{{ $d['title'] }}</h2>
                 <p class="ab-lead">{{ $d['lead'] }}</p>
             </div>
-            <span class="ab-docs__badge">{{ $d['badge'] }}</span>
+            @if (!empty($d['badge']))
+                <span class="ab-docs__badge">{{ $d['badge'] }}</span>
+            @endif
         </div>
 
         {{-- Документы: слева сам документ, справа описание и реквизиты --}}
@@ -24,11 +26,11 @@
                             <a class="ab-docs__file" href="{{ $item['file'] }}"
                                target="_blank" rel="noopener"
                                aria-label="{{ $item['file_label'] ?? $item['title'] }}">
-                                <span class="ab-docs__file-icon">{!! $item['icon'] !!}</span>
+                                <span class="ab-docs__file-icon">{!! $item['icon'] ?? '' !!}</span>
                                 <span class="ab-docs__file-type">PDF</span>
                             </a>
                         @else
-                            <span class="ab-docs__icon">{!! $item['icon'] !!}</span>
+                            <span class="ab-docs__icon">{!! $item['icon'] ?? '' !!}</span>
                         @endif
                     </div>
 

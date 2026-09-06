@@ -5,7 +5,7 @@
          после первого экрана, а до остального контента идти не приходится. --}}
     <section class="ab-licbar">
         <div class="ab-container ab-licbar__inner">
-            <span class="ab-licbar__icon" aria-hidden="true">{!! $lic['icon'] !!}</span>
+            <span class="ab-licbar__icon" aria-hidden="true">{!! $lic['icon'] ?? '' !!}</span>
 
             <p class="ab-licbar__text">
                 <b>Лицензия {{ $lic['meta']['Номер лицензии'] }}</b>
