@@ -11,7 +11,9 @@
         <ul class="ab-schedule__list">
             @foreach ($s['items'] as $item)
                 <li class="ab-schedule__card">
-                    <span class="ab-schedule__icon" aria-hidden="true">{!! $item['icon'] !!}</span>
+                    @if (!empty($item['icon']))
+                        <span class="ab-schedule__icon" aria-hidden="true">{!! $item['icon'] !!}</span>
+                    @endif
 
                     <h3 class="ab-schedule__title">{{ $item['title'] }}</h3>
 
