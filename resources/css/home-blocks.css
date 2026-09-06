@@ -113,15 +113,15 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 
 .ab-schedule__free { display: flex; justify-content: center; }
 .ab-schedule__free svg { width: 140px; height: 140px; }
-.is-visible .ab-schedule__free-spin { animation: ab-spin 14s linear infinite; transform-origin: 60px 60px; }
-@keyframes ab-spin { to { transform: rotate(360deg); } }
+/* Кольцо в карточке «Индивидуально» раньше крутилось без остановки.
+   Заказчику это не понравилось: движение шло постоянно и отвлекало
+   от текста. Оставляем статичную графику. */
 
 .ab-schedule__summary { margin: 0 0 5px; font-size: 20px; font-weight: 800; }
 .ab-schedule__note { margin: 0; font-size: 14px; color: var(--ab-400); }
 
 @media (prefers-reduced-motion: reduce) {
-    .is-visible .ab-schedule__bar.is-on,
-    .is-visible .ab-schedule__free-spin { animation: none; }
+    .is-visible .ab-schedule__bar.is-on { animation: none; }
 }
 
 /* ================= Как проходит обучение ================= */
