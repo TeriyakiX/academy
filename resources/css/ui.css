@@ -31,6 +31,8 @@
     --ab-transition: .25s ease;
 
     --ab-font: Circe, sans-serif;
+    /* шеврон вниз — используется в сворачиваемых блоках */
+    --ab-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
     --ab-font-display: Involve, Circe, sans-serif;
 }
 
@@ -43,6 +45,8 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
+    /* иначе при заданной ширине паддинги прибавляются сверху и кнопка вылезает */
+    box-sizing: border-box;
     padding: 14px 26px;
     border: 2px solid transparent;
     border-radius: var(--ab-radius);
@@ -101,3 +105,57 @@
 /* Ловушка для ботов: поле есть в разметке, но человек его не видит */
 .ab-guard { position: absolute !important; left: -9999px !important;
     width: 1px; height: 1px; overflow: hidden; }
+
+/* ================================================================
+   Отклик на нажатие
+   ================================================================
+   Управляющие элементы — стрелки слайдеров, точки, вкладки, кнопки —
+   должны отзываться на палец. Без этого на телефоне непонятно,
+   попал ты по кнопке или нет. Правила общие для всего проекта.       */
+
+.ab-teachers__nav-btn,
+.ab-rv__arrow,
+.ab-teachers__arrow,
+.ab-swipe-dots__dot,
+.ab-tabs__tab,
+.ab-shop__filter {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    transition: transform .12s ease, background-color .2s ease,
+                border-color .2s ease, color .2s ease, box-shadow .2s ease;
+}
+
+/* Нажатие: элемент проседает под пальцем и сразу возвращается */
+.ab-teachers__nav-btn:active,
+.ab-rv__arrow:active,
+.ab-teachers__arrow:active { transform: scale(.88); }
+
+.ab-swipe-dots__dot:active { transform: scale(.75); }
+.ab-tabs__tab:active,
+.ab-shop__filter:active { transform: scale(.97); }
+
+/* Кнопки сайта — то же поведение. transform перечисляем явно:
+   в базовом правиле .ab-btn его нет, и анимация нажатия не сработает. */
+.ab-btn { -webkit-tap-highlight-color: transparent; touch-action: manipulation;
+    transition: transform .12s ease, background-color var(--ab-transition),
+                border-color var(--ab-transition), color var(--ab-transition); }
+.ab-btn:active { transform: scale(.97); }
+
+/* Видимая рамка при переходе с клавиатуры */
+.ab-teachers__nav-btn:focus-visible,
+.ab-rv__arrow:focus-visible,
+.ab-teachers__arrow:focus-visible,
+.ab-swipe-dots__dot:focus-visible {
+    outline: 2px solid var(--ab-600);
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ab-teachers__nav-btn, .ab-rv__arrow, .ab-teachers__arrow,
+    .ab-swipe-dots__dot, .ab-tabs__tab, .ab-shop__filter, .ab-btn {
+        transition: background-color .2s ease, color .2s ease;
+    }
+    .ab-teachers__nav-btn:active, .ab-rv__arrow:active, .ab-teachers__arrow:active,
+    .ab-swipe-dots__dot:active, .ab-tabs__tab:active,
+    .ab-shop__filter:active, .ab-btn:active { transform: none; }
+}

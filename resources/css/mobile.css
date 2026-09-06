@@ -25,9 +25,10 @@
     .ab-ev__list,
     .ab-steps__list,
     .ab-reasons__list,
-    .ab-courses__grid,
-    .ab-catalog__grid,
-    .ab-shop__grid {
+    .ab-shop__grid,
+    .ab-bus__grid,
+    .ab-cprog__grid,
+    .ctor__list {
         display: flex;
         grid-template-columns: none;
         gap: 14px;
@@ -35,9 +36,9 @@
         scroll-snap-type: x mandatory;
         overscroll-behavior-x: contain;
         -webkit-overflow-scrolling: touch;
-        /* вылезаем за контейнер, чтобы карточки уходили под край экрана */
-        margin-inline: -16px;
-        padding: 4px 16px 12px;
+        /* карточка ровно по ширине контейнера: обрезанных краёв не остаётся */
+        margin-inline: 0;
+        padding: 2px 0 10px;
         scrollbar-width: none;
     }
 
@@ -48,9 +49,10 @@
     .ab-ev__list::-webkit-scrollbar,
     .ab-steps__list::-webkit-scrollbar,
     .ab-reasons__list::-webkit-scrollbar,
-    .ab-courses__grid::-webkit-scrollbar,
-    .ab-catalog__grid::-webkit-scrollbar,
-    .ab-shop__grid::-webkit-scrollbar { display: none; }
+    .ab-shop__grid::-webkit-scrollbar,
+    .ab-bus__grid::-webkit-scrollbar,
+    .ab-cprog__grid::-webkit-scrollbar,
+    .ctor__list::-webkit-scrollbar { display: none; }
 
     .ab-tabs__grid > *,
     .ab-rv__list > *,
@@ -59,11 +61,15 @@
     .ab-ev__list > *,
     .ab-steps__list > *,
     .ab-reasons__list > *,
-    .ab-courses__grid > *,
-    .ab-catalog__grid > *,
-    .ab-shop__grid > * {
-        flex: 0 0 84%;
-        scroll-snap-align: start;
+    .ab-shop__grid > *,
+    .ab-bus__grid > *,
+    .ab-cprog__grid > *,
+    .ctor__list > * {
+        flex: 0 0 100%;
+        min-width: 0;
+        /* иначе паддинги карточки прибавляются к 100% и она вылезает */
+        box-sizing: border-box;
+        scroll-snap-align: center;
     }
 
     /* Короткие плитки помещаются по две в ряд — прокрутка им не нужна */
@@ -81,13 +87,29 @@
     .ab-stats__ring { width: 46px; height: 46px; }
 
     /* Вкладки направлений переносились на четыре строки */
-    .ab-tabs__nav { flex-wrap: nowrap; overflow-x: auto; margin-inline: -16px;
-        padding: 0 16px 6px; margin-bottom: 18px; scrollbar-width: none; }
-    .ab-tabs__nav::-webkit-scrollbar { display: none; }
-    .ab-tabs__nav > * { flex: none; }
+    .ab-tabs__nav, .ab-shop__filters {
+        display: flex; flex-wrap: nowrap; overflow-x: auto;
+        margin-inline: -16px; padding: 0 16px 6px; margin-bottom: 18px;
+        scrollbar-width: none; }
+    .ab-tabs__nav::-webkit-scrollbar,
+    .ab-shop__filters::-webkit-scrollbar { display: none; }
+    .ab-tabs__nav > *, .ab-shop__filters > * { flex: none; }
 
-    /* Лица преподавателей дублируют слайдер — на телефоне не нужны */
-    .ab-teachers__thumbs { display: none; }
+    /* Тень у края ряда: сразу видно, что он листается дальше.
+       Внутренняя тень не уезжает вместе с содержимым, в отличие от накладки. */
+    .ab-swipe-row { transition: box-shadow .2s ease; }
+    .ab-swipe-row.has-right { box-shadow: inset -26px 0 18px -18px rgba(0,0,0,.28); }
+    .ab-swipe-row.has-left  { box-shadow: inset 26px 0 18px -18px rgba(0,0,0,.28); }
+    .ab-swipe-row.has-left.has-right {
+        box-shadow: inset 26px 0 18px -18px rgba(0,0,0,.28),
+                    inset -26px 0 18px -18px rgba(0,0,0,.28); }
+
+    /* Лица преподавателей — единственный способ переключить тренера,
+       поэтому на телефоне оставляем, только компактнее */
+    .ab-teachers__thumbs { flex-wrap: nowrap; overflow-x: auto; gap: 8px;
+        margin: 16px 0 0; padding-bottom: 6px; scrollbar-width: none; }
+    .ab-teachers__thumbs::-webkit-scrollbar { display: none; }
+    .ab-teachers__thumbs > * { flex: none; }
 
     /* Крупная карточка отзыва */
     .ab-rv__stage { padding: 22px; }
@@ -95,10 +117,251 @@
     .ab-ctor__inner, .ab-cert__inner, .ab-about__grid,
     .ab-contacts__grid, .ab-reasons__grid { gap: 20px; }
 
-    /* ---------- Подсказка, что блок листается ---------- */
-    .ab-swipe-hint { display: block; margin: -4px 0 14px; font-size: 13px; color: var(--ab-400); }
+    /* ---------- Точки: видно, сколько карточек и где мы ---------- */
+    .ab-swipe-dots { display: flex; justify-content: center; gap: 7px; margin: 2px 0 0; }
+    .ab-swipe-dots__dot { width: 7px; height: 7px; padding: 0; border: 0; border-radius: 50%;
+        background: var(--ab-200); cursor: pointer;
+        transition: transform .12s ease, background-color .2s ease, width .2s ease; }
+    .ab-swipe-dots__dot.is-active { width: 20px; border-radius: 4px; background: var(--ab-600); }
+
+    /* на тёмных секциях точки светлые */
+    .ab-stats .ab-swipe-dots__dot,
+    .ab-teachers-section .ab-swipe-dots__dot,
+    .ab-ctor .ab-swipe-dots__dot { background: rgba(255,255,255,.25); }
+    .ab-stats .ab-swipe-dots__dot.is-active,
+    .ab-teachers-section .ab-swipe-dots__dot.is-active,
+    .ab-ctor .ab-swipe-dots__dot.is-active { background: var(--ab-cream, #fff); }
 }
 
 @media (min-width: 761px) {
-    .ab-swipe-hint { display: none; }
+    .ab-swipe-dots { display: none; }
+}
+
+
+
+/* ---------- Подвал на телефоне ----------
+   Структура: блок с логотипом и соцсетями, четыре сворачиваемые колонки
+   ссылок, всегда открытые контакты и нижняя строка с копирайтом.
+   Всё выровнено по одному левому краю контейнера.                       */
+@media (max-width: 760px) {
+    .site-footer__top { grid-template-columns: 1fr; gap: 0; }
+
+    /* Логотип, описание, соцсети */
+    .site-footer__brand { margin-bottom: 24px; }
+    /* Логотип в подвале на телефоне убран: тонкая контурная марка на тёмном
+       фоне читается плохо и занимает место. Название есть в копирайте ниже. */
+    .site-footer__logo { display: none; }
+    .site-footer__tagline { margin: 0 0 16px; font-size: 14px; line-height: 1.6; }
+
+    /* Иконки жались влево, справа зияла пустота — растягиваем на всю ширину */
+    .site-footer__socials { display: grid; grid-auto-flow: column; gap: 10px; }
+    .site-footer__socials .site-social { width: 100%; height: 46px; border-radius: 12px; }
+
+    /* Сворачиваемые колонки: заголовок-кнопка во всю ширину */
+    .site-footer__col--foldable { border-top: 1px solid rgba(255,255,255,.12); }
+    .site-footer__col--foldable .site-footer__col-title {
+        display: flex; align-items: center; justify-content: space-between;
+        margin: 0; padding: 15px 0; font-size: 15px; cursor: pointer; user-select: none; }
+
+    /* Шеврон маской: ровно по центру, не съезжает при повороте */
+    .site-footer__col--foldable .site-footer__col-title::after {
+        content: ''; flex: none; width: 18px; height: 18px; opacity: .6;
+        background: currentColor;
+        -webkit-mask: var(--ab-chevron) center / 14px 14px no-repeat;
+        mask: var(--ab-chevron) center / 14px 14px no-repeat;
+        transition: transform .2s ease, opacity .2s ease; }
+    .site-footer__col--foldable.is-open .site-footer__col-title::after {
+        opacity: 1; transform: rotate(180deg); }
+
+    /* У списка задан display:grid — без этого атрибут hidden не сработает */
+    .site-footer__col ul[hidden] { display: none; }
+
+    /* Раскрытый список в две колонки — иначе открытая «Навигация»
+       занимает пол-экрана. Левый край первой колонки общий с заголовком. */
+    .site-footer__col--foldable ul {
+        display: grid; grid-template-columns: 1fr 1fr;
+        gap: 2px 16px; padding: 0 0 10px; }
+    .site-footer__col--foldable ul li { display: block; }
+    .site-footer__col--foldable ul a { display: block; padding: 8px 0; font-size: 14px; line-height: 1.35; }
+
+    /* Контакты не сворачиваем: телефон и адрес ищут чаще всего */
+    .site-footer__col--contacts { padding-top: 6px;
+        border-top: 1px solid rgba(255,255,255,.12); }
+    .site-footer__col--contacts .site-footer__col-title { padding: 15px 0 10px; font-size: 15px; }
+    .site-footer__col--contacts ul { gap: 12px; }
+    .site-footer__col--contacts a,
+    .site-footer__col--contacts span { align-items: flex-start; font-size: 14px; line-height: 1.45; }
+
+    /* Нижняя строка: копирайт и ссылки столбиком, один левый край */
+    .site-footer__bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .site-footer__copy { margin: 0; }
+    .site-footer__legal { flex-direction: column; gap: 9px; }
+}
+/* ---------- Точечные правки по телефону ---------- */
+@media (max-width: 760px) {
+
+    /* Верхняя строка шапки: телефон, почта, адрес и соцсети не помещаются
+       и съедают первый экран. Телефон и так есть в подвале и в контактах. */
+    .site-header__top { display: none; }
+
+    /* Кнопки в парах: одинаковая ширина, в один ряд, без переноса вразнобой */
+    .ab-hero__actions,
+    .ab-reviews__actions,
+    .ab-about__actions,
+    .ab-bus__actions,
+    .ab-product__actions,
+    .ab-thanks__actions,
+    .ab-cpage__actions,
+    .ab-tabs__more {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        flex-wrap: nowrap;
+    }
+    .ab-hero__actions > .ab-btn,
+    .ab-reviews__actions > .ab-btn,
+    .ab-about__actions > .ab-btn,
+    .ab-bus__actions > .ab-btn,
+    .ab-product__actions > .ab-btn,
+    .ab-thanks__actions > .ab-btn,
+    .ab-cpage__actions > .ab-btn,
+    .ab-tabs__more > .ab-btn {
+        width: 100%;
+        padding: 13px 10px;
+        font-size: 14px;
+        line-height: 1.25;
+        white-space: normal;   /* длинные подписи переносятся, а не вылезают */
+    }
+
+    /* Переключатели показываем сеткой: видно все сразу, крутить не нужно */
+    .ab-tabs__nav, .ab-shop__filters {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        overflow: visible;
+        margin-inline: 0;
+        padding: 0;
+        margin-bottom: 20px;
+        box-shadow: none;
+    }
+    .ab-tabs__nav > *, .ab-shop__filters > * {
+        width: 100%;
+        justify-content: center;
+        padding: 11px 8px;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    /* Блок конструктора занимал почти два экрана */
+    .ab-ctor__inner { padding: 26px 18px; gap: 24px; }
+    .ab-ctor__lead { margin-bottom: 18px; font-size: 16px; }
+    .ab-ctor__points { gap: 9px; margin-bottom: 22px; }
+    .ab-ctor__points li { font-size: 14px; }
+    .ab-ctor__screen { padding: 18px; }
+    .ab-ctor__screen-list { gap: 9px; margin-bottom: 14px; }
+    .ab-ctor__screen-total strong { font-size: 24px; }
+    .ab-ctor__text > .ab-btn { width: 100%; }
+}
+
+@media (max-width: 760px) {
+    /* Нечётный последний переключатель занимает строку целиком,
+       иначе рядом остаётся пустая половина */
+    .ab-tabs__nav > *:last-child:nth-child(odd),
+    .ab-shop__filters > *:last-child:nth-child(odd) { grid-column: 1 / -1; }
+
+    /* То же для непарной кнопки в группе */
+    .ab-hero__actions > .ab-btn:last-child:nth-child(odd),
+    .ab-reviews__actions > .ab-btn:last-child:nth-child(odd),
+    .ab-about__actions > .ab-btn:last-child:nth-child(odd),
+    .ab-bus__actions > .ab-btn:last-child:nth-child(odd),
+    .ab-product__actions > .ab-btn:last-child:nth-child(odd),
+    .ab-thanks__actions > .ab-btn:last-child:nth-child(odd),
+    .ab-cpage__actions > .ab-btn:last-child:nth-child(odd),
+    .ab-tabs__more > .ab-btn:last-child:nth-child(odd) { grid-column: 1 / -1; }
+}
+
+
+
+/* ---------- Типографика на узком экране ----------
+   Заголовки 28px на ширине 335px разваливались на две-три строки даже
+   у коротких названий: «Наши преподаватели» занимало два ряда, а
+   «Планируете открыть кофейню?» — три. Уменьшаем, блоки становятся
+   заметно спокойнее и короче.                                         */
+@media (max-width: 760px) {
+    .ab-h2 { font-size: 23px; line-height: 1.18; }
+    .ab-lead { font-size: 15px; line-height: 1.55; }
+
+    /* Первый экран */
+    .ab-hero__title { font-size: 28px; line-height: 1.12; }
+    .ab-hero__text { margin-bottom: 18px; font-size: 15px; line-height: 1.55; }
+    .ab-hero__facts { gap: 8px; margin-bottom: 20px; }
+    .ab-hero__facts li { font-size: 14px; }
+    .ab-hero__proof { margin-top: 22px; gap: 12px; }
+
+    /* Подзаголовки внутри карточек */
+    .ab-docs__title, .ab-cprog__title { font-size: 17px; }
+}
+
+/* ---------- Первый экран и отзывы ---------- */
+@media (max-width: 760px) {
+    /* Карточка направления в первом экране: 346px картинки — это почти
+       половина экрана. Делаем её ниже, направления всё равно повторяются
+       вкладками в следующем блоке. */
+    .ab-hd__tabs { gap: 6px; margin-bottom: 12px; }
+    .ab-hd__tab { padding: 7px 12px; font-size: 13px; }
+    .ab-hd__card { min-height: 0; aspect-ratio: 4 / 3; }
+    .ab-hd__card img { height: 100%; object-fit: cover; }
+
+    /* Текст отзыва 19px давал карточку в 574px. Уменьшаем до размера
+       остального текста — отзыв читается целиком, без обрыва. */
+    .ab-rv__stage p { font-size: 16px; line-height: 1.5; }
+}
+
+/* ---------- Преподаватели, отзывы, конструктор ---------- */
+@media (max-width: 760px) {
+    /* Лента лиц внизу — неудобный способ переключения. Заменена
+       строкой со стрелками и счётчиком под карточкой. */
+    .site-footer ~ * .ab-teachers__thumbs,
+    .ab-teachers__thumbs { display: none; }
+
+    /* Под большой карточкой отзыва шёл список тех же отзывов —
+       первый дублировался. Стрелок и счётчика достаточно. */
+    .ab-rv__list { display: none; }
+    .ab-rv__nav { margin-top: 16px; }
+
+    /* Конструктор: плашки скидок в ряд, экран предпросмотра компактнее */
+    .ab-ctor__points { grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 20px; }
+    .ab-ctor__points li { padding: 10px 8px; font-size: 13px; text-align: center; }
+    .ab-ctor__screen { padding: 16px; }
+    .ab-ctor__screen-list { gap: 8px; margin-bottom: 12px; }
+    .ab-ctor__screen-list li { font-size: 13px; }
+    .ab-ctor__screen-sale { padding: 10px 12px; }
+    .ab-ctor__screen-total { margin-top: 12px; }
+    .ab-ctor__screen-total strong { font-size: 22px; }
+}
+
+/* ---------- Хлебные крошки ----------
+   Полная цепочка занимала на телефоне три строки прямо под шапкой.
+   Оставляем одну ссылку — на предыдущий раздел. Остальные звенья
+   прячем, но из разметки не убираем: они нужны поисковикам.        */
+@media (max-width: 760px) {
+    .ab-crumbs { display: flex; margin-bottom: 14px; }
+    .ab-crumbs > * { display: none; }
+
+    .ab-crumbs > a:last-of-type {
+        display: inline-flex; align-items: center; gap: 8px;
+        padding: 7px 12px 7px 8px; border-radius: 999px;
+        background: var(--ab-100); color: var(--ab-600);
+        font-size: 14px; font-weight: 700; text-decoration: none;
+        -webkit-tap-highlight-color: transparent;
+        transition: transform .12s ease, background-color .2s ease; }
+    .ab-crumbs > a:last-of-type:active { transform: scale(.96); }
+
+    /* стрелка влево — тот же шеврон, повёрнутый на четверть */
+    .ab-crumbs > a:last-of-type::before {
+        content: ''; flex: none; width: 16px; height: 16px;
+        background: currentColor;
+        -webkit-mask: var(--ab-chevron) center / 14px 14px no-repeat;
+        mask: var(--ab-chevron) center / 14px 14px no-repeat;
+        transform: rotate(90deg); }
 }
