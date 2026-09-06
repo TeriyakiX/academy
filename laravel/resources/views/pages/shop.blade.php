@@ -23,7 +23,9 @@
                     @endif
                 </nav>
 
-                <h1 class="ab-cpage__title">{{ $current->title ?? 'Оборудование для кофеен' }}</h1>
+                <h1 class="ab-cpage__title">
+                    {{ $current->title ?? 'Оборудование для кофеен' }}@if ($brand) <span class="ab-cpage__title-brand">{{ $brand }}</span>@endif
+                </h1>
                 <p class="ab-cpage__lead">
                     {{ $current->description
                         ?? 'Профессиональные кофемашины, кофемолки и аксессуары — то же оборудование,
@@ -34,12 +36,42 @@
 
         <section class="ab-shop">
             <div class="ab-container">
-                <div class="ab-shop__filters" role="tablist" aria-label="Категории оборудования">
-                    <a class="ab-shop__filter @if (!$current) is-active @endif" href="/shop.html">Все</a>
-                    @foreach ($categories as $c)
-                        <a class="ab-shop__filter @if ($current && $current->id === $c->id) is-active @endif"
-                           href="/shop.html?category={{ $c->slug }}">{{ $c->title }}</a>
-                    @endforeach
+                {{-- Выбор идёт сверху вниз: сначала производитель, потом тип
+                     оборудования. Оба фильтра работают вместе, поэтому ссылки
+                     сохраняют уже выбранное значение соседнего фильтра. --}}
+                @php
+                    $link = function (?string $brandSlug, ?string $catSlug) {
+                        $q = array_filter(['brand' => $brandSlug, 'category' => $catSlug]);
+                        return '/shop.html' . ($q ? '?' . http_build_query($q) : '');
+                    };
+                @endphp
+
+                <div class="ab-shop__filter-groups">
+                    @if ($brands->count() > 1)
+                        <div class="ab-shop__filter-group">
+                            <span class="ab-shop__filter-label">Производитель</span>
+                            <div class="ab-shop__filters" role="tablist" aria-label="Производители">
+                                <a class="ab-shop__filter @if (!$brand) is-active @endif"
+                                   href="{{ $link(null, $current?->slug) }}">Все</a>
+                                @foreach ($brands as $b)
+                                    <a class="ab-shop__filter @if ($brand === $b) is-active @endif"
+                                       href="{{ $link($b, $current?->slug) }}">{{ $b }}</a>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
+
+                    <div class="ab-shop__filter-group">
+                        <span class="ab-shop__filter-label">Тип оборудования</span>
+                        <div class="ab-shop__filters" role="tablist" aria-label="Категории оборудования">
+                            <a class="ab-shop__filter @if (!$current) is-active @endif"
+                               href="{{ $link($brand, null) }}">Все</a>
+                            @foreach ($categories as $c)
+                                <a class="ab-shop__filter @if ($current && $current->id === $c->id) is-active @endif"
+                                   href="{{ $link($brand, $c->slug) }}">{{ $c->title }}</a>
+                            @endforeach
+                        </div>
+                    </div>
                 </div>
 
                 @if ($products->isEmpty())
