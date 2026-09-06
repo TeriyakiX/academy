@@ -365,3 +365,11 @@
         mask: var(--ab-chevron) center / 14px 14px no-repeat;
         transform: rotate(90deg); }
 }
+
+@media (max-width: 760px) {
+    /* Плашка «в течение рабочего дня» стояла внутри строки и на узком
+       экране прилипала к последнему слову, разрывая фразу. Выносим
+       её на отдельную строку под текстом. */
+    .ab-lead-block__promise { margin-bottom: 14px; font-size: 17px; line-height: 1.35; }
+    .ab-lead-block__promise span { display: table; margin-top: 8px; padding: 4px 11px; }
+}
