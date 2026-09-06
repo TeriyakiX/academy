@@ -385,3 +385,14 @@
     .ab-shop__filter-groups { gap: 20px; margin-bottom: 24px; }
     .ab-shop__filter-label { font-size: 12px; }
 }
+
+@media (max-width: 760px) {
+    /* Карточка расписания занимала 342px, из них 168 — пустая область
+       под графику и по 30px полей. Ужимаем поля, графику и заголовок. */
+    .ab-schedule__card { padding: 20px; }
+    .ab-schedule__title { margin-bottom: 16px; font-size: 18px; }
+    .ab-schedule__visual { min-height: 0; gap: 12px; margin-bottom: 16px; }
+    .ab-schedule__free svg { width: 92px; height: 92px; }
+    .ab-schedule__summary { font-size: 16px; }
+    .ab-schedule__note { font-size: 13px; }
+}
