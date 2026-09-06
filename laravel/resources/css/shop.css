@@ -16,7 +16,10 @@
 /* ---------- Фильтры категорий ---------- */
 .ab-shop__filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
 .ab-shop__filter {
-    display: inline-flex; align-items: center; padding: 9px 16px;
+    display: inline-flex; align-items: center;
+    /* иначе паддинги прибавляются к заданной ширине и кнопка вылезает */
+    box-sizing: border-box;
+    padding: 9px 16px;
     border: 1px solid var(--ab-100); border-radius: 999px;
     background: var(--ab-white); color: var(--ab-800);
     font-size: 14px; font-weight: 600; text-decoration: none;
