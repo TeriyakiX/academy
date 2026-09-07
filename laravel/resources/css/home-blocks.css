@@ -93,29 +93,29 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 .ab-schedule__list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
     margin: 0; padding: 0; list-style: none; }
 @media (max-width: 900px) { .ab-schedule__list { grid-template-columns: 1fr; } }
-
-.ab-schedule__card { display: flex; flex-direction: column; align-items: flex-start;
-    padding: 24px; border: 1px solid var(--ab-100); border-radius: var(--ab-radius-lg);
-    background: var(--ab-white);
+.ab-schedule__card { display: flex; flex-direction: column; padding: 22px;
+    border: 1px solid var(--ab-100); border-radius: var(--ab-radius-lg); background: var(--ab-white);
     transition: transform var(--ab-transition), box-shadow var(--ab-transition); }
 .ab-schedule__card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(26,26,26,.09); }
+.ab-schedule__title { margin: 0 0 16px; font-size: 19px; font-weight: 800; }
+.ab-schedule__visual { flex: 1; display: flex; flex-direction: column; justify-content: center;
+    gap: 12px; min-height: 118px; margin-bottom: 16px; }
+.ab-schedule__row { display: grid; gap: 6px; }
+.ab-schedule__slot { font-size: 13px; font-weight: 700; color: var(--ab-600); }
+.ab-schedule__bars { display: flex; gap: 8px; }
+.ab-schedule__bar { flex: 1; height: 7px; border-radius: 4px; background: var(--ab-100);
+    transform-origin: left center; }
+/* активная полоса «наливается» один раз при появлении блока */
+.is-visible .ab-schedule__bar.is-on { background: var(--ab-600); animation: ab-fill .55s ease both; }
+.is-visible .ab-schedule__row:nth-child(2) .ab-schedule__bar.is-on { animation-delay: .12s; }
+.is-visible .ab-schedule__row:nth-child(3) .ab-schedule__bar.is-on { animation-delay: .24s; }
+@keyframes ab-fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 
-.ab-schedule__icon { display: flex; align-items: center; justify-content: center;
-    width: 42px; height: 42px; margin-bottom: 14px; border-radius: 12px;
-    background: var(--ab-50); color: var(--ab-600); }
-.ab-schedule__icon svg { width: 22px; height: 22px; }
-.ab-schedule__card:hover .ab-schedule__icon { background: var(--ab-600); color: var(--ab-white); }
+.ab-schedule__free { display: flex; justify-content: center; }
+/* Кольцо статичное: раньше крутилось без остановки и отвлекало. */
+.ab-schedule__free svg { width: 104px; height: 104px; }
 
-.ab-schedule__title { margin: 0 0 12px; font-size: 19px; font-weight: 800; }
-
-/* Время занятий словами вместо декоративных полосок */
-.ab-schedule__slots { display: flex; flex-wrap: wrap; gap: 7px;
-    margin: 0 0 16px; padding: 0; list-style: none; }
-.ab-schedule__slots li { padding: 6px 12px; border-radius: 999px;
-    background: var(--ab-50); color: var(--ab-700);
-    font-size: 13px; font-weight: 700; }
-
-.ab-schedule__summary { margin: auto 0 4px; font-size: 17px; font-weight: 800; }
+.ab-schedule__summary { margin: 0 0 4px; font-size: 18px; font-weight: 800; }
 .ab-schedule__note { margin: 0; font-size: 14px; color: var(--ab-400); }
 
 /* ================= Как проходит обучение ================= */

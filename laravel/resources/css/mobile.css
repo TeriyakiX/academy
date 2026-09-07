@@ -387,8 +387,12 @@
 }
 
 @media (max-width: 760px) {
+    /* На телефоне карточка ужимается сильнее: кольцо и пустая область
+       под графикой занимали больше половины высоты. */
     .ab-schedule__card { padding: 18px; }
-    .ab-schedule__title { font-size: 17px; }
+    .ab-schedule__title { margin-bottom: 12px; font-size: 17px; }
+    .ab-schedule__visual { min-height: 96px; gap: 10px; margin-bottom: 14px; }
+    .ab-schedule__free svg { width: 88px; height: 88px; }
     .ab-schedule__summary { font-size: 16px; }
     .ab-schedule__note { font-size: 13px; }
 }
