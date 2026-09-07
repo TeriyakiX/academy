@@ -337,31 +337,6 @@
     .ab-ctor__screen-total strong { font-size: 22px; }
 }
 
-/* ---------- Хлебные крошки ----------
-   Полная цепочка занимала на телефоне три строки прямо под шапкой.
-   Оставляем одну ссылку — на предыдущий раздел. Остальные звенья
-   прячем, но из разметки не убираем: они нужны поисковикам.        */
-@media (max-width: 760px) {
-    .ab-crumbs { display: flex; margin-bottom: 14px; }
-    .ab-crumbs > * { display: none; }
-
-    .ab-crumbs > a:last-of-type {
-        display: inline-flex; align-items: center; gap: 8px;
-        padding: 7px 12px 7px 8px; border-radius: 999px;
-        background: var(--ab-100); color: var(--ab-600);
-        font-size: 14px; font-weight: 700; text-decoration: none;
-        -webkit-tap-highlight-color: transparent;
-        transition: transform .12s ease, background-color .2s ease; }
-    .ab-crumbs > a:last-of-type:active { transform: scale(.96); }
-
-    /* стрелка влево — тот же шеврон, повёрнутый на четверть */
-    .ab-crumbs > a:last-of-type::before {
-        content: ''; flex: none; width: 16px; height: 16px;
-        background: currentColor;
-        -webkit-mask: var(--ab-chevron) center / 14px 14px no-repeat;
-        mask: var(--ab-chevron) center / 14px 14px no-repeat;
-        transform: rotate(90deg); }
-}
 
 @media (max-width: 760px) {
     /* Плашка «в течение рабочего дня» стояла внутри строки и на узком
@@ -405,9 +380,9 @@
     .ab-shop__card:hover { transform: none; }
 
     .ab-shop__media { flex: 0 0 118px; aspect-ratio: auto; }
-    .ab-shop__noimage svg { width: 30px; height: 30px; }
-    .ab-shop__noimage b { font-size: 10px; letter-spacing: .06em; }
-    .ab-shop__noimage { gap: 6px; }
+    .ab-shop__noimage svg { width: 32px; height: 32px; }
+    /* марка уже написана над названием — в заглушке не повторяем */
+    .ab-shop__noimage b { display: none; }
 
     /* название в две строки, чтобы строки каталога были одной высоты */
     .ab-shop__name a { display: -webkit-box; -webkit-line-clamp: 2;

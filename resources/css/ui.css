@@ -159,3 +159,7 @@
     .ab-swipe-dots__dot:active, .ab-tabs__tab:active,
     .ab-shop__filter:active, .ab-btn:active { transform: none; }
 }
+
+/* Хлебные крошки скрыты: под шапкой они читались как вторая панель.
+   Разметка остаётся в HTML — вернуть можно этой одной строкой. */
+.ab-crumbs { display: none; }
