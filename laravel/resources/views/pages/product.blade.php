@@ -169,20 +169,41 @@
                     <h2 class="ab-h2">Похожие позиции</h2>
                     <ul class="ab-shop__grid">
                         @foreach ($similar as $p)
+                            {{-- Та же карточка, что в каталоге: кликается целиком --}}
                             <li class="ab-shop__card ab-reveal">
-                                <a class="ab-shop__media" href="{{ $p->url }}">
+                                <div class="ab-shop__media">
                                     @if ($p->image)
                                         <img src="{{ $p->image }}" alt="{{ $p->title }}"
                                              loading="lazy" width="360" height="260">
                                     @else
-                                        <span class="ab-shop__noimage">{{ $p->brand ?: 'Фото скоро' }}</span>
+                                        <span class="ab-shop__noimage" aria-hidden="true">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                 stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M4 8h12v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V8Z"/>
+                                                <path d="M16 9h1.5a2.5 2.5 0 0 1 0 5H16"/>
+                                                <path d="M7 3.5c0 1-1 1-1 2M10 3.5c0 1-1 1-1 2M13 3.5c0 1-1 1-1 2"/>
+                                                <path d="M3 21h14"/>
+                                            </svg>
+                                            <b>{{ $p->brand ?: 'Академия Бариста' }}</b>
+                                        </span>
                                     @endif
-                                </a>
+                                </div>
+
                                 <div class="ab-shop__body">
-                                    <h3 class="ab-shop__name"><a href="{{ $p->url }}">{{ $p->title }}</a></h3>
+                                    @if ($p->brand)
+                                        <span class="ab-shop__brand">{{ $p->brand }}</span>
+                                    @endif
+                                    <h3 class="ab-shop__name">
+                                        <a class="ab-shop__link" href="{{ $p->url }}">{{ $p->title }}</a>
+                                    </h3>
                                     <div class="ab-shop__foot">
-                                        <div class="ab-shop__price"><b>{{ $p->price_label }}</b></div>
-                                        <a class="ab-btn ab-btn--outline ab-btn--sm" href="{{ $p->url }}">Подробнее</a>
+                                        <div class="ab-shop__price">
+                                            <b>{{ $p->price_label }}</b>
+                                            <span class="ab-shop__stock ab-shop__stock--{{ $p->availability }}">
+                                                {{ $p->availability_label }}
+                                            </span>
+                                        </div>
+                                        <span class="ab-shop__more" aria-hidden="true">Подробнее</span>
                                     </div>
                                 </div>
                             </li>

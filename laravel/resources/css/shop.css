@@ -83,7 +83,8 @@
     display: flex; align-items: center; justify-content: space-between; gap: 12px;
 }
 .ab-shop__price { display: flex; flex-direction: column; gap: 2px; }
-.ab-shop__price b { font-size: 20px; font-weight: 800; color: var(--ab-900); }
+.ab-shop__price b { font-size: 20px; font-weight: 800; color: var(--ab-900);
+    white-space: nowrap; }
 .ab-shop__price s { font-size: 14px; color: var(--ab-300); }
 
 /* Не кнопка, а подпись со стрелкой: кликается вся карточка */
