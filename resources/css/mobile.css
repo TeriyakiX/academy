@@ -25,7 +25,6 @@
     .ab-ev__list,
     .ab-steps__list,
     .ab-reasons__list,
-    .ab-shop__grid,
     .ab-bus__grid,
     .ab-cprog__grid,
     .ctor__list {
@@ -49,7 +48,6 @@
     .ab-ev__list::-webkit-scrollbar,
     .ab-steps__list::-webkit-scrollbar,
     .ab-reasons__list::-webkit-scrollbar,
-    .ab-shop__grid::-webkit-scrollbar,
     .ab-bus__grid::-webkit-scrollbar,
     .ab-cprog__grid::-webkit-scrollbar,
     .ctor__list::-webkit-scrollbar { display: none; }
@@ -61,7 +59,6 @@
     .ab-ev__list > *,
     .ab-steps__list > *,
     .ab-reasons__list > *,
-    .ab-shop__grid > *,
     .ab-bus__grid > *,
     .ab-cprog__grid > *,
     .ctor__list > * {
@@ -395,4 +392,33 @@
     .ab-schedule__free svg { width: 88px; height: 88px; }
     .ab-schedule__summary { font-size: 16px; }
     .ab-schedule__note { font-size: 13px; }
+}
+
+/* ---------- Каталог оборудования на телефоне ----------
+   Карточка-плитка занимала 487px, из них 238 — серая заглушка вместо
+   фотографии. Товары так не просмотреть. Делаем строку: снимок слева,
+   название и цена справа. Кликается вся строка.                      */
+@media (max-width: 760px) {
+    .ab-shop__grid { grid-template-columns: 1fr; gap: 12px; }
+
+    .ab-shop__card { flex-direction: row; align-items: stretch; }
+    .ab-shop__card:hover { transform: none; }
+
+    .ab-shop__media { flex: 0 0 118px; aspect-ratio: auto; }
+    .ab-shop__noimage svg { width: 30px; height: 30px; }
+    .ab-shop__noimage b { font-size: 10px; letter-spacing: .06em; }
+    .ab-shop__noimage { gap: 6px; }
+
+    /* название в две строки, чтобы строки каталога были одной высоты */
+    .ab-shop__name a { display: -webkit-box; -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical; overflow: hidden; }
+
+    .ab-shop__body { gap: 5px; padding: 14px; }
+    .ab-shop__brand { font-size: 11px; }
+    .ab-shop__name { font-size: 15px; line-height: 1.25; }
+    .ab-shop__summary { display: none; }   /* описание есть на странице товара */
+
+    .ab-shop__foot { padding-top: 10px; }
+    .ab-shop__price b { font-size: 17px; }
+    .ab-shop__more { font-size: 13px; }
 }

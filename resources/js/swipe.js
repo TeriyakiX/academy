@@ -14,7 +14,6 @@ const SELECTORS = [
     '.ab-ev__list',
     '.ab-steps__list',
     '.ab-reasons__list',
-    '.ab-shop__grid',      // каталог оборудования
     '.ab-bus__grid',       // услуги для бизнеса
     '.ab-cprog__grid',     // программа курса
     '.ctor__list',         // конструктор курсов
