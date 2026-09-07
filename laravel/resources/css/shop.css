@@ -34,47 +34,67 @@
     display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px;
 }
 @media (max-width: 1000px) { .ab-shop__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 640px)  { .ab-shop__grid { grid-template-columns: 1fr; } }
 
 .ab-shop__card {
+    position: relative;
     display: flex; flex-direction: column;
     background: var(--ab-white); border: 1px solid var(--ab-100);
     border-radius: var(--ab-radius-lg); overflow: hidden;
-    transition: var(--ab-transition);
+    transition: border-color var(--ab-transition), transform var(--ab-transition),
+                box-shadow var(--ab-transition);
 }
-.ab-shop__card:hover { border-color: var(--ab-300); transform: translateY(-2px); }
+.ab-shop__card:hover { border-color: var(--ab-200); transform: translateY(-3px);
+    box-shadow: 0 16px 40px rgba(26,26,26,.09); }
 .ab-shop--similar .ab-shop__card { background: var(--ab-white); }
 
-.ab-shop__media {
-    display: flex; align-items: center; justify-content: center;
-    aspect-ratio: 4 / 3; background: var(--ab-50); text-decoration: none;
-}
-.ab-shop__media img { width: 100%; height: 100%; object-fit: contain; }
-.ab-shop__noimage { color: var(--ab-300); font-size: 15px; font-weight: 700; letter-spacing: .04em; }
+/* Ссылка названия растянута на карточку — кликается любое место */
+.ab-shop__link::after { content: ''; position: absolute; inset: 0; }
 
-.ab-shop__body { display: flex; flex-direction: column; gap: 8px; padding: 18px; flex: 1; }
+.ab-shop__media {
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    aspect-ratio: 4 / 3; background: var(--ab-50); overflow: hidden;
+}
+.ab-shop__media img { width: 100%; height: 100%; object-fit: contain;
+    transition: transform .35s ease; }
+.ab-shop__card:hover .ab-shop__media img { transform: scale(1.04); }
+
+/* Пока фотографий нет — не пустой прямоугольник, а знак с маркой */
+.ab-shop__noimage { display: flex; flex-direction: column; align-items: center; gap: 10px;
+    color: var(--ab-300); }
+.ab-shop__noimage svg { width: 46px; height: 46px; }
+.ab-shop__noimage b { font-size: 12px; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; }
+
+.ab-shop__stock { font-size: 13px; font-weight: 700; }
+
+.ab-shop__body { display: flex; flex-direction: column; gap: 7px; padding: 18px; flex: 1; }
 .ab-shop__brand {
     align-self: flex-start; font-size: 12px; font-weight: 700;
     letter-spacing: .08em; text-transform: uppercase; color: var(--ab-400);
 }
 .ab-shop__name { margin: 0; font-size: 17px; line-height: 1.3; }
 .ab-shop__name a { color: var(--ab-900); text-decoration: none; }
-.ab-shop__name a:hover { color: var(--ab-600); }
+.ab-shop__card:hover .ab-shop__name a { color: var(--ab-600); }
 .ab-shop__summary { margin: 0; font-size: 14px; line-height: 1.5; color: var(--ab-700); }
 
 .ab-shop__foot {
     margin-top: auto; padding-top: 14px;
-    display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
 }
 .ab-shop__price { display: flex; flex-direction: column; gap: 2px; }
-.ab-shop__price b { font-size: 19px; color: var(--ab-900); }
+.ab-shop__price b { font-size: 20px; font-weight: 800; color: var(--ab-900); }
 .ab-shop__price s { font-size: 14px; color: var(--ab-300); }
 
-.ab-shop__stock { font-size: 13px; font-weight: 600; }
-.ab-shop__stock--in_stock     { color: #2e7d32; }
-.ab-shop__stock--on_order     { color: var(--ab-500); }
-.ab-shop__stock--out_of_stock { color: #b3261e; }
+/* Не кнопка, а подпись со стрелкой: кликается вся карточка */
+.ab-shop__more { display: inline-flex; align-items: center; gap: 6px; flex: none;
+    font-size: 14px; font-weight: 700; color: var(--ab-600); }
+.ab-shop__more::after { content: '→'; transition: transform .2s ease; }
+.ab-shop__card:hover .ab-shop__more::after { transform: translateX(3px); }
 
+.ab-shop__stock--in_stock     { color: #2e7d32; }
+.ab-shop__stock--on_order     { color: #8a6d3b; }
+.ab-shop__stock--out_of_stock { color: #b3261e; }
 .ab-shop__empty { font-size: 16px; color: var(--ab-700); }
 
 /* ---------- Карточка товара ---------- */
@@ -85,9 +105,13 @@
 @media (max-width: 900px) { .ab-product__grid { grid-template-columns: 1fr; gap: 24px; } }
 
 .ab-product__media {
-    display: flex; flex-direction: column; gap: 12px;
-    background: var(--ab-white); border-radius: var(--ab-radius-lg); padding: 24px;
+    display: flex; flex-direction: column; justify-content: center; gap: 12px;
+    /* без минимальной высоты блок схлопывался до высоты заглушки */
+    min-height: 320px;
+    background: var(--ab-white); border: 1px solid var(--ab-100);
+    border-radius: var(--ab-radius-lg); padding: 24px;
 }
+@media (max-width: 760px) { .ab-product__media { min-height: 220px; padding: 18px; } }
 .ab-product__media > img { width: 100%; height: auto; object-fit: contain; }
 .ab-product__thumbs {
     list-style: none; margin: 0; padding: 0;

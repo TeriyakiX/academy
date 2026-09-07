@@ -29,7 +29,16 @@
                             <img src="{{ $product->image }}" alt="{{ $product->title }}"
                                  width="640" height="480" loading="eager">
                         @else
-                            <span class="ab-shop__noimage">{{ $product->brand ?: 'Фото скоро' }}</span>
+                            <span class="ab-shop__noimage" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                     stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M4 8h12v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V8Z"/>
+                                    <path d="M16 9h1.5a2.5 2.5 0 0 1 0 5H16"/>
+                                    <path d="M7 3.5c0 1-1 1-1 2M10 3.5c0 1-1 1-1 2M13 3.5c0 1-1 1-1 2"/>
+                                    <path d="M3 21h14"/>
+                                </svg>
+                                <b>{{ $product->brand ?: 'Академия Бариста' }}</b>
+                            </span>
                         @endif
 
                         @if ($product->gallery)
