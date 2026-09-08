@@ -46,16 +46,20 @@
                     };
                 @endphp
 
-                <div class="ab-shop__filter-groups">
+                <div class="ab-shop__filters-panel">
                     @if ($brands->count() > 1)
                         <div class="ab-shop__filter-group">
                             <span class="ab-shop__filter-label">Производитель</span>
                             <div class="ab-shop__filters" role="tablist" aria-label="Производители">
                                 <a class="ab-shop__filter @if (!$brand) is-active @endif"
-                                   href="{{ $link(null, $current?->slug) }}">Все</a>
+                                   href="{{ $link(null, $current?->slug) }}">
+                                    Все <b>{{ $allCount }}</b>
+                                </a>
                                 @foreach ($brands as $b)
                                     <a class="ab-shop__filter @if ($brand === $b) is-active @endif"
-                                       href="{{ $link($b, $current?->slug) }}">{{ $b }}</a>
+                                       href="{{ $link($b, $current?->slug) }}">
+                                        {{ $b }} <b>{{ $brandCounts[$b] }}</b>
+                                    </a>
                                 @endforeach
                             </div>
                         </div>
@@ -65,15 +69,26 @@
                         <span class="ab-shop__filter-label">Тип оборудования</span>
                         <div class="ab-shop__filters" role="tablist" aria-label="Категории оборудования">
                             <a class="ab-shop__filter @if (!$current) is-active @endif"
-                               href="{{ $link($brand, null) }}">Все</a>
+                               href="{{ $link($brand, null) }}">
+                                Все <b>{{ $allCount }}</b>
+                            </a>
                             @foreach ($categories as $c)
                                 <a class="ab-shop__filter @if ($current && $current->id === $c->id) is-active @endif"
-                                   href="{{ $link($brand, $c->slug) }}">{{ $c->title }}</a>
+                                   href="{{ $link($brand, $c->slug) }}">
+                                    {{ $c->title }} <b>{{ $catCounts[$c->slug] }}</b>
+                                </a>
                             @endforeach
                         </div>
                     </div>
-                </div>
 
+                    @if ($brand || $current)
+                        <a class="ab-shop__reset" href="/shop.html">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                 stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+                            Сбросить фильтры
+                        </a>
+                    @endif
+                </div>
                 @if ($products->isEmpty())
                     <p class="ab-shop__empty">
                         В этой категории пока нет позиций.
