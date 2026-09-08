@@ -58,6 +58,26 @@
 
                         <h1 class="ab-product__title">{{ $product->title }}</h1>
 
+                        {{-- Цветовые исполнения одной модели --}}
+                        @if ($variants->count() > 1)
+                            <div class="ab-product__colors">
+                                <span class="ab-product__colors-label">
+                                    Исполнение: <b>{{ $product->color }}</b>
+                                </span>
+                                <ul class="ab-product__colors-list">
+                                    @foreach ($variants as $v)
+                                        <li>
+                                            @if ($v->id === $product->id)
+                                                <span class="ab-product__color is-active">{{ $v->color }}</span>
+                                            @else
+                                                <a class="ab-product__color" href="{{ $v->url }}">{{ $v->color }}</a>
+                                            @endif
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
                         @if ($product->summary)
                             <p class="ab-lead">{{ $product->summary }}</p>
                         @endif
@@ -170,7 +190,7 @@
                     <ul class="ab-shop__grid">
                         @foreach ($similar as $p)
                             {{-- Та же карточка, что в каталоге: кликается целиком --}}
-                            <li class="ab-shop__card ab-reveal">
+                            <li class="ab-shop__card">
                                 <div class="ab-shop__media">
                                     @if ($p->image)
                                         <img src="{{ $p->image }}" alt="{{ $p->title }}"

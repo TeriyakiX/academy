@@ -80,12 +80,12 @@
                         <a href="{{ config('nav.contacts.phone_href') }}">Позвоните нам</a> — подберём под задачу.
                     </p>
                 @else
-                    <ul class="ab-shop__grid">
+                    <ul class="ab-shop__grid" id="tovary">
                         @foreach ($products as $p)
                             {{-- Карточка кликабельна целиком: ссылка на названии
                                  растянута на всю карточку, поэтому попасть можно
                                  куда угодно, а в разметке остаётся одна ссылка. --}}
-                            <li class="ab-shop__card ab-reveal">
+                            <li class="ab-shop__card">
                                 <div class="ab-shop__media">
                                     @if ($p->image)
                                         <img src="{{ $p->image }}" alt="{{ $p->title }}"
@@ -130,6 +130,16 @@
                             </li>
                         @endforeach
                     </ul>
+
+                    @if ($shown < $total)
+                        <div class="ab-shop__more-wrap">
+                            <span class="ab-shop__counter">Показано {{ $shown }} из {{ $total }}</span>
+                            <a class="ab-btn ab-btn--outline"
+                               href="{{ request()->fullUrlWithQuery(['show' => $shown + $perPage]) }}#tovary">
+                                Показать ещё
+                            </a>
+                        </div>
+                    @endif
                 @endif
             </div>
         </section>
