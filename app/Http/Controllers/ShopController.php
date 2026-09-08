@@ -124,7 +124,7 @@ class ShopController extends Controller
                 fn ($q) => $q->where('product_category_id', $product->product_category_id))
             ->orderBy('sort')->get()
             ->unique(fn ($p) => $p->variant_group ?: 'p' . $p->id)
-            ->take(3);
+            ->take(10);
 
         return view('pages.product', [
             'seo' => [

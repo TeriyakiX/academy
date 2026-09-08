@@ -104,7 +104,7 @@
                         @endif
 
                         @if ($product->summary)
-                            <p class="ab-lead">{{ $product->summary }}</p>
+                            <p class="ab-lead ab-product__lead">{{ $product->summary }}</p>
                         @endif
 
                         <div class="ab-product__pricebox">
