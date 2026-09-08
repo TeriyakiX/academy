@@ -54,8 +54,8 @@
 .site-nav__link:hover { background: #f4f2f0; }
 .site-nav__link.is-current { color: var(--c-brown); font-weight: 700; }
 
-/* выделенный пункт меню — заказчик просил подсветить «Для бизнеса» */
-/* «Для бизнеса» выделяем тёмной плашкой — просьба заказчика */
+/* выделенный пункт меню */
+/* выделенный пункт меню на тёмной плашке */
 .site-nav__link--accent { background: #241d1b; color: #fff; font-weight: 600; }
 .site-nav__link--accent:hover { background: #3a302f; }
 .site-nav__link--accent.is-current { color: #fff; }

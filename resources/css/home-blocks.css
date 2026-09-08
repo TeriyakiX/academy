@@ -112,7 +112,7 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 @keyframes ab-fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 
 .ab-schedule__free { display: flex; justify-content: center; }
-/* Кольцо статичное: раньше крутилось без остановки и отвлекало. */
+/* Кольцо статичное. */
 .ab-schedule__free svg { width: 104px; height: 104px; }
 
 .ab-schedule__summary { margin: 0 0 4px; font-size: 18px; font-weight: 800; }
