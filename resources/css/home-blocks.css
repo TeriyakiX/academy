@@ -956,3 +956,6 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 .ab-teachers__counter { min-width: 52px; text-align: center;
     font-size: 15px; font-weight: 700; color: rgba(255,255,255,.75); }
 @media (max-width: 900px) { .ab-teachers__nav { display: flex; } }
+
+/* Ленты для узкого экрана: на широком их нет */
+.ab-rv__swipe, .ab-teachers__swipe { display: none; }

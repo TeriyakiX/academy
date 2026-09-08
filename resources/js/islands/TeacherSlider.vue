@@ -1,5 +1,27 @@
 <template>
     <div class="ab-teachers">
+        <!-- Узкий экран: карточки листаются пальцем -->
+        <ul class="ab-teachers__swipe">
+            <li v-for="t in teachers" :key="t.name">
+                <div class="ab-teachers__card">
+                    <div class="ab-teachers__photo">
+                        <img :src="t.photo" :alt="t.name" width="360" height="440" loading="lazy">
+                    </div>
+
+                    <div class="ab-teachers__info">
+                        <h3 class="ab-teachers__name">{{ t.name }}</h3>
+                        <p class="ab-teachers__role">{{ t.role }}</p>
+                        <p v-if="t.experience" class="ab-teachers__exp">{{ t.experience }}</p>
+
+                        <p class="ab-teachers__skills-title">Направления:</p>
+                        <ul class="ab-teachers__skills">
+                            <li v-for="skill in t.skills" :key="skill">{{ skill }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        </ul>
+
         <div class="ab-teachers__stage">
             <button class="ab-teachers__arrow ab-teachers__arrow--prev" type="button"
                     aria-label="Предыдущий преподаватель" @click="prev">‹</button>

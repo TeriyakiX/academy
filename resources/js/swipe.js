@@ -17,6 +17,8 @@ const SELECTORS = [
     '.ab-bus__grid',       // услуги для бизнеса
     '.ab-cprog__grid',     // программа курса
     '.ctor__list',         // конструктор курсов
+    '.ab-rv__swipe',       // отзывы
+    '.ab-teachers__swipe', // преподаватели
 ];
 
 const MOBILE = '(max-width: 760px)';
@@ -41,6 +43,10 @@ function activeIndex(track) {
 
 function build(track) {
     if (track.dataset.swipeReady) return;
+
+    // скрытые списки точками не размечаем: у блока может быть
+    // и лента для телефона, и обычный список для широкого экрана
+    if (track.offsetParent === null) return;
 
     const count = track.children.length;
     if (count < 2) return;
