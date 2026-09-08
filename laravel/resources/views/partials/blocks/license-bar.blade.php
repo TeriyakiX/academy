@@ -7,11 +7,21 @@
         <div class="ab-container ab-licbar__inner">
             <span class="ab-licbar__icon" aria-hidden="true">{!! $lic['icon'] ?? '' !!}</span>
 
-            <p class="ab-licbar__text">
-                <b>Лицензия {{ $lic['meta']['Номер лицензии'] }}</b>
-                <span class="ab-licbar__sep" aria-hidden="true">·</span>
-                <span>{{ $lic['meta']['Кем выдана'] }}</span>
-            </p>
+            <div class="ab-licbar__body">
+                <p class="ab-licbar__text">
+                    <b>Лицензия {{ $lic['meta']['Номер лицензии'] }}</b>
+                    <span class="ab-licbar__sep" aria-hidden="true">·</span>
+                    <span>{{ $lic['meta']['Кем выдана'] }}</span>
+                </p>
+
+                @if (!empty($lic['file']))
+                    <a class="ab-licbar__link ab-licbar__link--inline" href="{{ $lic['file'] }}" target="_blank" rel="noopener">
+                        Выписка из реестра
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+                    </a>
+                @endif
+            </div>
 
             @if (!empty($lic['file']))
                 <a class="ab-licbar__link" href="{{ $lic['file'] }}" target="_blank" rel="noopener">

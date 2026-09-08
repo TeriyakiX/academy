@@ -328,3 +328,17 @@
         background-size: 16px 16px; }
     .ab-shop__select select:focus-visible { outline: 2px solid var(--ab-600); outline-offset: 1px; }
 }
+
+/* Короткие признаки товара вместо длинной строки конфигурации */
+.ab-shop__chips { display: flex; flex-wrap: wrap; gap: 6px;
+    margin: 2px 0 0; padding: 0; list-style: none; }
+.ab-shop__chips li { padding: 4px 9px; border-radius: 999px;
+    background: var(--ab-50); color: var(--ab-600);
+    font-size: 12px; font-weight: 600; white-space: nowrap; }
+
+@media (max-width: 760px) {
+    .ab-shop__chips { gap: 4px; }
+    .ab-shop__chips li { padding: 3px 7px; font-size: 11px; }
+    /* на плитке помещается только первый признак */
+    .ab-shop__chips li:nth-child(n+2) { display: none; }
+}

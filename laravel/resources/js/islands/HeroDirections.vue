@@ -10,7 +10,7 @@
                 type="button"
                 role="tab"
                 :aria-selected="i === index"
-                @click="index = i"
+                @click="pick(i)"
                 @mouseenter="index = i"
             >
                 {{ d.short }}
@@ -18,7 +18,8 @@
         </div>
 
         <!-- Фото направления -->
-        <div class="ab-hd__stage">
+        <div class="ab-hd__stage"
+             @touchstart.passive="onStart" @touchmove.passive="onMove" @touchend="onEnd">
             <transition name="ab-hd-fade" mode="out-in">
                 <a class="ab-hd__card" :key="active.title" :href="active.href">
                     <img class="ab-hd__photo" :src="active.photo" :alt="active.title"
@@ -47,7 +48,7 @@
                     :class="{ 'is-active': i === index }"
                     type="button"
                     :aria-label="d.title"
-                    @click="index = i"
+                    @click="pick(i)"
                 ></button>
             </div>
         </div>
@@ -77,4 +78,37 @@ onMounted(() => {
 });
 
 onBeforeUnmount(stop);
+
+/* Переключение вручную останавливает автопрокрутку. */
+const go = (step) => {
+    stop();
+    const n = props.directions.length;
+    index.value = (index.value + step + n) % n;
+};
+
+const pick = (i) => {
+    stop();
+    index.value = i;
+};
+
+/* Листание пальцем: карточка направления меняется свайпом,
+   точки под ней остаются указателем положения. */
+const SWIPE = 40;
+let startX = 0;
+let deltaX = 0;
+
+const onStart = (e) => {
+    startX = e.touches[0].clientX;
+    deltaX = 0;
+};
+
+const onMove = (e) => {
+    deltaX = e.touches[0].clientX - startX;
+};
+
+const onEnd = () => {
+    if (Math.abs(deltaX) < SWIPE) return;
+    go(deltaX < 0 ? 1 : -1);
+    deltaX = 0;
+};
 </script>

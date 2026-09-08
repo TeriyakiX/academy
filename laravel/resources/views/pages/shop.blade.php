@@ -170,7 +170,13 @@
                                     <h2 class="ab-shop__name">
                                         <a class="ab-shop__link" href="{{ $p->url }}">{{ $p->title }}</a>
                                     </h2>
-                                    <p class="ab-shop__summary">{{ $p->summary }}</p>
+                                    @if ($p->chips)
+                                        <ul class="ab-shop__chips">
+                                            @foreach ($p->chips as $chip)
+                                                <li>{{ $chip }}</li>
+                                            @endforeach
+                                        </ul>
+                                    @endif
 
                                     <div class="ab-shop__foot">
                                         <div class="ab-shop__price">
@@ -178,9 +184,6 @@
                                             @if ($p->old_price_label)
                                                 <s>{{ $p->old_price_label }}</s>
                                             @endif
-                                            <span class="ab-shop__stock ab-shop__stock--{{ $p->availability }}">
-                                                {{ $p->availability_label }}
-                                            </span>
                                         </div>
                                         <span class="ab-shop__more" aria-hidden="true">Подробнее</span>
                                     </div>

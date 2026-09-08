@@ -112,8 +112,19 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 @keyframes ab-fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 
 .ab-schedule__free { display: flex; justify-content: center; }
-/* Кольцо статичное. */
 .ab-schedule__free svg { width: 104px; height: 104px; }
+
+/* Деления идут по кругу одно за другим и остаются подсвеченными */
+.ab-schedule__tick { stroke: var(--ab-100); stroke-width: 7; stroke-linecap: round; }
+.is-visible .ab-schedule__tick { animation: ab-tick .5s ease both;
+    animation-delay: calc(var(--i) * .09s); }
+@keyframes ab-tick {
+    from { stroke: var(--ab-100); }
+    to   { stroke: var(--ab-600); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .is-visible .ab-schedule__tick { animation: none; stroke: var(--ab-600); }
+}
 
 .ab-schedule__summary { margin: 0 0 4px; font-size: 18px; font-weight: 800; }
 .ab-schedule__note { margin: 0; font-size: 14px; color: var(--ab-400); }
@@ -465,7 +476,7 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 .ab-hd__link svg { width: 16px; height: 16px; transition: transform var(--ab-transition); }
 .ab-hd__card:hover .ab-hd__link svg { transform: translate(3px, -3px); }
 
-.ab-hd__dots { display: flex; gap: 7px; margin-top: 14px; }
+.ab-hd__dots { display: flex; justify-content: center; gap: 7px; margin-top: 14px; }
 .ab-hd__dot { width: 30px; height: 4px; border: none; border-radius: 3px;
     background: var(--ab-100); cursor: pointer; transition: background var(--ab-transition); }
 .ab-hd__dot.is-active { background: var(--ab-600); }
@@ -543,7 +554,7 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 }
 
 /* ---- кольцо с иконкой в карточке цифры ---- */
-.ab-stats__ring { position: relative; width: 62px; height: 62px; margin-bottom: 18px; }
+.ab-stats__ring { position: relative; width: 44px; height: 44px; flex: none; }
 .ab-stats__ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
 .ab-stats__ring-bg { fill: none; stroke: rgba(255,255,255,.12); stroke-width: 6; }
 .ab-stats__ring-fill { fill: none; stroke: var(--ab-500); stroke-width: 6; stroke-linecap: round;
@@ -571,21 +582,26 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 @media (max-width: 900px) { .ab-stats__list { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 520px) { .ab-stats__list { grid-template-columns: 1fr; } }
 
-.ab-stats__item { padding: 30px 26px; border: 1px solid rgba(255,255,255,.1);
+.ab-stats__item { display: grid; grid-template-columns: auto 1fr; align-items: center;
+    column-gap: 14px; row-gap: 4px;
+    padding: 20px 22px; border: 1px solid rgba(255,255,255,.1);
     border-radius: var(--ab-radius-lg); background: rgba(255,255,255,.04);
     transition: background var(--ab-transition), border-color var(--ab-transition), transform var(--ab-transition); }
+/* значок занимает обе строки слева, число и подпись — справа */
+.ab-stats__item .ab-stats__ring { grid-row: 1 / span 2; }
+.ab-stats__item .ab-stats__note { grid-column: 1 / -1; }
 .ab-stats__item:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.2);
     transform: translateY(-4px); }
 
-.ab-stats__value { display: flex; align-items: baseline; gap: 2px; margin-bottom: 10px;
+.ab-stats__value { display: flex; align-items: baseline; gap: 2px; margin: 0;
     font-family: var(--ab-font-display); line-height: 1; }
-.ab-stats__num { font-size: clamp(40px, 4.4vw, 58px); font-weight: 800;
+.ab-stats__num { font-size: clamp(30px, 3.2vw, 42px); font-weight: 800;
     background: linear-gradient(180deg, #fff 35%, var(--ab-300)); -webkit-background-clip: text;
     background-clip: text; color: transparent; font-variant-numeric: tabular-nums; }
-.ab-stats__suffix { font-size: clamp(22px, 2.4vw, 30px); font-weight: 800; color: var(--ab-500); }
+.ab-stats__suffix { font-size: clamp(17px, 1.8vw, 22px); font-weight: 800; color: var(--ab-500); }
 
-.ab-stats__label { margin: 0 0 6px; font-size: 17px; font-weight: 800; color: var(--ab-white); }
-.ab-stats__note { margin: 0; font-size: 14px; line-height: 1.5; color: var(--ab-400); }
+.ab-stats__label { margin: 0; font-size: 15px; font-weight: 800; color: var(--ab-white); }
+.ab-stats__note { margin: 6px 0 0; font-size: 13px; line-height: 1.45; color: var(--ab-400); }
 
 /* ================= Отзывы ================= */
 .ab-reviews { padding: 76px 0; background: var(--ab-50); }
@@ -938,10 +954,8 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
     border-bottom: 1px solid currentColor; transition: color .2s ease; }
 .ab-licbar__link:hover { color: var(--ab-900); }
 .ab-licbar__link svg { width: 14px; height: 14px; }
-@media (max-width: 620px) {
-    .ab-licbar__text { flex-basis: 100%; font-size: 13px; }
-    .ab-licbar__sep { display: block; height: 0; margin: 0; overflow: hidden; }
-}
+/* Ссылка внутри строки нужна только на узком экране */
+.ab-licbar__link--inline { display: none; }
 
 /* Строка управления слайдером преподавателей: нужна там, где боковые
    стрелки не помещаются. На широком экране скрыта. */
