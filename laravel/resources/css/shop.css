@@ -10,7 +10,7 @@
 
 .ab-page--product .ab-product          { background: var(--ab-50); padding: 32px 0 60px; }
 .ab-page--product .ab-product__details { background: var(--ab-white); padding: 60px 0; }
-.ab-page--product .ab-product__order   { background: var(--ab-950); padding: 60px 0; }
+.ab-page--product .ab-product__order   { background: var(--ab-950); padding: 44px 0; }
 .ab-page--product .ab-shop--similar    { background: var(--ab-50); padding: 60px 0 76px; }
 
 /* ---------- Фильтры категорий ---------- */
@@ -158,7 +158,10 @@
     gap: 40px; align-items: center;
 }
 @media (max-width: 900px) { .ab-product__order-inner { grid-template-columns: 1fr; gap: 24px; } }
-.ab-product__order-note { margin: 12px 0 0; font-size: 16px; line-height: 1.6; color: var(--ab-cream); }
+.ab-product__order-note { margin: 10px 0 0; font-size: 15px; line-height: 1.55; color: var(--ab-cream);
+    max-width: 420px; }
+.ab-product__order .ab-h2 { font-size: 30px; }
+.ab-product__order .ab-lead-form { max-width: 420px; }
 
 /* Два уровня фильтра: сначала производитель, потом тип оборудования. */
 .ab-shop__filter-groups { display: grid; gap: 18px; margin-bottom: 28px; }
@@ -169,3 +172,23 @@
 
 /* Название производителя в заголовке страницы */
 .ab-cpage__title-brand { color: var(--ab-600); }
+
+/* «Похожие позиции» — блок вспомогательный, поэтому карточки строкой:
+   снимок слева, название и цена справа. Так он не спорит с основным
+   каталогом и занимает вдвое меньше высоты. */
+.ab-shop--similar { background: var(--ab-50); }
+.ab-shop--similar .ab-h2 { font-size: 28px; margin-bottom: 22px; }
+.ab-shop--similar .ab-shop__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 1000px) { .ab-shop--similar .ab-shop__grid { grid-template-columns: 1fr; } }
+
+.ab-shop--similar .ab-shop__card { flex-direction: row; align-items: stretch; }
+.ab-shop--similar .ab-shop__media { flex: 0 0 116px; aspect-ratio: auto; }
+.ab-shop--similar .ab-shop__noimage svg { width: 30px; height: 30px; }
+.ab-shop--similar .ab-shop__noimage b { display: none; }
+.ab-shop--similar .ab-shop__body { gap: 5px; padding: 14px; }
+.ab-shop--similar .ab-shop__name { font-size: 15px; line-height: 1.25; }
+.ab-shop--similar .ab-shop__name a { display: -webkit-box; -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical; overflow: hidden; }
+.ab-shop--similar .ab-shop__price b { font-size: 17px; }
+.ab-shop--similar .ab-shop__foot { padding-top: 10px; }
+.ab-shop--similar .ab-shop__more { font-size: 13px; }
