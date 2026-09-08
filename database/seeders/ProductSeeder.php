@@ -757,5 +757,9 @@ class ProductSeeder extends Seeder
             unset($p['category']);
             Product::updateOrCreate(['slug' => $p['slug']], $p);
         }
+
+        /* Каталог полностью описывается прайсом: позиции, которых в нём
+           больше нет, удаляем, иначе в витрине останутся старые записи. */
+        Product::whereNotIn('slug', array_column($products, 'slug'))->delete();
     }
 }
