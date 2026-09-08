@@ -23,6 +23,16 @@
                     <b>{{ $product->title }}</b>
                 </nav>
 
+                {{-- Возврат в раздел: хлебные крошки скрыты, а уйти
+                     обратно к списку нужно в одно нажатие. --}}
+                <a class="ab-back" href="{{ $product->category
+                        ? '/shop.html?category=' . $product->category->slug
+                        : '/shop.html' }}">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+                    {{ $product->category->title ?? 'Все товары' }}
+                </a>
+
                 <div class="ab-product__grid">
                     <div class="ab-product__media">
                         @if ($product->image)
@@ -58,20 +68,35 @@
 
                         <h1 class="ab-product__title">{{ $product->title }}</h1>
 
-                        {{-- Цветовые исполнения одной модели --}}
+                        {{-- Цветовые исполнения: кружок закрашен цветом корпуса,
+                             двухцветные — половинками. --}}
                         @if ($variants->count() > 1)
+                            @php $palette = config('shop.colors'); @endphp
                             <div class="ab-product__colors">
                                 <span class="ab-product__colors-label">
                                     Исполнение: <b>{{ $product->color }}</b>
                                 </span>
                                 <ul class="ab-product__colors-list">
                                     @foreach ($variants as $v)
+                                        @php
+                                            $key = trim(explode(',', (string) $v->color)[0]);
+                                            $c = $palette[$key] ?? $palette[$v->color] ?? ['#c9ccd0'];
+                                            $fill = count($c) > 1
+                                                ? "linear-gradient(135deg, {$c[0]} 0 50%, {$c[1]} 50% 100%)"
+                                                : $c[0];
+                                            $light = str_contains((string) $v->color, 'подсветкой');
+                                        @endphp
                                         <li>
-                                            @if ($v->id === $product->id)
-                                                <span class="ab-product__color is-active">{{ $v->color }}</span>
-                                            @else
-                                                <a class="ab-product__color" href="{{ $v->url }}">{{ $v->color }}</a>
-                                            @endif
+                                            <a class="ab-product__swatch @if ($v->id === $product->id) is-active @endif"
+                                               href="{{ $v->url }}" title="{{ $v->color }}"
+                                               aria-label="{{ $v->color }}"
+                                               @if ($v->id === $product->id) aria-current="true" @endif>
+                                                <span class="ab-product__swatch-dot" style="background: {{ $fill }}">
+                                                    @if ($light)
+                                                        <span class="ab-product__swatch-light" aria-hidden="true"></span>
+                                                    @endif
+                                                </span>
+                                            </a>
                                         </li>
                                     @endforeach
                                 </ul>

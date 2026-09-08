@@ -27,9 +27,13 @@ class ShopController extends Controller
          | тип оборудования. Список брендов собираем из самого каталога,
          | чтобы он не расходился с товарами.
          */
-        $brands = Product::active()
-            ->whereNotNull('brand')->where('brand', '!=', '')
-            ->distinct()->orderBy('brand')->pluck('brand');
+        /* Считаем позиции под каждый фильтр, чтобы человек видел,
+           сколько найдётся, ещё до нажатия. Цветовые исполнения
+           считаем за одну карточку — как они и показываются. */
+        $all = Product::active()->get();
+        $cards = fn ($items) => $items->unique(fn ($p) => $p->variant_group ?: 'p' . $p->id)->count();
+
+        $brands = $all->pluck('brand')->filter()->unique()->sort()->values();
 
         $brand = $request->query('brand');
         if ($brand && !$brands->contains($brand)) {
@@ -70,6 +74,13 @@ class ShopController extends Controller
             'categories' => $categories,
             'current'    => $current,
             'brands'     => $brands,
+            'brandCounts' => $brands->mapWithKeys(fn ($b) => [$b => $cards(
+                $all->where('brand', $b)->when($current, fn ($c) => $c->where('product_category_id', $current->id))
+            )]),
+            'catCounts'  => $categories->mapWithKeys(fn ($c) => [$c->slug => $cards(
+                $all->where('product_category_id', $c->id)->when($brand, fn ($q) => $q->where('brand', $brand))
+            )]),
+            'allCount'   => $cards($all),
             'brand'      => $brand,
             'products'   => $products,
             'total'      => $total,
