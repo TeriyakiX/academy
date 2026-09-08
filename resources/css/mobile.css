@@ -421,3 +421,15 @@
     /* та же вложенность на странице товара */
     .ab-product__order .ab-lead-form { padding: 0; border: 0; background: none; }
 }
+
+@media (max-width: 760px) {
+    /* Блок заявки занимал почти экран: крупная плашка срока, три пункта
+       и телефон над формой. Ужимаем, оставляя смысл. */
+    .ab-lead-block__inner { padding: 22px 16px; gap: 18px; }
+    .ab-lead-block__promise { margin-bottom: 10px; font-size: 16px; }
+    .ab-lead-block__promise span { margin-top: 6px; padding: 3px 10px; font-size: 13px; }
+    .ab-lead-block__note { margin-bottom: 16px; font-size: 14px; }
+    .ab-lead-block__list { gap: 8px; margin-bottom: 18px; }
+    .ab-lead-block__list li { padding-left: 24px; font-size: 14px; }
+    .ab-lead-block__phone { font-size: 20px; }
+}

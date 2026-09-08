@@ -46,6 +46,49 @@
                     };
                 @endphp
 
+                {{-- На узком экране фильтры показываем списками: девять кнопок
+                     во всю ширину отодвигали товары почти на экран вниз. --}}
+                <div class="ab-shop__selects">
+                    @if ($brands->count() > 1)
+                        <label class="ab-shop__select">
+                            <span>Производитель</span>
+                            <select data-filter-go>
+                                <option value="{{ $link(null, $current?->slug) }}" @selected(!$brand)>
+                                    Все производители ({{ $allCount }})
+                                </option>
+                                @foreach ($brands as $b)
+                                    <option value="{{ $link($b, $current?->slug) }}" @selected($brand === $b)>
+                                        {{ $b }} ({{ $brandCounts[$b] }})
+                                    </option>
+                                @endforeach
+                            </select>
+                        </label>
+                    @endif
+
+                    <label class="ab-shop__select">
+                        <span>Тип оборудования</span>
+                        <select data-filter-go>
+                            <option value="{{ $link($brand, null) }}" @selected(!$current)>
+                                Всё оборудование ({{ $allCount }})
+                            </option>
+                            @foreach ($categories as $c)
+                                <option value="{{ $link($brand, $c->slug) }}"
+                                        @selected($current && $current->id === $c->id)>
+                                    {{ $c->title }} ({{ $catCounts[$c->slug] }})
+                                </option>
+                            @endforeach
+                        </select>
+                    </label>
+
+                    @if ($brand || $current)
+                        <a class="ab-shop__reset" href="/shop.html">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                 stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+                            Сбросить фильтры
+                        </a>
+                    @endif
+                </div>
+
                 <div class="ab-shop__filters-panel">
                     @if ($brands->count() > 1)
                         <div class="ab-shop__filter-group">
@@ -159,7 +202,17 @@
             </div>
         </section>
 
-        @include('partials.blocks.lead')
+        @include('partials.blocks.lead', [
+            'title'  => 'Не знаете, что выбрать?',
+            'note'   => 'Подберём оборудование под вашу точку, посчитаем доставку и подключение.',
+            'points' => [
+                'Подберём модель под поток и меню',
+                'Посчитаем доставку и подключение',
+                'Обучим персонал работе на оборудовании',
+            ],
+            'action' => 'Получить подбор',
+            'source' => 'Каталог оборудования',
+        ])
     </main>
 
     @include('partials.site.footer')

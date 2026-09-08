@@ -3,6 +3,7 @@ import './site-layout.js';
 import './swipe.js';
 import './footer-accordion.js';
 import './product-variants.js';
+import './shop-filters.js';
 
 import { createApp } from 'vue';
 
