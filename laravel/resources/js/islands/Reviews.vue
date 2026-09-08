@@ -1,5 +1,31 @@
 <template>
     <div class="ab-rv">
+        <!-- Узкий экран: отзывы листаются пальцем -->
+        <ul class="ab-rv__swipe">
+            <li v-for="r in reviews" :key="r.name + r.date">
+                <blockquote class="ab-rv__card">
+                    <div class="ab-rv__stars" :aria-label="`Оценка ${r.rating} из 5`">
+                        <svg v-for="n in 5" :key="n" viewBox="0 0 24 24"
+                             :class="{ 'is-on': n <= r.rating }">
+                            <path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6L3.3 9.4l6.1-.8L12 3Z"/>
+                        </svg>
+                    </div>
+
+                    <p class="ab-rv__text">{{ r.text }}</p>
+
+                    <footer class="ab-rv__author">
+                        <span class="ab-rv__avatar">{{ initials(r.name) }}</span>
+                        <span class="ab-rv__meta">
+                            <strong>{{ r.name }}</strong>
+                            <span>{{ r.date }}</span>
+                        </span>
+                        <a v-if="r.href" class="ab-rv__source" :href="r.href"
+                           target="_blank" rel="noopener">Отзыв на Яндекс Картах</a>
+                    </footer>
+                </blockquote>
+            </li>
+        </ul>
+
         <!-- Крупный отзыв -->
         <div class="ab-rv__stage">
             <transition name="ab-rv-fade" mode="out-in">

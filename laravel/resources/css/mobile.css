@@ -433,3 +433,29 @@
     .ab-lead-block__list li { padding-left: 24px; font-size: 14px; }
     .ab-lead-block__phone { font-size: 20px; }
 }
+
+/* ---------- Отзывы и преподаватели листаются пальцем ----------
+   Стрелки со счётчиком заменены свайпом — как в остальных блоках. */
+@media (max-width: 760px) {
+    .ab-rv__stage, .ab-rv__nav,
+    .ab-teachers__stage, .ab-teachers__nav, .ab-teachers__thumbs { display: none; }
+
+    .ab-rv__swipe, .ab-teachers__swipe {
+        display: flex; gap: 12px; margin: 0; padding: 2px 0 10px;
+        list-style: none;
+        overflow-x: auto; scroll-snap-type: x mandatory;
+        overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; }
+    .ab-rv__swipe::-webkit-scrollbar,
+    .ab-teachers__swipe::-webkit-scrollbar { display: none; }
+
+    .ab-rv__swipe > li, .ab-teachers__swipe > li {
+        flex: 0 0 100%; min-width: 0; scroll-snap-align: center; }
+
+    .ab-rv__card { display: block; box-sizing: border-box; height: 100%;
+        padding: 22px; border-radius: var(--ab-radius-lg);
+        background: var(--ab-white); box-shadow: 0 18px 46px rgba(26,26,26,.08); }
+    .ab-rv__card .ab-rv__text { font-size: 16px; line-height: 1.5; }
+
+    .ab-teachers__swipe .ab-teachers__card { height: 100%; }
+}
