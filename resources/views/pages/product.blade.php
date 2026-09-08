@@ -244,9 +244,6 @@
                                     <div class="ab-shop__foot">
                                         <div class="ab-shop__price">
                                             <b>{{ $p->price_label }}</b>
-                                            <span class="ab-shop__stock ab-shop__stock--{{ $p->availability }}">
-                                                {{ $p->availability_label }}
-                                            </span>
                                         </div>
                                         <span class="ab-shop__more" aria-hidden="true">Подробнее</span>
                                     </div>

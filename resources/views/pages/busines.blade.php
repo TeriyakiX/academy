@@ -35,7 +35,7 @@
 
                     <ul class="ab-bus__stats">
                         <li><b>50+</b><span>кофеен помогли открыть</span></li>
-                        <li><b>4 года</b><span>в кофейном бизнесе</span></li>
+                        <li><b>{{ (int) date("Y") - 2019 }} лет</b><span>в кофейном бизнесе</span></li>
                         <li><b>8</b><span>услуг для бизнеса</span></li>
                     </ul>
                 </div>

@@ -81,10 +81,10 @@
 
     /* ---------- Плотнее содержимое крупных блоков ---------- */
 
-    /* Плитки с цифрами: кольцо и отступы были рассчитаны на десктоп */
-    .ab-stats__item { padding: 16px 14px; }
-    .ab-stats__value { margin-bottom: 6px; font-size: 30px; }
-    .ab-stats__ring { width: 46px; height: 46px; }
+    .ab-stats__list { grid-template-columns: 1fr; }
+    .ab-stats__item { padding: 14px 16px; column-gap: 12px; }
+    .ab-stats__ring { width: 38px; height: 38px; }
+    .ab-stats__num { font-size: 28px; }
 
     /* Вкладки направлений переносились на четыре строки */
     .ab-tabs__nav, .ab-shop__filters {
@@ -457,4 +457,20 @@
     .ab-rv__card .ab-rv__text { font-size: 16px; line-height: 1.5; }
 
     .ab-teachers__swipe .ab-teachers__card { height: 100%; }
+}
+
+/* ---------- Полоса с лицензией ----------
+   Значок, номер и ссылка выстраиваются в одну строку: значок слева,
+   текст в две короткие строки, ссылка под ними. */
+@media (max-width: 760px) {
+    .ab-licbar { padding: 16px 0; }
+    .ab-licbar__inner { flex-wrap: nowrap; align-items: flex-start; gap: 12px; }
+    .ab-licbar__icon { margin-top: 2px; }
+    .ab-licbar__icon svg { width: 20px; height: 20px; }
+    .ab-licbar__text { flex: 1 1 auto; min-width: 0; font-size: 13px; line-height: 1.45; }
+    .ab-licbar__text b { display: block; }
+    .ab-licbar__sep { display: none; }
+    .ab-licbar__body { min-width: 0; }
+    .ab-licbar__link { display: none; }
+    .ab-licbar__link--inline { display: inline-flex; margin-top: 6px; font-size: 13px; }
 }

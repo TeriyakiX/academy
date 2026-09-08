@@ -43,6 +43,32 @@ class Product extends Model
         return $q->where('is_active', true);
     }
 
+    /**
+     * Три коротких признака для карточки каталога:
+     * длинная строка конфигурации там читается плохо.
+     */
+    public function getChipsAttribute(): array
+    {
+        $map = [
+            'Количество групп' => fn ($v) => $v . ' ' . ($v == 1 ? 'группа' : ($v <= 4 ? 'группы' : 'групп')),
+            'Объём бойлера'    => fn ($v) => 'бойлер ' . $v,
+            'Жернова'          => fn ($v) => $v,
+            'Бункеров для зерна' => fn ($v) => $v . ' бункера для зерна',
+            'Управление'       => fn ($v) => $v,
+            'PID-контроль'     => fn () => 'PID-контроль',
+        ];
+
+        $chips = [];
+        foreach ($map as $key => $format) {
+            foreach ($this->specs ?? [] as [$name, $value]) {
+                if ($name === $key) { $chips[] = $format($value); break; }
+            }
+            if (count($chips) >= 3) break;
+        }
+
+        return $chips;
+    }
+
     public function getUrlAttribute(): string
     {
         return '/shop/' . $this->slug . '.html';

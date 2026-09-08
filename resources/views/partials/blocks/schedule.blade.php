@@ -23,14 +23,15 @@
                                 </div>
                             @endforeach
                         @else
+                            {{-- Двенадцать делений по кругу — как часовой циферблат:
+                                 время занятия выбирается любое. --}}
                             <div class="ab-schedule__free" aria-hidden="true">
                                 <svg viewBox="0 0 120 120">
-                                    <circle cx="60" cy="60" r="46" fill="none" stroke="#e4e1dd" stroke-width="9"
-                                            stroke-dasharray="14 10" stroke-linecap="round"/>
-                                    <g class="ab-schedule__free-spin">
-                                        <circle cx="60" cy="60" r="46" fill="none" stroke="#6b5a53" stroke-width="9"
-                                                stroke-dasharray="14 76" stroke-linecap="round"/>
-                                    </g>
+                                    @for ($i = 0; $i < 12; $i++)
+                                        <line class="ab-schedule__tick" x1="60" y1="16" x2="60" y2="27"
+                                              transform="rotate({{ $i * 30 }} 60 60)"
+                                              style="--i: {{ $i }}"/>
+                                    @endfor
                                 </svg>
                             </div>
                         @endif
