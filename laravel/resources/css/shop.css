@@ -300,3 +300,28 @@
     .ab-product__swatch { width: 38px; height: 38px; }
     .ab-product__swatch-dot { width: 27px; height: 27px; }
 }
+
+/* Компактные фильтры для узкого экрана: два списка вместо девяти кнопок */
+.ab-shop__selects { display: none; }
+
+@media (max-width: 760px) {
+    .ab-shop__selects { display: grid; gap: 12px; margin-bottom: 20px;
+        padding: 16px; border-radius: var(--ab-radius-lg);
+        background: var(--ab-white); border: 1px solid var(--ab-100); }
+    .ab-shop__filters-panel { display: none; }
+
+    .ab-shop__select { display: grid; gap: 6px; }
+    .ab-shop__select > span { font-size: 12px; font-weight: 700; letter-spacing: .04em;
+        text-transform: uppercase; color: var(--ab-400); }
+    .ab-shop__select select {
+        width: 100%; padding: 13px 40px 13px 14px;
+        border: 1px solid var(--ab-100); border-radius: var(--ab-radius);
+        background: var(--ab-white); color: var(--ab-900);
+        font: inherit; font-size: 15px; font-weight: 600;
+        appearance: none;
+        background-image: var(--ab-chevron);
+        background-repeat: no-repeat;
+        background-position: right 14px center;
+        background-size: 16px 16px; }
+    .ab-shop__select select:focus-visible { outline: 2px solid var(--ab-600); outline-offset: 1px; }
+}

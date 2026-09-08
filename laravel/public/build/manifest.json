@@ -45,7 +45,7 @@
     "isEntry": true
   },
   "resources/css/mobile.css": {
-    "file": "assets/mobile-BMMIdnLh.css",
+    "file": "assets/mobile-BBWndSH0.css",
     "name": "mobile",
     "names": [
       "mobile.css"
@@ -63,7 +63,7 @@
     "isEntry": true
   },
   "resources/css/shop.css": {
-    "file": "assets/shop-BMNNDDAF.css",
+    "file": "assets/shop-B_dMezNS.css",
     "name": "shop",
     "names": [
       "shop.css"
@@ -90,7 +90,7 @@
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-Du5qA12Q.js",
+    "file": "assets/app-BzL8APIZ.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
@@ -108,7 +108,7 @@
     ]
   },
   "resources/js/islands/BusinessServices.vue": {
-    "file": "assets/BusinessServices-bhFEZ56a.js",
+    "file": "assets/BusinessServices-CJPzkRhU.js",
     "name": "BusinessServices",
     "src": "resources/js/islands/BusinessServices.vue",
     "isDynamicEntry": true,
@@ -117,7 +117,7 @@
     ]
   },
   "resources/js/islands/CourseConstructor.vue": {
-    "file": "assets/CourseConstructor-CJeXsJLt.js",
+    "file": "assets/CourseConstructor-CoLPfj5J.js",
     "name": "CourseConstructor",
     "src": "resources/js/islands/CourseConstructor.vue",
     "isDynamicEntry": true,
@@ -126,7 +126,7 @@
     ]
   },
   "resources/js/islands/CourseProgram.vue": {
-    "file": "assets/CourseProgram-oUDFHosy.js",
+    "file": "assets/CourseProgram-D7Xjr2Px.js",
     "name": "CourseProgram",
     "src": "resources/js/islands/CourseProgram.vue",
     "isDynamicEntry": true,
@@ -135,7 +135,7 @@
     ]
   },
   "resources/js/islands/CourseTabs.vue": {
-    "file": "assets/CourseTabs-CI88YK8Q.js",
+    "file": "assets/CourseTabs-BHqmO4sI.js",
     "name": "CourseTabs",
     "src": "resources/js/islands/CourseTabs.vue",
     "isDynamicEntry": true,
@@ -144,7 +144,7 @@
     ]
   },
   "resources/js/islands/EventsSchedule.vue": {
-    "file": "assets/EventsSchedule-CVgFkwKS.js",
+    "file": "assets/EventsSchedule-iMlOtucM.js",
     "name": "EventsSchedule",
     "src": "resources/js/islands/EventsSchedule.vue",
     "isDynamicEntry": true,
@@ -153,7 +153,7 @@
     ]
   },
   "resources/js/islands/FaqAccordion.vue": {
-    "file": "assets/FaqAccordion-BfkaSZot.js",
+    "file": "assets/FaqAccordion-sDghw2fl.js",
     "name": "FaqAccordion",
     "src": "resources/js/islands/FaqAccordion.vue",
     "isDynamicEntry": true,
@@ -162,7 +162,7 @@
     ]
   },
   "resources/js/islands/HeroDirections.vue": {
-    "file": "assets/HeroDirections-CZWU2KD-.js",
+    "file": "assets/HeroDirections-CDB2OafC.js",
     "name": "HeroDirections",
     "src": "resources/js/islands/HeroDirections.vue",
     "isDynamicEntry": true,
@@ -171,7 +171,7 @@
     ]
   },
   "resources/js/islands/Reviews.vue": {
-    "file": "assets/Reviews-CBiCWp8l.js",
+    "file": "assets/Reviews-DuWgZjna.js",
     "name": "Reviews",
     "src": "resources/js/islands/Reviews.vue",
     "isDynamicEntry": true,
@@ -180,7 +180,7 @@
     ]
   },
   "resources/js/islands/StatsCounter.vue": {
-    "file": "assets/StatsCounter-BO_ayGZf.js",
+    "file": "assets/StatsCounter-DEYU-H52.js",
     "name": "StatsCounter",
     "src": "resources/js/islands/StatsCounter.vue",
     "isDynamicEntry": true,
@@ -189,7 +189,7 @@
     ]
   },
   "resources/js/islands/TeacherSlider.vue": {
-    "file": "assets/TeacherSlider-6alqHNMc.js",
+    "file": "assets/TeacherSlider-BtxGFKLC.js",
     "name": "TeacherSlider",
     "src": "resources/js/islands/TeacherSlider.vue",
     "isDynamicEntry": true,
