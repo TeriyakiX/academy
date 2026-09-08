@@ -373,32 +373,32 @@
 }
 
 /* ---------- Каталог оборудования на телефоне ----------
-   Карточка-плитка занимала 487px, из них 238 — серая заглушка вместо
-   фотографии. Товары так не просмотреть. Делаем строку: снимок слева,
-   название и цена справа. Кликается вся строка.                      */
+   Плитка в два столбца: снимок сверху, под ним название и цена.
+   Так на экран попадает вчетверо больше товаров, чем строками.   */
 @media (max-width: 760px) {
-    .ab-shop__grid { grid-template-columns: 1fr; gap: 12px; }
+    .ab-shop__grid { grid-template-columns: 1fr 1fr; gap: 10px; }
 
-    .ab-shop__card { flex-direction: row; align-items: stretch; }
+    .ab-shop__card { flex-direction: column; }
     .ab-shop__card:hover { transform: none; }
 
-    .ab-shop__media { flex: 0 0 118px; aspect-ratio: auto; }
-    .ab-shop__noimage svg { width: 32px; height: 32px; }
+    .ab-shop__media { flex: none; aspect-ratio: 1 / 1; }
+    .ab-shop__noimage svg { width: 34px; height: 34px; }
     /* марка уже написана над названием — в заглушке не повторяем */
     .ab-shop__noimage b { display: none; }
 
-    /* название в две строки, чтобы строки каталога были одной высоты */
+    .ab-shop__body { gap: 4px; padding: 10px 10px 12px; }
+    .ab-shop__brand { font-size: 10px; letter-spacing: .06em; }
+    .ab-shop__name { font-size: 13px; line-height: 1.25; }
     .ab-shop__name a { display: -webkit-box; -webkit-line-clamp: 2;
         -webkit-box-orient: vertical; overflow: hidden; }
-
-    .ab-shop__body { gap: 5px; padding: 14px; }
-    .ab-shop__brand { font-size: 11px; }
-    .ab-shop__name { font-size: 15px; line-height: 1.25; }
     .ab-shop__summary { display: none; }   /* описание есть на странице товара */
 
-    .ab-shop__foot { padding-top: 10px; }
-    .ab-shop__price b { font-size: 17px; }
-    .ab-shop__more { font-size: 13px; }
+    /* цена и наличие в столбик, подпись «Подробнее» на плитке лишняя */
+    .ab-shop__foot { flex-direction: column; align-items: flex-start; gap: 2px; padding-top: 8px; }
+    .ab-shop__price { gap: 1px; }
+    .ab-shop__price b { font-size: 15px; }
+    .ab-shop__stock { font-size: 11px; }
+    .ab-shop__more { display: none; }
 }
 
 @media (max-width: 760px) {
@@ -406,4 +406,18 @@
     .ab-cpage__hero { padding-top: 26px; padding-bottom: 26px; }
     .ab-cpage__title { margin: 0 0 10px; font-size: 25px; line-height: 1.15; }
     .ab-cpage__lead { margin: 0; font-size: 15px; line-height: 1.55; }
+}
+
+/* ---------- Блок заявки ----------
+   Внутри секции лежала карточка, а в ней — ещё одна карточка формы.
+   На узком экране три вложенных отступа съедали ширину, и поля
+   получались зажатыми. Убираем оформление у внутренней формы. */
+@media (max-width: 760px) {
+    .ab-lead-block__inner { padding: 26px 18px; }
+    .ab-lead-form { padding: 0; border: 0; background: none; gap: 12px; }
+    .ab-lead-form__field input { padding: 14px 16px; }
+    .ab-lead-block__text { margin-bottom: 6px; }
+
+    /* та же вложенность на странице товара */
+    .ab-product__order .ab-lead-form { padding: 0; border: 0; background: none; }
 }

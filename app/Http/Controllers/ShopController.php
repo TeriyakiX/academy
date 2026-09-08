@@ -40,7 +40,20 @@ class ShopController extends Controller
             ->when($brand, fn ($q) => $q->where('brand', $brand))
             ->when($current, fn ($q) => $q->where('product_category_id', $current->id))
             ->orderBy('sort')->orderBy('title')
-            ->get();
+            ->get()
+            /* Цветовые исполнения одной модели показываем одной карточкой:
+               выбор цвета — уже внутри товара. */
+            ->unique(fn ($p) => $p->variant_group ?: 'p' . $p->id)
+            ->values();
+
+        /* Показываем каталог порциями: 24 карточки за раз.
+           Кнопка «Показать ещё» добавляет следующую порцию, а адрес
+           страницы остаётся рабочим и без JavaScript. */
+        $perPage = 24;
+        $shown = (int) $request->query('show', $perPage);
+        $shown = max($perPage, min($shown, $products->count()));
+        $total = $products->count();
+        $products = $products->take($shown);
 
         return view('pages.shop', [
             'seo' => [
@@ -59,6 +72,9 @@ class ShopController extends Controller
             'brands'     => $brands,
             'brand'      => $brand,
             'products'   => $products,
+            'total'      => $total,
+            'shown'      => $shown,
+            'perPage'    => $perPage,
         ]);
     }
 
@@ -82,11 +98,22 @@ class ShopController extends Controller
     {
         $product = Product::active()->with('category')->where('slug', $slug)->firstOrFail();
 
+        /* Другие цвета этой же модели — для переключателя на странице. */
+        $variants = $product->variant_group
+            ? Product::active()->where('variant_group', $product->variant_group)
+                ->orderBy('sort')->get()
+            : collect();
+
         $similar = Product::active()
             ->where('id', '!=', $product->id)
+            ->when($product->variant_group,
+                fn ($q) => $q->where(fn ($w) => $w->whereNull('variant_group')
+                    ->orWhere('variant_group', '!=', $product->variant_group)))
             ->when($product->product_category_id,
                 fn ($q) => $q->where('product_category_id', $product->product_category_id))
-            ->orderBy('sort')->limit(3)->get();
+            ->orderBy('sort')->get()
+            ->unique(fn ($p) => $p->variant_group ?: 'p' . $p->id)
+            ->take(3);
 
         return view('pages.product', [
             'seo' => [
@@ -99,8 +126,9 @@ class ShopController extends Controller
                 'css'         => [],
                 'js'          => [],
             ],
-            'product' => $product,
-            'similar' => $similar,
+            'product'  => $product,
+            'variants' => $variants,
+            'similar'  => $similar,
         ]);
     }
 }
