@@ -452,9 +452,10 @@
         flex: 0 0 100%; min-width: 0; scroll-snap-align: center; }
 
     .ab-rv__card { display: block; box-sizing: border-box; height: 100%;
-        padding: 22px; border-radius: var(--ab-radius-lg);
-        background: var(--ab-white); box-shadow: 0 18px 46px rgba(26,26,26,.08); }
-    .ab-rv__card .ab-rv__text { font-size: 16px; line-height: 1.5; }
+        padding: 20px; border-radius: var(--ab-radius-lg);
+        background: var(--ab-50); border: 1px solid var(--ab-100); }
+    .ab-rv__card .ab-rv__text { margin-bottom: 18px; font-size: 15px; line-height: 1.5;
+        -webkit-line-clamp: 8; }
 
     .ab-teachers__swipe .ab-teachers__card { height: 100%; }
 }
@@ -473,4 +474,21 @@
     .ab-licbar__body { min-width: 0; }
     .ab-licbar__link { display: none; }
     .ab-licbar__link--inline { display: inline-flex; margin-top: 6px; font-size: 13px; }
+}
+
+/* ---------- Подарочный сертификат ----------
+   Снимок карты уходит наверх: он и есть главный аргумент,
+   а перечисление направлений собирается в компактные метки. */
+@media (max-width: 760px) {
+    .ab-cert__inner { padding: 24px 18px; gap: 20px; }
+    .ab-cert__media { order: -1; }
+    .ab-cert__media img { border-radius: 14px; }
+
+    .ab-cert__tag { margin-bottom: 12px; padding: 6px 12px; font-size: 12px; }
+    .ab-cert__text { margin-bottom: 16px; font-size: 15px; line-height: 1.55; }
+
+    .ab-cert__list { gap: 6px; margin-bottom: 20px; }
+    .ab-cert__list li { padding: 6px 12px; font-size: 13px; }
+
+    .ab-cert__body .ab-btn { width: 100%; }
 }

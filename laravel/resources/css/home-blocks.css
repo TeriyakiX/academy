@@ -281,10 +281,12 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 @media (max-width: 1000px) { .ab-buscta__inner { grid-template-columns: 1fr; gap: 28px; padding: 32px 24px; } }
 .ab-buscta__lead { max-width: 520px; margin: 0 0 28px; font-size: 16px; line-height: 1.6; color: var(--ab-cream); }
 .ab-buscta__list { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
-.ab-buscta__list li { padding: 15px 20px; border: 1px solid rgba(255,255,255,.14);
+.ab-buscta__list li { display: flex; align-items: center; gap: 12px;
+    padding: 14px 18px; border: 1px solid rgba(255,255,255,.14);
     border-radius: var(--ab-radius); font-size: 15px; color: var(--ab-cream);
     transition: background var(--ab-transition); }
 .ab-buscta__list li:hover { background: rgba(255,255,255,.06); }
+.ab-buscta__list svg { width: 22px; height: 22px; flex: none; color: var(--ab-400); }
 
 /* ================= Направления ================= */
 .ab-dirs { padding: 0 0 76px; }
@@ -616,14 +618,17 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
     gap: 22px; align-items: stretch; }
 @media (max-width: 950px) { .ab-rv { grid-template-columns: 1fr; } }
 
+/* Карточка на белой секции: без подложки её углы не читаются,
+   поэтому даём фон и рамку вместо одной тени. */
 .ab-rv__stage { position: relative; display: flex; flex-direction: column;
     padding: 28px; border-radius: var(--ab-radius-lg);
-    background: var(--ab-white); box-shadow: 0 18px 46px rgba(26,26,26,.08); }
+    background: var(--ab-50); border: 1px solid var(--ab-100); }
 .ab-rv__quote { margin: 0; }
 .ab-rv__stars { display: flex; gap: 4px; margin-bottom: 18px; }
 .ab-rv__stars svg { width: 20px; height: 20px; fill: var(--ab-100); }
 .ab-rv__stars svg.is-on { fill: #d8a34a; }
-.ab-rv__text { margin: 0 0 22px; font-size: 17px; line-height: 1.55; color: var(--ab-dark); }
+.ab-rv__text { margin: 0 0 22px; font-size: 17px; line-height: 1.55; color: var(--ab-dark);
+    display: -webkit-box; -webkit-line-clamp: 7; -webkit-box-orient: vertical; overflow: hidden; }
 
 .ab-rv__author { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
 .ab-rv__avatar { display: flex; align-items: center; justify-content: center;
@@ -648,7 +653,7 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 .ab-rv__list { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none;
     align-content: start; }
 .ab-rv__item { display: grid; gap: 2px; width: 100%; padding: 11px 14px; text-align: left;
-    border: 1px solid transparent; border-radius: var(--ab-radius); background: var(--ab-white);
+    border: 1px solid var(--ab-100); border-radius: var(--ab-radius); background: var(--ab-white);
     font: inherit; cursor: pointer; transition: all var(--ab-transition); }
 .ab-rv__item:hover { border-color: var(--ab-200); }
 .ab-rv__item.is-active { border-color: var(--ab-600); background: var(--ab-white);
@@ -973,3 +978,15 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 
 /* Ленты для узкого экрана: на широком их нет */
 .ab-rv__swipe, .ab-teachers__swipe { display: none; }
+
+/* Телефон и мессенджеры в блоке вопросов */
+.ab-faq__contacts { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
+.ab-faq__socials { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.ab-faq__socials .site-social { width: 42px; height: 42px;
+    border: 1px solid var(--ab-100); background: var(--ab-white); color: var(--ab-700); }
+.ab-faq__socials .site-social:hover { background: var(--ab-600); color: var(--ab-white); }
+@media (max-width: 760px) {
+    .ab-faq__contacts { gap: 12px; }
+    .ab-faq__contacts .ab-btn { width: 100%; }
+    .ab-faq__socials { gap: 10px; }
+}
