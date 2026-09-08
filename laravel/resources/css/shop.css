@@ -231,6 +231,9 @@
     overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch;
     margin-inline: -20px;
     padding: 4px 20px 14px;
+    /* без этого примагничивание не учитывает поле слева
+       и первая карточка уезжает под край экрана */
+    scroll-padding-inline: 20px;
     scrollbar-width: none;
 }
 .ab-shop--similar .ab-shop__grid::-webkit-scrollbar { display: none; }
