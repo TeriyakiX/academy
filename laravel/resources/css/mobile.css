@@ -11,8 +11,11 @@
 
 @media (max-width: 760px) {
 
-    /* ---------- Отступы секций ---------- */
-    main section:not(.ab-licbar) { padding-top: 44px; padding-bottom: 44px; }
+    /* ---------- Отступы секций ----------
+       Второй селектор нужен из-за правил вида .ab-page--shop .ab-shop:
+       у них специфичность выше, и без него они оставляли десктопные поля. */
+    main section:not(.ab-licbar),
+    .ab-page section:not(.ab-licbar) { padding-top: 44px; padding-bottom: 44px; }
 
     .ab-h2 { margin-bottom: 12px; }
     .ab-lead { margin-bottom: 22px; }
@@ -396,4 +399,11 @@
     .ab-shop__foot { padding-top: 10px; }
     .ab-shop__price b { font-size: 17px; }
     .ab-shop__more { font-size: 13px; }
+}
+
+@media (max-width: 760px) {
+    /* Шапка раздела: заголовок и подпись без лишнего воздуха */
+    .ab-cpage__hero { padding-top: 26px; padding-bottom: 26px; }
+    .ab-cpage__title { margin: 0 0 10px; font-size: 25px; line-height: 1.15; }
+    .ab-cpage__lead { margin: 0; font-size: 15px; line-height: 1.55; }
 }
