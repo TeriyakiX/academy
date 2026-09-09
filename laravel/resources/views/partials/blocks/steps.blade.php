@@ -9,8 +9,10 @@
             @foreach ($s['items'] as $item)
                 <li class="ab-steps__item">
                     <span class="ab-steps__n">{{ $item['n'] }}</span>
-                    <h3 class="ab-steps__title">{{ $item['title'] }}</h3>
-                    <p class="ab-steps__text">{{ $item['text'] }}</p>
+                    <div class="ab-steps__body">
+                        <h3 class="ab-steps__title">{{ $item['title'] }}</h3>
+                        <p class="ab-steps__text">{{ $item['text'] }}</p>
+                    </div>
                 </li>
             @endforeach
         </ol>

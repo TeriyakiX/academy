@@ -136,23 +136,26 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 @media (max-width: 1000px) { .ab-steps__list { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 640px)  { .ab-steps__list { grid-template-columns: 1fr; } }
 
-.ab-steps__item { position: relative; padding: 30px 26px 26px;
+.ab-steps__item { position: relative;
+    display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 14px; align-items: start;
+    padding: 24px 22px;
     border: 1px solid var(--ab-100); border-radius: var(--ab-radius-lg); background: var(--ab-white);
     transition: transform var(--ab-transition), box-shadow var(--ab-transition); }
 .ab-steps__item:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(26,26,26,.09); }
 /* соединительная линия между шагами */
-.ab-steps__item::after { content: ''; position: absolute; top: 52px; right: -20px;
+.ab-steps__item::after { content: ''; position: absolute; top: 44px; right: -20px;
     width: 20px; height: 1px; background: var(--ab-200); }
 .ab-steps__item:last-child::after { display: none; }
 @media (max-width: 1000px) { .ab-steps__item::after { display: none; } }
 
-.ab-steps__n { display: inline-flex; align-items: center; justify-content: center;
-    width: 46px; height: 46px; margin-bottom: 16px; border-radius: 50%;
+.ab-steps__n { display: flex; align-items: center; justify-content: center;
+    width: 40px; height: 40px; flex: none; border-radius: 12px;
     background: var(--ab-50); font-family: var(--ab-font-display);
-    font-size: 17px; font-weight: 800; color: var(--ab-600); }
+    font-size: 15px; font-weight: 800; color: var(--ab-600);
+    transition: all var(--ab-transition); }
 .ab-steps__item:hover .ab-steps__n { background: var(--ab-600); color: var(--ab-white); }
-.ab-steps__title { margin: 0 0 9px; font-size: 17px; font-weight: 800; line-height: 1.3; }
-.ab-steps__text { margin: 0; font-size: 14px; line-height: 1.6; color: var(--ab-500); }
+.ab-steps__title { margin: 0 0 7px; font-size: 16px; font-weight: 800; line-height: 1.3; }
+.ab-steps__text { margin: 0; font-size: 14px; line-height: 1.55; color: var(--ab-500); }
 
 /* ================= Преподаватели ================= */
 .ab-teachers-section { padding: 72px 0; background: var(--ab-950); }
@@ -675,13 +678,20 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 .ab-faq__list { display: grid; gap: 10px; }
 .ab-faq__item { border: 1px solid var(--ab-100); border-radius: var(--ab-radius-lg);
     background: var(--ab-white); overflow: hidden; transition: border-color var(--ab-transition); }
-.ab-faq__item.is-open { border-color: var(--ab-600); }
+.ab-faq__item:hover { border-color: var(--ab-200); }
+.ab-faq__item.is-open { border-color: var(--ab-600); box-shadow: 0 10px 30px rgba(26,26,26,.07); }
 .ab-faq__question { display: flex; align-items: center; justify-content: space-between; gap: 18px;
-    width: 100%; padding: 22px 24px; border: none; background: none; font: inherit;
-    font-size: 16px; font-weight: 700; text-align: left; color: var(--ab-dark); cursor: pointer; }
-.ab-faq__icon { width: 22px; height: 22px; flex: none; color: var(--ab-600);
-    transition: transform var(--ab-transition); }
-.ab-faq__item.is-open .ab-faq__icon { transform: rotate(45deg); }
+    width: 100%; padding: 20px 22px; border: none; background: none; font: inherit;
+    font-size: 16px; font-weight: 700; text-align: left; color: var(--ab-dark); cursor: pointer;
+    transition: color var(--ab-transition); }
+.ab-faq__question:hover { color: var(--ab-600); }
+/* Плюс живёт в кружке: видно, что строку можно раскрыть */
+.ab-faq__icon { box-sizing: content-box; width: 18px; height: 18px; flex: none; padding: 8px;
+    border-radius: 50%; background: var(--ab-50); color: var(--ab-600);
+    transition: transform var(--ab-transition), background var(--ab-transition), color var(--ab-transition); }
+.ab-faq__question:hover .ab-faq__icon { background: var(--ab-100); }
+.ab-faq__item.is-open .ab-faq__icon { transform: rotate(135deg);
+    background: var(--ab-600); color: var(--ab-white); }
 .ab-faq__body { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
 .ab-faq__answer { padding: 0 24px 22px; }
 .ab-faq__answer p { margin: 0; font-size: 15px; line-height: 1.65; color: var(--ab-500); }
@@ -988,5 +998,10 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 @media (max-width: 760px) {
     .ab-faq__contacts { gap: 12px; }
     .ab-faq__contacts .ab-btn { width: 100%; }
-    .ab-faq__socials { gap: 10px; }
+    /* Ряд мессенджеров короче ширины экрана — ставим по центру,
+       иначе он висит у левого края под кнопкой во всю строку. */
+    .ab-faq__contacts { justify-content: center; }
+    .ab-faq__socials { gap: 10px; justify-content: center; }
+    .ab-contacts__social { justify-content: center; }
+    .ab-contacts__social-title { text-align: center; }
 }
