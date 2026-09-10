@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
+    {{-- Токен для запросов из браузера: его подставляет общий клиент в resources/src/shared/api --}}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>{{ $seo['title'] }}</title>
     @isset($seo["description"])
         <meta name="description" content="{{ $seo["description"] }}">
@@ -30,7 +33,7 @@
     @endforeach
 
     @stack('head')
-    @vite(['resources/css/app.css', 'resources/css/ui.css', 'resources/css/site-layout.css', 'resources/css/mobile.css', 'resources/js/app.js'])
+    @vite(['resources/src/app/assets/styles/app.css', 'resources/src/app/assets/styles/ui.css', 'resources/src/app/assets/styles/site-layout.css', 'resources/src/app/assets/styles/mobile.css', 'resources/src/app/main.ts'])
 </head>
 <body @foreach ($seo['body_attrs'] ?? [] as $k => $v) {{ $k }}="{{ $v }}" @endforeach>
 

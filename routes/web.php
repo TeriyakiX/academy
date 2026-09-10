@@ -142,6 +142,7 @@ Route::post('/lead', function (
     $data = $request->validate([
         'name'      => ['required', 'string', 'max:120'],
         'phone'     => ['required', 'string', 'max:40'],
+        'email'     => ['nullable', 'email', 'max:120'],
         'source'    => ['nullable', 'string', 'max:200'],
         'page'      => ['nullable', 'string', 'max:200'],
         'comment'   => ['nullable', 'string', 'max:1000'],

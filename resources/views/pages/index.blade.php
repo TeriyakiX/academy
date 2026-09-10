@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @push('head')
-    @vite(['resources/css/constructor.css', 'resources/css/reviews.css', 'resources/css/home-blocks.css'])
+    @vite(['resources/src/app/assets/styles/constructor.css', 'resources/src/app/assets/styles/reviews.css', 'resources/src/app/assets/styles/home-blocks.css'])
 @endpush
 
 @push('scripts')

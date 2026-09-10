@@ -30,7 +30,7 @@ php artisan serve
 | `config/course-pages.php` | Содержимое страниц курсов |
 | `config/documents.php` | Блок «Какой документ вы получите» |
 | `config/leads.php` | Каналы, куда уходят заявки |
-| `resources/js/islands/` | Vue-компоненты |
+| `resources/src/` | Фронтенд: слои app / modules / shared, см. [resources/src/README.md](resources/src/README.md) |
 | `resources/views/partials/blocks/` | Блоки страниц |
 
 ## Адреса страниц
