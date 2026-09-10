@@ -1,1 +1,0 @@
-import"./modulepreload-polyfill.js";import{h as o,m,a as r}from"./accordion-footer.js";import{t as a}from"./mobile-menu.js";import{m as e}from"./mobile-menu-accordion.js";import{s as i}from"./send-form-telegram.js";import"./inputmask.js";o();a();e();m();r();i();

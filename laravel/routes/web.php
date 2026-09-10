@@ -124,7 +124,6 @@ Route::get('/constructor.html', fn () => view('pages.constructor', ['seo' => [
     'canonical'   => 'https://academy-barista.ru/constructor.html',
     'body_attrs'  => ['class' => 'body'],
     'css'         => ['/assets/splide.css', '/assets/masterClass.css'],
-    'js'          => [['src' => '/assets/pageCommon.js', 'type' => 'module', 'defer' => false, 'async' => false]],
 ]]))->name('constructor');
 
 /*

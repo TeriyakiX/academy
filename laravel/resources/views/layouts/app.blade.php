@@ -39,8 +39,6 @@
 
 @yield('content')
 
-{{-- Заглушки для старых бандлов страниц. Должны идти до них. --}}
-<script src="/assets/legacyCompat.js"></script>
 @foreach ($seo['js'] ?? [] as $script)
     <script src="{{ $script['src'] }}"@if ($script['type']) type="{{ $script['type'] }}"@endif @if ($script['defer']) defer @endif @if ($script['async']) async @endif></script>
 @endforeach
