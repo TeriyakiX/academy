@@ -8,19 +8,30 @@
     
     
     <main class="main">
-        <div class="article-layout">
-            <article class="article"></article>
-            <aside class="article-sidebar">
-                <div class="article-sidebar__container"><h3 class="article-sidebar__title">Читайте также</h3>
-                    <div class="article-sidebar__list"></div>
-                </div>
-            </aside>
+        {{-- Текст статьи подгружал скрипт старого сайта из /api/articles.php.
+             До переноса блога страница показывает заглушку. --}}
+        <div class="ab-empty">
+            <p class="ab-empty__title">Статья готовится</p>
+            <p class="ab-empty__text">
+                Переносим материалы блога на новый сайт. Загляните в раздел курсов —
+                там программы, расписание и цены.
+            </p>
+            <a class="ab-btn ab-btn--primary" href="/courses.html">Посмотреть курсы</a>
         </div>
         <section class="contact main-section">
             <div class="contact__inner"><h4 class="contact__vertical-text heading-title-vertical">Контакты</h4>
                 <div class="contact__container container">
                     <div class="contact__content">
-                        <div class="contact__maps" id="map"></div>
+                        {{-- Карту рисовал скрипт старого сайта; он падал на запросе к несуществующему
+                             /api/articles.php, и на месте карты оставалась белая дыра в 475px.
+                             Ставим тот же виджет, что и на остальных страницах. --}}
+                        <div class="contact__maps">
+                            <iframe
+                                class="lazy-map"
+                                data-src="https://yandex.ru/map-widget/v1/?ll=37.684367%2C55.773872&z=16&pt=37.684075,55.773560,pm2rdm"
+                                title="Академия Бариста на карте"
+                                width="100%" height="480" frameborder="0" allowfullscreen loading="lazy"></iframe>
+                        </div>
                         <div class="contact__right"><h2 class="contact__title heading-title-section">Контакты</h2>
                             <div class="contact__card"><a class="contact__card-item contact__link contact__tel text-regular" href="tel:+7%20(925)%20152-28-66">
                                 <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

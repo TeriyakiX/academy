@@ -173,3 +173,32 @@ html, body { margin: 0; }
 /* Поля форм: при width 100% паддинги прибавлялись к ширине,
    и поле выходило за пределы формы. */
 input, textarea, select, button { box-sizing: border-box; }
+
+/* ---------- Пустой раздел ----------
+   Показывается там, где содержимое ещё не перенесено: лучше честно
+   сказать об этом, чем оставить страницу с одним заголовком. */
+.ab-empty {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 64px 24px 72px;
+    text-align: center;
+}
+.ab-empty__title {
+    margin: 0 0 10px;
+    font-family: var(--ab-font-display, inherit);
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--ab-dark, #1a1a1a);
+}
+.ab-empty__text {
+    margin: 0 0 24px;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--ab-500, #6b6b6b);
+}
+@media (max-width: 760px) {
+    .ab-empty { padding: 44px 4px 52px; }
+    .ab-empty__title { font-size: 20px; }
+    .ab-empty__text { font-size: 15px; }
+    .ab-empty .ab-btn { width: 100%; }
+}

@@ -10,16 +10,33 @@
     <main class="main">
         <div class="blog__inner"><h4 class="blog__vertical-text heading-title-vertical">Блог</h4>
             <div class="blog__container container"><h2 class="blog__title heading-title-section">Статьи</h2>
-                <div class="blog-categories"></div>
-                <div class="blog-list" id="blog-list"></div>
-                <div class="blog-pagination"></div>
+                {{-- Статьи наполнял скрипт старого сайта: он ходил в /api/articles.php,
+                     которого в новой версии нет. До переноса блога показываем честную
+                     заглушку, а не пустую страницу с одним заголовком. --}}
+                <div class="ab-empty">
+                    <p class="ab-empty__title">Готовим статьи</p>
+                    <p class="ab-empty__text">
+                        Переносим материалы блога на новый сайт. Пока свежие новости и разборы
+                        выходят в наших каналах — ссылки в подвале.
+                    </p>
+                    <a class="ab-btn ab-btn--primary" href="/courses.html">Посмотреть курсы</a>
+                </div>
             </div>
         </div>
         <section class="contact main-section">
             <div class="contact__inner"><h4 class="contact__vertical-text heading-title-vertical">Контакты</h4>
                 <div class="contact__container container">
                     <div class="contact__content">
-                        <div class="contact__maps" id="map"></div>
+                        {{-- Карту рисовал скрипт старого сайта; он падал на запросе к несуществующему
+                             /api/articles.php, и на месте карты оставалась белая дыра в 475px.
+                             Ставим тот же виджет, что и на остальных страницах. --}}
+                        <div class="contact__maps">
+                            <iframe
+                                class="lazy-map"
+                                data-src="https://yandex.ru/map-widget/v1/?ll=37.684367%2C55.773872&z=16&pt=37.684075,55.773560,pm2rdm"
+                                title="Академия Бариста на карте"
+                                width="100%" height="480" frameborder="0" allowfullscreen loading="lazy"></iframe>
+                        </div>
                         <div class="contact__right"><h2 class="contact__title heading-title-section">Контакты</h2>
                             <div class="contact__card"><a class="contact__card-item contact__link contact__tel text-regular" href="tel:+7%20(925)%20152-28-66">
                                 <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

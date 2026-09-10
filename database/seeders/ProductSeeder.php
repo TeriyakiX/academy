@@ -745,9 +745,49 @@ class ProductSeeder extends Seeder
              'image' => '/assets/shop/glow-e2-grey-black-gl-e2-g-b.png', 'sort' => 140,
              'variant_group' => 'glow-e2', 'color' => 'Серый с чёрным',
              'specs' => array (
+  0 => 
+  array (
+    0 => 'Количество групп',
+    1 => '2',
+  ),
+  1 => 
+  array (
+    0 => 'Управление',
+    1 => 'Автомат',
+  ),
+  2 => 
+  array (
+    0 => 'Группы',
+    1 => 'Высокие',
+  ),
+  3 => 
+  array (
+    0 => 'PID-контроль',
+    1 => 'Есть',
+  ),
+  4 => 
+  array (
+    0 => 'Предсмачивание',
+    1 => 'Есть',
+  ),
+  5 => 
+  array (
+    0 => 'Таймер',
+    1 => 'Есть',
+  ),
+  6 => 
+  array (
+    0 => 'Манометр',
+    1 => 'Есть',
+  ),
+  7 => 
+  array (
+    0 => 'Подсветка групп',
+    1 => 'Есть',
+  ),
 ),
-             'summary' => 'под заказ',
-             'description' => 'под заказ'],
+             'summary' => '2 группы, автомат, высокие группы, объем бойлера 11 литров',
+             'description' => '2 группы, автомат, высокие группы, объем бойлера 11 литров, цвет серый верх + чёрный низ, таймер, подсветка групп, экран настройки температур, PID контроль, система предсмачивания, двойной манометр'],
             ['slug' => 'bubble-e1-high-white-bu-e1-h-01-w', 'sku' => 'BU-E1-H-01-W',
              'brand' => 'Carimali', 'title' => 'BUBBLE E1 HIGH WHITE',
              'category' => 'rozhkovye-kofemashiny', 'price' => 383852,
@@ -1257,7 +1297,7 @@ class ProductSeeder extends Seeder
   ),
 ),
              'summary' => '2 группы, автомат, высокие группы, цвет чёрный, паровики cool touch, сенсорный дисплей, экономайзер, таймер, PID контроль, улучшенная термоизоляция, бойлер 11 л, автоматическая чис',
-             'description' => '2 группы, автомат, высокие группы, цвет чёрный, паровики cool touch, сенсорный дисплей, экономайзер, таймер, PID контроль, улучшенная термоизоляция, бойлер 11 л, автоматическая чистка, RGBподсветка зоны приготовления и корпуса'],
+             'description' => '2 группы, автомат, высокие группы, цвет чёрный, паровики cool touch, сенсорный дисплей, экономайзер, таймер, PID контроль, улучшенная термоизоляция, бойлер 11 л, автоматическая чистка, RGB подсветка зоны приготовления и корпуса'],
             ['slug' => 'evok-2eh-as-black-evok-e2-h-b-as1', 'sku' => 'EVOK-E2-H-B-AS1',
              'brand' => 'Carimali', 'title' => 'EVOK 2EH AS BLACK',
              'category' => 'rozhkovye-kofemashiny', 'price' => 994035,
@@ -1297,7 +1337,7 @@ class ProductSeeder extends Seeder
   ),
 ),
              'summary' => '2 группы, автомат, высокие группы, цвет чёрный, паровики cool touch, сенсорный дисплей, экономайзер, таймер, PID контроль, улучшенная термоизоляция, бойлер 11 л, автоматическая чис',
-             'description' => '2 группы, автомат, высокие группы, цвет чёрный, паровики cool touch, сенсорный дисплей, экономайзер, таймер, PID контроль, улучшенная термоизоляция, бойлер 11 л, автоматическая чистка, RGBподсветка зоны приготовления и корпуса, автостимер на 2 режима работы – 1 шт.'],
+             'description' => '2 группы, автомат, высокие группы, цвет чёрный, паровики cool touch, сенсорный дисплей, экономайзер, таймер, PID контроль, улучшенная термоизоляция, бойлер 11 л, автоматическая чистка, RGB подсветка зоны приготовления и корпуса, автостимер на 2 режима работы – 1 шт.'],
             ['slug' => 'evok-2eh-lm-black-evok-e2-h-b-lm', 'sku' => 'EVOK-E2-H-B-LM',
              'brand' => 'Carimali', 'title' => 'EVOK 2EH LM BLACK',
              'category' => 'rozhkovye-kofemashiny', 'price' => 1005900,
@@ -1337,7 +1377,7 @@ class ProductSeeder extends Seeder
   ),
 ),
              'summary' => '2 группы, автомат, высокие группы, цвет чёрный, паровики cool touch, сенсорный дисплей, экономайзер, таймер, PID контроль, улучшенная термоизоляция, бойлер 11 л, автоматическая чис',
-             'description' => '2 группы, автомат, высокие группы, цвет чёрный, паровики cool touch, сенсорный дисплей, экономайзер, таймер, PID контроль, улучшенная термоизоляция, бойлер 11 л, автоматическая чистка, RGBподсветка зоны приготовления и корпуса, автокапучинатор с настройкой рецептов молочных напитков – 1 шт.'],
+             'description' => '2 группы, автомат, высокие группы, цвет чёрный, паровики cool touch, сенсорный дисплей, экономайзер, таймер, PID контроль, улучшенная термоизоляция, бойлер 11 л, автоматическая чистка, RGB подсветка зоны приготовления и корпуса, автокапучинатор с настройкой рецептов молочных напитков – 1 шт.'],
             ['slug' => 'evok-2eh-lm-as-black-evok-e2-h-b-lm-as1', 'sku' => 'EVOK-E2-H-B-LM-AS1',
              'brand' => 'Carimali', 'title' => 'EVOK 2EH LM+AS BLACK',
              'category' => 'rozhkovye-kofemashiny', 'price' => 1075935,
@@ -1377,7 +1417,7 @@ class ProductSeeder extends Seeder
   ),
 ),
              'summary' => '2 группы, автомат, высокие группы, цвет чёрный, паровики cool touch, сенсорный дисплей, экономайзер, таймер, PID контроль, улучшенная термоизоляция, бойлер 11 л, автоматическая чис',
-             'description' => '2 группы, автомат, высокие группы, цвет чёрный, паровики cool touch, сенсорный дисплей, экономайзер, таймер, PID контроль, улучшенная термоизоляция, бойлер 11 л, автоматическая чистка, RGBподсветка зоны приготовления и корпуса, автокапучинатор с настройкой рецептов молочных напитков – 1 шт., автостимер на 2 режима работы – 1 шт.'],
+             'description' => '2 группы, автомат, высокие группы, цвет чёрный, паровики cool touch, сенсорный дисплей, экономайзер, таймер, PID контроль, улучшенная термоизоляция, бойлер 11 л, автоматическая чистка, RGB подсветка зоны приготовления и корпуса, автокапучинатор с настройкой рецептов молочных напитков – 1 шт., автостимер на 2 режима работы – 1 шт.'],
             ['slug' => 'evok-3eh-black-evok-e3-h-b', 'sku' => 'EVOK-E3-H-B',
              'brand' => 'Carimali', 'title' => 'EVOK 3EH BLACK',
              'category' => 'rozhkovye-kofemashiny', 'price' => 1066800,
@@ -1417,13 +1457,13 @@ class ProductSeeder extends Seeder
   ),
 ),
              'summary' => '3 группы, автомат, высокие группы, цвет чёрный, паровики cool touch, сенсорный дисплей, экономайзер, таймер, PID контроль, улучшенная термоизоляция, бойлер 11 л, автоматическая чис',
-             'description' => '3 группы, автомат, высокие группы, цвет чёрный, паровики cool touch, сенсорный дисплей, экономайзер, таймер, PID контроль, улучшенная термоизоляция, бойлер 11 л, автоматическая чистка, RGBподсветка зоны приготовления и корпуса'],
+             'description' => '3 группы, автомат, высокие группы, цвет чёрный, паровики cool touch, сенсорный дисплей, экономайзер, таймер, PID контроль, улучшенная термоизоляция, бойлер 11 л, автоматическая чистка, RGB подсветка зоны приготовления и корпуса'],
             ['slug' => 'indie-2gr-inox-black-ind-e2-b', 'sku' => 'IND-E2-B',
              'brand' => 'Carimali', 'title' => 'INDIE 2GR INOX BLACK',
              'category' => 'rozhkovye-kofemashiny', 'price' => 1714702,
              'availability' => 'on_order', 'stock' => NULL,
              'image' => '/assets/shop/indie-2gr-inox-black-ind-e2-b.png', 'sort' => 300,
-             'variant_group' => NULL, 'color' => 'Чёрный',
+             'variant_group' => 'indie-2gr', 'color' => 'Чёрный',
              'specs' => array (
   0 => 
   array (
@@ -1453,7 +1493,7 @@ class ProductSeeder extends Seeder
              'category' => 'rozhkovye-kofemashiny', 'price' => 1714702,
              'availability' => 'in_stock', 'stock' => 2,
              'image' => '/assets/shop/indie-2gr-ice-white-ind-e2-w.png', 'sort' => 310,
-             'variant_group' => NULL, 'color' => 'Белый',
+             'variant_group' => 'indie-2gr', 'color' => 'Белый',
              'specs' => array (
   0 => 
   array (
@@ -1483,7 +1523,7 @@ class ProductSeeder extends Seeder
              'category' => 'rozhkovye-kofemashiny', 'price' => 2146462,
              'availability' => 'on_order', 'stock' => NULL,
              'image' => '/assets/shop/indie-3gr-inox-black-ind-e3-b.png', 'sort' => 320,
-             'variant_group' => NULL, 'color' => 'Чёрный',
+             'variant_group' => 'indie-3gr', 'color' => 'Чёрный',
              'specs' => array (
   0 => 
   array (
@@ -1513,7 +1553,7 @@ class ProductSeeder extends Seeder
              'category' => 'rozhkovye-kofemashiny', 'price' => 2146462,
              'availability' => 'on_order', 'stock' => NULL,
              'image' => '/assets/shop/indie-3gr-ice-white-ind-e3-w.png', 'sort' => 330,
-             'variant_group' => NULL, 'color' => 'Белый',
+             'variant_group' => 'indie-3gr', 'color' => 'Белый',
              'specs' => array (
   0 => 
   array (
@@ -1658,7 +1698,7 @@ class ProductSeeder extends Seeder
 ),
              'summary' => '3 группы, вертикальная, автомат, Riforma Limited Edition, корпус медь/окисленная латунь',
              'description' => '3 группы, вертикальная, автомат, Riforma Limited Edition, корпус медь/окисленная латунь'],
-            ['slug' => 'heylo-coffee-black-26302-2839hey-cof-blckhey-cof-wht', 'sku' => '26302-2839HEY-COF-BLCKHEY-COF-WHT',
+            ['slug' => 'heylo-coffee-black-26302-2839hey-cof-blckhey-cof-wht', 'sku' => 'HEY-COF-BLCK / HEY-COF-WHT',
              'brand' => 'Heylo', 'title' => 'HEYLO COFFEE BLACK',
              'category' => 'rozhkovye-kofemashiny', 'price' => 772117,
              'availability' => 'on_order', 'stock' => NULL,
@@ -1673,7 +1713,7 @@ class ProductSeeder extends Seeder
 ),
              'summary' => 'Безбойлерный кофейный модуль HEYLO на 1 группу, индукционная технология, профилирование температуры и давления, цвет чёрный/графит',
              'description' => 'Безбойлерный кофейный модуль HEYLO на 1 группу, индукционная технология, профилирование температуры и давления, цвет чёрный/графит'],
-            ['slug' => 'heylo-milk-black-7091723766hey-milk-blckhey-milk-wht', 'sku' => '7091723766HEY-MILK-BLCKHEY-MILK-WHT',
+            ['slug' => 'heylo-milk-black-7091723766hey-milk-blckhey-milk-wht', 'sku' => 'HEY-MILK-BLCK / HEY-MILK-WHT',
              'brand' => 'Heylo', 'title' => 'HEYLO MILK BLACK',
              'category' => 'rozhkovye-kofemashiny', 'price' => 772117,
              'availability' => 'on_order', 'stock' => NULL,
@@ -1806,8 +1846,8 @@ class ProductSeeder extends Seeder
     1 => 'К водопроводу',
   ),
 ),
-             'summary' => 'Свежее молоко + 2 бункера для зерна + 2 бункера для порошков, работа от водопровода, ЦУ M-Brew L на 8-16 г молотого кофе, молочная помпа, touchscreen 10", WiFi-модуль, MDBподключен',
-             'description' => 'Свежее молоко + 2 бункера для зерна + 2 бункера для порошков, работа от водопровода, ЦУ M-Brew L на 8-16 г молотого кофе, молочная помпа, touchscreen 10", WiFi-модуль, MDBподключение, производительность 250 чашек'],
+             'summary' => 'Свежее молоко + 2 бункера для зерна + 2 бункера для порошков, работа от водопровода, ЦУ M-Brew L на 8-16 г молотого кофе, молочная помпа, touchscreen 10", WiFi-модуль, MDB подключен',
+             'description' => 'Свежее молоко + 2 бункера для зерна + 2 бункера для порошков, работа от водопровода, ЦУ M-Brew L на 8-16 г молотого кофе, молочная помпа, touchscreen 10", WiFi-модуль, MDB подключение, производительность 250 чашек'],
             ['slug' => 'silverace-e-1m-1g-2s-2x-wm-sa-01-01-02', 'sku' => 'SA-01-01-02',
              'brand' => 'Carimali', 'title' => 'SILVERACE E 1M 1G 2S 2X WM',
              'category' => 'superavtomaty', 'price' => 992722,
@@ -1836,14 +1876,14 @@ class ProductSeeder extends Seeder
     1 => 'К водопроводу',
   ),
 ),
-             'summary' => 'Свежее молоко + 1 бункер для зерна + 2 бункера для порошков, работа от водопровода, ЦУ M-Brew L на 8-16 г молотого кофе, молочная помпа, touchscreen 10", , WiFi-модуль, MDBподключе',
-             'description' => 'Свежее молоко + 1 бункер для зерна + 2 бункера для порошков, работа от водопровода, ЦУ M-Brew L на 8-16 г молотого кофе, молочная помпа, touchscreen 10", , WiFi-модуль, MDBподключение, производительность 250 чашек'],
+             'summary' => 'Свежее молоко + 1 бункер для зерна + 2 бункера для порошков, работа от водопровода, ЦУ M-Brew L на 8-16 г молотого кофе, молочная помпа, touchscreen 10", , WiFi-модуль, MDB подключе',
+             'description' => 'Свежее молоко + 1 бункер для зерна + 2 бункера для порошков, работа от водопровода, ЦУ M-Brew L на 8-16 г молотого кофе, молочная помпа, touchscreen 10", , WiFi-модуль, MDB подключение, производительность 250 чашек'],
             ['slug' => 'blue-26-e-0m-1g-2s-1x-wj-bd-26-00-01-02', 'sku' => 'BD-26-00-01-02',
              'brand' => 'Carimali', 'title' => 'BLUE 26 E 0M 1G 2S 1X WJ',
              'category' => 'superavtomaty', 'price' => 419444,
              'availability' => 'on_order', 'stock' => NULL,
              'image' => NULL, 'sort' => 480,
-             'variant_group' => NULL, 'color' => 'Синий',
+             'variant_group' => NULL, 'color' => NULL,
              'specs' => array (
   0 => 
   array (
@@ -1868,7 +1908,7 @@ class ProductSeeder extends Seeder
              'category' => 'rozhkovye-kofemashiny', 'price' => 437852,
              'availability' => 'on_order', 'stock' => NULL,
              'image' => NULL, 'sort' => 490,
-             'variant_group' => NULL, 'color' => 'Синий',
+             'variant_group' => NULL, 'color' => NULL,
              'specs' => array (
   0 => 
   array (
@@ -1893,7 +1933,7 @@ class ProductSeeder extends Seeder
              'category' => 'rozhkovye-kofemashiny', 'price' => 475983,
              'availability' => 'on_order', 'stock' => NULL,
              'image' => '/assets/shop/blue-26-e-1m-2g-0s-0x-wm-bd26-01-02-00.jpg', 'sort' => 500,
-             'variant_group' => NULL, 'color' => 'Синий',
+             'variant_group' => NULL, 'color' => NULL,
              'specs' => array (
   0 => 
   array (
@@ -1918,7 +1958,7 @@ class ProductSeeder extends Seeder
              'category' => 'rozhkovye-kofemashiny', 'price' => 486502,
              'availability' => 'on_order', 'stock' => NULL,
              'image' => NULL, 'sort' => 510,
-             'variant_group' => NULL, 'color' => 'Синий',
+             'variant_group' => NULL, 'color' => NULL,
              'specs' => array (
   0 => 
   array (
@@ -1943,7 +1983,7 @@ class ProductSeeder extends Seeder
              'category' => 'rozhkovye-kofemashiny', 'price' => 515430,
              'availability' => 'on_order', 'stock' => NULL,
              'image' => NULL, 'sort' => 520,
-             'variant_group' => NULL, 'color' => 'Синий',
+             'variant_group' => NULL, 'color' => NULL,
              'specs' => array (
   0 => 
   array (
@@ -1968,7 +2008,7 @@ class ProductSeeder extends Seeder
              'category' => 'rozhkovye-kofemashiny', 'price' => 553561,
              'availability' => 'on_order', 'stock' => NULL,
              'image' => '/assets/shop/blue-26-plus-e-1m-2g-0s-0x-wm-bd26pl-01-02-00.jpg', 'sort' => 530,
-             'variant_group' => NULL, 'color' => 'Синий',
+             'variant_group' => NULL, 'color' => NULL,
              'specs' => array (
   0 => 
   array (
@@ -2060,9 +2100,39 @@ class ProductSeeder extends Seeder
              'image' => NULL, 'sort' => 570,
              'variant_group' => NULL, 'color' => NULL,
              'specs' => array (
+  0 => 
+  array (
+    0 => 'Управление',
+    1 => 'Аналоговый дисплей',
+  ),
+  1 => 
+  array (
+    0 => 'Свежее молоко',
+    1 => 'Есть',
+  ),
+  2 => 
+  array (
+    0 => 'Бункеров для зерна',
+    1 => '1',
+  ),
+  3 => 
+  array (
+    0 => 'Бункеров для порошков',
+    1 => '3',
+  ),
+  4 => 
+  array (
+    0 => 'Подключение',
+    1 => 'Водопровод',
+  ),
+  5 => 
+  array (
+    0 => 'Экран настройки',
+    1 => 'Есть',
+  ),
 ),
-             'summary' => 'под заказ',
-             'description' => 'под заказ'],
+             'summary' => 'Свежее молоко + 1 бункер для зерна + 3 бункера для порошков + работа от бака WM или водопровода, аналоговый дисплей, производительность 100 чашек',
+             'description' => 'Свежее молоко + 1 бункер для зерна + 3 бункера для порошков + работа от бака WM или водопровода, аналоговый дисплей, производительность 100 чашек'],
             ['slug' => 'bluedot-e-1m-2g-2s-2x-bd-01-02-02', 'sku' => 'BD-01-02-02',
              'brand' => 'Carimali', 'title' => 'BLUEDOT E 1M 2G 2S 2X',
              'category' => 'superavtomaty', 'price' => 629824,
@@ -2070,9 +2140,39 @@ class ProductSeeder extends Seeder
              'image' => '/assets/shop/bluedot-e-1m-2g-2s-2x-bd-01-02-02.jpg', 'sort' => 580,
              'variant_group' => NULL, 'color' => NULL,
              'specs' => array (
+  0 => 
+  array (
+    0 => 'Управление',
+    1 => 'Аналоговый дисплей',
+  ),
+  1 => 
+  array (
+    0 => 'Свежее молоко',
+    1 => 'Есть',
+  ),
+  2 => 
+  array (
+    0 => 'Бункеров для зерна',
+    1 => '2',
+  ),
+  3 => 
+  array (
+    0 => 'Бункеров для порошков',
+    1 => '2',
+  ),
+  4 => 
+  array (
+    0 => 'Подключение',
+    1 => 'Водопровод',
+  ),
+  5 => 
+  array (
+    0 => 'Экран настройки',
+    1 => 'Есть',
+  ),
 ),
-             'summary' => 'под заказ',
-             'description' => 'под заказ'],
+             'summary' => 'Свежее молоко + 2 бункера для зерна + 2 бункера для порошков + работа от бака WM или водопровода, аналоговый дисплей, производительность 100 чашек',
+             'description' => 'Свежее молоко + 2 бункера для зерна + 2 бункера для порошков + работа от бака WM или водопровода, аналоговый дисплей, производительность 100 чашек'],
             ['slug' => 'bluedot-plus-e-0m-2g-2s-2x-wj-bdpl-00-02-02', 'sku' => 'BDPL-00-02-02',
              'brand' => 'Carimali', 'title' => 'BLUEDOT PLUS E 0M 2G 2S 2X WJ',
              'category' => 'superavtomaty', 'price' => 604841,
@@ -2175,9 +2275,29 @@ class ProductSeeder extends Seeder
              'image' => NULL, 'sort' => 630,
              'variant_group' => NULL, 'color' => NULL,
              'specs' => array (
+  0 => 
+  array (
+    0 => 'Свежее молоко',
+    1 => 'Есть',
+  ),
+  1 => 
+  array (
+    0 => 'Бункеров для зерна',
+    1 => '1',
+  ),
+  2 => 
+  array (
+    0 => 'Бункеров для порошков',
+    1 => '3',
+  ),
+  3 => 
+  array (
+    0 => 'Подключение',
+    1 => 'Водопровод',
+  ),
 ),
-             'summary' => 'под заказ',
-             'description' => 'под заказ'],
+             'summary' => 'Свежее молоко + 1 бункер для зерна + 3 для порошков + работа от бака или водопровода, молочная помпа, touch 1G 3S 2X WJscreen 7", WiFi-модуль',
+             'description' => 'Свежее молоко + 1 бункер для зерна + 3 для порошков + работа от бака или водопровода, молочная помпа, touch 1G 3S 2X WJscreen 7", WiFi-модуль, MDB-подключение, производительность 120 чашек'],
             ['slug' => 'bluedot-power-e-1m-bdpw-01-02-02', 'sku' => 'BDPW-01-02-02',
              'brand' => 'Carimali', 'title' => 'BLUEDOT POWER E 1M',
              'category' => 'superavtomaty', 'price' => 756051,
@@ -2185,9 +2305,29 @@ class ProductSeeder extends Seeder
              'image' => '/assets/shop/bluedot-power-e-1m-bdpw-01-02-02.jpg', 'sort' => 640,
              'variant_group' => NULL, 'color' => NULL,
              'specs' => array (
+  0 => 
+  array (
+    0 => 'Свежее молоко',
+    1 => 'Есть',
+  ),
+  1 => 
+  array (
+    0 => 'Бункеров для зерна',
+    1 => '2',
+  ),
+  2 => 
+  array (
+    0 => 'Бункеров для порошков',
+    1 => '2',
+  ),
+  3 => 
+  array (
+    0 => 'Подключение',
+    1 => 'Водопровод',
+  ),
 ),
-             'summary' => 'под заказ',
-             'description' => 'под заказ'],
+             'summary' => 'Свежее молоко + 2 бункера для зерна + 2 для порошков+ работа от бака или водопровода, молочная помпа, touch 2G 2S 2X WJscreen 7", WiFi-модуль',
+             'description' => 'Свежее молоко + 2 бункера для зерна + 2 для порошков+ работа от бака или водопровода, молочная помпа, touch 2G 2S 2X WJscreen 7", WiFi-модуль, MDB-подключение,спроизводительность 120 чашек'],
             ['slug' => 'armonia-soft-e-0m-1g-2s-2x-wm-as-00-01-02', 'sku' => 'AS-00-01-02',
              'brand' => 'Carimali', 'title' => 'ARMONIA SOFT E 0M 1G 2S 2X WM',
              'category' => 'superavtomaty', 'price' => 733699,
@@ -2220,9 +2360,39 @@ class ProductSeeder extends Seeder
              'image' => NULL, 'sort' => 660,
              'variant_group' => NULL, 'color' => NULL,
              'specs' => array (
+  0 => 
+  array (
+    0 => 'Управление',
+    1 => 'Аналоговый дисплей',
+  ),
+  1 => 
+  array (
+    0 => 'Свежее молоко',
+    1 => 'Есть',
+  ),
+  2 => 
+  array (
+    0 => 'Бункеров для зерна',
+    1 => '1',
+  ),
+  3 => 
+  array (
+    0 => 'Бункеров для порошков',
+    1 => '2',
+  ),
+  4 => 
+  array (
+    0 => 'Подключение',
+    1 => 'Водопровод',
+  ),
+  5 => 
+  array (
+    0 => 'Экран настройки',
+    1 => 'Есть',
+  ),
 ),
-             'summary' => 'под заказ',
-             'description' => 'под заказ'],
+             'summary' => 'Свежее молоко + 1 бункер для зерна + 2 бункера для порошков, работа от водопровода, ЦУ M-Brew L на 8-16 г 2G 1S 1X WM молотого кофе, молочная помпа',
+             'description' => 'Свежее молоко + 1 бункер для зерна + 2 бункера для порошков, работа от водопровода, ЦУ M-Brew L на 8-16 г 2G 1S 1X WM молотого кофе, молочная помпа, аналоговый дисплей, производительность 250 чашек'],
             ['slug' => 'armonia-ultra-e-0m-1g-2s-2x-wm-au-00-01-02', 'sku' => 'AU-00-01-02',
              'brand' => 'Carimali', 'title' => 'ARMONIA ULTRA E 0M 1G 2S 2X WM',
              'category' => 'superavtomaty', 'price' => 919096,
@@ -2246,8 +2416,8 @@ class ProductSeeder extends Seeder
     1 => 'К водопроводу',
   ),
 ),
-             'summary' => '1 бункер для зерна + 2 бункера для порошков, работа от водопровода, ЦУ MBrew L на 8-16 г молотого кофе, touchscreen 10", WiFi-модуль, MDBподключение, производительность 250 чашек',
-             'description' => '1 бункер для зерна + 2 бункера для порошков, работа от водопровода, ЦУ MBrew L на 8-16 г молотого кофе, touchscreen 10", WiFi-модуль, MDBподключение, производительность 250 чашек'],
+             'summary' => '1 бункер для зерна + 2 бункера для порошков, работа от водопровода, ЦУ MBrew L на 8-16 г молотого кофе, touchscreen 10", WiFi-модуль, MDB подключение, производительность 250 чашек',
+             'description' => '1 бункер для зерна + 2 бункера для порошков, работа от водопровода, ЦУ MBrew L на 8-16 г молотого кофе, touchscreen 10", WiFi-модуль, MDB подключение, производительность 250 чашек'],
             ['slug' => 'armonia-ultra-e-1mcs-1g-2s-2x-wm-au-01-01-02', 'sku' => 'AU-01-01-02',
              'brand' => 'Carimali', 'title' => 'ARMONIA ULTRA E 1MCS 1G 2S 2X WM',
              'category' => 'superavtomaty', 'price' => 1107122,
@@ -2276,8 +2446,8 @@ class ProductSeeder extends Seeder
     1 => 'К водопроводу',
   ),
 ),
-             'summary' => 'Свежее молоко + 1 бункер для зерна + 2 бункера для порошков, работа от водопровода, ЦУ M-Brew L на 8-16 г молотого кофе, молочная помпа, touchscreen 10", WiFi-модуль, MDBподключени',
-             'description' => 'Свежее молоко + 1 бункер для зерна + 2 бункера для порошков, работа от водопровода, ЦУ M-Brew L на 8-16 г молотого кофе, молочная помпа, touchscreen 10", WiFi-модуль, MDBподключение, производительность 250 чашек'],
+             'summary' => 'Свежее молоко + 1 бункер для зерна + 2 бункера для порошков, работа от водопровода, ЦУ M-Brew L на 8-16 г молотого кофе, молочная помпа, touchscreen 10", WiFi-модуль, MDB подключени',
+             'description' => 'Свежее молоко + 1 бункер для зерна + 2 бункера для порошков, работа от водопровода, ЦУ M-Brew L на 8-16 г молотого кофе, молочная помпа, touchscreen 10", WiFi-модуль, MDB подключение, производительность 250 чашек'],
             ['slug' => 'armonia-ultra-e-1mcs-2g-1s-1x-wm-au-01-02-01', 'sku' => 'AU-01-02-01',
              'brand' => 'Carimali', 'title' => 'ARMONIA ULTRA E 1MCS 2G 1S 1X WM',
              'category' => 'superavtomaty', 'price' => 1109752,
@@ -2306,8 +2476,8 @@ class ProductSeeder extends Seeder
     1 => 'К водопроводу',
   ),
 ),
-             'summary' => 'Свежее молоко + 2 бункера для зерна + 1 бункер для порошков, работа от водопровода, ЦУ M-Brew L на 8-16 г молотого кофе, молочная помпа, touchscreen 10", WiFi-модуль, MDBподключени',
-             'description' => 'Свежее молоко + 2 бункера для зерна + 1 бункер для порошков, работа от водопровода, ЦУ M-Brew L на 8-16 г молотого кофе, молочная помпа, touchscreen 10", WiFi-модуль, MDBподключение, производительность 250 чашек'],
+             'summary' => 'Свежее молоко + 2 бункера для зерна + 1 бункер для порошков, работа от водопровода, ЦУ M-Brew L на 8-16 г молотого кофе, молочная помпа, touchscreen 10", WiFi-модуль, MDB подключени',
+             'description' => 'Свежее молоко + 2 бункера для зерна + 1 бункер для порошков, работа от водопровода, ЦУ M-Brew L на 8-16 г молотого кофе, молочная помпа, touchscreen 10", WiFi-модуль, MDB подключение, производительность 250 чашек'],
             ['slug' => 'silvertwin-e-0m-1g-3s-st-00-01-03', 'sku' => 'ST-00-01-03',
              'brand' => 'Carimali', 'title' => 'SILVERTWIN E 0M 1G 3S',
              'category' => 'superavtomaty', 'price' => 845468,
@@ -2315,9 +2485,19 @@ class ProductSeeder extends Seeder
              'image' => NULL, 'sort' => 700,
              'variant_group' => NULL, 'color' => NULL,
              'specs' => array (
+  0 => 
+  array (
+    0 => 'Бункеров для зерна',
+    1 => '1',
+  ),
+  1 => 
+  array (
+    0 => 'Бункеров для порошков',
+    1 => '3',
+  ),
 ),
-             'summary' => 'под заказ',
-             'description' => 'под заказ'],
+             'summary' => 'Без свеж. молока, 1 бункер для зерна + 3 для порошков + Черный-серебристый + ЦУ CARIbrew L на 8-16 г молотого кофе, 2X WJtouch-screen 10", WiFi-модуль',
+             'description' => 'Без свеж. молока, 1 бункер для зерна + 3 для порошков + Черный-серебристый + ЦУ CARIbrew L на 8-16 г молотого кофе, 2X WJtouch-screen 10", WiFi-модуль, MDB-подключение, производительность 150 чашек'],
             ['slug' => 'silvertwin-e-1m-2g-1s-st-01-02-01', 'sku' => 'ST-01-02-01',
              'brand' => 'Carimali', 'title' => 'SILVERTWIN E 1M 2G 1S',
              'category' => 'superavtomaty', 'price' => 978658,
@@ -2325,9 +2505,24 @@ class ProductSeeder extends Seeder
              'image' => '/assets/shop/silvertwin-e-1m-2g-1s-st-01-02-01.jpg', 'sort' => 710,
              'variant_group' => NULL, 'color' => NULL,
              'specs' => array (
+  0 => 
+  array (
+    0 => 'Свежее молоко',
+    1 => 'Есть',
+  ),
+  1 => 
+  array (
+    0 => 'Бункеров для зерна',
+    1 => '2',
+  ),
+  2 => 
+  array (
+    0 => 'Бункеров для порошков',
+    1 => '1',
+  ),
 ),
-             'summary' => 'под заказ',
-             'description' => 'под заказ'],
+             'summary' => 'Свеж. молоко, 2 бункера для зерна + 1 для порошков + Черный-серебристый + ЦУ CARIbrew L на 8-16 г молотого кофе, 1X WJ молочная помпа, touch-screen 10"',
+             'description' => 'Свеж. молоко, 2 бункера для зерна + 1 для порошков + Черный-серебристый + ЦУ CARIbrew L на 8-16 г молотого кофе, 1X WJ молочная помпа, touch-screen 10", WiFi модуль, MDB-подключение, производительность 150 чашек'],
             ['slug' => 'silvertwin-e-1m-2g-2s-st-01-02-02', 'sku' => 'ST-01-02-02',
              'brand' => 'Carimali', 'title' => 'SILVERTWIN E 1M 2G 2S',
              'category' => 'superavtomaty', 'price' => 1001822,
@@ -2335,9 +2530,24 @@ class ProductSeeder extends Seeder
              'image' => NULL, 'sort' => 720,
              'variant_group' => NULL, 'color' => NULL,
              'specs' => array (
+  0 => 
+  array (
+    0 => 'Свежее молоко',
+    1 => 'Есть',
+  ),
+  1 => 
+  array (
+    0 => 'Бункеров для зерна',
+    1 => '2',
+  ),
+  2 => 
+  array (
+    0 => 'Бункеров для порошков',
+    1 => '2',
+  ),
 ),
-             'summary' => 'под заказ',
-             'description' => 'под заказ'],
+             'summary' => 'Свеж. молоко, 2 бункера для зерна + 2 для порошков + Черный-серебристый + ЦУ на 8-16 г молотого кофе, молочная 2X WJ помпа, touch-screen 10"',
+             'description' => 'Свеж. молоко, 2 бункера для зерна + 2 для порошков + Черный-серебристый + ЦУ на 8-16 г молотого кофе, молочная 2X WJ помпа, touch-screen 10", WiFi-модуль, MDB-подключение, производительность 150 чашек'],
             ['slug' => 'optima-soft-e-1mcs-1g-wm-os-01-01-00', 'sku' => 'OS-01-01-00',
              'brand' => 'Carimali', 'title' => 'OPTIMA SOFT E 1MCS 1G WM',
              'category' => 'superavtomaty', 'price' => 1044009,
@@ -2535,27 +2745,27 @@ class ProductSeeder extends Seeder
              'description' => 'Прозрачная дверца и электронный контроль температуры, цвет черныйРазмеры (ШхВхГ) 220x456x516 ммМасса 16 кгОбъем холодильной камеры 7 лОбъем контейнера для молока 4,5 л Напряжение 220-240 В 50/60 Гц, мощность 120 Вт'],
             ['slug' => 'cup-warmer-plus-cup-warmer-plus', 'sku' => 'CUP WARMER PLUS',
              'brand' => 'Carimali', 'title' => 'CUP WARMER PLUS',
-             'category' => 'superavtomaty', 'price' => 138384,
+             'category' => 'aksessuary', 'price' => 138384,
              'availability' => 'on_order', 'stock' => NULL,
              'image' => '/assets/shop/cup-warmer-plus-cup-warmer-plus.jpg', 'sort' => 830,
              'variant_group' => NULL, 'color' => NULL,
              'specs' => array (
 ),
-             'summary' => 'под заказ',
-             'description' => 'под заказ'],
+             'summary' => 'Цвет черный. Размеры (Шх. Вх. Г) 324x584x429 мм (Armonia)324x624x429 мм (Optima)НАГРЕВАТЕЛЬ ЧАШЕК Масса 15 кг (Armonia) / 16 кг (Optima) Напряжение 220-240 В 50/60 Гц. Особенности: подсветка. Подходит для моделей Mya Ultra, Armonia, SilverAce, Optima',
+             'description' => 'Цвет черный. Размеры (Шх. Вх. Г) 324x584x429 мм (Armonia)324x624x429 мм (Optima)НАГРЕВАТЕЛЬ ЧАШЕК Масса 15 кг (Armonia) / 16 кг (Optima) Напряжение 220-240 В 50/60 Гц. Особенности: подсветка. Подходит для моделей Mya Ultra, Armonia, SilverAce, Optima'],
             ['slug' => 'nagrevatel-chashek-cw-s', 'sku' => 'CW-S',
              'brand' => 'Carimali', 'title' => 'НАГРЕВАТЕЛЬ ЧАШЕК',
-             'category' => 'superavtomaty', 'price' => 60459,
+             'category' => 'aksessuary', 'price' => 60459,
              'availability' => 'on_order', 'stock' => NULL,
              'image' => '/assets/shop/nagrevatel-chashek-cw-s.jpg', 'sort' => 840,
              'variant_group' => NULL, 'color' => NULL,
              'specs' => array (
 ),
-             'summary' => 'под заказ',
-             'description' => 'под заказ'],
-            ['slug' => 'modul-dlya-poroshkov', 'sku' => '–',
+             'summary' => 'Цвет черный. Размеры (Шх. Вх. Г) 204x448x378 мм. НАГРЕВАТЕЛЬ ЧАШЕК Масса 8,5 кг -SНапряжение 220-240 В 50/60 Гц. Подходит для моделей Blue, BlueDot, SilverTwin',
+             'description' => 'Цвет черный. Размеры (Шх. Вх. Г) 204x448x378 мм. НАГРЕВАТЕЛЬ ЧАШЕК Масса 8,5 кг -SНапряжение 220-240 В 50/60 Гц. Подходит для моделей Blue, BlueDot, SilverTwin'],
+            ['slug' => 'modul-dlya-poroshkov', 'sku' => NULL,
              'brand' => 'Carimali', 'title' => 'МОДУЛЬ ДЛЯ ПОРОШКОВ',
-             'category' => 'superavtomaty', 'price' => 126000,
+             'category' => 'aksessuary', 'price' => 126000,
              'availability' => 'on_order', 'stock' => NULL,
              'image' => '/assets/shop/modul-dlya-poroshkov.jpg', 'sort' => 850,
              'variant_group' => NULL, 'color' => NULL,
@@ -2586,8 +2796,8 @@ class ProductSeeder extends Seeder
              'variant_group' => NULL, 'color' => NULL,
              'specs' => array (
 ),
-             'summary' => 'в наличии',
-             'description' => 'в наличии'],
+             'summary' => 'Концентрат для Средство для очистки молочной молочной системы системы суперавтоматов(1 л)',
+             'description' => 'Концентрат для Средство для очистки молочной молочной системы системы суперавтоматов(1 л)'],
             ['slug' => 'sredstvo-dlya-ochistki-molochnoy-sistemy-m14-m14', 'sku' => 'M14',
              'brand' => 'Carimali', 'title' => 'Средство для очистки молочной системы M14',
              'category' => 'aksessuary', 'price' => 1418,
@@ -2596,8 +2806,8 @@ class ProductSeeder extends Seeder
              'variant_group' => NULL, 'color' => NULL,
              'specs' => array (
 ),
-             'summary' => 'в наличии',
-             'description' => 'в наличии'],
+             'summary' => 'Концентрат для Средство для очистки молочной молочной системы системы суперавтоматов (1 л)',
+             'description' => 'Концентрат для Средство для очистки молочной молочной системы системы суперавтоматов (1 л)'],
             ['slug' => 'tabletki-dlya-chistki-zavarochnyh-uzlov-g31-g31', 'sku' => 'G31',
              'brand' => 'Carimali', 'title' => 'Таблетки для чистки заварочных узлов G31',
              'category' => 'aksessuary', 'price' => 2000,
@@ -2606,8 +2816,8 @@ class ProductSeeder extends Seeder
              'variant_group' => NULL, 'color' => NULL,
              'specs' => array (
 ),
-             'summary' => 'в наличии',
-             'description' => 'в наличии'],
+             'summary' => 'Таблетки для чистки от кофейных масел Таблетки от кофейных заварочных узлов суперавтоматов и масел (100 шт) рабочих групп рожковых кофемашин',
+             'description' => 'Таблетки для чистки от кофейных масел Таблетки от кофейных заварочных узлов суперавтоматов и масел (100 шт) рабочих групп рожковых кофемашин'],
         ];
 
         foreach ($products as $p) {

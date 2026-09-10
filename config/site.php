@@ -1,5 +1,12 @@
 <?php
 
+/*
+ | Карта страниц сайта: адрес, шаблон, мета-теги и подключаемые файлы.
+ |
+ | Адреса повторяют прежнюю версию сайта, включая расширение .html —
+ | это условие сохранения позиций в поиске. Менять их нельзя.
+ */
+
 return array (
   'pages' => 
   array (
@@ -810,7 +817,7 @@ return array (
     array (
       'view' => 'oferta',
       'title' => 'Договор-Оферта | Академия Бариста',
-      'description' => NULL,
+      'description' => 'Договор-оферта на оказание образовательных услуг Академии Бариста: порядок обучения, оплаты и возврата.',
       'keywords' => NULL,
       'og_title' => NULL,
       'og_image' => NULL,
@@ -832,7 +839,7 @@ return array (
     array (
       'view' => 'privacy-policy',
       'title' => 'Политика конфиденциальности | Академия Бариста',
-      'description' => NULL,
+      'description' => 'Как Академия Бариста обрабатывает и защищает персональные данные учеников и посетителей сайта.',
       'keywords' => NULL,
       'og_title' => NULL,
       'og_image' => NULL,
@@ -891,7 +898,7 @@ return array (
     array (
       'view' => 'thank-you',
       'title' => 'Спасибо за заявку !',
-      'description' => NULL,
+      'description' => 'Заявка отправлена. Мы перезвоним в рабочее время и поможем выбрать курс.',
       'keywords' => NULL,
       'og_title' => NULL,
       'og_image' => NULL,
@@ -920,7 +927,7 @@ return array (
     array (
       'view' => 'user-agreement',
       'title' => 'Пользовательское соглашение | Академия Бариста',
-      'description' => NULL,
+      'description' => 'Условия использования сайта Академии Бариста: права, обязанности и ответственность сторон.',
       'keywords' => NULL,
       'og_title' => NULL,
       'og_image' => NULL,
