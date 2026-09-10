@@ -1,0 +1,14 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
+  "include": ["resources/src/**/*", "resources/src/**/*.vue"],
+  "compilerOptions": {
+    "types": ["vite/client", "node"],
+    "module": "esnext",
+    "target": "esnext",
+    "lib": ["es2022", "dom"],
+    "noEmit": true,
+    "paths": {
+      "@/*": ["./resources/src/*"]
+    }
+  }
+}

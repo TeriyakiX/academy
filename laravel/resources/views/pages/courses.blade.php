@@ -1072,7 +1072,7 @@
                             </g>
                         </svg>
                     </button>
-                    <form class="modal__form form" action=""><label class="modal__form-label form__label" for=""><input class="modal__form-input form__input form-name" name="Имя" type="text" placeholder="Ваше имя"></label> <label class="modal__form-label form__label" for=""><input class="modal__form-input form__input form-phone" name="Телефон" type="tel" placeholder="Телефон"></label> <label class="modal__form-label form__label" for=""><input class="modal__form-input form__input form-email" name="Email" type="email" placeholder="Email"></label> <textarea class="modal__form-textarea form__textarea" placeholder="Ваше сообщение" name="Сообщение"></textarea>
+                    <form class="modal__form form" method="post" action="/lead">@csrf @include('partials.form-guard')<input type="hidden" name="source" value="Форма на странице"><input type="hidden" name="page" value="{{ request()->getPathInfo() }}"><label class="modal__form-label form__label" for=""><input class="modal__form-input form__input form-name" name="name" required autocomplete="name" type="text" placeholder="Ваше имя"></label> <label class="modal__form-label form__label" for=""><input class="modal__form-input form__input form-phone" name="phone" required autocomplete="tel" type="tel" placeholder="Телефон"></label> <label class="modal__form-label form__label" for=""><input class="modal__form-input form__input form-email" name="email" autocomplete="email" type="email" placeholder="Email"></label> <textarea class="modal__form-textarea form__textarea" placeholder="Ваше сообщение" name="comment"></textarea>
                         <button class="modal__form-button form__button button button-brown" type="submit">Оставить
                             заявку
                             <svg class="button-icon" width="14" height="14" viewbox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1088,7 +1088,7 @@
                             </span>
                             </div>
                         </div>
-                        <input type="hidden" class="form-purpose" value="Тип заявки: Главная страница"></form>
+                        <input type="hidden" name="source" value="Главная страница"></form>
                 </div>
             </div>
         </div>

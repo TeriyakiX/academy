@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @push('head')
-    @vite('resources/css/legal.css')
+    @vite('resources/src/app/assets/styles/legal.css')
 @endpush
 
 @section('content')

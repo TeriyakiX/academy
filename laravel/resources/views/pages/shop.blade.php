@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @push('head')
-    @vite(['resources/css/home-blocks.css', 'resources/css/course.css', 'resources/css/shop.css'])
+    @vite(['resources/src/app/assets/styles/home-blocks.css', 'resources/src/app/assets/styles/course.css', 'resources/src/app/assets/styles/shop.css'])
 @endpush
 
 @section('content')

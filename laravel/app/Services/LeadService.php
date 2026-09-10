@@ -94,6 +94,7 @@ class LeadService
                     'TITLE'      => 'Заявка с сайта: ' . ($lead['source'] ?? 'сайт'),
                     'NAME'       => $lead['name'] ?? '',
                     'PHONE'      => [['VALUE' => $lead['phone'] ?? '', 'VALUE_TYPE' => 'WORK']],
+                    'EMAIL'      => array_filter([['VALUE' => $lead['email'] ?? '', 'VALUE_TYPE' => 'WORK']], fn ($e) => $e['VALUE'] !== ''),
                     'COMMENTS'   => $this->comments($lead),
                     'SOURCE_ID'  => 'WEB',
                     'ASSIGNED_BY_ID' => config('leads.bitrix.assigned_to') ?: null,
@@ -114,6 +115,7 @@ class LeadService
             'Откуда: ' . e($lead['source'] ?? '—'),
         ];
 
+        if (!empty($lead['email']))   $rows[] = 'E-mail: ' . e($lead['email']);
         if (!empty($lead['page']))    $rows[] = 'Страница: ' . e($lead['page']);
         if (!empty($lead['comment'])) $rows[] = 'Комментарий: ' . e($lead['comment']);
         if (!empty($lead['courses'])) $rows[] = 'Курсы: ' . e($lead['courses']);

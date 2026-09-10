@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @push('head')
-    @vite('resources/css/constructor.css')
+    @vite('resources/src/app/assets/styles/constructor.css')
 @endpush
 @section('content')
 <div class="wrapper">
