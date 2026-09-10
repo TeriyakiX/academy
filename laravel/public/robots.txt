@@ -1,5 +1,0 @@
-User-agent: *
-Disallow: /*?*etext=
-Disallow: /*?*from=mainpage
-
-Sitemap: https://academy-barista.ru/sitemap.xml
