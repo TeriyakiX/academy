@@ -4,10 +4,6 @@
     {{-- Верхняя строка: контакты и соцсети --}}
     <div class="site-header__top">
         <div class="site-header__container">
-            <a class="site-header__contact" href="{{ config('nav.contacts.phone_href') }}">
-                <svg class="site-icon"><use href="#i-phone"></use></svg>
-                {{ config('nav.contacts.phone') }}
-            </a>
             <a class="site-header__contact site-header__contact--hide-sm" href="mailto:{{ config('nav.contacts.email') }}">
                 <svg class="site-icon"><use href="#i-mail"></use></svg>
                 {{ config('nav.contacts.email') }}
@@ -59,6 +55,13 @@
                     @endforeach
                 </ul>
             </nav>
+
+            {{-- Телефон рядом с кнопкой: позвонить хотят чаще, чем писать,
+                 а в тёмной полосе сверху номер терялся и пропадал на телефоне. --}}
+            <a class="site-header__phone" href="{{ config('nav.contacts.phone_href') }}">
+                <svg class="site-icon" aria-hidden="true"><use href="#i-phone"></use></svg>
+                <span>{{ config('nav.contacts.phone') }}</span>
+            </a>
 
             <button class="site-header__cta ab-btn ab-btn--primary js-open-modal" type="button" data-modal-path="consultation">
                 Оставить заявку

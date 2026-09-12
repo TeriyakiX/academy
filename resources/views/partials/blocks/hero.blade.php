@@ -1,7 +1,4 @@
-@php
-    $h = config('home.hero');
-    $teachers = config('home.teachers.items');
-@endphp
+@php $h = config('home.hero'); @endphp
 
 <section class="ab-hero">
 
@@ -9,8 +6,6 @@
         <div class="ab-hero__grid">
 
             <div class="ab-hero__main">
-                <span class="ab-hero__badge ab-in" style="--d:0s">Набор открыт · Москва</span>
-
                 <h1 class="ab-hero__title ab-in" style="--d:.06s">{!! $h['title_html'] ?? e($h['title']) !!}</h1>
 
                 <p class="ab-hero__text ab-in" style="--d:.12s">{{ $h['text'] }}</p>
@@ -32,23 +27,6 @@
                         Оставить заявку
                     </button>
                     <a class="ab-btn ab-btn--outline ab-btn--lg" href="/courses.html">Выбрать курс</a>
-                </div>
-
-                {{-- Соцдоказательство: лица тренеров и телефон --}}
-                <div class="ab-hero__proof ab-in" style="--d:.3s">
-                    <div class="ab-hero__faces">
-                        @foreach ($teachers as $t)
-                            <img src="{{ $t['photo'] }}" alt="{{ $t['name'] }}" width="44" height="44" loading="lazy">
-                        @endforeach
-                    </div>
-                    <p class="ab-hero__proof-text">
-                        <strong>1000+ учеников</strong> уже прошли обучение<br>
-                        у практикующих тренеров школы
-                    </p>
-                    <a class="ab-hero__phone" href="{{ config('nav.contacts.phone_href') }}">
-                        {{ config('nav.contacts.phone') }}
-                        <span>{{ config('nav.contacts.hours') }}</span>
-                    </a>
                 </div>
             </div>
 
