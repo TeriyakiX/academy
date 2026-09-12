@@ -304,13 +304,15 @@
 
 /* ---------- Первый экран и отзывы ---------- */
 @media (max-width: 760px) {
-    /* Карточка направления в первом экране: 346px картинки — это почти
-       половина экрана. Делаем её ниже, направления всё равно повторяются
-       вкладками в следующем блоке. */
-    .ab-hd__tabs { gap: 6px; margin-bottom: 12px; }
-    .ab-hd__tab { padding: 7px 12px; font-size: 13px; }
-    .ab-hd__card { min-height: 0; aspect-ratio: 4 / 3; }
-    .ab-hd__card img { height: 100%; object-fit: cover; }
+    /* Плитки направлений: на узком экране остаются две в ряд,
+       но становятся ниже — первый экран и так длинный. */
+    .ab-hero__tiles { gap: 10px; }
+    .ab-tile__photo { height: 128px; }
+    .ab-tile__link { border-radius: 14px; }
+    .ab-tile__body { left: 11px; right: 11px; bottom: 10px; gap: 6px; }
+    .ab-tile__title { font-size: 13px; }
+    .ab-tile__arrow { width: 26px; height: 26px; }
+    .ab-tile__arrow svg { width: 12px; height: 12px; }
 
     /* Текст отзыва 19px давал карточку в 574px. Уменьшаем до размера
        остального текста — отзыв читается целиком, без обрыва. */
@@ -524,4 +526,16 @@
         font-size: 13px;
         border-radius: 10px;
     }
+}
+
+/* ---------- Подарочный сертификат на телефоне ----------
+   Карточка вдвое уже, чем на компьютере: отступы и кегли уменьшаем,
+   иначе логотип и подпись налезают друг на друга. */
+@media (max-width: 760px) {
+    .ab-giftcard { padding: 20px; border-radius: 16px; }
+    .ab-giftcard__mark { width: 32px; height: 32px; }
+    .ab-giftcard__kicker { font-size: 10px; letter-spacing: .18em; }
+    .ab-giftcard__word { font-size: 26px; }
+    .ab-giftcard__rule { margin: 12px 0 9px; }
+    .ab-giftcard__foot { font-size: 11px; }
 }

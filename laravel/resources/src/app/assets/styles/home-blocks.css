@@ -447,53 +447,6 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 .ab-hero__phone { font-size: 15px; font-weight: 700; color: var(--ab-dark); text-decoration: none; }
 .ab-hero__phone span { display: block; font-size: 12px; font-weight: 400; color: var(--ab-400); }
 
-/* ---- переключатель направлений ---- */
-.ab-hd__tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px;
-    padding: 5px; border-radius: 12px; background: var(--ab-white);
-    box-shadow: 0 4px 18px rgba(26,26,26,.07); width: fit-content; }
-.ab-hd__tab { padding: 9px 17px; border: none; border-radius: 8px; background: transparent;
-    font: inherit; font-size: 14px; font-weight: 700; color: var(--ab-500);
-    cursor: pointer; transition: all var(--ab-transition); }
-.ab-hd__tab:hover { color: var(--ab-dark); }
-.ab-hd__tab.is-active { background: var(--ab-600); color: var(--ab-white); }
-
-.ab-hd__stage { position: relative; }
-.ab-hd__card { position: relative; display: block; border-radius: 22px; overflow: hidden;
-    text-decoration: none; background: var(--ab-100);
-    box-shadow: 0 26px 60px rgba(26,26,26,.16); }
-.ab-hd__photo { display: block; width: 100%; height: 500px; object-fit: cover;
-    transition: transform 6s ease; }
-.ab-hd__card:hover .ab-hd__photo { transform: scale(1.05); }
-@media (max-width: 700px) { .ab-hd__photo { height: 340px; } }
-
-/* затемнение снизу, чтобы текст читался на любом фото */
-.ab-hd__card::after { content: ''; position: absolute; inset: 40% 0 0;
-    background: linear-gradient(180deg, transparent, rgba(20,16,16,.88)); pointer-events: none; }
-
-.ab-hd__overlay { position: absolute; left: 26px; right: 26px; bottom: 24px; z-index: 1; color: var(--ab-white); }
-.ab-hd__title { margin: 0 0 8px; font-family: var(--ab-font-display); font-size: 24px; font-weight: 800; }
-.ab-hd__text { margin: 0 0 14px; max-width: 460px; font-size: 14px; line-height: 1.55; color: #e2ddd9; }
-.ab-hd__link { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px;
-    border-radius: 999px; background: rgba(255,255,255,.16); backdrop-filter: blur(8px);
-    font-size: 14px; font-weight: 700; color: var(--ab-white);
-    transition: background var(--ab-transition); }
-.ab-hd__card:hover .ab-hd__link { background: var(--ab-600); }
-.ab-hd__link svg { width: 16px; height: 16px; transition: transform var(--ab-transition); }
-.ab-hd__card:hover .ab-hd__link svg { transform: translate(3px, -3px); }
-
-.ab-hd__dots { display: flex; justify-content: center; gap: 7px; margin-top: 14px; }
-.ab-hd__dot { width: 30px; height: 4px; border: none; border-radius: 3px;
-    background: var(--ab-100); cursor: pointer; transition: background var(--ab-transition); }
-.ab-hd__dot.is-active { background: var(--ab-600); }
-
-.ab-hd-fade-enter-active, .ab-hd-fade-leave-active { transition: opacity .4s ease, transform .4s ease; }
-.ab-hd-fade-enter-from { opacity: 0; transform: scale(1.03); }
-.ab-hd-fade-leave-to { opacity: 0; }
-@media (prefers-reduced-motion: reduce) {
-    .ab-hd-fade-enter-active, .ab-hd-fade-leave-active,
-    .ab-hd__photo, .ab-hd__card:hover .ab-hd__photo { transition: none; transform: none; }
-}
-
 /* оценки площадок внутри блока цифр */
 .ab-stats__ratings { position: relative; display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -733,12 +686,17 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
     border-radius: 999px; background: rgba(255,255,255,.1);
     font-size: 12px; font-weight: 700; color: var(--ab-cream); }
 .ab-cert__text { max-width: 480px; margin: 0 0 22px; font-size: 16px; line-height: 1.6; color: var(--ab-cream); }
-.ab-cert__list { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 28px; padding: 0; list-style: none; }
-.ab-cert__list li { padding: 8px 16px; border: 1px solid rgba(255,255,255,.18);
-    border-radius: 999px; font-size: 14px; color: var(--ab-cream); }
-.ab-cert__media img { display: block; width: 100%; height: auto; border-radius: 18px;
-    box-shadow: 0 24px 56px rgba(0,0,0,.4); transition: transform var(--ab-transition); }
-.ab-cert__media img:hover { transform: translateY(-6px); }
+.ab-cert__list { display: grid; gap: 10px; margin: 0 0 28px; padding: 0; list-style: none; }
+.ab-cert__list li { display: flex; align-items: center; gap: 11px; font-size: 15px; color: var(--ab-cream); }
+.ab-cert__list li::before { content: ''; flex: none; width: 20px; height: 20px; border-radius: 50%;
+    background: rgba(255,255,255,.14)
+    url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%273%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27m5 12 5 5L20 7%27/%3E%3C/svg%3E") center / 11px no-repeat; }
+
+.ab-cert__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 18px; }
+.ab-cert__more { font-size: 15px; font-weight: 700; color: var(--ab-cream);
+    text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.35);
+    transition: border-color var(--ab-transition), color var(--ab-transition); }
+.ab-cert__more:hover { color: var(--ab-white); border-color: var(--ab-white); }
 
 /* ================================================================
    РИТМ ФОНОВ
@@ -1004,4 +962,94 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
     .ab-faq__socials { gap: 10px; justify-content: center; }
     .ab-contacts__social { justify-content: center; }
     .ab-contacts__social-title { text-align: center; }
+}
+
+/* ---- направления в первом экране ----
+   Четыре плитки вместо карусели: человек сразу видит, чему здесь учат,
+   и ничего не двигается само по себе. */
+.ab-hero__tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px; margin: 0; padding: 0; list-style: none; }
+
+.ab-tile { position: relative; }
+.ab-tile__link { position: relative; display: block; height: 100%; overflow: hidden;
+    border-radius: 18px; background: var(--ab-100); text-decoration: none;
+    box-shadow: 0 14px 34px rgba(26,26,26,.13);
+    transition: transform var(--ab-transition), box-shadow var(--ab-transition); }
+.ab-tile__link:hover { transform: translateY(-4px); box-shadow: 0 22px 46px rgba(26,26,26,.2); }
+
+.ab-tile__photo { display: block; width: 100%; height: 243px; object-fit: cover;
+    transition: transform .7s ease; }
+.ab-tile__link:hover .ab-tile__photo { transform: scale(1.06); }
+
+/* затемнение снизу, чтобы подпись читалась на любом фото */
+.ab-tile__link::after { content: ''; position: absolute; inset: 35% 0 0;
+    background: linear-gradient(180deg, transparent, rgba(20,16,16,.86)); pointer-events: none; }
+
+.ab-tile__body { position: absolute; left: 16px; right: 16px; bottom: 14px; z-index: 1;
+    display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.ab-tile__title { font-family: var(--ab-font-display); font-size: 17px; font-weight: 800;
+    line-height: 1.2; color: var(--ab-white); }
+.ab-tile__arrow { display: flex; align-items: center; justify-content: center; flex: none;
+    width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,.18);
+    color: var(--ab-white); backdrop-filter: blur(6px);
+    transition: background var(--ab-transition), transform var(--ab-transition); }
+.ab-tile__arrow svg { width: 15px; height: 15px; }
+.ab-tile__link:hover .ab-tile__arrow { background: var(--ab-600); transform: translate(2px, -2px); }
+
+@media (prefers-reduced-motion: reduce) {
+    .ab-tile__link, .ab-tile__photo, .ab-tile__arrow { transition: none; }
+    .ab-tile__link:hover { transform: none; }
+    .ab-tile__link:hover .ab-tile__photo { transform: none; }
+}
+
+/* ---- подарочный сертификат ----
+   Карточка нарисована вёрсткой: прежний снимок был со стоковой рукой
+   на белом фоне и с напечатанной датой окончания, которая давно прошла. */
+.ab-cert__media { display: flex; align-items: center; justify-content: center;
+    perspective: 1000px; }
+
+.ab-giftcard { position: relative; overflow: hidden;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    width: 100%; max-width: 440px; aspect-ratio: 8 / 5;
+    padding: 30px; border-radius: 20px;
+    /* карточка светлее подложки, иначе сливается с блоком */
+    border: 1px solid rgba(226,214,206,.35);
+    background:
+        radial-gradient(130% 130% at 10% 6%, rgba(240,230,222,.22), transparent 58%),
+        linear-gradient(145deg, #8a736a 0%, #6b5a53 45%, #4a3c37 100%);
+    box-shadow: 0 30px 60px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.08);
+    transform: rotate(-3.5deg);
+    transition: transform var(--ab-transition), box-shadow var(--ab-transition); }
+.ab-cert__inner:hover .ab-giftcard { transform: rotate(-1.5deg) translateY(-6px);
+    box-shadow: 0 38px 72px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.1); }
+
+/* косой блик — карточка перестаёт выглядеть плоской заливкой */
+.ab-giftcard__sheen { position: absolute; inset: -40% -10% auto; height: 150%;
+    background: linear-gradient(104deg, transparent 40%, rgba(255,255,255,.16) 50%, transparent 60%);
+    pointer-events: none; }
+
+/* логотип тёмный, на тёмной карточке его не видно — выбеливаем.
+   Стоит в обычном потоке: на узкой карточке абсолютный налезал на подпись. */
+.ab-giftcard__mark { width: 40px; height: 40px; margin-bottom: auto; object-fit: contain; object-position: left top;
+    filter: brightness(0) invert(1); opacity: .92; }
+
+/* нижняя часть карточки держится вместе */
+.ab-giftcard__kicker { font-size: 12px; font-weight: 700; letter-spacing: .22em;
+    text-transform: uppercase; color: rgba(245,238,232,.82); }
+.ab-giftcard__word { margin-top: 4px; font-family: var(--ab-font-display);
+    font-size: clamp(26px, 3.4vw, 38px); font-weight: 800; line-height: 1;
+    letter-spacing: -.01em; color: #fff; }
+
+.ab-giftcard__rule { height: 1px; margin: 18px 0 12px;
+    background: linear-gradient(90deg, rgba(245,238,232,.7), transparent); }
+.ab-giftcard__foot { font-size: 12px; letter-spacing: .06em; color: rgba(245,238,232,.78); }
+
+@media (prefers-reduced-motion: reduce) {
+    .ab-giftcard, .ab-cert__inner:hover .ab-giftcard { transition: none; transform: rotate(-3.5deg); }
+}
+
+/* Карточка на светлой странице сертификатов: тень мягче,
+   на белом фоне глубокая выглядит грязным пятном. */
+.ab-cert__media--light .ab-giftcard {
+    box-shadow: 0 24px 50px rgba(26,26,26,.22), inset 0 1px 0 rgba(255,255,255,.1);
 }
