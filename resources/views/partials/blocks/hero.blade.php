@@ -52,10 +52,29 @@
                 </div>
             </div>
 
-            {{-- Направления с живым фото --}}
-            <div class="ab-hero__side ab-in" style="--d:.16s"
-                 data-island="HeroDirections"
-                 data-props="{{ json_encode(['directions' => $h['directions']], JSON_UNESCAPED_UNICODE) }}"></div>
+            {{-- Направления: все четыре сразу.
+                 Раньше здесь была карусель — она показывала одно направление,
+                 переключалась сама и уводила внимание с заголовка. --}}
+            <ul class="ab-hero__tiles ab-in" style="--d:.16s">
+                @foreach ($h['directions'] as $i => $d)
+                    <li class="ab-tile">
+                        <a class="ab-tile__link" href="{{ $d['href'] }}">
+                            <img class="ab-tile__photo" src="{{ $d['photo'] }}" alt="{{ $d['title'] }}"
+                                 width="573" height="470" loading="{{ $i < 2 ? 'eager' : 'lazy' }}" decoding="async">
+
+                            <span class="ab-tile__body">
+                                <span class="ab-tile__title">{{ $d['title'] }}</span>
+                                <span class="ab-tile__arrow" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor"
+                                              stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </span>
+                            </span>
+                        </a>
+                    </li>
+                @endforeach
+            </ul>
 
         </div>
     </div>

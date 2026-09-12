@@ -15,12 +15,29 @@
                     <li>Курсы для барменов</li>
                 </ul>
 
-                <a class="ab-btn ab-btn--light ab-btn--lg" href="/sertifikat.html">Купить сертификат</a>
+                <div class="ab-cert__actions">
+                    <a class="ab-btn ab-btn--light ab-btn--lg" href="/sertifikat.html">Купить сертификат</a>
+                    <a class="ab-cert__more" href="/courses.html">Посмотреть программы</a>
+                </div>
             </div>
 
-            <div class="ab-cert__media">
-                <img src="/assets/certificate.webp" alt="Подарочный сертификат Академии Бариста"
-                     loading="lazy" width="560" height="380">
+            {{-- Сертификат нарисован вёрсткой, а не снимком.
+                 На прежней картинке была напечатана дата окончания, которая
+                 давно прошла, и серая рука со стока на белом фоне — в тёмном
+                 блоке она читалась как чужая вставка. --}}
+            <div class="ab-cert__media" aria-hidden="true">
+                <div class="ab-giftcard">
+                    <span class="ab-giftcard__sheen"></span>
+
+                    <img class="ab-giftcard__mark" src="/assets/logo.png" alt=""
+                         width="64" height="64" loading="lazy" decoding="async">
+
+                    <span class="ab-giftcard__kicker">Подарочный</span>
+                    <strong class="ab-giftcard__word">Сертификат</strong>
+
+                    <span class="ab-giftcard__rule"></span>
+                    <span class="ab-giftcard__foot">Академия Бариста · Москва</span>
+                </div>
             </div>
         </div>
     </div>
