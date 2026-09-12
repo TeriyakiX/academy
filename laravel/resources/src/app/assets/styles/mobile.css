@@ -296,7 +296,6 @@
     .ab-hero__text { margin-bottom: 18px; font-size: 15px; line-height: 1.55; }
     .ab-hero__facts { gap: 8px; margin-bottom: 20px; }
     .ab-hero__facts li { font-size: 14px; }
-    .ab-hero__proof { margin-top: 22px; gap: 12px; }
 
     /* Подзаголовки внутри карточек */
     .ab-docs__title, .ab-cprog__title { font-size: 17px; }

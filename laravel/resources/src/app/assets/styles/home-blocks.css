@@ -425,13 +425,6 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
     grid-template-columns: minmax(0, 1fr) minmax(0, 640px); gap: 60px; align-items: center; }
 @media (max-width: 1100px) { .ab-hero__grid { grid-template-columns: 1fr; gap: 36px; } }
 
-.ab-hero__badge { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px;
-    padding: 8px 16px; border-radius: 999px; background: var(--ab-white);
-    box-shadow: 0 4px 16px rgba(26,26,26,.07);
-    font-size: 13px; font-weight: 700; color: var(--ab-600); }
-.ab-hero__badge::before { content: ''; width: 7px; height: 7px; border-radius: 50%;
-    background: #4e8f4a; box-shadow: 0 0 0 4px rgba(78,143,74,.18); }
-
 .ab-hero__title { margin: 0 0 20px; font-family: var(--ab-font-display);
     font-size: clamp(34px, 4.2vw, 56px); font-weight: 800; line-height: 1.06;
     letter-spacing: -.015em; color: var(--ab-dark); }
@@ -444,8 +437,6 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
     background: var(--ab-600); color: var(--ab-white); }
 
 .ab-hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
-.ab-hero__phone { font-size: 15px; font-weight: 700; color: var(--ab-dark); text-decoration: none; }
-.ab-hero__phone span { display: block; font-size: 12px; font-weight: 400; color: var(--ab-400); }
 
 /* оценки площадок внутри блока цифр */
 .ab-stats__ratings { position: relative; display: grid;
@@ -474,20 +465,6 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
     transform: scaleX(0); transform-origin: left; animation: ab-underline .8s ease .55s forwards; }
 @keyframes ab-underline { to { transform: scaleX(1); } }
 @media (prefers-reduced-motion: reduce) { .ab-hero__title em::after { animation: none; transform: scaleX(1); } }
-
-/* ---- соцдоказательство ---- */
-.ab-hero__proof { display: flex; flex-wrap: wrap; align-items: center; gap: 16px;
-    margin-top: 32px; padding-top: 26px; border-top: 1px solid var(--ab-100); }
-.ab-hero__faces { display: flex; }
-.ab-hero__faces img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover;
-    object-position: top center; border: 3px solid var(--ab-white); background: var(--ab-100); }
-.ab-hero__faces img + img { margin-left: -14px; }
-.ab-hero__proof-text { margin: 0; font-size: 13px; line-height: 1.5; color: var(--ab-500); }
-.ab-hero__proof-text strong { color: var(--ab-dark); }
-.ab-hero__phone { margin-left: auto; font-size: 16px; font-weight: 800;
-    color: var(--ab-dark); text-decoration: none; white-space: nowrap; }
-.ab-hero__phone span { display: block; font-size: 12px; font-weight: 400; color: var(--ab-400); }
-@media (max-width: 560px) { .ab-hero__phone { margin-left: 0; } }
 
 /* ---- цифры: появление по очереди и блик ---- */
 .ab-stats__item { opacity: 0; transform: translateY(20px); }
