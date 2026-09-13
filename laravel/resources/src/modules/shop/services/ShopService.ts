@@ -3,14 +3,15 @@ import { api } from '@/shared/api';
 /**
  * Работа с каталогом.
  *
- * Страницы товаров кэшируются в памяти: пользователь щёлкает цвета
- * туда-обратно, и повторно тянуть уже загруженный документ незачем.
+ * Страницы держим в памяти: человек щёлкает цвета туда-обратно и
+ * возвращается к уже открытой порции каталога — повторно тянуть
+ * загруженный документ незачем.
  */
 class ShopService {
     private readonly pages = new Map<TUrl, Document>();
 
-    /** Страница товара как документ — для подмены части разметки. */
-    async fetchProductPage(url: TUrl): Promise<Document> {
+    /** Страница каталога или товара как документ — для подмены части разметки. */
+    async fetchPage(url: TUrl): Promise<Document> {
         const cached = this.pages.get(url);
         if (cached) return cached;
 
@@ -26,6 +27,7 @@ class ShopService {
 
         if (filters.category) query.set('category', filters.category);
         if (filters.brand) query.set('brand', filters.brand);
+        if (filters.sort) query.set('sort', filters.sort);
         if (filters.show) query.set('show', String(filters.show));
 
         const search = query.toString();

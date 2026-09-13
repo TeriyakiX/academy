@@ -342,3 +342,45 @@
     /* на плитке помещается только первый признак */
     .ab-shop__chips li:nth-child(n+2) { display: none; }
 }
+
+/* ---------- Строка над списком: сколько нашлось и порядок вывода ----------
+   Сортировку по цене спрашивают чаще всего: оборудование подбирают
+   под бюджет, а не по названию. */
+.ab-shop__toolbar { display: flex; flex-wrap: wrap; align-items: center;
+    justify-content: space-between; gap: 14px; margin-bottom: 18px; }
+
+.ab-shop__found { font-size: 15px; font-weight: 700; color: var(--ab-500); }
+
+.ab-shop__sort { display: inline-flex; align-items: center; gap: 10px; }
+.ab-shop__sort-label { font-size: 14px; color: var(--ab-400); white-space: nowrap; }
+.ab-shop__sort select {
+    padding: 10px 38px 10px 14px;
+    border: 1px solid var(--ab-100); border-radius: var(--ab-radius);
+    background: var(--ab-white); color: var(--ab-900);
+    font: inherit; font-size: 14px; font-weight: 600; cursor: pointer;
+    appearance: none;
+    background-image: var(--ab-chevron);
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 15px 15px; }
+.ab-shop__sort select:hover { border-color: var(--ab-200); }
+.ab-shop__sort select:focus-visible { outline: 2px solid var(--ab-600); outline-offset: 1px; }
+
+@media (max-width: 760px) {
+    /* На узком экране подпись съедает половину строки — убираем её,
+       варианты и так начинаются со слова «Сначала». */
+    .ab-shop__toolbar { gap: 10px; margin-bottom: 14px; }
+    .ab-shop__found { font-size: 14px; }
+    .ab-shop__sort-label { display: none; }
+    .ab-shop__sort { flex: 1 1 auto; justify-content: flex-end; }
+    .ab-shop__sort select { width: 100%; max-width: 210px; font-size: 14px; }
+}
+
+/* Кнопка ждёт ответа сервера — показываем, что нажатие принято */
+.ab-shop__more-wrap .is-loading { opacity: .6; pointer-events: none; }
+
+/* Первая из добавленных карточек коротко подсвечивается:
+   иначе непонятно, где заканчивается уже просмотренное. */
+@keyframes ab-shop-new { from { box-shadow: 0 0 0 3px var(--ab-200); } to { box-shadow: 0 0 0 3px transparent; } }
+.ab-shop__card.is-new { animation: ab-shop-new 1.6s ease-out forwards; }
+@media (prefers-reduced-motion: reduce) { .ab-shop__card.is-new { animation: none; } }
