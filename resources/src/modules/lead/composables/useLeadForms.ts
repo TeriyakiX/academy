@@ -1,5 +1,5 @@
 import LeadService from '@/modules/lead/services/LeadService';
-import { claim, qs, qsa } from '@/shared/utils/dom';
+import { qs } from '@/shared/utils/dom';
 
 /*
  | Поведение всех форм заявки на сайте.
@@ -9,10 +9,18 @@ import { claim, qs, qsa } from '@/shared/utils/dom';
  |  - телефон форматируется по мере набора;
  |  - незаполненный номер видно до отправки;
  |  - повторное нажатие кнопки не создаёт вторую заявку.
+ |
+ | Слушаем на уровне документа, а не навешиваем обработчики на каждую форму:
+ | часть форм рисует Vue уже после загрузки скрипта — например, шаги
+ | оформления сертификата, — и такие формы оставались без маски.
  */
 
 const FORM = 'form[action="/lead"]';
 const ERROR_CLASS = 'ab-field-error';
+
+function formOf(el: EventTarget | null): HTMLFormElement | null {
+    return (el as HTMLElement | null)?.closest<HTMLFormElement>(FORM) ?? null;
+}
 
 function showError(field: HTMLElement, message: string): void {
     clearError(field);
@@ -32,21 +40,29 @@ function clearError(field: HTMLElement): void {
     if (hint?.classList.contains(ERROR_CLASS)) hint.remove();
 }
 
-function bind(form: HTMLFormElement): void {
-    if (!claim(form, 'leadReady')) return;
+export function useLeadForms(): void {
+    /* Телефон приводим к привычному виду по мере набора. */
+    document.addEventListener('input', (e) => {
+        const field = e.target as HTMLInputElement | null;
+        if (!field || !formOf(field)) return;
 
-    const phone = qs<HTMLInputElement>('input[name="phone"]', form);
-    const name = qs<HTMLInputElement>('input[name="name"]', form);
-    const submit = qs<HTMLButtonElement>('button[type="submit"]', form);
+        if (field.name === 'phone') {
+            field.value = LeadService.maskPhone(field.value);
+        }
 
-    phone?.addEventListener('input', () => {
-        phone.value = LeadService.maskPhone(phone.value);
-        clearError(phone);
+        if (field.name === 'phone' || field.name === 'name') {
+            clearError(field);
+        }
     });
 
-    name?.addEventListener('input', () => clearError(name));
+    document.addEventListener('submit', (e) => {
+        const form = formOf(e.target);
+        if (!form) return;
 
-    form.addEventListener('submit', (e) => {
+        const name = qs<HTMLInputElement>('input[name="name"]', form);
+        const phone = qs<HTMLInputElement>('input[name="phone"]', form);
+        const submit = qs<HTMLButtonElement>('button[type="submit"]', form);
+
         const { valid, errors } = LeadService.validate({
             name: name?.value ?? '',
             phone: phone?.value ?? '',
@@ -63,16 +79,11 @@ function bind(form: HTMLFormElement): void {
             return;
         }
 
-        // страница уходит на «спасибо» — блокируем кнопку, чтобы
-        // нетерпеливое второе нажатие не отправило заявку дважды
+        /* Страница уходит на «спасибо» — блокируем кнопку, чтобы
+           нетерпеливое второе нажатие не отправило заявку дважды. */
         if (submit) {
             submit.disabled = true;
-            submit.dataset.label = submit.textContent ?? '';
             submit.textContent = 'Отправляем…';
         }
     });
-}
-
-export function useLeadForms(): void {
-    qsa<HTMLFormElement>(FORM).forEach(bind);
 }

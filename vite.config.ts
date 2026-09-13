@@ -31,6 +31,7 @@ export default defineConfig({
                     'constructor',
                     'reviews',
                     'shop',
+                    'certificate',
                     'legal',
                     'mobile',
                 ),

@@ -1,0 +1,138 @@
+/*
+ | Страница подарочных сертификатов.
+ |
+ | Оформление идёт шагами: программа → кому → контакты. Итог виден на
+ | каждом шаге справа, поэтому выбор не теряется из виду, а человек в любой
+ | момент понимает, сколько это стоит.
+ */
+
+.ab-cwrap { padding: 0 0 76px; }
+.ab-cwrap__fallback { margin: 0; font-size: 16px; color: var(--ab-500); }
+
+.ab-cw { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 340px);
+    gap: 24px; align-items: start; margin-top: 28px; }
+@media (max-width: 900px) { .ab-cw { grid-template-columns: 1fr; } }
+
+/* ---------- полоса шагов ---------- */
+.ab-cw__steps { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 10px; margin: 0; padding: 0; list-style: none; counter-reset: none; }
+@media (max-width: 620px) { .ab-cw__steps { grid-template-columns: 1fr; gap: 6px; } }
+
+.ab-cw__step-btn { display: flex; align-items: center; gap: 12px; width: 100%;
+    padding: 14px 16px; border: 1px solid var(--ab-100); border-radius: var(--ab-radius-lg);
+    background: var(--ab-white); font: inherit; text-align: left; cursor: pointer;
+    transition: border-color var(--ab-transition), background var(--ab-transition); }
+.ab-cw__step-btn:disabled { cursor: default; opacity: .55; }
+.ab-cw__step-btn:not(:disabled):hover { border-color: var(--ab-200); }
+
+.ab-cw__step.is-active .ab-cw__step-btn { border-color: var(--ab-600); background: var(--ab-50); }
+.ab-cw__step.is-done .ab-cw__step-btn { border-color: var(--ab-200); }
+
+.ab-cw__step-n { display: flex; align-items: center; justify-content: center; flex: none;
+    width: 34px; height: 34px; border-radius: 50%; background: var(--ab-50);
+    font-family: var(--ab-font-display); font-size: 15px; font-weight: 800; color: var(--ab-600);
+    transition: background var(--ab-transition), color var(--ab-transition); }
+.ab-cw__step-n svg { width: 16px; height: 16px; }
+.ab-cw__step.is-active .ab-cw__step-n { background: var(--ab-600); color: var(--ab-white); }
+.ab-cw__step.is-done .ab-cw__step-n { background: #4e8f4a; color: var(--ab-white); }
+
+.ab-cw__step-text { display: grid; gap: 1px; min-width: 0; }
+.ab-cw__step-text b { font-size: 15px; font-weight: 800; color: var(--ab-dark); }
+.ab-cw__step-text i { font-style: normal; font-size: 12px; color: var(--ab-400); }
+
+/* ---------- содержимое шага ---------- */
+.ab-cw__body { min-width: 0; padding: 24px; border: 1px solid var(--ab-100);
+    border-radius: var(--ab-radius-lg); background: var(--ab-white); }
+@media (max-width: 620px) { .ab-cw__body { padding: 18px; } }
+
+.ab-cw__hint { margin: 0 0 18px; font-size: 15px; line-height: 1.55; color: var(--ab-500); }
+
+.ab-cw__tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+.ab-cw__tab { display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 16px; border: 1px solid var(--ab-100); border-radius: 999px;
+    background: var(--ab-white); font: inherit; font-size: 14px; font-weight: 700;
+    color: var(--ab-500); cursor: pointer; transition: all var(--ab-transition); }
+.ab-cw__tab:hover { border-color: var(--ab-200); color: var(--ab-dark); }
+.ab-cw__tab.is-active { background: var(--ab-600); border-color: var(--ab-600); color: var(--ab-white); }
+.ab-cw__tab-badge { display: inline-flex; align-items: center; justify-content: center;
+    min-width: 20px; height: 20px; padding: 0 6px; border-radius: 999px;
+    background: rgba(255,255,255,.22); font-size: 12px; }
+.ab-cw__tab:not(.is-active) .ab-cw__tab-badge { background: var(--ab-50); color: var(--ab-600); }
+
+.ab-cw__list { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+
+.ab-cw__course { display: grid; grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center; gap: 14px; padding: 14px 16px;
+    border: 1px solid var(--ab-100); border-radius: var(--ab-radius); background: var(--ab-white);
+    cursor: pointer; transition: border-color var(--ab-transition), background var(--ab-transition); }
+.ab-cw__course:hover { border-color: var(--ab-200); }
+.ab-cw__course.is-picked { border-color: var(--ab-600); background: var(--ab-50); }
+
+.ab-cw__check { width: 20px; height: 20px; flex: none; accent-color: var(--ab-600); cursor: pointer; }
+
+.ab-cw__course-main { display: grid; gap: 2px; min-width: 0; }
+.ab-cw__course-title { font-size: 15px; font-weight: 700; color: var(--ab-dark); }
+.ab-cw__course-meta { font-size: 13px; color: var(--ab-400); }
+.ab-cw__course-price { font-family: var(--ab-font-display); font-size: 16px; font-weight: 800;
+    white-space: nowrap; color: var(--ab-dark); }
+
+/* ---------- поля ---------- */
+.ab-cw__fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+@media (max-width: 620px) { .ab-cw__fields { grid-template-columns: 1fr; } }
+.ab-cw__field { display: grid; gap: 6px; }
+.ab-cw__field--wide { grid-column: 1 / -1; }
+.ab-cw__field > span { font-size: 13px; font-weight: 700; color: var(--ab-600); }
+.ab-cw__field > span i { font-style: normal; font-weight: 400; color: var(--ab-400); }
+.ab-cw__field input,
+.ab-cw__field textarea {
+    width: 100%; padding: 12px 14px;
+    border: 1px solid var(--ab-100); border-radius: var(--ab-radius);
+    background: var(--ab-white); color: var(--ab-dark);
+    font: inherit; font-size: 15px; resize: vertical; }
+.ab-cw__field input:focus,
+.ab-cw__field textarea:focus { outline: 2px solid var(--ab-600); outline-offset: 1px; border-color: transparent; }
+
+.ab-cw__form .ab-btn { margin-top: 18px; }
+.ab-cw__note { margin: 12px 0 0; font-size: 13px; line-height: 1.5; color: var(--ab-400); }
+.ab-cw__note a { color: var(--ab-600); }
+
+/* ---------- итог ---------- */
+.ab-cw__total { position: sticky; top: 20px; display: grid; gap: 14px;
+    padding: 22px; border: 1px solid var(--ab-100); border-radius: var(--ab-radius-lg);
+    background: var(--ab-50); }
+@media (max-width: 900px) { .ab-cw__total { position: static; } }
+
+.ab-cw__empty { margin: 0; font-size: 14px; line-height: 1.55; color: var(--ab-400); }
+
+.ab-cw__chosen { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.ab-cw__chosen li { display: grid; grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center; gap: 10px; font-size: 14px; color: var(--ab-dark); }
+.ab-cw__chosen b { font-weight: 700; white-space: nowrap; }
+
+.ab-cw__remove { display: flex; align-items: center; justify-content: center;
+    width: 22px; height: 22px; flex: none; padding: 0; border: none; border-radius: 50%;
+    background: var(--ab-100); color: var(--ab-600);
+    font-size: 16px; line-height: 1; cursor: pointer; transition: all var(--ab-transition); }
+.ab-cw__remove:hover { background: var(--ab-600); color: var(--ab-white); }
+
+.ab-cw__upsell { margin: 0; padding: 10px 12px; border-radius: var(--ab-radius);
+    background: var(--ab-white); font-size: 13px; line-height: 1.45; color: var(--ab-600); }
+
+.ab-cw__sum { display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+    padding-top: 14px; border-top: 1px solid var(--ab-100); font-size: 15px; color: var(--ab-500); }
+.ab-cw__sum-value { display: flex; align-items: baseline; gap: 8px; }
+.ab-cw__sum-value s { font-size: 14px; color: var(--ab-400); }
+.ab-cw__sum-value b { font-family: var(--ab-font-display); font-size: 22px; font-weight: 800;
+    color: var(--ab-dark); }
+
+.ab-cw__saved { margin: 0; font-size: 13px; font-weight: 700; color: #4e8f4a; }
+
+.ab-cw__nav { display: flex; flex-wrap: wrap; gap: 10px; }
+.ab-cw__nav .ab-btn { flex: 1 1 auto; justify-content: center; }
+.ab-cw__nav .ab-btn:disabled { opacity: .5; pointer-events: none; }
+
+/* Список преимуществ в первом экране страницы */
+.ab-cert__list--dark li { color: var(--ab-600); }
+.ab-cert__list--dark li::before { background: var(--ab-50)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b5a53' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12 5 5L20 7'/%3E%3C/svg%3E")
+    center / 11px no-repeat; }
