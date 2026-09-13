@@ -41,10 +41,14 @@ interface IProductCategory {
     products_count?: number;
 }
 
+/** Порядок вывода каталога. */
+type TShopSort = 'price_asc' | 'price_desc';
+
 /** Выбранные в каталоге фильтры. */
 interface IShopFilters {
     category?: string;
     brand?: string;
+    sort?: TShopSort;
     /** Сколько карточек показывать — «показать ещё» без перезагрузки списка. */
     show?: number;
 }

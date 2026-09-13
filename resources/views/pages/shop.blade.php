@@ -40,10 +40,33 @@
                      оборудования. Оба фильтра работают вместе, поэтому ссылки
                      сохраняют уже выбранное значение соседнего фильтра. --}}
                 @php
-                    $link = function (?string $brandSlug, ?string $catSlug) {
-                        $q = array_filter(['brand' => $brandSlug, 'category' => $catSlug]);
+                    $link = function (?string $brandSlug, ?string $catSlug) use ($sort) {
+                        $q = array_filter(['brand' => $brandSlug, 'category' => $catSlug, 'sort' => $sort]);
                         return '/shop.html' . ($q ? '?' . http_build_query($q) : '');
                     };
+
+                    /* Ссылка на ту же выборку с другим порядком вывода. */
+                    $sortLink = function (?string $value) use ($brand, $current) {
+                        $q = array_filter(['brand' => $brand, 'category' => $current?->slug, 'sort' => $value]);
+                        return '/shop.html' . ($q ? '?' . http_build_query($q) : '');
+                    };
+
+                    /* Склонение считаем сами: локаль приложения английская,
+                       и встроенный выбор формы дал бы «позиция» для 5 штук. */
+                    $plural = function (int $n) {
+                        $mod10 = $n % 10;
+                        $mod100 = $n % 100;
+                        if ($mod100 >= 11 && $mod100 <= 14) return 'позиций';
+                        if ($mod10 === 1) return 'позиция';
+                        if ($mod10 >= 2 && $mod10 <= 4) return 'позиции';
+                        return 'позиций';
+                    };
+
+                    $sortOptions = [
+                        null         => 'Сначала популярные',
+                        'price_asc'  => 'Сначала дешёвые',
+                        'price_desc' => 'Сначала дорогие',
+                    ];
                 @endphp
 
                 {{-- На узком экране фильтры показываем списками: девять кнопок
@@ -132,6 +155,28 @@
                         </a>
                     @endif
                 </div>
+                {{-- Строка над списком: сколько нашлось и в каком порядке
+                     показывать. Сортировка — обычные ссылки, поэтому работает
+                     и без JavaScript, а на узком экране сворачивается в список. --}}
+                @if ($products->isNotEmpty())
+                    <div class="ab-shop__toolbar">
+                        <span class="ab-shop__found">
+                            {{ $total }} {{ $plural($total) }}
+                        </span>
+
+                        <label class="ab-shop__sort">
+                            <span class="ab-shop__sort-label">Сортировка</span>
+                            <select data-filter-go>
+                                @foreach ($sortOptions as $value => $title)
+                                    <option value="{{ $sortLink($value) }}" @selected($sort === $value)>
+                                        {{ $title }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </label>
+                    </div>
+                @endif
+
                 @if ($products->isEmpty())
                     <p class="ab-shop__empty">
                         В этой категории пока нет позиций.
@@ -143,7 +188,7 @@
                             {{-- Карточка кликабельна целиком: ссылка на названии
                                  растянута на всю карточку, поэтому попасть можно
                                  куда угодно, а в разметке остаётся одна ссылка. --}}
-                            <li class="ab-shop__card">
+                            <li class="ab-shop__card" id="tovar-{{ $loop->index }}">
                                 <div class="ab-shop__media">
                                     @if ($p->image)
                                         <img src="{{ $p->image }}" alt="{{ $p->title }}"
@@ -193,10 +238,14 @@
                     </ul>
 
                     @if ($shown < $total)
-                        <div class="ab-shop__more-wrap">
+                        {{-- Ссылка ведёт на первую из добавленных позиций, а не
+                             на начало списка: иначе после нажатия приходится
+                             заново пролистывать всё, что уже видел. Со скриптом
+                             страница вообще не перезагружается. --}}
+                        <div class="ab-shop__more-wrap" data-shop-more>
                             <span class="ab-shop__counter">Показано {{ $shown }} из {{ $total }}</span>
                             <a class="ab-btn ab-btn--outline"
-                               href="{{ request()->fullUrlWithQuery(['show' => $shown + $perPage]) }}#tovary">
+                               href="{{ request()->fullUrlWithQuery(['show' => $shown + $perPage]) }}#tovar-{{ $shown }}">
                                 Показать ещё
                             </a>
                         </div>

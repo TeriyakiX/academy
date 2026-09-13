@@ -40,9 +40,21 @@ class ShopController extends Controller
             $brand = null;
         }
 
+        /*
+         | Порядок вывода. По умолчанию — как задумано в каталоге
+         | (поле sort), плюс сортировка по цене: её спрашивают чаще всего,
+         | когда подбирают оборудование под бюджет.
+         */
+        $sort = $request->query('sort');
+        if (!in_array($sort, ['price_asc', 'price_desc'], true)) {
+            $sort = null;
+        }
+
         $products = Product::active()
             ->when($brand, fn ($q) => $q->where('brand', $brand))
             ->when($current, fn ($q) => $q->where('product_category_id', $current->id))
+            ->when($sort === 'price_asc',  fn ($q) => $q->orderBy('price'))
+            ->when($sort === 'price_desc', fn ($q) => $q->orderByDesc('price'))
             ->orderBy('sort')->orderBy('title')
             ->get()
             /* Цветовые исполнения одной модели показываем одной карточкой:
@@ -69,7 +81,7 @@ class ShopController extends Controller
                 'css'         => [],
                 'js'          => [],
                 // страницы фильтра не должны плодить дубли в поиске
-                'robots'      => ($current || $brand) ? 'noindex, follow' : '',
+                'robots'      => ($current || $brand || $sort) ? 'noindex, follow' : '',
             ],
             'categories' => $categories,
             'current'    => $current,
@@ -82,6 +94,7 @@ class ShopController extends Controller
             )]),
             'allCount'   => $cards($all),
             'brand'      => $brand,
+            'sort'       => $sort,
             'products'   => $products,
             'total'      => $total,
             'shown'      => $shown,

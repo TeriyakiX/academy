@@ -60,7 +60,7 @@ export function useProductVariants(): void {
         body?.classList.add('is-switching');
 
         try {
-            swap(await ShopService.fetchProductPage(url));
+            swap(await ShopService.fetchPage(url));
             history.pushState({ variant: url }, '', url);
         } catch {
             window.location.href = url; // не вышло — обычный переход
@@ -76,7 +76,7 @@ export function useProductVariants(): void {
         if (!state?.variant && !qs('.ab-product__colors')) return;
 
         try {
-            swap(await ShopService.fetchProductPage(location.pathname));
+            swap(await ShopService.fetchPage(location.pathname));
         } catch {
             window.location.reload();
         }
