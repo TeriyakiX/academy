@@ -1030,3 +1030,46 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 .ab-cert__media--light .ab-giftcard {
     box-shadow: 0 24px 50px rgba(26,26,26,.22), inset 0 1px 0 rgba(255,255,255,.1);
 }
+
+/* ---- баннер сертификата: шаги и стопка карточек ----
+   Три метки-галочки заменены шагами: они совпадают с тем, что человек
+   увидит на странице оформления, и объясняют, что будет после нажатия. */
+.ab-cert__steps { display: grid; gap: 14px; margin: 0 0 28px; padding: 0; list-style: none;
+    counter-reset: none; }
+.ab-cert__step { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 14px;
+    align-items: start; }
+.ab-cert__step-n { display: flex; align-items: center; justify-content: center; flex: none;
+    width: 30px; height: 30px; border-radius: 10px;
+    background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.16);
+    font-family: var(--ab-font-display); font-size: 14px; font-weight: 800; color: var(--ab-white); }
+.ab-cert__step-body { display: grid; gap: 2px; min-width: 0; }
+.ab-cert__step-body b { font-size: 15px; font-weight: 800; color: var(--ab-white); }
+.ab-cert__step-body i { font-style: normal; font-size: 13px; line-height: 1.45; color: var(--ab-cream); }
+
+/* Вторая карточка позади первой: подарок — это стопка, а не один лист */
+.ab-giftcard-stack { position: relative; width: 100%; max-width: 440px; }
+.ab-giftcard-stack__back { position: absolute; inset: 0;
+    border-radius: 20px; border: 1px solid rgba(226,214,206,.18);
+    background: linear-gradient(145deg, #5b4c46, #3a302d);
+    transform: rotate(4deg) translate(10px, 12px);
+    transition: transform var(--ab-transition); }
+.ab-cert__inner:hover .ab-giftcard-stack__back { transform: rotate(6.5deg) translate(16px, 16px); }
+
+/* Ориентир по цене — из тех же программ, что и на странице сертификатов */
+.ab-giftcard__price { position: absolute; right: -10px; bottom: -14px;
+    padding: 9px 16px; border-radius: 999px;
+    background: var(--ab-white); color: var(--ab-dark);
+    font-family: var(--ab-font-display); font-size: 15px; font-weight: 800;
+    box-shadow: 0 12px 28px rgba(0,0,0,.35); }
+
+@media (max-width: 760px) {
+    .ab-cert__steps { gap: 12px; margin-bottom: 22px; }
+    .ab-cert__step-n { width: 26px; height: 26px; font-size: 13px; }
+    .ab-cert__step-body b { font-size: 14px; }
+    .ab-cert__step-body i { font-size: 12px; }
+    .ab-giftcard__price { right: 0; bottom: -12px; padding: 7px 13px; font-size: 13px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .ab-giftcard-stack__back,
+    .ab-cert__inner:hover .ab-giftcard-stack__back { transition: none; transform: rotate(4deg) translate(10px, 12px); }
+}
