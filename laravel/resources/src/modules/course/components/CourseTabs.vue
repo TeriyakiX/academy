@@ -22,6 +22,9 @@
             <article v-for="course in schools[active]" :key="course.id" class="ab-card">
                 <div class="ab-card__head">
                     <h3 class="ab-card__title">{{ course.title }}</h3>
+
+                    <!-- Описание обрезаем по строкам: иначе у карточек в ряду
+                         разъезжаются строки характеристик и цены. -->
                     <p class="ab-card__desc">{{ course.desc }}</p>
                 </div>
 
@@ -39,10 +42,16 @@
 
                 <div class="ab-card__foot">
                     <div class="ab-card__price">
-                        <s v-if="course.old">{{ money(course.old) }}</s>
-                        <strong>{{ money(course.price) }}</strong>
+                        <span v-if="course.old" class="ab-card__save">
+                            выгода {{ money(course.old - course.price) }}
+                        </span>
+                        <span class="ab-card__price-row">
+                            <strong>{{ money(course.price) }}</strong>
+                            <s v-if="course.old">{{ money(course.old) }}</s>
+                        </span>
                     </div>
-                    <a class="ab-btn ab-btn--primary ab-btn--sm" :href="course.url">Подробнее</a>
+
+                    <a class="ab-btn ab-btn--primary" :href="course.url">Подробнее</a>
                 </div>
             </article>
         </transition-group>
