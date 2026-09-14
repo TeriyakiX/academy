@@ -70,42 +70,10 @@
                 </ul>
             </section>
 
-            <!-- ШАГ 2. Кому -->
+            <!-- ШАГ 2. Кому дарим и куда звонить — одной формой.
+                 Раньше это были два отдельных шага, и «Кому» с «Контактами»
+                 путались между собой: непонятно, чьё имя куда. -->
             <section v-show="step === 2" class="ab-cw__pane">
-                <p class="ab-cw__hint">
-                    Эти данные впишем в сертификат. Имя получателя нужно обязательно,
-                    остальное — по желанию.
-                </p>
-
-                <div class="ab-cw__fields">
-                    <label class="ab-cw__field">
-                        <span>Кому</span>
-                        <input v-model.trim="recipient.name" type="text" placeholder="Имя получателя"
-                               maxlength="60" :aria-invalid="showNameError || undefined">
-                        <!-- Шаг нельзя проскочить пустым: сертификат без имени
-                             всё равно придётся уточнять по телефону. -->
-                        <b v-if="showNameError" class="ab-field-error">Напишите, кому дарите сертификат</b>
-                    </label>
-
-                    <label class="ab-cw__field">
-                        <span>От кого</span>
-                        <input v-model.trim="recipient.from" type="text" placeholder="Ваше имя" maxlength="60">
-                    </label>
-
-                    <label class="ab-cw__field ab-cw__field--wide">
-                        <span>Пожелание <i>— необязательно</i></span>
-                        <textarea v-model.trim="recipient.wish" rows="2"
-                                  placeholder="Короткая подпись на сертификате" maxlength="160"></textarea>
-                    </label>
-                </div>
-            </section>
-
-            <!-- ШАГ 3. Контакты и отправка -->
-            <section v-show="step === 3" class="ab-cw__pane">
-                <p class="ab-cw__hint">
-                    Перезвоним в рабочее время, уточним детали и пришлём сертификат.
-                </p>
-
                 <!--
                     Обычная форма на тот же адрес, что и все заявки сайта:
                     сервер её уже принимает, проверяет и отправляет менеджеру.
@@ -124,6 +92,29 @@
                             <input type="text" name="website" tabindex="-1" autocomplete="off">
                         </label>
                     </div>
+
+                    <p class="ab-cw__legend">Что напишем в сертификате</p>
+
+                    <div class="ab-cw__fields">
+                        <label class="ab-cw__field">
+                            <span>Кому</span>
+                            <input v-model.trim="recipient.name" type="text" placeholder="Имя получателя"
+                                   maxlength="60" required>
+                        </label>
+
+                        <label class="ab-cw__field">
+                            <span>От кого <i>— необязательно</i></span>
+                            <input v-model.trim="recipient.from" type="text" placeholder="Ваше имя" maxlength="60">
+                        </label>
+
+                        <label class="ab-cw__field ab-cw__field--wide">
+                            <span>Пожелание <i>— необязательно</i></span>
+                            <textarea v-model.trim="recipient.wish" rows="2"
+                                      placeholder="Короткая подпись на сертификате" maxlength="160"></textarea>
+                        </label>
+                    </div>
+
+                    <p class="ab-cw__legend">Куда вам перезвонить</p>
 
                     <div class="ab-cw__fields">
                         <label class="ab-cw__field">
@@ -144,10 +135,10 @@
                         </label>
                     </div>
 
-                    <!-- Пока имя и телефон не заполнены, кнопка серая:
-                         пустая заявка менеджеру бесполезна. -->
+                    <!-- Кнопка серая, пока не заполнено всё обязательное:
+                         имя получателя, ваше имя и телефон. -->
                     <button class="ab-btn ab-btn--primary ab-btn--lg ab-btn--block" type="submit"
-                            :disabled="!contactReady">
+                            :disabled="!canSend">
                         Отправить заявку
                     </button>
 
@@ -158,6 +149,7 @@
                 </form>
             </section>
         </div>
+
 
         <!-- Итог: виден на каждом шаге, поэтому выбор не теряется из виду -->
         <aside class="ab-cw__total">
@@ -195,29 +187,27 @@
             </template>
 
             <div class="ab-cw__nav">
-                <button v-if="step > 1" class="ab-btn ab-btn--outline" type="button" @click="back">
+                <button v-if="step === 2" class="ab-btn ab-btn--outline" type="button" @click="back">
                     Назад
                 </button>
                 <button
-                    v-if="step < 3"
+                    v-if="step === 1"
                     class="ab-btn ab-btn--primary"
                     type="button"
-                    :disabled="!filled(step)"
+                    :disabled="!picked.length"
                     @click="next"
                 >
-                    {{ step === 1 ? 'К оформлению' : 'К контактам' }}
+                    К оформлению
                 </button>
             </div>
 
-            <!-- Пока шаг пустой, кнопка неактивна — объясняем, чего не хватает. -->
-            <p v-if="!filled(step) && step < 3" class="ab-cw__last">
-                {{ step === 1 ? 'Выберите хотя бы одну программу.' : 'Напишите имя получателя — оно попадёт в сертификат.' }}
+            <!-- Пока не из чего собирать сертификат, кнопка серая — говорим почему. -->
+            <p v-if="step === 1 && !picked.length" class="ab-cw__last">
+                Выберите хотя бы одну программу.
             </p>
 
-            <!-- На третьем шаге кнопки «дальше» нет: заявку отправляет форма
-                 слева. Без подсказки шаг выглядит тупиком. -->
-            <p v-if="step === 3" class="ab-cw__last">
-                Остался последний шаг: заполните имя и телефон в форме — и мы перезвоним.
+            <p v-else-if="step === 2 && !canSend" class="ab-cw__last">
+                Заполните имя получателя, ваше имя и телефон — тогда кнопка отправки станет активной.
             </p>
         </aside>
     </div>
@@ -241,9 +231,8 @@ const props = defineProps<{
 const STORAGE_KEY = 'ab-certificate';
 
 const steps = [
-    { n: 1 as const, title: 'Программа', note: 'что дарим' },
-    { n: 2 as const, title: 'Кому', note: 'подпись в сертификате' },
-    { n: 3 as const, title: 'Контакты', note: 'как с вами связаться' },
+    { n: 1 as const, title: 'Что дарим', note: 'программы и стоимость' },
+    { n: 2 as const, title: 'Кому и куда звонить', note: 'подпись и ваши контакты' },
 ];
 
 const step = ref<TCertificateStep>(1);
@@ -258,6 +247,12 @@ const recipient = reactive<ICertificateRecipient>({ name: '', from: '', wish: ''
 /* Контакты держим отдельно: поля остаются обычными полями формы,
    а нам нужно знать, можно ли уже включать кнопку отправки. */
 const contact = reactive({ name: '', phone: '' });
+
+/* Отправка доступна, когда собрано всё нужное: программа, имя
+   получателя и контакты. Иначе менеджеру придёт нечего обрабатывать. */
+const canSend = computed(
+    () => picked.value.length > 0 && recipient.name.length > 0 && contactReady.value,
+);
 
 const contactReady = computed(
     /* 10 цифр — номер без кода страны, 11 — уже с ним: маска дорисовывает
@@ -326,21 +321,14 @@ const summary = computed(() => {
  */
 function filled(n: number): boolean {
     if (n === 1) return picked.value.length > 0;
-    if (n === 2) return recipient.name.length > 0;
 
-    return false;
+    return canSend.value;
 }
 
-/** Открыть можно текущий шаг и тот, к которому подготовлены данные. */
+/** Ко второму шагу пускаем только с выбранной программой. */
 function canOpen(n: number): boolean {
-    for (let i = 1; i < n; i += 1) {
-        if (!filled(i)) return false;
-    }
-
-    return true;
+    return n === 1 || picked.value.length > 0;
 }
-
-const showNameError = ref(false);
 
 function goTo(n: number) {
     if (!canOpen(n)) return;
@@ -348,22 +336,14 @@ function goTo(n: number) {
 }
 
 function next() {
-    if (!filled(step.value)) {
-        if (step.value === 2) showNameError.value = true;
-        return;
-    }
-
-    showNameError.value = false;
-    step.value = (step.value + 1) as TCertificateStep;
+    if (!picked.value.length) return;
+    step.value = 2;
 }
-
-/* Имя появилось — предупреждение больше не нужно. */
-watch(() => recipient.name, () => { showNameError.value = false; });
 
 /* Если все программы сняли, возвращаем на первый шаг: дальше идти не с чем. */
 watch(() => picked.value.length, (n) => { if (!n) step.value = 1; });
 
 function back() {
-    step.value = (step.value - 1) as TCertificateStep;
+    step.value = 1;
 }
 </script>
