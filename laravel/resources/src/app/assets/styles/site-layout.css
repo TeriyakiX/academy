@@ -106,8 +106,8 @@
 @media (max-width: 700px) {
     .site-header__contact--hide-sm, .site-header__socials { display: none; }
     .site-header__cta { display: none; }
-    /* кнопка заявки скрыта — номер занимает её место и прижимается вправо */
-    .site-header__phone { margin-left: auto; padding: 8px 6px; font-size: 15px; }
+    /* кнопка заявки скрыта — номер встаёт по центру между лого и бургером */
+    .site-header__phone { margin: 0 auto; padding: 8px 6px; font-size: 15px; }
     .site-burger { margin-left: 0; }
 }
 @media (max-width: 380px) {

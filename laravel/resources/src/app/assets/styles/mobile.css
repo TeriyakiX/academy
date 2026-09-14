@@ -81,10 +81,6 @@
 
     /* ---------- Плотнее содержимое крупных блоков ---------- */
 
-    .ab-stats__list { grid-template-columns: 1fr; }
-    .ab-stats__item { padding: 14px 16px; column-gap: 12px; }
-    .ab-stats__ring { width: 38px; height: 38px; }
-    .ab-stats__num { font-size: 28px; }
 
     /* Вкладки направлений переносились на четыре строки */
     .ab-tabs__nav, .ab-shop__filters {
@@ -501,6 +497,10 @@
         border-radius: 50%; background: rgba(255,255,255,.14) 50% 50% / 10px 10px no-repeat;
         background-image: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%273%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27m5 12 5 5L20 7%27/%3E%3C/svg%3E"); }
 
+    /* На светлой странице сертификатов белая галочка на белом фоне
+       не видна — там метка коричневая. */
+    .ab-cert__list--dark li::before { background-color: var(--ab-600); }
+
     .ab-cert__body .ab-btn { width: 100%; }
 }
 
@@ -527,4 +527,42 @@
     .ab-giftcard__word { font-size: 26px; }
     .ab-giftcard__rule { margin: 12px 0 9px; }
     .ab-giftcard__foot { font-size: 11px; }
+}
+
+/* ---------- Плотнее крупные блоки на телефоне ----------
+   Каждый из них занимал по полтора экрана: карточки шли в один столбец,
+   отступы оставались «компьютерными». Читается то же самое, места вдвое меньше. */
+@media (max-width: 760px) {
+    /* Цифры: по две в ряд. Значок убираем — на 170 пикселях ширины
+       он забирает место у самой цифры, ради которой блок и нужен. */
+    .ab-stats { padding: 40px 0; }
+    .ab-stats__head { margin-bottom: 24px; }
+    .ab-stats__list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .ab-stats__item { grid-template-columns: minmax(0, 1fr); padding: 14px; row-gap: 2px; }
+    .ab-stats__ring { display: none; }
+    .ab-stats__num { font-size: 24px; }
+    .ab-stats__label { font-size: 13px; }
+    .ab-stats__note { font-size: 11px; line-height: 1.35; }
+    .ab-stats__ratings { gap: 10px; margin-top: 14px; }
+    .ab-stats__ratings a, .ab-stats__ratings div { padding: 12px 16px; }
+    .ab-stats__rating-score { font-size: 22px; }
+
+    /* «Для бизнеса»: услуги по две в ряд, отступы карточки меньше. */
+    .ab-buscta { padding-bottom: 40px; }
+    .ab-buscta__inner { padding: 24px 18px; gap: 20px; border-radius: 18px; }
+    .ab-buscta__lead { margin-bottom: 18px; font-size: 15px; }
+    .ab-buscta__list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+    .ab-buscta__list li { align-items: flex-start; gap: 9px; padding: 11px 12px;
+        font-size: 13px; line-height: 1.35; }
+    .ab-buscta__list svg { width: 18px; height: 18px; }
+
+    /* Первый экран страницы сертификатов: карточка занимала пол-экрана. */
+    .ab-cpage__hero .ab-giftcard { max-width: 260px; margin: 0 auto; }
+    .ab-cert__media--light { margin-bottom: 4px; }
+}
+
+/* Совсем узкие экраны: по две плитки уже не помещаются. */
+@media (max-width: 360px) {
+    .ab-stats__list,
+    .ab-buscta__list { grid-template-columns: minmax(0, 1fr); }
 }
