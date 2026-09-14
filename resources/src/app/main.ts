@@ -5,6 +5,7 @@ import { setupPlugins } from '@/app/config/plugins';
 import { setupLayout } from '@/modules/layout';
 import { setupLead } from '@/modules/lead';
 import { setupShop } from '@/modules/shop';
+import { useRail } from '@/shared/composables/useRail';
 import { useReveal } from '@/shared/composables/useReveal';
 import { useSwipeDots } from '@/shared/composables/useSwipeDots';
 import { qsa } from '@/shared/utils/dom';
@@ -42,6 +43,7 @@ function bootstrap(): void {
     setupLead();
     setupShop();
 
+    useRail();
     useReveal();
     useSwipeDots();
 

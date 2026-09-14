@@ -1,8 +1,14 @@
 @php
     /* Минимальная цена берётся из тех же программ, что и на странице
        сертификатов: выдумывать «от» нельзя, а ориентир человеку нужен. */
-    $prices = collect(config('courses.schools'))->flatten(1)->pluck('price')->filter();
-    $from   = $prices->isNotEmpty() ? $prices->min() : null;
+    $schools = config('courses.schools');
+
+    $programs = collect($schools)
+        ->flatMap(fn ($courses, $school) => collect($courses)->map(fn ($c) => $c + ['school' => $school]))
+        ->filter(fn ($c) => !empty($c['price']))
+        ->values();
+
+    $from = $programs->min('price');
 
     $steps = [
         ['n' => '1', 'title' => 'Выберите программы', 'text' => 'Курс, мастер-класс или сразу несколько'],
@@ -40,7 +46,17 @@
                     <a class="ab-btn ab-btn--light ab-btn--lg" href="/sertifikat.html#oformit">
                         Собрать сертификат
                     </a>
-                    <a class="ab-cert__more" href="/courses.html">Посмотреть программы</a>
+
+                    {{-- Раньше отсюда уводило на страницу курсов. Теперь программы
+                         открываются лентой прямо здесь — человек не уходит с главной. --}}
+                    <button class="ab-cert__more" type="button"
+                            data-rail-toggle aria-expanded="false" aria-controls="cert-programs">
+                        <span>Посмотреть программы</span>
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M5 12h13m-5-6 6 6-6 6" fill="none" stroke="currentColor"
+                                  stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
                 </div>
             </div>
 
@@ -68,6 +84,38 @@
                         <span class="ab-giftcard__price">от {{ number_format($from, 0, '', ' ') }} ₽</span>
                     @endif
                 </div>
+            </div>
+        </div>
+
+        {{-- Лента программ. Без скрипта она просто видна и листается пальцем;
+             скрипт добавляет сворачивание и стрелки. --}}
+        <div class="ab-cert__rail" id="cert-programs" data-rail>
+            <ul class="ab-cert__rail-track" data-rail-track>
+                @foreach ($programs as $p)
+                    <li>
+                        <a class="ab-cert__prog" href="{{ $p['url'] }}">
+                            <span class="ab-cert__prog-school">{{ $p['school'] }}</span>
+                            <span class="ab-cert__prog-title">{{ $p['title'] }}</span>
+                            <span class="ab-cert__prog-meta">{{ $p['duration'] ?? '' }}</span>
+                            <span class="ab-cert__prog-price">{{ number_format($p['price'], 0, '', ' ') }} ₽</span>
+                        </a>
+                    </li>
+                @endforeach
+            </ul>
+
+            <div class="ab-cert__rail-nav">
+                <button class="ab-cert__rail-btn" type="button" data-rail-prev aria-label="Предыдущие программы">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M15 5 8 12l7 7" fill="none" stroke="currentColor"
+                              stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
+                <button class="ab-cert__rail-btn" type="button" data-rail-next aria-label="Следующие программы">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="m9 5 7 7-7 7" fill="none" stroke="currentColor"
+                              stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
             </div>
         </div>
     </div>

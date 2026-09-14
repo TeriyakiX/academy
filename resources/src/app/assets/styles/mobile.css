@@ -303,15 +303,14 @@
 
 /* ---------- Первый экран и отзывы ---------- */
 @media (max-width: 760px) {
-    /* Плитки направлений: на узком экране остаются две в ряд,
-       но становятся ниже — первый экран и так длинный. */
-    .ab-hero__tiles { gap: 10px; }
-    .ab-tile__photo { height: 128px; }
-    .ab-tile__link { border-radius: 14px; }
-    .ab-tile__body { left: 11px; right: 11px; bottom: 10px; gap: 6px; }
-    .ab-tile__title { font-size: 13px; }
-    .ab-tile__arrow { width: 26px; height: 26px; }
-    .ab-tile__arrow svg { width: 12px; height: 12px; }
+    /* Полосы направлений: на узком экране это карточки, и они ниже —
+       первый экран и так длинный. */
+    .ab-hero__panels { gap: 10px; }
+    .ab-hero__panels .ab-panel { height: 190px; }
+    .ab-panel__link { border-radius: 14px; }
+    .ab-panel__body { left: 12px; right: 12px; bottom: 12px; }
+    .ab-panel__title { font-size: 15px; }
+    .ab-panel__note { font-size: 12px; }
 
     /* Текст отзыва 19px давал карточку в 574px. Уменьшаем до размера
        остального текста — отзыв читается целиком, без обрыва. */
