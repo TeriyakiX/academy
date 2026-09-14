@@ -211,9 +211,15 @@ Route::get('/robots.txt', function (\Illuminate\Http\Request $request) {
     /*
      | Тестовой копии в поиске быть не должно: одинаковое содержимое
      | на двух доменах поисковик считает дублем и делит позиции.
+     |
+     | Обход при этом НЕ закрываем. Закрытый обход выглядит надёжнее,
+     | но работает хуже: робот не читает страницу и не видит запрета
+     | индексации, поэтому по внешней ссылке адрес копии всё равно может
+     | попасть в выдачу — пустой строкой. Пускаем робота и отдаём ему
+     | «noindex» заголовком и в разметке: это он обязан выполнить.
      */
     if (in_array($request->getHost(), config('seo.noindex_hosts', []), true)) {
-        return response("User-agent: *\nDisallow: /\n")
+        return response("User-agent: *\nDisallow:\n")
             ->header('Content-Type', 'text/plain; charset=UTF-8');
     }
 

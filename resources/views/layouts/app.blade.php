@@ -14,7 +14,9 @@
     @isset($seo['keywords'])
         <meta name="keywords" content="{{ $seo['keywords'] }}">
     @endisset
-    <meta name="robots" content="{{ $seo['robots'] ?? 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' }}">
+    {{-- На тестовой копии запрет индексации стоит всегда, что бы ни передала страница. --}}
+    @php $staging = in_array(request()->getHost(), config('seo.noindex_hosts', []), true); @endphp
+    <meta name="robots" content="{{ $staging ? 'noindex, nofollow' : ($seo['robots'] ?? 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1') }}">
 
     {{-- canonical всегда указывает на саму страницу --}}
     <link rel="canonical" href="{{ $seo['canonical'] }}">
