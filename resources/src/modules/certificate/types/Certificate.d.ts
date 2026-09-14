@@ -6,8 +6,8 @@
  | на выбранные программы.
  */
 
-/** Шаг оформления. */
-type TCertificateStep = 1 | 2 | 3;
+/** Шаг оформления: что дарим → кому и куда звонить. */
+type TCertificateStep = 1 | 2;
 
 /** Кому предназначен сертификат. */
 interface ICertificateRecipient {
