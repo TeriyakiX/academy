@@ -942,30 +942,62 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 }
 
 /* ---- направления в первом экране ----
-   Четыре плитки вместо карусели: человек сразу видит, чему здесь учат,
-   и ничего не двигается само по себе. */
+   Мозаика из четырёх плиток вместо карусели: человек сразу видит,
+   чему здесь учат, и ничего не двигается само по себе. Разный размер
+   задаёт порядок чтения — крупная плитка первая. */
 .ab-hero__tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px; margin: 0; padding: 0; list-style: none; }
+    grid-template-rows: 1fr 1fr .78fr; gap: 14px; height: 540px;
+    margin: 0; padding: 0; list-style: none; }
 
-.ab-tile { position: relative; }
-.ab-tile__link { position: relative; display: block; height: 100%; overflow: hidden;
+.ab-tile--a { grid-column: 1; grid-row: 1 / 3; }
+.ab-tile--b { grid-column: 2; grid-row: 1; }
+.ab-tile--c { grid-column: 2; grid-row: 2; }
+.ab-tile--d { grid-column: 1 / -1; grid-row: 3; }
+
+/* На узком экране мозаика теряет смысл — плитки становятся равными,
+   а пояснения видно сразу: наведения там нет. */
+@media (max-width: 1100px) {
+    .ab-hero__tiles { height: auto; grid-template-rows: none; }
+    .ab-hero__tiles .ab-tile { grid-column: auto; grid-row: auto; }
+    .ab-hero__tiles .ab-tile__link { height: 210px; }
+    .ab-hero__tiles .ab-tile__note { max-height: 78px; margin-top: 7px; opacity: 1; }
+}
+@media (max-width: 560px) { .ab-hero__tiles { grid-template-columns: 1fr; } }
+
+.ab-tile { position: relative; min-width: 0; }
+.ab-tile__link { position: relative; display: block; height: 100%; min-height: 170px; overflow: hidden;
     border-radius: 18px; background: var(--ab-100); text-decoration: none;
     box-shadow: 0 14px 34px rgba(26,26,26,.13);
     transition: transform var(--ab-transition), box-shadow var(--ab-transition); }
 .ab-tile__link:hover { transform: translateY(-4px); box-shadow: 0 22px 46px rgba(26,26,26,.2); }
 
-.ab-tile__photo { display: block; width: 100%; height: 243px; object-fit: cover;
+.ab-tile__photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
     transition: transform .7s ease; }
 .ab-tile__link:hover .ab-tile__photo { transform: scale(1.06); }
 
 /* затемнение снизу, чтобы подпись читалась на любом фото */
-.ab-tile__link::after { content: ''; position: absolute; inset: 35% 0 0;
-    background: linear-gradient(180deg, transparent, rgba(20,16,16,.86)); pointer-events: none; }
+.ab-tile__link::after { content: ''; position: absolute; inset: 30% 0 0;
+    background: linear-gradient(180deg, transparent, rgba(20,16,16,.88)); pointer-events: none; }
 
-.ab-tile__body { position: absolute; left: 16px; right: 16px; bottom: 14px; z-index: 1;
-    display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.ab-tile__body { position: absolute; left: 16px; right: 16px; bottom: 14px; z-index: 1; display: block; }
+.ab-tile__head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 .ab-tile__title { font-family: var(--ab-font-display); font-size: 17px; font-weight: 800;
     line-height: 1.2; color: var(--ab-white); }
+.ab-tile--a .ab-tile__title { font-size: 20px; }
+
+/* Пояснение раскрывается при наведении: по одному названию не всегда
+   понятно, о чём направление, но и загромождать фото не хочется. */
+.ab-tile__note { display: block; max-height: 0; margin-top: 0; opacity: 0; overflow: hidden;
+    font-size: 13px; line-height: 1.45; color: rgba(255,255,255,.84);
+    transition: max-height .35s ease, opacity .3s ease, margin-top .35s ease; }
+.ab-tile__link:hover .ab-tile__note,
+.ab-tile__link:focus-visible .ab-tile__note { max-height: 78px; margin-top: 7px; opacity: 1; }
+
+/* Там, где наведения нет, показываем сразу. */
+@media (hover: none) {
+    .ab-tile__note { max-height: 78px; margin-top: 7px; opacity: 1; }
+}
+
 .ab-tile__arrow { display: flex; align-items: center; justify-content: center; flex: none;
     width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,.18);
     color: var(--ab-white); backdrop-filter: blur(6px);
@@ -974,7 +1006,7 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 .ab-tile__link:hover .ab-tile__arrow { background: var(--ab-600); transform: translate(2px, -2px); }
 
 @media (prefers-reduced-motion: reduce) {
-    .ab-tile__link, .ab-tile__photo, .ab-tile__arrow { transition: none; }
+    .ab-tile__link, .ab-tile__photo, .ab-tile__arrow, .ab-tile__note { transition: none; }
     .ab-tile__link:hover { transform: none; }
     .ab-tile__link:hover .ab-tile__photo { transform: none; }
 }
