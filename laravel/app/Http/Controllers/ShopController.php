@@ -139,11 +139,31 @@ class ShopController extends Controller
             ->unique(fn ($p) => $p->variant_group ?: 'p' . $p->id)
             ->take(10);
 
+        /*
+         | Заголовок и описание для поиска.
+         |
+         | У части товаров название само по себе длинное, и с приставкой
+         | «— купить в Академии Бариста» строка не помещается в выдачу.
+         | Для таких берём короткий вариант приставки.
+         |
+         | Описание: краткая строка из прайса бывает в два-три слова —
+         | этого поиску мало, поэтому дополняем подробным описанием.
+         */
+        $suffix = mb_strlen($product->title) > 34
+            ? ' — Академия Бариста'
+            : ' — купить в Академии Бариста';
+
+        $summary = trim((string) $product->summary);
+        $full    = trim((string) $product->description);
+
+        if (mb_strlen($summary) < 70 && $full !== '' && $full !== $summary) {
+            $summary = trim($summary === '' ? $full : $summary . '. ' . $full);
+        }
+
         return view('pages.product', [
             'seo' => [
-                'title'       => $product->title . ' — купить в Академии Бариста',
-                'description' => $product->summary
-                    ?: mb_substr((string) $product->description, 0, 200),
+                'title'       => $product->title . $suffix,
+                'description' => mb_substr($summary, 0, 200),
                 'canonical'   => 'https://academy-barista.ru' . $product->url,
                 'og_image'    => $product->image,
                 'body_attrs'  => ['class' => 'body'],

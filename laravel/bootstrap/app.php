@@ -12,7 +12,8 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        /* Тестовая копия не должна попадать в поиск: она мешает боевому сайту. */
+        $middleware->append(\App\Http\Middleware\NoIndexOnStaging::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(
