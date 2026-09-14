@@ -682,7 +682,8 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 .ab-cert__more[aria-expanded="true"] svg { transform: rotate(90deg); }
 
 /* ---- лента программ ---- */
-.ab-cert__rail { position: relative; margin-top: 34px; }
+/* Лежит внутри тёмной карточки и занимает обе колонки. */
+.ab-cert__rail { position: relative; grid-column: 1 / -1; margin-top: 8px; }
 
 .ab-cert__rail-track { display: flex; gap: 12px; margin: 0; padding: 2px 0 14px;
     list-style: none; overflow-x: auto; scrollbar-width: none; }
