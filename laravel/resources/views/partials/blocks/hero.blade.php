@@ -55,7 +55,8 @@
             </div>
 
             {{-- Заявка прямо в первом экране: раньше до неё надо было
-                 пролистать всю страницу. --}}
+                 пролистать всю страницу. Полей два — чем короче форма,
+                 тем чаще её дозаполняют. --}}
             <form class="ab-hero__form ab-in" style="--d:.3s" method="post" action="/lead">
                 @csrf
                 @include('partials.form-guard')
@@ -63,9 +64,11 @@
                 <input type="hidden" name="source" value="Первый экран">
                 <input type="hidden" name="page" value="{{ request()->getPathInfo() }}">
 
+                <span class="ab-hero__form-badge">Ответим в течение рабочего дня</span>
+
                 <b class="ab-hero__form-title">Подберём программу</b>
                 <p class="ab-hero__form-note">
-                    Оставьте номер — перезвоним в рабочее время, расскажем про даты и места.
+                    Оставьте номер — перезвоним, расскажем про даты, места и стоимость.
                 </p>
 
                 <label class="ab-hero__field">
@@ -78,19 +81,15 @@
                     <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required autocomplete="tel">
                 </label>
 
-                <label class="ab-hero__field">
-                    <span>Что интересует</span>
-                    <select name="courses">
-                        <option value="">Пока не выбрал — подскажите</option>
-                        @foreach ($h['directions'] as $d)
-                            <option value="{{ $d['title'] }}">{{ $d['title'] }}</option>
-                        @endforeach
-                    </select>
-                </label>
-
                 <button class="ab-btn ab-btn--primary ab-btn--block ab-btn--lg" type="submit">
                     Оставить заявку
                 </button>
+
+                {{-- Кому удобнее позвонить самому — пусть звонит, а не ищет номер. --}}
+                <a class="ab-hero__form-phone" href="{{ config('nav.contacts.phone_href') }}">
+                    {{ config('nav.contacts.phone') }}
+                    <i>{{ config('nav.contacts.hours') }}</i>
+                </a>
 
                 <p class="ab-hero__form-legal">
                     Нажимая кнопку, вы соглашаетесь с
