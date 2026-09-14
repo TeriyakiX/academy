@@ -85,37 +85,38 @@
                     @endif
                 </div>
             </div>
-        </div>
 
-        {{-- Лента программ. Без скрипта она просто видна и листается пальцем;
-             скрипт добавляет сворачивание и стрелки. --}}
-        <div class="ab-cert__rail" id="cert-programs" data-rail>
-            <ul class="ab-cert__rail-track" data-rail-track>
-                @foreach ($programs as $p)
-                    <li>
-                        <a class="ab-cert__prog" href="{{ $p['url'] }}">
-                            <span class="ab-cert__prog-school">{{ $p['school'] }}</span>
-                            <span class="ab-cert__prog-title">{{ $p['title'] }}</span>
-                            <span class="ab-cert__prog-meta">{{ $p['duration'] ?? '' }}</span>
-                            <span class="ab-cert__prog-price">{{ number_format($p['price'], 0, '', ' ') }} ₽</span>
-                        </a>
-                    </li>
-                @endforeach
-            </ul>
+            {{-- Лента программ занимает всю ширину карточки. Без скрипта она
+                 просто видна и листается пальцем; скрипт добавляет
+                 сворачивание и стрелки. --}}
+            <div class="ab-cert__rail" id="cert-programs" data-rail>
+                <ul class="ab-cert__rail-track" data-rail-track>
+                    @foreach ($programs as $p)
+                        <li>
+                            <a class="ab-cert__prog" href="{{ $p['url'] }}">
+                                <span class="ab-cert__prog-school">{{ $p['school'] }}</span>
+                                <span class="ab-cert__prog-title">{{ $p['title'] }}</span>
+                                <span class="ab-cert__prog-meta">{{ $p['duration'] ?? '' }}</span>
+                                <span class="ab-cert__prog-price">{{ number_format($p['price'], 0, '', ' ') }} ₽</span>
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
 
-            <div class="ab-cert__rail-nav">
-                <button class="ab-cert__rail-btn" type="button" data-rail-prev aria-label="Предыдущие программы">
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M15 5 8 12l7 7" fill="none" stroke="currentColor"
-                              stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </button>
-                <button class="ab-cert__rail-btn" type="button" data-rail-next aria-label="Следующие программы">
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="m9 5 7 7-7 7" fill="none" stroke="currentColor"
-                              stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </button>
+                <div class="ab-cert__rail-nav">
+                    <button class="ab-cert__rail-btn" type="button" data-rail-prev aria-label="Предыдущие программы">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M15 5 8 12l7 7" fill="none" stroke="currentColor"
+                                  stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                    <button class="ab-cert__rail-btn" type="button" data-rail-next aria-label="Следующие программы">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="m9 5 7 7-7 7" fill="none" stroke="currentColor"
+                                  stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
