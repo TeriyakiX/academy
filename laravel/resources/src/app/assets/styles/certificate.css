@@ -129,7 +129,11 @@
 
 .ab-cw__nav { display: flex; flex-wrap: wrap; gap: 10px; }
 .ab-cw__nav .ab-btn { flex: 1 1 auto; justify-content: center; }
-.ab-cw__nav .ab-btn:disabled { opacity: .5; pointer-events: none; }
+/* Пока шаг не заполнен, кнопка серая и явно нерабочая:
+   прозрачной фирменной кнопкой это читалось как «просто бледная». */
+.ab-cw__nav .ab-btn:disabled,
+.ab-cw__form .ab-btn:disabled { opacity: 1; background: var(--ab-100); border-color: var(--ab-100);
+    color: var(--ab-400); box-shadow: none; cursor: not-allowed; pointer-events: none; }
 
 /* Список преимуществ в первом экране страницы */
 .ab-cert__list--dark li { color: var(--ab-600); }
