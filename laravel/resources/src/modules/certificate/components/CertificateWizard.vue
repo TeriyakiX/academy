@@ -6,16 +6,16 @@
                 v-for="s in steps"
                 :key="s.n"
                 class="ab-cw__step"
-                :class="{ 'is-active': step === s.n, 'is-done': step > s.n }"
+                :class="{ 'is-active': step === s.n, 'is-done': step !== s.n && filled(s.n) }"
             >
                 <button
                     class="ab-cw__step-btn"
                     type="button"
-                    :disabled="s.n > maxReached"
+                    :disabled="!canOpen(s.n)"
                     @click="goTo(s.n)"
                 >
                     <span class="ab-cw__step-n">
-                        <svg v-if="step > s.n" viewBox="0 0 24 24" aria-hidden="true">
+                        <svg v-if="step !== s.n && filled(s.n)" viewBox="0 0 24 24" aria-hidden="true">
                             <path d="m5 12 5 5L20 7" fill="none" stroke="currentColor"
                                   stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
@@ -73,14 +73,18 @@
             <!-- ШАГ 2. Кому -->
             <section v-show="step === 2" class="ab-cw__pane">
                 <p class="ab-cw__hint">
-                    Эти данные впишем в сертификат. Любое поле можно оставить пустым —
-                    тогда выпишем сертификат на предъявителя.
+                    Эти данные впишем в сертификат. Имя получателя нужно обязательно,
+                    остальное — по желанию.
                 </p>
 
                 <div class="ab-cw__fields">
                     <label class="ab-cw__field">
                         <span>Кому</span>
-                        <input v-model.trim="recipient.name" type="text" placeholder="Имя получателя" maxlength="60">
+                        <input v-model.trim="recipient.name" type="text" placeholder="Имя получателя"
+                               maxlength="60" :aria-invalid="showNameError || undefined">
+                        <!-- Шаг нельзя проскочить пустым: сертификат без имени
+                             всё равно придётся уточнять по телефону. -->
+                        <b v-if="showNameError" class="ab-field-error">Напишите, кому дарите сертификат</b>
                     </label>
 
                     <label class="ab-cw__field">
@@ -193,17 +197,17 @@
                     v-if="step < 3"
                     class="ab-btn ab-btn--primary"
                     type="button"
-                    :disabled="!picked.length"
+                    :disabled="!filled(step)"
                     @click="next"
                 >
                     {{ step === 1 ? 'К оформлению' : 'К контактам' }}
                 </button>
             </div>
 
-            <!-- Второй шаг необязательный, поэтому из него виден выход дальше -->
-            <button v-if="step === 2" class="ab-cw__skip" type="button" @click="next">
-                Пропустить — сертификат на предъявителя
-            </button>
+            <!-- Пока шаг пустой, кнопка неактивна — объясняем, чего не хватает. -->
+            <p v-if="!filled(step) && step < 3" class="ab-cw__last">
+                {{ step === 1 ? 'Выберите хотя бы одну программу.' : 'Напишите имя получателя — оно попадёт в сертификат.' }}
+            </p>
 
             <!-- На третьем шаге кнопки «дальше» нет: заявку отправляет форма
                  слева. Без подсказки шаг выглядит тупиком. -->
@@ -238,7 +242,6 @@ const steps = [
 ];
 
 const step = ref<TCertificateStep>(1);
-const maxReached = ref<TCertificateStep>(1);
 
 const schoolNames = computed(() => Object.keys(props.schools));
 const activeSchool = ref(schoolNames.value[0]);
@@ -302,17 +305,48 @@ const summary = computed(() => {
     return `Сертификат — ${list} — ${price}${sale}${to}${from}${wish}`;
 });
 
+/*
+ | Шаг считается пройденным по данным, а не по тому, что его открывали:
+ | иначе можно прощёлкать мастер насквозь и отправить пустой сертификат.
+ */
+function filled(n: number): boolean {
+    if (n === 1) return picked.value.length > 0;
+    if (n === 2) return recipient.name.length > 0;
+
+    return false;
+}
+
+/** Открыть можно текущий шаг и тот, к которому подготовлены данные. */
+function canOpen(n: number): boolean {
+    for (let i = 1; i < n; i += 1) {
+        if (!filled(i)) return false;
+    }
+
+    return true;
+}
+
+const showNameError = ref(false);
+
 function goTo(n: number) {
-    if (n > maxReached.value) return;
+    if (!canOpen(n)) return;
     step.value = n as TCertificateStep;
 }
 
 function next() {
-    if (step.value === 1 && !picked.value.length) return;
+    if (!filled(step.value)) {
+        if (step.value === 2) showNameError.value = true;
+        return;
+    }
 
+    showNameError.value = false;
     step.value = (step.value + 1) as TCertificateStep;
-    if (step.value > maxReached.value) maxReached.value = step.value;
 }
+
+/* Имя появилось — предупреждение больше не нужно. */
+watch(() => recipient.name, () => { showNameError.value = false; });
+
+/* Если все программы сняли, возвращаем на первый шаг: дальше идти не с чем. */
+watch(() => picked.value.length, (n) => { if (!n) step.value = 1; });
 
 function back() {
     step.value = (step.value - 1) as TCertificateStep;
