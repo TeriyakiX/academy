@@ -128,12 +128,14 @@
                     <div class="ab-cw__fields">
                         <label class="ab-cw__field">
                             <span>Как вас зовут</span>
-                            <input type="text" name="name" placeholder="Имя" required autocomplete="name">
+                            <input type="text" name="name" placeholder="Имя" required autocomplete="name"
+                                   @input="contact.name = ($event.target as HTMLInputElement).value">
                         </label>
 
                         <label class="ab-cw__field">
                             <span>Телефон</span>
-                            <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required autocomplete="tel">
+                            <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required autocomplete="tel"
+                                   @input="contact.phone = ($event.target as HTMLInputElement).value">
                         </label>
 
                         <label class="ab-cw__field ab-cw__field--wide">
@@ -142,7 +144,10 @@
                         </label>
                     </div>
 
-                    <button class="ab-btn ab-btn--primary ab-btn--lg ab-btn--block" type="submit">
+                    <!-- Пока имя и телефон не заполнены, кнопка серая:
+                         пустая заявка менеджеру бесполезна. -->
+                    <button class="ab-btn ab-btn--primary ab-btn--lg ab-btn--block" type="submit"
+                            :disabled="!contactReady">
                         Отправить заявку
                     </button>
 
@@ -249,6 +254,16 @@ const activeSchool = ref(schoolNames.value[0]);
 const pickedIds = ref<TCourseId[]>(restore());
 
 const recipient = reactive<ICertificateRecipient>({ name: '', from: '', wish: '' });
+
+/* Контакты держим отдельно: поля остаются обычными полями формы,
+   а нам нужно знать, можно ли уже включать кнопку отправки. */
+const contact = reactive({ name: '', phone: '' });
+
+const contactReady = computed(
+    /* 10 цифр — номер без кода страны, 11 — уже с ним: маска дорисовывает
+       «+7» после нашего обработчика, поэтому считаем от десяти. */
+    () => contact.name.trim().length > 1 && contact.phone.replace(/\D/g, '').length >= 10,
+);
 
 function restore(): TCourseId[] {
     try {
