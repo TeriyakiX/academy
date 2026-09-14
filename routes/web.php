@@ -92,6 +92,10 @@ foreach (config('site.redirects') as $from => $to) {
 
 // Старые адреса с WordPress-версии сайта
 foreach ([
+    /* Заглушка «Страница в разработке» со старого сайта: она есть в его
+       карте сайта, поэтому после переезда должна вести на главную,
+       а не отдавать 404. */
+    '/coming-soon.html'         => '/',
     '/barista-bazovyj'          => '/courses/barista-base.html',
     '/barista-v-take-away'      => '/master-class/barista-v-take-away.html',
     '/metod-stir'               => '/barnoe-delo/metod-ctir.html',
