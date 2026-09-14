@@ -1,1 +1,0 @@
-import{D as e}from"./main-Bq3hO62_.js";function t(){let t=e(null),n=e([]),r=e=>t=>{n.value[e]=t},i=e=>n.value[e]?.scrollHeight??0;return{open:t,bodies:n,setBody:r,styleFor:e=>({maxHeight:t.value===e?`${i(e)}px`:`0px`}),toggle:e=>{t.value=t.value===e?null:e},isOpen:e=>t.value===e}}export{t};
