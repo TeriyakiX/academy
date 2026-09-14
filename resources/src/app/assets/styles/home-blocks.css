@@ -542,7 +542,8 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
     .ab-hero__bg img { opacity: .3; }
 }
 
-@media (max-width: 380px) {
+/* На совсем узких экранах плитки направлений встают в столбик. */
+@media (max-width: 340px) {
     .ab-hero__dirs { grid-template-columns: minmax(0, 1fr); }
 }
 

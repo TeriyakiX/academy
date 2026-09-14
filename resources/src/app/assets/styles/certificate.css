@@ -137,8 +137,8 @@
 
 /* Список преимуществ в первом экране страницы */
 .ab-cert__list--dark li { color: var(--ab-600); }
-.ab-cert__list--dark li::before { background: var(--ab-50)
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b5a53' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12 5 5L20 7'/%3E%3C/svg%3E")
+.ab-cert__list--dark li::before { background: var(--ab-600)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12 5 5L20 7'/%3E%3C/svg%3E")
     center / 11px no-repeat; }
 
 /* На третьем шаге заявку отправляет форма слева, кнопки «дальше» здесь нет. */
