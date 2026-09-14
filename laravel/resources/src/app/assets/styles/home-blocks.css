@@ -413,58 +413,79 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
     width: 100%; height: 100%; border: none; }
 @media (max-width: 900px) { .ab-contacts__map { min-height: 320px; } }
 
-/* ================= Первый экран ================= */
-.ab-hero { position: relative; padding: 52px 0 68px; overflow: hidden;
-    background: linear-gradient(180deg, var(--ab-50) 0%, var(--ab-white) 62%); }
-/* тёплое пятно за текстом — даёт глубину вместо плоской заливки */
-.ab-hero::before { content: ''; position: absolute; top: -180px; left: -160px;
-    width: 620px; height: 620px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(107,90,83,.10), transparent 68%); pointer-events: none; }
+/* ================= Первый экран =================
+   Фото на весь экран, текст поверх, снизу выбор направления. Карусели нет:
+   переключает человек, само ничего не едет. */
+.ab-hero { position: relative; padding: 64px 0 56px; overflow: hidden; color: var(--ab-white);
+    background: #1c1717; }
 
-.ab-hero__grid { position: relative; display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 640px); gap: 60px; align-items: center; }
-@media (max-width: 1100px) { .ab-hero__grid { grid-template-columns: 1fr; gap: 36px; } }
+.ab-hero__bg { position: absolute; inset: 0; }
+.ab-hero__bg img { width: 100%; height: 100%; object-fit: cover; opacity: .38; }
+/* затемнение, иначе белый текст не читается на светлых участках фото */
+.ab-hero__bg::after { content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(20,16,16,.72) 0%, rgba(20,16,16,.55) 45%, rgba(20,16,16,.92) 100%); }
 
-.ab-hero__title { margin: 0 0 20px; font-family: var(--ab-font-display);
-    font-size: clamp(34px, 4.2vw, 56px); font-weight: 800; line-height: 1.06;
-    letter-spacing: -.015em; color: var(--ab-dark); }
-.ab-hero__title em { font-style: normal; color: var(--ab-600); }
-.ab-hero__text { max-width: 540px; margin: 0 0 26px; font-size: 17px; line-height: 1.65; color: var(--ab-500); }
+.ab-hero__main { position: relative; max-width: 760px; }
 
-.ab-hero__facts { display: flex; flex-wrap: wrap; gap: 10px 22px; margin: 0 0 34px; padding: 0; list-style: none; }
-.ab-hero__facts li { display: flex; align-items: center; gap: 9px; font-size: 14px; color: var(--ab-dark); }
+.ab-hero__kicker { display: inline-block; margin-bottom: 14px; padding: 7px 14px;
+    border-radius: 999px; background: rgba(255,255,255,.12);
+    font-size: 13px; font-weight: 700; letter-spacing: .02em; color: var(--ab-white); }
+
+.ab-hero__title { margin: 0 0 18px; font-family: var(--ab-font-display);
+    font-size: clamp(32px, 4.4vw, 58px); font-weight: 800; line-height: 1.05;
+    letter-spacing: -.015em; color: var(--ab-white); }
+.ab-hero__title em { position: relative; font-style: normal; color: var(--ab-cream); white-space: nowrap; }
+
+.ab-hero__text { max-width: 620px; margin: 0 0 22px; font-size: 17px; line-height: 1.6;
+    color: rgba(255,255,255,.82); }
+
+.ab-hero__facts { display: flex; flex-wrap: wrap; gap: 10px 22px; margin: 0; padding: 0; list-style: none; }
+.ab-hero__facts li { display: flex; align-items: center; gap: 9px; font-size: 14px; color: rgba(255,255,255,.9); }
 .ab-hero__check { width: 17px; height: 17px; flex: none; padding: 3px; border-radius: 50%;
     background: var(--ab-600); color: var(--ab-white); }
 
-.ab-hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
+/* ---- выбор направления ---- */
+.ab-hero__picker { position: relative; margin-top: 38px; padding: 22px;
+    border: 1px solid rgba(255,255,255,.14); border-radius: 22px;
+    background: rgba(28,23,23,.58); backdrop-filter: blur(10px); }
 
-/* оценки площадок внутри блока цифр */
-.ab-stats__ratings { position: relative; display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 14px; margin: 20px 0 0; padding: 0; list-style: none; }
+.ab-hero__picker-label { display: block; margin-bottom: 12px; font-size: 13px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .05em; color: var(--ab-300); }
 
-.ab-stats__ratings a, .ab-stats__ratings div { display: grid; grid-template-columns: 1fr auto;
-    align-items: center; gap: 2px 14px; padding: 15px 22px; border-radius: var(--ab-radius);
-    background: rgba(255,255,255,.04); color: var(--ab-white); text-decoration: none;
-    transition: background var(--ab-transition); }
-.ab-stats__ratings a:hover { background: rgba(255,255,255,.1); }
-.ab-stats__rating-name { font-size: 14px; font-weight: 700; }
-.ab-stats__rating-count { grid-column: 1; font-size: 12px; color: var(--ab-400); }
-.ab-stats__rating-score { grid-column: 2; grid-row: 1 / span 2;
-    font-family: var(--ab-font-display); font-size: 26px; font-weight: 800; color: var(--ab-300); }
+.ab-hero__tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+.ab-hero__tab { padding: 11px 18px; border: 1px solid rgba(255,255,255,.2); border-radius: 999px;
+    background: transparent; font: inherit; font-size: 14px; font-weight: 700;
+    color: rgba(255,255,255,.82); cursor: pointer; transition: all var(--ab-transition); }
+.ab-hero__tab:hover { border-color: rgba(255,255,255,.45); color: var(--ab-white); }
+.ab-hero__tab.is-active { background: var(--ab-white); border-color: var(--ab-white); color: var(--ab-dark); }
 
-/* ---- вход элементов первого экрана ---- */
-@keyframes ab-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
-.ab-in { animation: ab-in .7s cubic-bezier(.22,.7,.3,1) both; animation-delay: var(--d, 0s); }
-@media (prefers-reduced-motion: reduce) { .ab-in { animation: none; } }
+.ab-hero__panel { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 300px);
+    gap: 24px; align-items: center; }
+/* display: grid перебивает атрибут hidden — скрываем явно. */
+.ab-hero__panel[hidden] { display: none; }
 
-/* ---- акцент в заголовке ---- */
-.ab-hero__title em { position: relative; font-style: normal; color: var(--ab-600); white-space: nowrap; }
-.ab-hero__title em::after { content: ''; position: absolute; left: 0; right: 0; bottom: .08em;
-    height: .1em; border-radius: 3px; background: var(--ab-200);
-    transform: scaleX(0); transform-origin: left; animation: ab-underline .8s ease .55s forwards; }
-@keyframes ab-underline { to { transform: scaleX(1); } }
-@media (prefers-reduced-motion: reduce) { .ab-hero__title em::after { animation: none; transform: scaleX(1); } }
+.ab-hero__panel-text { display: grid; gap: 10px; }
+.ab-hero__panel-title { font-family: var(--ab-font-display); font-size: 22px; font-weight: 800;
+    color: var(--ab-white); }
+.ab-hero__panel-note { margin: 0; max-width: 560px; font-size: 15px; line-height: 1.55;
+    color: rgba(255,255,255,.78); }
+.ab-hero__panel-price { font-family: var(--ab-font-display); font-size: 17px; font-weight: 800;
+    color: var(--ab-cream); }
+
+.ab-hero__panel-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
+/* на тёмной подложке обычная светлая обводка читается лучше фирменной */
+.ab-hero__panel-actions .ab-btn--outline { border-color: rgba(255,255,255,.4); color: var(--ab-white); }
+.ab-hero__panel-actions .ab-btn--outline:hover { background: rgba(255,255,255,.12); }
+
+.ab-hero__panel-photo { width: 100%; height: 190px; object-fit: cover; border-radius: 16px; }
+
+@media (max-width: 900px) {
+    .ab-hero { padding: 44px 0 44px; }
+    .ab-hero__picker { padding: 18px; }
+    .ab-hero__panel { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+    .ab-hero__panel-photo { order: -1; height: 160px; }
+    .ab-hero__panel-actions .ab-btn { flex: 1 1 100%; justify-content: center; }
+}
 
 /* ---- цифры: появление по очереди и блик ---- */
 .ab-stats__item { opacity: 0; transform: translateY(20px); }
@@ -991,78 +1012,6 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
     .ab-faq__socials { gap: 10px; justify-content: center; }
     .ab-contacts__social { justify-content: center; }
     .ab-contacts__social-title { text-align: center; }
-}
-
-/* ---- направления в первом экране ----
-   Четыре полосы вместо карусели. Раскрытая занимает больше места и
-   показывает пояснение — ничего не двигается само, ведёт человек. */
-.ab-hero__panels { display: flex; gap: 12px; height: 520px;
-    margin: 0; padding: 0; list-style: none; }
-
-.ab-panel { flex: 1 1 0; min-width: 0;
-    transition: flex-grow .55s cubic-bezier(.22,.7,.3,1); }
-
-/* Пока курсор в стороне, раскрыта первая полоса — блок не выглядит пустым. */
-.ab-hero__panels:not(:hover) .ab-panel:first-child,
-.ab-panel:hover,
-.ab-panel:focus-within { flex-grow: 2.8; }
-
-.ab-panel__link { position: relative; display: block; height: 100%; overflow: hidden;
-    border-radius: 18px; background: var(--ab-100); text-decoration: none;
-    box-shadow: 0 14px 34px rgba(26,26,26,.13); }
-
-.ab-panel__photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-
-/* затемнение снизу, чтобы подпись читалась на любом фото */
-.ab-panel__link::after { content: ''; position: absolute; inset: 30% 0 0;
-    background: linear-gradient(180deg, transparent, rgba(20,16,16,.9)); pointer-events: none; }
-
-.ab-panel__body { position: absolute; left: 18px; right: 18px; bottom: 18px; z-index: 1; display: block; }
-
-/* У сжатой полосы на горизонтальную подпись нет ширины — она встаёт
-   вертикально и остаётся читаемой. Раскрытая возвращает её на место. */
-.ab-panel__title { display: block; writing-mode: vertical-rl; transform: rotate(180deg);
-    white-space: nowrap; font-family: var(--ab-font-display); font-size: 18px; font-weight: 800;
-    line-height: 1.2; color: var(--ab-white); }
-
-.ab-hero__panels:not(:hover) .ab-panel:first-child .ab-panel__title,
-.ab-panel:hover .ab-panel__title,
-.ab-panel:focus-within .ab-panel__title { writing-mode: horizontal-tb; transform: none; }
-
-/* Пояснение и ссылка — только у раскрытой полосы: у сжатой для них нет ширины. */
-.ab-panel__note, .ab-panel__more { opacity: 0; transition: opacity .35s ease; }
-
-.ab-panel__note { display: block; max-height: 0; overflow: hidden;
-    font-size: 13px; line-height: 1.5; color: rgba(255,255,255,.85);
-    transition: max-height .45s ease, opacity .35s ease, margin .45s ease; }
-
-.ab-panel__more { display: inline-flex; align-items: center; gap: 7px; margin-top: 10px;
-    font-size: 13px; font-weight: 700; color: var(--ab-white); }
-.ab-panel__more svg { width: 15px; height: 15px; }
-
-.ab-hero__panels:not(:hover) .ab-panel:first-child .ab-panel__note,
-.ab-panel:hover .ab-panel__note,
-.ab-panel:focus-within .ab-panel__note { max-height: 90px; margin-top: 8px; opacity: 1; }
-
-.ab-hero__panels:not(:hover) .ab-panel:first-child .ab-panel__more,
-.ab-panel:hover .ab-panel__more,
-.ab-panel:focus-within .ab-panel__more { opacity: 1; }
-
-/* На узком экране раскрывать нечего — полосы становятся карточками,
-   пояснение видно сразу: наведения там нет. */
-@media (max-width: 1100px) {
-    .ab-hero__panels { flex-wrap: wrap; height: auto; }
-    .ab-hero__panels .ab-panel { flex: 1 1 calc(50% - 6px); height: 230px; }
-    .ab-hero__panels .ab-panel__title { writing-mode: horizontal-tb; transform: none; white-space: normal; }
-    .ab-hero__panels .ab-panel__note { max-height: 90px; margin-top: 8px; opacity: 1; }
-    .ab-hero__panels .ab-panel__more { display: none; }
-}
-@media (max-width: 560px) {
-    .ab-hero__panels .ab-panel { flex: 1 1 100%; height: 210px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .ab-panel, .ab-panel__note, .ab-panel__more { transition: none; }
 }
 
 /* ---- подарочный сертификат ----
