@@ -464,6 +464,11 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
     background: var(--ab-white); color: var(--ab-dark);
     box-shadow: 0 26px 60px rgba(12,9,9,.42); }
 
+/* Обещание срока сверху карточки: первое, что видно, — что будет дальше. */
+.ab-hero__form-badge { display: inline-block; margin-bottom: 12px; padding: 6px 12px;
+    border-radius: 999px; background: var(--ab-50);
+    font-size: 12px; font-weight: 700; color: var(--ab-600); }
+
 .ab-hero__form-title { display: block; margin-bottom: 6px; font-family: var(--ab-font-display);
     font-size: 21px; font-weight: 800; color: var(--ab-dark); }
 .ab-hero__form-note { margin: 0 0 18px; font-size: 14px; line-height: 1.5; color: var(--ab-500); }
@@ -476,6 +481,15 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
     font: inherit; font-size: 15px; }
 .ab-hero__field input:focus,
 .ab-hero__field select:focus { outline: 2px solid var(--ab-600); outline-offset: 1px; border-color: transparent; }
+
+/* Позвонить самому — вариант не хуже заявки, номер должен быть под рукой. */
+.ab-hero__form-phone { display: flex; align-items: baseline; justify-content: center; gap: 8px;
+    margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--ab-100);
+    font-family: var(--ab-font-display); font-size: 18px; font-weight: 800;
+    color: var(--ab-dark); text-decoration: none; }
+.ab-hero__form-phone i { font-style: normal; font-family: var(--ab-font); font-size: 12px;
+    font-weight: 400; color: var(--ab-400); }
+.ab-hero__form-phone:hover { color: var(--ab-600); }
 
 .ab-hero__form-legal { margin: 12px 0 0; font-size: 12px; line-height: 1.5; color: var(--ab-400); }
 .ab-hero__form-legal a { color: var(--ab-600); }
