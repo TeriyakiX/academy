@@ -1,14 +1,4 @@
-@php
-    $h = config('home.hero');
-    $schools = config('courses.schools');
-
-    /* «от …» берём из реальных цен программ направления, а не придумываем. */
-    $priceFrom = function (?string $school) use ($schools) {
-        $prices = collect($schools[$school] ?? [])->pluck('price')->filter();
-
-        return $prices->isNotEmpty() ? $prices->min() : null;
-    };
-@endphp
+@php $h = config('home.hero'); @endphp
 
 <section class="ab-hero">
     {{-- Фото занимает весь первый экран: это школа, а не текстовая страница. --}}
@@ -34,21 +24,6 @@
                                       stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                             {{ $fact }}
-                        </li>
-                    @endforeach
-                </ul>
-
-                {{-- Направления с ценой: человек сразу видит, что здесь есть
-                     и сколько стоит, без переключений и раскрытий. --}}
-                <ul class="ab-hero__dirs ab-in" style="--d:.26s">
-                    @foreach ($h['directions'] as $d)
-                        @php $from = $priceFrom($d['school'] ?? null); @endphp
-
-                        <li>
-                            <a class="ab-hero__dir" href="{{ $d['href'] }}">
-                                <b>{{ $d['short'] }}</b>
-                                <i>{{ $from ? 'от ' . number_format($from, 0, '', ' ') . ' ₽' : 'по запросу' }}</i>
-                            </a>
                         </li>
                     @endforeach
                 </ul>
