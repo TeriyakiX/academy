@@ -19,27 +19,11 @@
 
 @include('partials.blocks.constructor-cta')
 
-@include('partials.blocks.schedule')
-
-@include('partials.blocks.steps')
-
 @include('partials.blocks.reviews')
-
-@include('partials.blocks.teachers')
-
-@include('partials.blocks.about')
-
-@include('partials.blocks.reasons')
-
-@include('partials.blocks.directions')
-
-@include('partials.blocks.business-cta')
 
 @include('partials.blocks.events')
 
 @include('partials.blocks.certificate')
-
-@include('partials.blocks.partners')
 
 @include('partials.blocks.faq')
 
