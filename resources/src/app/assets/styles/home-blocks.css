@@ -1193,3 +1193,92 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
     .ab-giftcard-stack__back,
     .ab-cert__inner:hover .ab-giftcard-stack__back { transition: none; transform: rotate(4deg) translate(10px, 12px); }
 }
+
+/* ================= Чем занимается школа =================
+   Три направления одним блоком: курсы, оборудование, запуск кофеен.
+   Раньше об оборудовании и бизнесе можно было узнать только из меню. */
+.ab-lines { padding: 76px 0; }
+.ab-lines__head { max-width: 760px; margin-bottom: 34px; }
+
+.ab-lines__list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px; margin: 0; padding: 0; list-style: none; }
+@media (max-width: 1000px) { .ab-lines__list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 680px)  { .ab-lines__list { grid-template-columns: minmax(0, 1fr); } }
+
+.ab-lines__card { display: flex; flex-direction: column; height: 100%; padding: 26px;
+    border: 1px solid var(--ab-100); border-radius: var(--ab-radius-lg);
+    background: var(--ab-white); text-decoration: none;
+    transition: transform var(--ab-transition), border-color var(--ab-transition),
+        box-shadow var(--ab-transition); }
+.ab-lines__card:hover { transform: translateY(-4px); border-color: var(--ab-300);
+    box-shadow: 0 18px 40px rgba(26,26,26,.1); }
+
+.ab-lines__tag { align-self: flex-start; margin-bottom: 14px; padding: 6px 12px;
+    border-radius: 999px; background: var(--ab-50);
+    font-size: 12px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase;
+    color: var(--ab-600); }
+
+.ab-lines__title { margin-bottom: 8px; font-family: var(--ab-font-display);
+    font-size: 21px; font-weight: 800; line-height: 1.2; color: var(--ab-dark); }
+.ab-lines__text { margin-bottom: 20px; font-size: 15px; line-height: 1.55; color: var(--ab-500); }
+
+.ab-lines__foot { display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    margin-top: auto; padding-top: 16px; border-top: 1px solid var(--ab-100); }
+.ab-lines__foot i { font-style: normal; font-size: 13px; color: var(--ab-400); }
+
+.ab-lines__go { display: inline-flex; align-items: center; gap: 7px;
+    font-size: 14px; font-weight: 700; color: var(--ab-600); }
+.ab-lines__go svg { width: 16px; height: 16px; transition: transform var(--ab-transition); }
+.ab-lines__card:hover .ab-lines__go svg { transform: translateX(3px); }
+
+@media (max-width: 760px) {
+    .ab-lines { padding: 44px 0; }
+    .ab-lines__head { margin-bottom: 22px; }
+    .ab-lines__card { padding: 20px; }
+    .ab-lines__title { font-size: 19px; }
+    .ab-lines__text { margin-bottom: 16px; font-size: 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ab-lines__card, .ab-lines__go svg { transition: none; }
+    .ab-lines__card:hover { transform: none; }
+}
+
+/* ================= Всплывающее предложение =================
+   Небольшая карточка в углу. Появляется не сразу и закрывается насовсем,
+   поэтому не воспринимается как реклама, которую надо отбивать. */
+.ab-promo { position: fixed; right: 20px; bottom: 20px; z-index: 60;
+    width: min(330px, calc(100vw - 40px)); padding: 22px;
+    border: 1px solid var(--ab-100); border-radius: 20px; background: var(--ab-white);
+    box-shadow: 0 24px 60px rgba(12,9,9,.28);
+    opacity: 0; transform: translateY(14px);
+    transition: opacity .28s ease, transform .28s ease; }
+.ab-promo.is-open { opacity: 1; transform: none; }
+
+.ab-promo__close { position: absolute; top: 12px; right: 12px;
+    display: flex; align-items: center; justify-content: center;
+    width: 28px; height: 28px; padding: 0; border: none; border-radius: 50%;
+    background: var(--ab-50); color: var(--ab-500); cursor: pointer;
+    transition: background var(--ab-transition), color var(--ab-transition); }
+.ab-promo__close:hover { background: var(--ab-100); color: var(--ab-dark); }
+.ab-promo__close svg { width: 15px; height: 15px; }
+
+.ab-promo__tag { display: inline-block; margin-bottom: 10px; padding: 5px 11px;
+    border-radius: 999px; background: var(--ab-50);
+    font-size: 11px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase;
+    color: var(--ab-600); }
+
+.ab-promo__title { display: block; margin-bottom: 6px; font-family: var(--ab-font-display);
+    font-size: 19px; font-weight: 800; color: var(--ab-dark); }
+.ab-promo__text { margin: 0 0 16px; font-size: 14px; line-height: 1.5; color: var(--ab-500); }
+.ab-promo__action { width: 100%; justify-content: center; }
+
+/* На телефоне карточка в углу закрывает содержимое — делаем полосой снизу. */
+@media (max-width: 560px) {
+    .ab-promo { right: 10px; left: 10px; bottom: 10px; width: auto; padding: 18px; border-radius: 16px; }
+    .ab-promo__text { margin-bottom: 14px; font-size: 13px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ab-promo { transition: none; }
+}
