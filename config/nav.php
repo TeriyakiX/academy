@@ -48,7 +48,8 @@ return [
         ['title' => 'Для бизнеса',       'href' => '/busines.html', 'accent' => true],
         ['title' => 'Оборудование',     'href' => '/shop.html'],
         ['title' => 'Сертификат',        'href' => '/sertifikat.html'],
-        ['title' => 'Блог',              'href' => '/blog.html'],
+        ['title' => 'О нас', 'href' => '/o-nas.html'],
+    ['title' => 'Блог',              'href' => '/blog.html'],
         ['title' => 'Контакты',          'href' => '/contact.html'],
     ],
 
@@ -62,7 +63,8 @@ return [
             ['title' => 'Для бизнеса', 'href' => '/busines.html'],
             ['title' => 'Оборудование','href' => '/shop.html'],
             ['title' => 'Мероприятия', 'href' => '/events.html'],
-            ['title' => 'Блог',        'href' => '/blog.html'],
+            ['title' => 'О нас', 'href' => '/o-nas.html'],
+    ['title' => 'Блог',        'href' => '/blog.html'],
             ['title' => 'Контакты',    'href' => '/contact.html'],
         ],
         'Курсы бариста' => [
