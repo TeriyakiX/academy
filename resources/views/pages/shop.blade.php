@@ -23,14 +23,25 @@
                     @endif
                 </nav>
 
-                <h1 class="ab-cpage__title">
-                    {{ $current->title ?? 'Оборудование для кофеен' }}@if ($brand) <span class="ab-cpage__title-brand">{{ $brand }}</span>@endif
-                </h1>
-                <p class="ab-cpage__lead">
-                    {{ $current->description
-                        ?? 'Профессиональные кофемашины, кофемолки и аксессуары — то же оборудование,
-                            на котором проходит обучение в Академии.' }}
-                </p>
+                {{-- Фото оборудования справа: шапка каталога без него была
+                     пустой полосой, а человек пришёл смотреть на технику. --}}
+                <div class="ab-cpage__split">
+                    <div>
+                        <h1 class="ab-cpage__title">
+                            {{ $current->title ?? 'Оборудование для кофеен' }}@if ($brand) <span class="ab-cpage__title-brand">{{ $brand }}</span>@endif
+                        </h1>
+                        <p class="ab-cpage__lead">
+                            {{ $current->description
+                                ?? 'Профессиональные кофемашины, кофемолки и аксессуары — то же оборудование,
+                                    на котором проходит обучение в Академии.' }}
+                        </p>
+                    </div>
+
+                    <div class="ab-cpage__media">
+                        <img src="/assets/about.webp" alt="Профессиональная кофемашина в Академии Бариста"
+                             width="678" height="413" loading="eager" decoding="async">
+                    </div>
+                </div>
             </div>
         </section>
 

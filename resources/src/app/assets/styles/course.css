@@ -181,3 +181,16 @@
 .ab-page--events .ab-events        { background: var(--ab-white); }
 .ab-page--events .ab-lead-block    { background: var(--ab-50); }
 .ab-page--events .ab-contacts-home { background: var(--ab-white); }
+
+/* Шапка раздела с фото справа: каталог курсов, оборудование. */
+.ab-cpage__split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 440px);
+    gap: 48px; align-items: center; }
+.ab-cpage__split .ab-cpage__lead { margin-bottom: 0; }
+.ab-cpage__media { position: relative; }
+.ab-cpage__media img { display: block; width: 100%; aspect-ratio: 16 / 11; object-fit: cover;
+    border-radius: var(--ab-radius-lg); box-shadow: 0 20px 44px rgba(26,26,26,.14); }
+
+@media (max-width: 900px) {
+    .ab-cpage__split { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+    .ab-cpage__media img { aspect-ratio: 16 / 9; }
+}

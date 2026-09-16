@@ -29,7 +29,7 @@
     <div class="site-header__main">
         <div class="site-header__container">
             <a class="site-header__logo" href="/" aria-label="Академия Бариста — на главную">
-                <img src="/assets/logo.png" alt="Академия Бариста" width="64" height="64" loading="eager">
+                <img src="/assets/logo.svg" alt="Академия Бариста" width="64" height="65" loading="eager">
             </a>
 
             <nav class="site-nav" aria-label="Основное меню">
@@ -78,7 +78,7 @@
 <div class="site-mobile" id="site-mobile-menu" hidden>
     <div class="site-mobile__panel">
         <div class="site-mobile__head">
-            <a class="site-mobile__logo" href="/"><img src="/assets/logo.png" alt="Академия Бариста" width="52" height="52"></a>
+            <a class="site-mobile__logo" href="/"><img src="/assets/logo.svg" alt="Академия Бариста" width="52" height="53"></a>
             <button class="site-mobile__close" type="button" aria-label="Закрыть">&times;</button>
         </div>
 
