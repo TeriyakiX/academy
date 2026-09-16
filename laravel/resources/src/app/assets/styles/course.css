@@ -252,3 +252,13 @@
     .ab-cmod__day { padding: 18px 0; }
     .ab-cmod__items { font-size: 13px; }
 }
+
+/* Фото в шапке — спутник заголовка, а не главный герой: при коротком
+   тексте крупная картинка раздувала шапку до половины экрана. */
+.ab-cpage__split { grid-template-columns: minmax(0, 1fr) minmax(0, 380px); }
+.ab-cpage__media img { height: auto; aspect-ratio: 16 / 10; }
+.ab-cpage__split--solo { grid-template-columns: minmax(0, 1fr); }
+
+/* В каталоге вкладки идут сразу за шапкой: полный отступ секции
+   давал пустую полосу в сотню пикселей. */
+.ab-page--catalog .ab-programs { padding-top: 12px; }
