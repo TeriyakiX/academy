@@ -17,8 +17,21 @@
                     <b>{{ $catalog['h1'] }}</b>
                 </nav>
 
-                <h1 class="ab-cpage__title">{{ $catalog['h1'] }}</h1>
-                <p class="ab-cpage__lead">{{ $catalog['lead'] }}</p>
+                {{-- Текст слева, фото направления справа: без картинки шапка
+                     выглядела пустой полосой над вкладками. --}}
+                <div class="ab-cpage__split">
+                    <div>
+                        <h1 class="ab-cpage__title">{{ $catalog['h1'] }}</h1>
+                        <p class="ab-cpage__lead">{{ $catalog['lead'] }}</p>
+                    </div>
+
+                    @if (!empty($catalog['image']))
+                        <div class="ab-cpage__media">
+                            <img src="{{ $catalog['image'] }}" alt="{{ $catalog['h1'] }}"
+                                 width="573" height="470" loading="eager" decoding="async">
+                        </div>
+                    @endif
+                </div>
             </div>
         </section>
 
