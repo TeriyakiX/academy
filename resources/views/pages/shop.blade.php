@@ -25,7 +25,7 @@
 
                 {{-- Фото оборудования справа: шапка каталога без него была
                      пустой полосой, а человек пришёл смотреть на технику. --}}
-                <div class="ab-cpage__split">
+                <div class="ab-cpage__split{{ ($current || $brand) ? ' ab-cpage__split--solo' : '' }}">
                     <div>
                         <h1 class="ab-cpage__title">
                             {{ $current->title ?? 'Оборудование для кофеен' }}@if ($brand) <span class="ab-cpage__title-brand">{{ $brand }}</span>@endif
@@ -37,10 +37,14 @@
                         </p>
                     </div>
 
+                    {{-- Фото только на общей странице каталога: в разделе «Кофемолки»
+                         или «Аксессуары» кофемашина была бы не по теме. --}}
+                    @if (!$current && !$brand)
                     <div class="ab-cpage__media">
                         <img src="/assets/about.webp" alt="Профессиональная кофемашина в Академии Бариста"
                              width="678" height="413" loading="eager" decoding="async">
                     </div>
+                    @endif
                 </div>
             </div>
         </section>
