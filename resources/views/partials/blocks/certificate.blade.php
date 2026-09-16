@@ -59,30 +59,9 @@
                 </div>
             </div>
 
-            {{-- Сертификат нарисован вёрсткой, а не снимком: на прежней
-                 картинке была напечатана дата окончания, которая давно прошла,
-                 и серая рука со стока на белом фоне. --}}
+            {{-- Сертификат — бумажный документ, нарисованный вёрсткой. --}}
             <div class="ab-cert__media" aria-hidden="true">
-                <div class="ab-giftcard-stack">
-                    <span class="ab-giftcard-stack__back"></span>
-
-                    <div class="ab-giftcard">
-                        <span class="ab-giftcard__sheen"></span>
-
-                        <img class="ab-giftcard__mark" src="/assets/logo.png" alt=""
-                             width="64" height="64" loading="lazy" decoding="async">
-
-                        <span class="ab-giftcard__kicker">Подарочный</span>
-                        <strong class="ab-giftcard__word">Сертификат</strong>
-
-                        <span class="ab-giftcard__rule"></span>
-                        <span class="ab-giftcard__foot">Академия Бариста · Москва</span>
-                    </div>
-
-                    @if ($from)
-                        <span class="ab-giftcard__price">от {{ number_format($from, 0, '', ' ') }} ₽</span>
-                    @endif
-                </div>
+                @include('partials.certificate-paper', ['price' => $from])
             </div>
 
             {{-- Лента программ занимает всю ширину карточки. Без скрипта она

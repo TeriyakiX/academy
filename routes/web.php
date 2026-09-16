@@ -80,6 +80,14 @@ foreach (config('site.pages') as $uri => $page) {
                 'school'    => $card['school']    ?? 'Курсы',
                 'price'     => $card['price']     ?? null,
                 'old_price' => $card['old']       ?? null,
+                'duration'  => $card['duration']  ?? null,
+                'url'       => $uri,
+                /* Фото направления — для карточки записи рядом с программой. */
+                'photo'     => [
+                    'Курсы бариста' => '/assets/barista.webp',
+                    'Мастер-классы' => '/assets/master-class.webp',
+                    'Барное дело'   => '/assets/barmen.webp',
+                ][$card['school'] ?? ''] ?? '/assets/barista.webp',
             ],
         ]))->name($routeName);
 

@@ -68,15 +68,128 @@
             </div>
         </section>
 
-        {{-- ---------- Программа курса ---------- --}}
-        @if (count($course['program']))
-            <section class="ab-cprog ab-reveal">
-                <div class="ab-container">
-                    <h2 class="ab-h2">Программа курса</h2>
-                    <p class="ab-lead">Что именно разбираем на занятиях — по блокам.</p>
+        {{-- ---------- Программа курса ----------
+             Слева — темы по дням: в каждом дне теория и практика.
+             Справа — карточка записи, она едет вместе с прокруткой,
+             чтобы записаться можно было из любого места программы. --}}
+        @php
+            $days = \App\Support\CourseSchedule::days(
+                $course['program'], $course['duration'] ?? null, $course['days'] ?? null
+            );
+            $dayCount = \App\Support\CourseSchedule::dayCount($course['duration'] ?? null);
+            $dayWord  = ($dayCount % 10 === 1 && $dayCount % 100 !== 11) ? 'дня' : 'дней';
+            /* Мастер-класс — не курс: и в заголовке, и в карточке записи. */
+            $isClass  = ($course['school'] ?? '') === 'Мастер-классы';
+        @endphp
 
-                    <div data-island="CourseProgram"
-                         data-props="{{ json_encode(['blocks' => $course['program']], JSON_UNESCAPED_UNICODE) }}"></div>
+        @if (count($days) && count($days[0]['groups']))
+            <section class="ab-cmod ab-reveal">
+                <div class="ab-container">
+                    <div class="ab-cmod__grid">
+                        <div class="ab-cmod__main">
+                            <h2 class="ab-cmod__title">
+                                Программа {{ $isClass ? 'мастер-класса' : 'курса' }} <b>{{ $course['title'] }}</b>
+                                @if ($dayCount > 1)
+                                    <span>состоит из {{ $dayCount }} {{ $dayWord }}</span>
+                                @endif
+                            </h2>
+
+                            <ol class="ab-cmod__list">
+                                @foreach ($days as $day)
+                                    <li class="ab-cmod__day">
+                                        <h3 class="ab-cmod__day-title">
+                                            {{-- Номер уже в подписи — рядом значок зерна, как метка модуля. --}}
+                                            <svg class="ab-cmod__day-mark" viewBox="0 0 24 24" aria-hidden="true">
+                                                <ellipse cx="12" cy="12" rx="7" ry="9.5" transform="rotate(35 12 12)" />
+                                                <path d="M8.5 5.5c3 2.5 1 5.5 3.5 7s1.5 4 3.5 6" />
+                                            </svg>
+                                            [ {{ $day['label'] }} ]
+                                        </h3>
+
+                                        <div class="ab-cmod__groups">
+                                            @foreach ($day['groups'] as $group)
+                                                <div class="ab-cmod__group">
+                                                    <h4 class="ab-cmod__group-title">
+                                                        @if ($group['icon'] === 'practice')
+                                                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                                <path d="M4 10h13v4a6 6 0 0 1-6 6h-1a6 6 0 0 1-6-6v-4Z" />
+                                                                <path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H16" />
+                                                                <path d="M8 3c0 1.5 1 1.5 1 3M12 3c0 1.5 1 1.5 1 3" />
+                                                            </svg>
+                                                        @elseif ($group['icon'] === 'result')
+                                                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                                <circle cx="12" cy="9" r="6" />
+                                                                <path d="m9 14-2 7 5-3 5 3-2-7" />
+                                                            </svg>
+                                                        @else
+                                                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                                <path d="M4 20h4L19 9l-4-4L4 16v4Z" />
+                                                                <path d="M13 7l4 4" />
+                                                                <path d="M4 4h8" />
+                                                            </svg>
+                                                        @endif
+                                                        {{ $group['title'] }}
+                                                    </h4>
+
+                                                    <ul class="ab-cmod__items">
+                                                        @foreach ($group['items'] as $item)
+                                                            <li>{{ \Illuminate\Support\Str::ucfirst(trim($item)) }}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </li>
+                                @endforeach
+                            </ol>
+                        </div>
+
+                        {{-- Карточка записи рядом с программой. --}}
+                        <aside class="ab-cmod__aside">
+                            <form class="ab-cmod__card" method="post" action="/lead">
+                                @csrf
+                                @include('partials.form-guard')
+
+                                <input type="hidden" name="source" value="Программа курса">
+                                <input type="hidden" name="page" value="{{ request()->getPathInfo() }}">
+                                <input type="hidden" name="courses" value="{{ $course['title'] }}">
+
+                                <img class="ab-cmod__photo" src="{{ $course['photo'] }}" alt="{{ $course['title'] }}"
+                                     width="573" height="470" loading="lazy" decoding="async">
+
+                                <div class="ab-cmod__chips">
+                                    @if (!empty($course['duration']))
+                                        <span>{{ $course['duration'] }}</span>
+                                    @endif
+                                    @if (!empty($course['price']))
+                                        <span>{{ number_format($course['price'], 0, ',', ' ') }} ₽</span>
+                                    @endif
+                                </div>
+
+                                <b class="ab-cmod__card-title">Хочу записаться на {{ $isClass ? 'мастер-класс' : 'курс' }} «{{ $course['title'] }}»</b>
+                                <p class="ab-cmod__card-note">Оставьте заявку — менеджер свяжется с вами и подберёт дату.</p>
+
+                                <label class="ab-cmod__field">
+                                    <span>Имя</span>
+                                    <input type="text" name="name" placeholder="Как к вам обращаться" required autocomplete="name">
+                                </label>
+
+                                <label class="ab-cmod__field">
+                                    <span>Телефон</span>
+                                    <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required autocomplete="tel">
+                                </label>
+
+                                <button class="ab-btn ab-btn--primary ab-btn--block ab-btn--lg" type="submit">
+                                    Отправить заявку
+                                </button>
+
+                                <p class="ab-cmod__legal">
+                                    Отправляя форму, вы соглашаетесь с
+                                    <a href="/privacy-policy.html">политикой обработки персональных данных</a>
+                                </p>
+                            </form>
+                        </aside>
+                    </div>
                 </div>
             </section>
         @endif

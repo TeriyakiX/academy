@@ -148,3 +148,8 @@
 .ab-cw__legend { margin: 0 0 12px; font-size: 13px; font-weight: 800; text-transform: uppercase;
     letter-spacing: .05em; color: var(--ab-400); }
 .ab-cw__fields + .ab-cw__legend { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--ab-100); }
+
+/* Шапка страницы сертификатов: лист крупнее, чем картинка на странице
+   «Для бизнеса» с той же сеткой, — на маленьком не читается надпись. */
+.ab-page--cert .ab-bus__intro { grid-template-columns: minmax(0, 1fr) minmax(0, 440px); }
+@media (max-width: 1000px) { .ab-page--cert .ab-bus__intro { grid-template-columns: minmax(0, 1fr); } }

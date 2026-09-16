@@ -29,7 +29,6 @@
     .ab-steps__list,
     .ab-reasons__list,
     .ab-bus__grid,
-    .ab-cprog__grid,
     .ctor__list {
         display: flex;
         grid-template-columns: none;
@@ -52,7 +51,6 @@
     .ab-steps__list::-webkit-scrollbar,
     .ab-reasons__list::-webkit-scrollbar,
     .ab-bus__grid::-webkit-scrollbar,
-    .ab-cprog__grid::-webkit-scrollbar,
     .ctor__list::-webkit-scrollbar { display: none; }
 
     .ab-tabs__grid > *,
@@ -63,7 +61,6 @@
     .ab-steps__list > *,
     .ab-reasons__list > *,
     .ab-bus__grid > *,
-    .ab-cprog__grid > *,
     .ctor__list > * {
         flex: 0 0 100%;
         min-width: 0;
@@ -294,7 +291,7 @@
     .ab-hero__facts li { font-size: 14px; }
 
     /* Подзаголовки внутри карточек */
-    .ab-docs__title, .ab-cprog__title { font-size: 17px; }
+    .ab-docs__title { font-size: 17px; }
 }
 
 /* ---------- Первый экран и отзывы ---------- */
@@ -517,18 +514,6 @@
     }
 }
 
-/* ---------- Подарочный сертификат на телефоне ----------
-   Карточка вдвое уже, чем на компьютере: отступы и кегли уменьшаем,
-   иначе логотип и подпись налезают друг на друга. */
-@media (max-width: 760px) {
-    .ab-giftcard { padding: 20px; border-radius: 16px; }
-    .ab-giftcard__mark { width: 32px; height: 32px; }
-    .ab-giftcard__kicker { font-size: 10px; letter-spacing: .18em; }
-    .ab-giftcard__word { font-size: 26px; }
-    .ab-giftcard__rule { margin: 12px 0 9px; }
-    .ab-giftcard__foot { font-size: 11px; }
-}
-
 /* ---------- Плотнее крупные блоки на телефоне ----------
    Каждый из них занимал по полтора экрана: карточки шли в один столбец,
    отступы оставались «компьютерными». Читается то же самое, места вдвое меньше. */
@@ -557,7 +542,7 @@
     .ab-buscta__list svg { width: 18px; height: 18px; }
 
     /* Первый экран страницы сертификатов: карточка занимала пол-экрана. */
-    .ab-cpage__hero .ab-giftcard { max-width: 260px; margin: 0 auto; }
+    .ab-cpage__hero .ab-certdoc-stack { max-width: 300px; margin: 0 auto; }
     .ab-cert__media--light { margin-bottom: 4px; }
 }
 

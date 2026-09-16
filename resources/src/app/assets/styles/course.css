@@ -3,7 +3,7 @@
    Токены и кнопки — ui.css, общие блоки — home-blocks.css.
    ================================================================ */
 
-.ab-cpage__hero, .ab-cprog, .ab-clearn { font-family: var(--ab-font); color: var(--ab-dark); }
+.ab-cpage__hero, .ab-cmod, .ab-clearn { font-family: var(--ab-font); color: var(--ab-dark); }
 
 /* ---- хлебные крошки ---- */
 .ab-crumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
@@ -50,28 +50,6 @@
 .ab-cpage__buy-phone { display: block; margin-top: 16px; text-align: center;
     font-size: 16px; font-weight: 800; color: var(--ab-dark); text-decoration: none; }
 .ab-cpage__buy-phone span { display: block; font-size: 12px; font-weight: 400; color: var(--ab-400); }
-
-/* ---- программа курса ---- */
-.ab-cprog { padding: 72px 0; background: var(--ab-50); }
-.ab-cprog__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
-.ab-cprog__block { display: flex; flex-direction: column; padding: 30px;
-    border: 1px solid var(--ab-100); border-radius: var(--ab-radius-lg); background: var(--ab-white); }
-.ab-cprog__head { display: flex; align-items: center; gap: 16px; margin-bottom: 22px; }
-.ab-cprog__n { display: flex; align-items: center; justify-content: center;
-    width: 48px; height: 48px; flex: none; border-radius: 14px; background: var(--ab-600);
-    font-family: var(--ab-font-display); font-size: 18px; font-weight: 800; color: var(--ab-white); }
-.ab-cprog__title { margin: 0; font-size: 20px; font-weight: 800; }
-.ab-cprog__count { margin: 2px 0 0; font-size: 13px; color: var(--ab-400); }
-
-.ab-cprog__topics { flex: 1; display: grid; gap: 11px; margin: 0 0 18px; padding: 0; list-style: none; }
-.ab-cprog__topics li { position: relative; padding-left: 20px; font-size: 15px; line-height: 1.5; color: var(--ab-500); }
-.ab-cprog__topics li::before { content: ''; position: absolute; left: 0; top: 9px;
-    width: 7px; height: 7px; border-radius: 50%; background: var(--ab-300); }
-
-.ab-cprog__more { align-self: flex-start; padding: 10px 18px; border: 1px solid var(--ab-100);
-    border-radius: var(--ab-radius); background: var(--ab-white); font: inherit; font-size: 14px;
-    font-weight: 700; color: var(--ab-600); cursor: pointer; transition: all var(--ab-transition); }
-.ab-cprog__more:hover { background: var(--ab-600); border-color: var(--ab-600); color: var(--ab-white); }
 
 /* ---- чему научитесь ---- */
 .ab-clearn { padding: 72px 0; }
@@ -148,8 +126,8 @@
    ================================================================ */
 
 /* --- страница курса --- */
-.ab-page--course .ab-cprog    { background: var(--ab-50); }
-.ab-page--course .ab-clearn   { background: var(--ab-white); }
+.ab-page--course .ab-cmod     { background: var(--ab-white); }
+.ab-page--course .ab-clearn   { background: var(--ab-50); }
 .ab-page--course .ab-programs { background: var(--ab-50); }
 .ab-page--course .ab-lead-block { background: var(--ab-white); }
 
@@ -193,4 +171,84 @@
 @media (max-width: 900px) {
     .ab-cpage__split { grid-template-columns: minmax(0, 1fr); gap: 20px; }
     .ab-cpage__media img { aspect-ratio: 16 / 9; }
+}
+
+/* ================= Программа курса по дням =================
+   Дни идут строками с разделителями: номер дня, внутри теория и практика
+   списками. Справа карточка записи — едет вместе с прокруткой, чтобы
+   записаться можно было, не возвращаясь наверх. */
+.ab-cmod { padding: 64px 0; }
+
+.ab-cmod__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 340px);
+    gap: 56px; align-items: start; }
+
+.ab-cmod__title { margin: 0 0 28px; font-family: var(--ab-font-display);
+    font-size: clamp(24px, 2.6vw, 34px); font-weight: 500; line-height: 1.15;
+    text-transform: uppercase; color: var(--ab-dark); }
+.ab-cmod__title b { font-weight: 800; }
+.ab-cmod__title span { display: block; }
+
+.ab-cmod__list { margin: 0; padding: 0; list-style: none; }
+
+.ab-cmod__day { padding: 22px 0; border-top: 1px solid var(--ab-100); }
+.ab-cmod__day:first-child { padding-top: 0; border-top: 0; }
+
+.ab-cmod__day-title { display: flex; align-items: center; gap: 12px; margin: 0 0 16px;
+    font-size: 15px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+    color: var(--ab-dark); }
+.ab-cmod__day-mark { width: 22px; height: 22px; flex: none;
+    fill: var(--ab-600); stroke: var(--ab-white); stroke-width: 1.4; stroke-linecap: round; }
+
+/* теория и практика одного дня — рядом, как два столбца конспекта */
+.ab-cmod__groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 32px; }
+.ab-cmod__group-title { display: flex; align-items: center; gap: 8px; margin: 0 0 8px;
+    font-size: 14px; font-weight: 700; color: var(--ab-dark); }
+.ab-cmod__group-title svg { width: 20px; height: 20px; flex: none;
+    fill: none; stroke: var(--ab-600); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+
+.ab-cmod__items { display: grid; gap: 4px; margin: 0; padding: 0 0 0 18px; list-style: disc;
+    font-size: 14px; line-height: 1.45; color: var(--ab-500); }
+.ab-cmod__items li::marker { color: var(--ab-400); }
+
+/* ---- карточка записи ---- */
+.ab-cmod__aside { position: sticky; top: 90px; }
+
+.ab-cmod__card { display: grid; gap: 12px; padding: 10px 10px 18px;
+    border: 1px solid var(--ab-100); border-radius: var(--ab-radius-lg);
+    background: var(--ab-white); box-shadow: 0 18px 40px rgba(26,26,26,.08); }
+.ab-cmod__card > :not(.ab-cmod__photo) { margin-inline: 8px; }
+
+.ab-cmod__photo { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover;
+    border-radius: 12px; }
+
+.ab-cmod__chips { display: grid; grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); gap: 8px; }
+.ab-cmod__chips span { padding: 7px 8px; border: 1px solid var(--ab-dark); border-radius: 8px;
+    font-size: 12px; font-weight: 700; text-align: center; text-transform: uppercase;
+    color: var(--ab-dark); white-space: nowrap; }
+
+.ab-cmod__card-title { font-family: var(--ab-font-display); font-size: 19px; font-weight: 800;
+    line-height: 1.2; text-transform: uppercase; color: var(--ab-dark); }
+.ab-cmod__card-note { margin: -4px 0 4px; font-size: 13px; line-height: 1.45; color: var(--ab-500); }
+
+.ab-cmod__field { display: grid; gap: 4px; }
+.ab-cmod__field > span { font-size: 11px; font-weight: 700; letter-spacing: .06em;
+    text-transform: uppercase; color: var(--ab-400); }
+.ab-cmod__field input { width: 100%; padding: 9px 0; border: 0; border-bottom: 1px solid var(--ab-200);
+    background: transparent; color: var(--ab-dark); font: inherit; font-size: 15px; }
+.ab-cmod__field input:focus { outline: none; border-bottom-color: var(--ab-600); }
+
+.ab-cmod__legal { margin: 0; font-size: 11px; line-height: 1.45; color: var(--ab-400); }
+.ab-cmod__legal a { color: var(--ab-500); }
+
+@media (max-width: 1000px) {
+    .ab-cmod__grid { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+    .ab-cmod__aside { position: static; max-width: 460px; }
+}
+
+@media (max-width: 680px) {
+    .ab-cmod { padding: 40px 0; }
+    .ab-cmod__title { margin-bottom: 20px; font-size: 22px; }
+    .ab-cmod__groups { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+    .ab-cmod__day { padding: 18px 0; }
+    .ab-cmod__items { font-size: 13px; }
 }

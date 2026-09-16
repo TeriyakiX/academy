@@ -32,21 +32,9 @@
                         </ul>
                     </div>
 
-                    {{-- Карточка нарисована вёрсткой: на прежнем снимке была
-                         напечатана дата окончания, которая давно прошла. --}}
+                    {{-- Сертификат — бумажный документ, нарисованный вёрсткой. --}}
                     <div class="ab-cert__media ab-cert__media--light" aria-hidden="true">
-                        <div class="ab-giftcard">
-                            <span class="ab-giftcard__sheen"></span>
-
-                            <img class="ab-giftcard__mark" src="/assets/logo.png" alt=""
-                                 width="64" height="64" loading="eager" decoding="async">
-
-                            <span class="ab-giftcard__kicker">Подарочный</span>
-                            <strong class="ab-giftcard__word">Сертификат</strong>
-
-                            <span class="ab-giftcard__rule"></span>
-                            <span class="ab-giftcard__foot">Академия Бариста · Москва</span>
-                        </div>
+                        @include('partials.certificate-paper')
                     </div>
                 </div>
             </div>
