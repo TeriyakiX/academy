@@ -12,7 +12,8 @@
             </div>
 
             <div class="ab-about__body">
-                <h2 class="ab-h2">{{ $a['title'] }}</h2>
+                @php $tag = ($asTitle ?? false) ? 'h1' : 'h2'; @endphp
+                <{{ $tag }} class="ab-h2">{{ $a['title'] }}</{{ $tag }}>
                 <p class="ab-lead">{{ $a['lead'] }}</p>
                 <p class="ab-about__text">{{ $a['text'] }}</p>
 
