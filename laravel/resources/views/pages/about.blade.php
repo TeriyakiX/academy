@@ -20,7 +20,7 @@
         нужны целиком и в одном месте.
     --}}
     <main class="ab-page">
-        @include('partials.blocks.about')
+        @include('partials.blocks.about', ['asTitle' => true])
         @include('partials.blocks.reasons')
         @include('partials.blocks.teachers')
         @include('partials.blocks.partners')
