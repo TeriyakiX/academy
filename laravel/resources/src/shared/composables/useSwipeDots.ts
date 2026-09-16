@@ -19,7 +19,6 @@ const TRACKS = [
     '.ab-steps__list',
     '.ab-reasons__list',
     '.ab-bus__grid',        // услуги для бизнеса
-    '.ab-cprog__grid',      // программа курса
     '.ctor__list',          // конструктор курсов
     '.ab-rv__swipe',        // отзывы
     '.ab-teachers__swipe',  // преподаватели

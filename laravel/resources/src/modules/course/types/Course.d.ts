@@ -45,10 +45,3 @@ interface INextDiscount {
     need: number;
     percent: number;
 }
-
-/** Блок программы курса: тема занятия и её содержание. */
-interface IProgramBlock {
-    title: string;
-    topics: string[];
-    duration?: string;
-}

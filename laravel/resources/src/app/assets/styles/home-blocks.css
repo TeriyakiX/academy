@@ -1082,56 +1082,88 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
     .ab-contacts__social-title { text-align: center; }
 }
 
-/* ---- подарочный сертификат ----
-   Карточка нарисована вёрсткой: прежний снимок был со стоковой рукой
-   на белом фоне и с напечатанной датой окончания, которая давно прошла. */
-.ab-cert__media { display: flex; align-items: center; justify-content: center;
-    perspective: 1000px; }
+/* ---- изображение сертификата ----
+   Бумажный документ в рамке, с печатью и строкой подписи — чтобы с первого
+   взгляда читался как сертификат, а не как пластиковая карта.
+   Размеры текста заданы в долях ширины листа (cqi): на телефоне лист
+   уменьшается целиком, пропорции не ломаются. */
+.ab-cert__media { display: flex; align-items: center; justify-content: center; }
 
-.ab-giftcard { position: relative; overflow: hidden;
-    display: flex; flex-direction: column; justify-content: flex-end;
-    width: 100%; max-width: 440px; aspect-ratio: 8 / 5;
-    padding: 30px; border-radius: 20px;
-    /* карточка светлее подложки, иначе сливается с блоком */
-    border: 1px solid rgba(226,214,206,.35);
+.ab-certdoc-stack { position: relative; width: 100%; max-width: 460px; }
+
+/* второй лист позади: подарок выглядит объёмнее, чем одиночная бумага */
+.ab-certdoc-stack__back { position: absolute; inset: 0; border-radius: 4px;
+    background: linear-gradient(160deg, #eee5d9, #ddd0c0);
+    box-shadow: 0 16px 36px rgba(0,0,0,.22);
+    transform: rotate(3.5deg) translate(10px, 10px);
+    transition: transform var(--ab-transition); }
+.ab-cert__inner:hover .ab-certdoc-stack__back { transform: rotate(5.5deg) translate(14px, 14px); }
+
+.ab-certdoc { position: relative; container-type: inline-size;
+    aspect-ratio: 297 / 210; padding: 3cqi; border-radius: 4px;
     background:
-        radial-gradient(130% 130% at 10% 6%, rgba(240,230,222,.22), transparent 58%),
-        linear-gradient(145deg, #8a736a 0%, #6b5a53 45%, #4a3c37 100%);
-    box-shadow: 0 30px 60px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.08);
-    transform: rotate(-3.5deg);
+        radial-gradient(120% 90% at 20% 0%, rgba(255,255,255,.9), transparent 60%),
+        linear-gradient(170deg, #fdfaf4 0%, #f6efe4 100%);
+    box-shadow: 0 30px 60px rgba(0,0,0,.4);
+    transform: rotate(-2.5deg);
     transition: transform var(--ab-transition), box-shadow var(--ab-transition); }
-.ab-cert__inner:hover .ab-giftcard { transform: rotate(-1.5deg) translateY(-6px);
-    box-shadow: 0 38px 72px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.1); }
+.ab-cert__inner:hover .ab-certdoc { transform: rotate(-1deg) translateY(-6px); }
 
-/* косой блик — карточка перестаёт выглядеть плоской заливкой */
-.ab-giftcard__sheen { position: absolute; inset: -40% -10% auto; height: 150%;
-    background: linear-gradient(104deg, transparent 40%, rgba(255,255,255,.16) 50%, transparent 60%);
-    pointer-events: none; }
+/* двойная рамка документа и тонкая линия внутри неё */
+.ab-certdoc__frame { position: relative; display: flex; flex-direction: column; align-items: center;
+    height: 100%; padding: 3.2cqi 6cqi 2.6cqi;
+    border: max(3px, .9cqi) double #b9a18b;
+    outline: 1px solid rgba(185,161,139,.55); outline-offset: -1.8cqi;
+    text-align: center; color: #3f3430; }
 
-/* логотип тёмный, на тёмной карточке его не видно — выбеливаем.
-   Стоит в обычном потоке: на узкой карточке абсолютный налезал на подпись. */
-.ab-giftcard__mark { width: 40px; height: 40px; margin-bottom: auto; object-fit: contain; object-position: left top;
-    filter: brightness(0) invert(1); opacity: .92; }
+.ab-certdoc__corner { position: absolute; width: 4.5cqi; height: 4.5cqi;
+    border: 0 solid #a88d76; }
+.ab-certdoc__corner--tl { top: 2.6cqi; left: 2.6cqi; border-top-width: 2px; border-left-width: 2px; }
+.ab-certdoc__corner--tr { top: 2.6cqi; right: 2.6cqi; border-top-width: 2px; border-right-width: 2px; }
+.ab-certdoc__corner--bl { bottom: 2.6cqi; left: 2.6cqi; border-bottom-width: 2px; border-left-width: 2px; }
+.ab-certdoc__corner--br { bottom: 2.6cqi; right: 2.6cqi; border-bottom-width: 2px; border-right-width: 2px; }
 
-/* нижняя часть карточки держится вместе */
-.ab-giftcard__kicker { font-size: 12px; font-weight: 700; letter-spacing: .22em;
-    text-transform: uppercase; color: rgba(245,238,232,.82); }
-.ab-giftcard__word { margin-top: 4px; font-family: var(--ab-font-display);
-    font-size: clamp(26px, 3.4vw, 38px); font-weight: 800; line-height: 1;
-    letter-spacing: -.01em; color: #fff; }
+.ab-certdoc__logo { width: 7.5cqi; height: auto; margin-bottom: 1.2cqi; }
 
-.ab-giftcard__rule { height: 1px; margin: 18px 0 12px;
-    background: linear-gradient(90deg, rgba(245,238,232,.7), transparent); }
-.ab-giftcard__foot { font-size: 12px; letter-spacing: .06em; color: rgba(245,238,232,.78); }
+.ab-certdoc__title { font-family: var(--ab-font-display); font-size: 8cqi; font-weight: 800;
+    line-height: 1; letter-spacing: .14em; text-transform: uppercase; color: #3b302c; }
+.ab-certdoc__subtitle { margin-top: .9cqi; font-size: 2.5cqi; letter-spacing: .05em; color: #8a7466; }
+
+.ab-certdoc__label { align-self: flex-start; margin-top: 2.2cqi;
+    font-size: 1.9cqi; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: #9c8676; }
+.ab-certdoc__line { align-self: stretch; padding: .4cqi 0 .5cqi; text-align: left;
+    border-bottom: 1px solid #cfbdab; font-size: 2.7cqi; line-height: 1.2; }
+.ab-certdoc__line i { font-family: Georgia, 'Times New Roman', serif; font-style: italic; color: #b09c8b; }
+
+.ab-certdoc__foot { display: flex; align-items: flex-end; justify-content: space-between; gap: 3cqi;
+    align-self: stretch; margin-top: auto; }
+.ab-certdoc__meta { display: grid; gap: .3cqi; text-align: left;
+    font-size: 1.9cqi; letter-spacing: .06em; color: #9c8676; }
+
+/* печать слегка повёрнута и полупрозрачна — как настоящий оттиск */
+.ab-certdoc__seal { width: 13cqi; height: 13cqi; color: #8e4b3d; opacity: .78;
+    transform: rotate(-14deg); }
+.ab-certdoc__seal text { font-family: var(--ab-font); }
+
+.ab-certdoc__sign { display: grid; gap: .6cqi; min-width: 20cqi;
+    font-size: 1.9cqi; letter-spacing: .04em; color: #9c8676; }
+.ab-certdoc__sign-line { height: 1px; background: #b9a18b; }
+
+/* ориентир по цене — из тех же программ, что и на странице сертификатов */
+.ab-certdoc__price { position: absolute; right: -10px; bottom: -14px; z-index: 1;
+    padding: 9px 16px; border-radius: 999px;
+    background: var(--ab-600); color: var(--ab-white);
+    font-family: var(--ab-font-display); font-size: 15px; font-weight: 800;
+    box-shadow: 0 12px 28px rgba(0,0,0,.35); }
+
+/* На светлой странице сертификатов глубокая тень выглядит грязным пятном. */
+.ab-cert__media--light .ab-certdoc { box-shadow: 0 22px 46px rgba(26,26,26,.18); }
+.ab-cert__media--light .ab-certdoc-stack__back { box-shadow: 0 12px 28px rgba(26,26,26,.1); }
 
 @media (prefers-reduced-motion: reduce) {
-    .ab-giftcard, .ab-cert__inner:hover .ab-giftcard { transition: none; transform: rotate(-3.5deg); }
-}
-
-/* Карточка на светлой странице сертификатов: тень мягче,
-   на белом фоне глубокая выглядит грязным пятном. */
-.ab-cert__media--light .ab-giftcard {
-    box-shadow: 0 24px 50px rgba(26,26,26,.22), inset 0 1px 0 rgba(255,255,255,.1);
+    .ab-certdoc, .ab-cert__inner:hover .ab-certdoc { transition: none; transform: rotate(-2.5deg); }
+    .ab-certdoc-stack__back,
+    .ab-cert__inner:hover .ab-certdoc-stack__back { transition: none; transform: rotate(3.5deg) translate(10px, 10px); }
 }
 
 /* ---- баннер сертификата: шаги и стопка карточек ----
@@ -1149,32 +1181,12 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 .ab-cert__step-body b { font-size: 15px; font-weight: 800; color: var(--ab-white); }
 .ab-cert__step-body i { font-style: normal; font-size: 13px; line-height: 1.45; color: var(--ab-cream); }
 
-/* Вторая карточка позади первой: подарок — это стопка, а не один лист */
-.ab-giftcard-stack { position: relative; width: 100%; max-width: 440px; }
-.ab-giftcard-stack__back { position: absolute; inset: 0;
-    border-radius: 20px; border: 1px solid rgba(226,214,206,.18);
-    background: linear-gradient(145deg, #5b4c46, #3a302d);
-    transform: rotate(4deg) translate(10px, 12px);
-    transition: transform var(--ab-transition); }
-.ab-cert__inner:hover .ab-giftcard-stack__back { transform: rotate(6.5deg) translate(16px, 16px); }
-
-/* Ориентир по цене — из тех же программ, что и на странице сертификатов */
-.ab-giftcard__price { position: absolute; right: -10px; bottom: -14px;
-    padding: 9px 16px; border-radius: 999px;
-    background: var(--ab-white); color: var(--ab-dark);
-    font-family: var(--ab-font-display); font-size: 15px; font-weight: 800;
-    box-shadow: 0 12px 28px rgba(0,0,0,.35); }
-
 @media (max-width: 760px) {
     .ab-cert__steps { gap: 12px; margin-bottom: 22px; }
     .ab-cert__step-n { width: 26px; height: 26px; font-size: 13px; }
     .ab-cert__step-body b { font-size: 14px; }
     .ab-cert__step-body i { font-size: 12px; }
-    .ab-giftcard__price { right: 0; bottom: -12px; padding: 7px 13px; font-size: 13px; }
-}
-@media (prefers-reduced-motion: reduce) {
-    .ab-giftcard-stack__back,
-    .ab-cert__inner:hover .ab-giftcard-stack__back { transition: none; transform: rotate(4deg) translate(10px, 12px); }
+    .ab-certdoc__price { right: 0; bottom: -12px; padding: 7px 13px; font-size: 13px; }
 }
 
 /* ================= Чем занимается школа =================
