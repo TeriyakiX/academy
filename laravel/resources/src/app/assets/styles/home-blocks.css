@@ -1047,7 +1047,7 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
    уменьшается целиком, пропорции не ломаются. */
 .ab-cert__media { display: flex; align-items: center; justify-content: center; }
 
-.ab-certdoc-stack { position: relative; width: 100%; max-width: 460px; }
+.ab-certdoc-stack { position: relative; width: 100%; max-width: 520px; }
 
 /* второй лист позади: подарок выглядит объёмнее, чем одиночная бумага */
 .ab-certdoc-stack__back { position: absolute; inset: 0; border-radius: 4px;
