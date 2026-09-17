@@ -1123,7 +1123,7 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 .ab-certdoc__corner--bl { bottom: 2.6cqi; left: 2.6cqi; border-bottom-width: 2px; border-left-width: 2px; }
 .ab-certdoc__corner--br { bottom: 2.6cqi; right: 2.6cqi; border-bottom-width: 2px; border-right-width: 2px; }
 
-.ab-certdoc__logo { width: 7.5cqi; height: auto; margin-bottom: 1.2cqi; }
+.ab-certdoc__logo { width: auto; height: 7.8cqi; margin-bottom: 1.4cqi; }
 
 .ab-certdoc__title { font-family: var(--ab-font-display); font-size: 8cqi; font-weight: 800;
     line-height: 1; letter-spacing: .14em; text-transform: uppercase; color: #3b302c; }

@@ -79,11 +79,15 @@
 .ab-bus__card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(26,26,26,.1); }
 .ab-bus__media img { display: block; width: 100%; height: 190px; object-fit: cover; }
 .ab-bus__body { display: flex; flex-direction: column; flex: 1; padding: 24px; }
-.ab-bus__title { margin: 0 0 12px; font-size: 18px; font-weight: 800; line-height: 1.3; }
+.ab-bus__title { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+    overflow: hidden; margin: 0 0 12px; font-size: 18px; font-weight: 800; line-height: 1.3; }
+.ab-bus__title a { color: inherit; text-decoration: none; }
+.ab-bus__card:hover .ab-bus__title a { color: var(--ab-600); }
 .ab-bus__meta { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px; padding: 0; list-style: none; }
 .ab-bus__meta li { padding: 6px 12px; border-radius: 999px; background: var(--ab-50); font-size: 13px; color: var(--ab-500); }
 .ab-bus__meta b { color: var(--ab-dark); }
-.ab-bus__text { flex: 1; margin: 0 0 16px; font-size: 14px; line-height: 1.6; color: var(--ab-500); }
+.ab-bus__text { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
+    overflow: hidden; flex: 1; margin: 0 0 16px; font-size: 14px; line-height: 1.6; color: var(--ab-500); }
 .ab-bus__details { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
 .ab-bus__details-title { margin: 0 0 10px; font-size: 14px; font-weight: 800; }
 .ab-bus__points { display: grid; gap: 8px; margin: 0 0 16px; padding: 0; list-style: none; }
@@ -126,7 +130,8 @@
    ================================================================ */
 
 /* --- страница курса --- */
-.ab-page--course .ab-cmod     { background: var(--ab-white); }
+.ab-page--course .ab-cmod,
+.ab-page--business .ab-cmod    { background: var(--ab-white); }
 .ab-page--course .ab-clearn   { background: var(--ab-50); }
 .ab-page--course .ab-programs { background: var(--ab-50); }
 .ab-page--course .ab-lead-block { background: var(--ab-white); }
@@ -269,3 +274,10 @@
 /* В каталоге вкладки идут сразу за шапкой: полный отступ секции
    давал пустую полосу в сотню пикселей. */
 .ab-page--catalog .ab-programs { padding-top: 12px; }
+
+/* Список «Что входит» на странице услуги: колонками, если пунктов много. */
+.ab-cmod__items--solo { gap: 10px; font-size: 15px; line-height: 1.5; }
+
+@media (min-width: 900px) {
+    .ab-cmod__items--solo { grid-template-columns: 1fr 1fr; column-gap: 28px; }
+}

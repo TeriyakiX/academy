@@ -45,10 +45,11 @@
         <section class="ab-bus ab-reveal">
             <div class="ab-container">
                 <h2 class="ab-h2">Что мы делаем</h2>
-                <p class="ab-lead">Выберите услугу — расскажем подробнее и посчитаем под ваш проект.</p>
+                <p class="ab-lead">Выберите услугу — на её странице расписано, что входит в работу и сколько это стоит.</p>
 
-                <div data-island="BusinessServices"
-                     data-props="{{ json_encode(['items' => config('home.business.items')], JSON_UNESCAPED_UNICODE) }}"></div>
+                <div class="ab-bus__grid">
+                    @each('partials.blocks.service-card', config('business.items'), 'service')
+                </div>
             </div>
         </section>
 

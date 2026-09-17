@@ -40,14 +40,6 @@ interface ITeacher {
 }
 
 /** Услуга для бизнеса. */
-interface IBusinessService {
-    title: string;
-    text: string;
-    points: string[];
-    price: number;
-    duration: string;
-    image?: string;
-}
 
 interface IFaqItem {
     q: string;
