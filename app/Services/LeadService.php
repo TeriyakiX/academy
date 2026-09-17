@@ -112,7 +112,7 @@ class LeadService
         $token = config('leads.telegram.token');
         $chat  = config('leads.telegram.chat_id');
 
-        if (!$token || !$chat) {
+        if (!config('leads.telegram.enabled') || !$token || !$chat) {
             return;
         }
 

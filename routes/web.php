@@ -180,6 +180,10 @@ Route::post('/lead', function (
         return redirect('/thank-you.html');
     }
 
+    // Не все формы передают страницу — берём её из адреса, откуда пришли.
+    $data['page'] = ($data['page'] ?? null)
+        ?: parse_url((string) $request->headers->get('referer'), PHP_URL_PATH) ?: null;
+
     $leads->handle($data);
 
     return redirect('/thank-you.html');
