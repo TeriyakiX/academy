@@ -13,9 +13,9 @@
 
 @include('partials.blocks.lines')
 
-@include('partials.blocks.stats')
-
 @include('partials.blocks.courses-tabs')
+
+@include('partials.blocks.stats')
 
 @include('partials.blocks.constructor-cta')
 

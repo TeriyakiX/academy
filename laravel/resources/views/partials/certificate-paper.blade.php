@@ -24,8 +24,10 @@
             <span class="ab-certdoc__corner ab-certdoc__corner--bl"></span>
             <span class="ab-certdoc__corner ab-certdoc__corner--br"></span>
 
-            <img class="ab-certdoc__logo" src="/assets/logo.svg" alt=""
-                 width="80" height="81" loading="lazy" decoding="async">
+            {{-- Только знак: в полном логотипе подпись идёт сбоку, и на маленьком
+                 листе знак из-за неё смотрится сдвинутым от центра. --}}
+            <img class="ab-certdoc__logo" src="/assets/logo-mark.svg" alt=""
+                 width="42" height="81" loading="lazy" decoding="async">
 
             <strong class="ab-certdoc__title">Сертификат</strong>
             <span class="ab-certdoc__subtitle">на обучение в Академии Бариста</span>

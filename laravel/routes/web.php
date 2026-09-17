@@ -52,9 +52,44 @@ $catalogPages = [
     ],
 ];
 
+/*
+ | Услуги для бизнеса: у каждой своя страница.
+ |
+ | Раньше все услуги лежали свёрнутыми карточками на одной странице:
+ | услугу нельзя было открыть по ссылке, и в поиске её не было.
+ | Страницы описаны в config/business.php и добавляются к остальным
+ | страницам сайта — тогда они сами попадают и в маршруты, и в карту сайта.
+ */
+$services = collect(config('business.items', []))->keyBy('url');
+
+config(['site.pages' => $services
+    ->map(fn ($service) => [
+        'view'        => 'service',
+        'title'       => $service['seo_title'],
+        'description' => $service['seo_description'],
+        'keywords'    => '',
+        'og_title'    => $service['seo_title'],
+        'og_image'    => $service['image'],
+        'canonical'   => rtrim(config('seo.domain'), '/') . $service['url'],
+        'robots'      => '',
+        'body_attrs'  => ['class' => 'body'],
+    ])
+    ->all() + config('site.pages', [])]);
 foreach (config('site.pages') as $uri => $page) {
     $routeName = 'page' . str_replace(['/', '.html', '.'], ['.', '', '_'], rtrim($uri, '/')) ?: 'home';
 
+    if ($services->has($uri)) {
+        $service = $services->get($uri);
+
+        Route::get($uri, fn () => view('pages.service', [
+            'seo'     => $page,
+            'service' => $service,
+            /* Три соседние услуги внизу страницы: людям редко нужна ровно одна. */
+            'others'  => $services->except($uri)->take(3)->values()->all(),
+        ]))->name($routeName);
+
+        continue;
+    }
     if (isset($catalogPages[$uri])) {
         $meta = $catalogPages[$uri];
         $schools = config('courses.schools');
@@ -101,6 +136,24 @@ foreach (config('site.pages') as $uri => $page) {
 foreach (config('site.redirects') as $from => $to) {
     Route::redirect($from, $to, 301);
 }
+
+/*
+ | Бланк сертификата для печати.
+ |
+ | Нужен школе, чтобы выдавать сертификаты на руки: открыл, впечатал
+ | имя и программу, распечатал. В карту сайта не попадает и закрыт
+ | от поисковиков — это рабочий инструмент, а не страница сайта.
+ */
+Route::get('/sertifikat-blank.html', function (\Illuminate\Http\Request $request) {
+    return response()
+        ->view('pages.certificate-print', [
+            'to'      => \Illuminate\Support\Str::limit((string) $request->query('to'), 60, ''),
+            'program' => \Illuminate\Support\Str::limit((string) $request->query('program'), 90, ''),
+            'number'  => preg_replace('~[^0-9A-Za-z-]~', '', (string) $request->query('number')) ?: '0001',
+            'date'    => preg_replace('~[^0-9.]~', '', (string) $request->query('date')) ?: now()->format('d.m.Y'),
+        ])
+        ->header('X-Robots-Tag', 'noindex, nofollow');
+})->name('certificate.blank');
 
 // Старые адреса с WordPress-версии сайта
 foreach ([
