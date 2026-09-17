@@ -139,7 +139,7 @@
 /* --- каталог и подборки --- */
 .ab-page--catalog .ab-programs   { background: var(--ab-white); }
 .ab-page--catalog .ab-ctor       { background: var(--ab-50); }
-.ab-page--catalog .ab-schedule   { background: var(--ab-white); }
+.ab-page--catalog .ab-when      { background: var(--ab-white); }
 .ab-page--catalog .ab-reviews    { background: var(--ab-50); }
 .ab-page--catalog .ab-faq        { background: var(--ab-white); }
 .ab-page--catalog .ab-lead-block { background: var(--ab-50); }

@@ -23,7 +23,6 @@
     /* ---------- Карточки листаются вбок ---------- */
     .ab-tabs__grid,
     .ab-rv__list,
-    .ab-schedule__list,
     .ab-dirs__cols,
     .ab-ev__list,
     .ab-steps__list,
@@ -44,7 +43,6 @@
 
     .ab-tabs__grid::-webkit-scrollbar,
     .ab-rv__list::-webkit-scrollbar,
-    .ab-schedule__list::-webkit-scrollbar,
     .ab-dirs__cols::-webkit-scrollbar,
     .ab-ev__list::-webkit-scrollbar,
     .ab-steps__list::-webkit-scrollbar,
@@ -53,7 +51,6 @@
 
     .ab-tabs__grid > *,
     .ab-rv__list > *,
-    .ab-schedule__list > *,
     .ab-dirs__cols > *,
     .ab-ev__list > *,
     .ab-steps__list > *,
@@ -340,17 +337,6 @@
 
     .ab-shop__filter-groups { gap: 20px; margin-bottom: 24px; }
     .ab-shop__filter-label { font-size: 12px; }
-}
-
-@media (max-width: 760px) {
-    /* На телефоне карточка ужимается сильнее: кольцо и пустая область
-       под графикой занимали больше половины высоты. */
-    .ab-schedule__card { padding: 18px; }
-    .ab-schedule__title { margin-bottom: 12px; font-size: 17px; }
-    .ab-schedule__visual { min-height: 96px; gap: 10px; margin-bottom: 14px; }
-    .ab-schedule__free svg { width: 88px; height: 88px; }
-    .ab-schedule__summary { font-size: 16px; }
-    .ab-schedule__note { font-size: 13px; }
 }
 
 /* ---------- Каталог оборудования на телефоне ----------

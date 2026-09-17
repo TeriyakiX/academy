@@ -3,7 +3,7 @@
    Токены и кнопки — в ui.css.
    ================================================================ */
 
-.ab-programs, .ab-ratings, .ab-schedule, .ab-steps,
+.ab-programs, .ab-ratings, .ab-when, .ab-steps,
 .ab-teachers-section, .ab-ctor, .ab-lead-block, .ab-partners {
     font-family: var(--ab-font);
     color: var(--ab-dark);
@@ -113,46 +113,41 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 .ab-rating__score { font-family: var(--ab-font-display); font-size: 34px; font-weight: 800;
     line-height: 1; color: var(--ab-600); }
 
-/* ================= График занятий ================= */
-.ab-schedule { padding: 72px 0; background: var(--ab-50); }
-.ab-schedule__list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
-    margin: 0; padding: 0; list-style: none; }
-@media (max-width: 900px) { .ab-schedule__list { grid-template-columns: 1fr; } }
-.ab-schedule__card { display: flex; flex-direction: column; padding: 22px;
-    border: 1px solid var(--ab-100); border-radius: var(--ab-radius-lg); background: var(--ab-white);
-    transition: transform var(--ab-transition), box-shadow var(--ab-transition); }
-.ab-schedule__card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(26,26,26,.09); }
-.ab-schedule__title { margin: 0 0 16px; font-size: 19px; font-weight: 800; }
-.ab-schedule__visual { flex: 1; display: flex; flex-direction: column; justify-content: center;
-    gap: 12px; min-height: 118px; margin-bottom: 16px; }
-.ab-schedule__row { display: grid; gap: 6px; }
-.ab-schedule__slot { font-size: 13px; font-weight: 700; color: var(--ab-600); }
-.ab-schedule__bars { display: flex; gap: 8px; }
-.ab-schedule__bar { flex: 1; height: 7px; border-radius: 4px; background: var(--ab-100);
-    transform-origin: left center; }
-/* активная полоса «наливается» один раз при появлении блока */
-.is-visible .ab-schedule__bar.is-on { background: var(--ab-600); animation: ab-fill .55s ease both; }
-.is-visible .ab-schedule__row:nth-child(2) .ab-schedule__bar.is-on { animation-delay: .12s; }
-.is-visible .ab-schedule__row:nth-child(3) .ab-schedule__bar.is-on { animation-delay: .24s; }
-@keyframes ab-fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+/* ================= Когда идут занятия ================= */
+.ab-when { padding: 72px 0; }
+.ab-when__head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between;
+    gap: 16px 32px; margin-bottom: 26px; }
+.ab-when__head .ab-lead { margin-bottom: 0; }
+.ab-when__hint { max-width: 320px; margin: 0; padding: 12px 16px; border-left: 2px solid var(--ab-600);
+    font-size: 14px; line-height: 1.5; color: var(--ab-500); }
 
-.ab-schedule__free { display: flex; justify-content: center; }
-.ab-schedule__free svg { width: 104px; height: 104px; }
+.ab-when__table { border: 1px solid var(--ab-100); border-radius: var(--ab-radius-lg);
+    background: var(--ab-white); overflow: hidden; }
+.ab-when__row { display: grid; grid-template-columns: 180px minmax(0, 1fr) 180px minmax(0, 1fr);
+    gap: 16px 24px; align-items: center; padding: 18px 24px; border-top: 1px solid var(--ab-100); }
+.ab-when__row:first-child { border-top: 0; }
+.ab-when__row--head { padding: 12px 24px; background: var(--ab-50); font-size: 12px; font-weight: 700;
+    letter-spacing: .06em; text-transform: uppercase; color: var(--ab-400); }
+.ab-when__row:not(.ab-when__row--head):hover { background: var(--ab-50); }
 
-/* Деления идут по кругу одно за другим и остаются подсвеченными */
-.ab-schedule__tick { stroke: var(--ab-100); stroke-width: 7; stroke-linecap: round; }
-.is-visible .ab-schedule__tick { animation: ab-tick .5s ease both;
-    animation-delay: calc(var(--i) * .09s); }
-@keyframes ab-tick {
-    from { stroke: var(--ab-100); }
-    to   { stroke: var(--ab-600); }
+.ab-when__mode { font-family: var(--ab-font-display); font-size: 18px; font-weight: 800; }
+.ab-when__times { display: flex; flex-wrap: wrap; gap: 8px; }
+.ab-when__times span { padding: 6px 12px; border-radius: 999px; background: var(--ab-50);
+    font-size: 13px; font-weight: 600; color: var(--ab-600); }
+.ab-when__times span.is-any { background: none; padding-left: 0; color: var(--ab-400); font-weight: 500; }
+.ab-when__len { font-size: 15px; font-weight: 700; }
+.ab-when__for { font-size: 14px; color: var(--ab-500); }
+
+@media (max-width: 860px) {
+    .ab-when { padding: 44px 0; }
+    .ab-when__hint { max-width: none; }
+    .ab-when__row--head { display: none; }
+    .ab-when__row { grid-template-columns: 1fr; gap: 10px; padding: 18px; }
+    .ab-when__len::before,
+    .ab-when__for::before,
+    .ab-when__times::before { content: attr(data-label) ': '; margin-right: 4px; color: var(--ab-400); }
+    .ab-when__times { align-items: center; }
 }
-@media (prefers-reduced-motion: reduce) {
-    .is-visible .ab-schedule__tick { animation: none; stroke: var(--ab-600); }
-}
-
-.ab-schedule__summary { margin: 0 0 4px; font-size: 18px; font-weight: 800; }
-.ab-schedule__note { margin: 0; font-size: 14px; color: var(--ab-400); }
 
 /* ================= Как проходит обучение ================= */
 .ab-steps { padding: 72px 0; }
@@ -839,7 +834,7 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 
 /* --- белые --- */
 .ab-programs,
-.ab-schedule,
+.ab-when,
 .ab-about,
 .ab-dirs,
 .ab-cert,
