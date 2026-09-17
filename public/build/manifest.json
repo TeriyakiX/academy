@@ -75,6 +75,15 @@
     "src": "resources/src/app/assets/styles/reviews.css",
     "isEntry": true
   },
+  "resources/src/app/assets/styles/service.css": {
+    "file": "assets/service-BTCor-NL.css",
+    "name": "service",
+    "names": [
+      "service.css"
+    ],
+    "src": "resources/src/app/assets/styles/service.css",
+    "isEntry": true
+  },
   "resources/src/app/assets/styles/shop.css": {
     "file": "assets/shop-BXy4irgV.css",
     "name": "shop",

@@ -28,6 +28,7 @@ export default defineConfig({
                     'site-layout',
                     'home-blocks',
                     'course',
+                    'service',
                     'constructor',
                     'reviews',
                     'shop',
