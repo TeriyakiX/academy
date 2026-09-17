@@ -230,6 +230,13 @@
     line-height: 1.2; text-transform: uppercase; color: var(--ab-dark); }
 .ab-cmod__card-note { margin: -4px 0 4px; font-size: 13px; line-height: 1.45; color: var(--ab-500); }
 
+.ab-cmod__dates { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.ab-cmod__dates li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; padding: 8px 10px;
+    border-radius: 8px; background: var(--ab-50, #f7f2ee); font-size: 13px; color: var(--ab-dark); }
+.ab-cmod__dates b { font-size: 14px; }
+.ab-cmod__dates span { color: var(--ab-500); }
+.ab-cmod__dates i { margin-left: auto; font-style: normal; font-size: 12px; color: var(--ab-500); }
+
 .ab-cmod__field { display: grid; gap: 4px; }
 .ab-cmod__field > span { font-size: 11px; font-weight: 700; letter-spacing: .06em;
     text-transform: uppercase; color: var(--ab-400); }

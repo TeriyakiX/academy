@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 
@@ -17,6 +18,10 @@ use Throwable;
  */
 class LeadService
 {
+    public function __construct(private CrmClient $crm)
+    {
+    }
+
     /** Минимальное время на заполнение формы человеком, секунды. */
     private const MIN_FILL_SECONDS = 3;
 
@@ -51,11 +56,54 @@ class LeadService
         // служебные поля в CRM не нужны
         unset($lead['website'], $lead['loaded_at']);
 
+        $certificate = $this->certificate($lead['certificate'] ?? null);
+        unset($lead['certificate']);
+
         // В лог пишем всегда — это страховка, если внешний канал недоступен.
         Log::channel('single')->info('Заявка с сайта', $lead);
 
+        $this->sendCrm($lead, $certificate);
         $this->sendTelegram($lead);
         $this->sendBitrix($lead);
+    }
+
+    /** Заявка в CRM академии; сертификат — отдельными полями. */
+    private function sendCrm(array $lead, ?array $certificate): void
+    {
+        $this->crm->post('leads', array_filter($lead + [
+            'ip'          => Request::ip(),
+            'certificate' => $certificate,
+        ], fn ($value) => $value !== null && $value !== ''));
+    }
+
+    /**
+     * Сертификат из формы. Сумму считаем здесь, по ценам каталога:
+     * значению из браузера доверять нельзя.
+     */
+    private function certificate(?array $form): ?array
+    {
+        if (empty($form['recipient']) || empty($form['programs'])) {
+            return null;
+        }
+
+        $ids = array_filter(array_map('trim', explode(',', $form['programs'])));
+        $courses = collect(config('courses.schools'))->flatten(1)->keyBy('id')->only($ids);
+
+        if ($courses->isEmpty()) {
+            return null;
+        }
+
+        $percent = collect(config('courses.discounts'))
+            ->filter(fn ($p, $count) => $courses->count() >= (int) $count)
+            ->max() ?? 0;
+
+        return [
+            'recipient' => $form['recipient'],
+            'from'      => $form['from'] ?? null,
+            'wish'      => $form['wish'] ?? null,
+            'programs'  => $courses->pluck('title')->values()->all(),
+            'amount'    => (int) round($courses->sum('price') * (1 - $percent / 100)),
+        ];
     }
 
     /** Уведомление менеджеру в Telegram. */

@@ -167,7 +167,21 @@
                                 </div>
 
                                 <b class="ab-cmod__card-title">Хочу записаться на {{ $isClass ? 'мастер-класс' : 'курс' }} «{{ $course['title'] }}»</b>
-                                <p class="ab-cmod__card-note">Оставьте заявку — менеджер свяжется с вами и подберёт дату.</p>
+                                @if (!empty($course['groups']))
+                                    {{-- Ближайшие группы ведутся в CRM. --}}
+                                    <ul class="ab-cmod__dates">
+                                        @foreach (array_slice($course['groups'], 0, 3) as $group)
+                                            <li>
+                                                <b>{{ \Illuminate\Support\Carbon::parse($group['date'])->locale('ru')->translatedFormat('j F') }}</b>
+                                                @if ($group['time']) <span>{{ $group['time'] }}</span> @endif
+                                                @if ($group['seats'] !== null) <i>{{ $group['seats'] ? 'мест: ' . $group['seats'] : 'мест нет' }}</i> @endif
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                    <p class="ab-cmod__card-note">Оставьте заявку — менеджер забронирует место в группе.</p>
+                                @else
+                                    <p class="ab-cmod__card-note">Оставьте заявку — менеджер свяжется с вами и подберёт дату.</p>
+                                @endif
 
                                 <label class="ab-cmod__field">
                                     <span>Имя</span>
