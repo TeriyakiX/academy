@@ -72,11 +72,11 @@
         .corner--bl { bottom: 4mm; left: 4mm; border-bottom-width: .7mm; border-left-width: .7mm; }
         .corner--br { bottom: 4mm; right: 4mm; border-bottom-width: .7mm; border-right-width: .7mm; }
 
-        .logo { height: 22mm; margin-bottom: 4mm; }
+        .logo { width: 40mm; height: auto; margin-bottom: 5mm; }
 
         .title {
             margin: 0;
-            font-size: 19mm;
+            font-size: 16mm;
             font-weight: 800;
             letter-spacing: .12em;
             line-height: 1;
@@ -91,7 +91,7 @@
             color: #8a7466;
         }
 
-        .lines { width: 100%; margin-top: 10mm; }
+        .lines { width: 100%; margin-top: 8mm; }
 
         .label {
             font-size: 3.4mm;
@@ -102,17 +102,24 @@
         }
 
         .line {
-            margin: 1.5mm 0 7mm;
+            margin: 1.5mm 0 6mm;
             padding-bottom: 2mm;
             border-bottom: .3mm solid #cbb49f;
             min-height: 9mm;
             font-size: 7mm;
         }
 
-        .line i {
+        /* Пустая строка подсказывает, что в неё вписать; на печать подсказка не идёт. */
+        .line:empty::before {
+            content: attr(data-empty);
             font-family: Georgia, 'Times New Roman', serif;
             font-style: italic;
             color: #c3b1a1;
+        }
+
+        [contenteditable]:focus {
+            outline: none;
+            background: #fdf6ec;
         }
 
         .foot {
@@ -147,6 +154,9 @@
         @media print {
             .hint { display: none; }
             body { background: none; }
+            /* Подсказки в пустых строках на бумаге не нужны. */
+            .line:empty::before { content: ''; }
+            [contenteditable]:focus { background: none; }
         }
     </style>
 </head>
@@ -158,24 +168,24 @@
         <span class="corner corner--bl"></span>
         <span class="corner corner--br"></span>
 
-        <img class="logo" src="/assets/logo-mark.svg" alt="Академия Бариста">
+        <img class="logo" src="/assets/logo.svg" alt="Академия Бариста">
 
         <h1 class="title">Сертификат</h1>
         <span class="subtitle">на обучение в Академии Бариста</span>
 
         <div class="lines">
             <span class="label">Выдан</span>
-            <div class="line">{!! $to ? e($to) : '<i>имя получателя</i>' !!}</div>
+            <div class="line" contenteditable="true" data-empty="имя получателя">{{ $to }}</div>
 
             <span class="label">Программа</span>
-            <div class="line">{!! $program ? e($program) : '<i>выбранные курсы и мастер-классы</i>' !!}</div>
+            <div class="line" contenteditable="true" data-empty="выбранные курсы и мастер-классы">{{ $program }}</div>
         </div>
 
         <div class="foot">
             <div class="meta">
                 <div>Москва</div>
-                <div>№ {{ $number }}</div>
-                <div>{{ $date }}</div>
+                <div>№ <span contenteditable="true">{{ $number }}</span></div>
+                <div contenteditable="true">{{ $date }}</div>
             </div>
 
             {{-- Печать: круговая надпись вокруг знака. --}}
@@ -201,10 +211,9 @@
 </div>
 
 <p class="hint">
-    Бланк для печати. Ctrl+P → размер A4, ориентация «Альбомная», поля «Нет»,
-    отметка «Фоновая графика». Имя и программу можно впечатать заранее, добавив к адресу
-    <code>?to=Иван Иванов&amp;program=Бариста базовый&amp;number=0007</code> — или оставить
-    строки пустыми и заполнить от руки.
+    <b>Как выписать сертификат.</b> Нажмите на строку «Выдан» и впишите имя, потом программу,
+    номер и дату — прямо на листе. Затем Ctrl+P: размер A4, ориентация «Альбомная»,
+    поля «Нет», отметка «Фоновая графика». Можно и распечатать пустой бланк, а строки заполнить от руки.
 </p>
 </body>
 </html>
