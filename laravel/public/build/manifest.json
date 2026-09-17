@@ -58,7 +58,7 @@
     "isEntry": true
   },
   "resources/src/app/assets/styles/mobile.css": {
-    "file": "assets/mobile-B0vwbry1.css",
+    "file": "assets/mobile-D3mV3EqQ.css",
     "name": "mobile",
     "names": [
       "mobile.css"
@@ -112,7 +112,7 @@
     "isEntry": true
   },
   "resources/src/app/main.ts": {
-    "file": "assets/main-vXfkcKq6.js",
+    "file": "assets/main-D49M7cYK.js",
     "name": "main",
     "src": "resources/src/app/main.ts",
     "isEntry": true,
@@ -127,7 +127,7 @@
     ]
   },
   "resources/src/modules/certificate/components/CertificateWizard.vue": {
-    "file": "assets/CertificateWizard-CxMYTkTU.js",
+    "file": "assets/CertificateWizard-D6A4mW7n.js",
     "name": "CertificateWizard",
     "src": "resources/src/modules/certificate/components/CertificateWizard.vue",
     "isDynamicEntry": true,
@@ -137,7 +137,7 @@
     ]
   },
   "resources/src/modules/course/components/CourseConstructor.vue": {
-    "file": "assets/CourseConstructor-CIKeWP9i.js",
+    "file": "assets/CourseConstructor-DKjOFIvB.js",
     "name": "CourseConstructor",
     "src": "resources/src/modules/course/components/CourseConstructor.vue",
     "isDynamicEntry": true,
@@ -147,7 +147,7 @@
     ]
   },
   "resources/src/modules/course/components/CourseTabs.vue": {
-    "file": "assets/CourseTabs-DQfT9TzX.js",
+    "file": "assets/CourseTabs-CdcF3dtd.js",
     "name": "CourseTabs",
     "src": "resources/src/modules/course/components/CourseTabs.vue",
     "isDynamicEntry": true,
@@ -156,7 +156,7 @@
     ]
   },
   "resources/src/modules/home/components/EventsSchedule.vue": {
-    "file": "assets/EventsSchedule-ZFBrw19A.js",
+    "file": "assets/EventsSchedule-BP9hh6aF.js",
     "name": "EventsSchedule",
     "src": "resources/src/modules/home/components/EventsSchedule.vue",
     "isDynamicEntry": true,
@@ -165,7 +165,7 @@
     ]
   },
   "resources/src/modules/home/components/FaqAccordion.vue": {
-    "file": "assets/FaqAccordion-DkYG43y7.js",
+    "file": "assets/FaqAccordion-D3u4cJK7.js",
     "name": "FaqAccordion",
     "src": "resources/src/modules/home/components/FaqAccordion.vue",
     "isDynamicEntry": true,
@@ -174,7 +174,7 @@
     ]
   },
   "resources/src/modules/home/components/Reviews.vue": {
-    "file": "assets/Reviews-Dr82pO6v.js",
+    "file": "assets/Reviews-D5NZnwfv.js",
     "name": "Reviews",
     "src": "resources/src/modules/home/components/Reviews.vue",
     "isDynamicEntry": true,
@@ -183,7 +183,7 @@
     ]
   },
   "resources/src/modules/home/components/StatsCounter.vue": {
-    "file": "assets/StatsCounter-Bd80s4tZ.js",
+    "file": "assets/StatsCounter-0sPXdoHD.js",
     "name": "StatsCounter",
     "src": "resources/src/modules/home/components/StatsCounter.vue",
     "isDynamicEntry": true,

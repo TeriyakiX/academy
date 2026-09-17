@@ -22,13 +22,6 @@ const TRACKS = [
     '.ab-rv__swipe',        // отзывы
 ];
 
-/*
- | Ряды-переключатели — не карусель с карточками, а полоса кнопок.
- | Точки им не нужны, нужен понятный признак, что полосу можно тянуть:
- | тень у того края, за которым ещё есть содержимое.
- */
-const ROWS: string[] = [];
-
 /** Индекс карточки, которая сейчас в центре экрана. */
 function activeIndex(track: HTMLElement): number {
     const middle = track.scrollLeft + track.clientWidth / 2;
@@ -83,27 +76,10 @@ function buildDots(track: HTMLElement): void {
     sync();
 }
 
-function markRow(row: HTMLElement): void {
-    const update = () => {
-        const max = row.scrollWidth - row.clientWidth;
-        row.classList.toggle('has-left', row.scrollLeft > 4);
-        row.classList.toggle('has-right', row.scrollLeft < max - 4);
-    };
-
-    if (claim(row, 'rowReady')) {
-        row.classList.add('ab-swipe-row');
-        row.addEventListener('scroll', update, { passive: true });
-        window.addEventListener('resize', update);
-    }
-
-    update();
-}
-
 function scan(): void {
     if (!window.matchMedia(MEDIA_MOBILE).matches) return;
 
     qsa(TRACKS.join(',')).forEach(buildDots);
-    qsa(ROWS.join(',')).forEach(markRow);
 }
 
 export function useSwipeDots(): void {

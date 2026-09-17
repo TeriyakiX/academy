@@ -82,15 +82,6 @@
     .ab-shop__filters::-webkit-scrollbar { display: none; }
     .ab-tabs__nav > *, .ab-shop__filters > * { flex: none; }
 
-    /* Тень у края ряда: сразу видно, что он листается дальше.
-       Внутренняя тень не уезжает вместе с содержимым, в отличие от накладки. */
-    .ab-swipe-row { transition: box-shadow .2s ease; }
-    .ab-swipe-row.has-right { box-shadow: inset -26px 0 18px -18px rgba(0,0,0,.28); }
-    .ab-swipe-row.has-left  { box-shadow: inset 26px 0 18px -18px rgba(0,0,0,.28); }
-    .ab-swipe-row.has-left.has-right {
-        box-shadow: inset 26px 0 18px -18px rgba(0,0,0,.28),
-                    inset -26px 0 18px -18px rgba(0,0,0,.28); }
-
 
     /* Крупная карточка отзыва */
     .ab-rv__stage { padding: 22px; }
