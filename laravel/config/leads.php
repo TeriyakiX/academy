@@ -8,6 +8,8 @@
 
 return [
     'telegram' => [
+        // Пока заявки ведутся в CRM, уведомления в Telegram выключены.
+        'enabled' => (bool) env('TELEGRAM_LEADS_ENABLED', false),
         'token'   => env('TELEGRAM_BOT_TOKEN'),
         'chat_id' => env('TELEGRAM_CHAT_ID'),
     ],
