@@ -229,34 +229,30 @@ return [
 
     /* ---------- График занятий ---------- */
     'schedule' => [
-        'title' => 'Выбирай удобный график занятий',
-        'lead'  => 'Пропустили занятие? Отработаете его с другой группой бесплатно.',
+        'title' => 'Когда идут занятия',
+        'lead'  => 'Выберите формат: будни, выходные или занятие один на один.',
+        'note'  => 'Пропустили занятие — отработаете его с другой группой бесплатно.',
         'items' => [
             [
-                'title'   => 'По будням',
-                'slots'   => ['Утром', 'Днём', 'Вечером'],
-                'icon'    => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>',
-                'summary' => '2 дня по 4 часа',
-                'note'    => 'Базовые курсы бариста',
+                'title'    => 'По будням',
+                'times'    => ['утро', 'день', 'вечер'],
+                'length'   => '2 дня по 4 часа',
+                'audience' => 'Базовые курсы бариста',
             ],
             [
-                'title'   => 'По выходным',
-                'slots'   => ['Утро', 'Вечер'],
-                'icon'    => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg>',
-                'summary' => '1 день 8 часов',
-                'note'    => 'Для тех, кто работает',
+                'title'    => 'По выходным',
+                'times'    => ['утро', 'вечер'],
+                'length'   => '1 день 8 часов',
+                'audience' => 'Тем, кто работает в будни',
             ],
             [
-                'title'   => 'Индивидуально',
-                'slots'   => [],
-                'icon'    => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.6"/><path d="M5 20a7 7 0 0 1 14 0"/></svg>',
-                'summary' => 'Дату и время выбираете вы',
-                'note'    => 'Занятие один на один с тренером',
+                'title'    => 'Индивидуально',
+                'times'    => [],
+                'length'   => 'по договорённости',
+                'audience' => 'Занятие один на один с тренером',
             ],
         ],
     ],
-
-    /* ---------- Как проходит обучение ---------- */
     'steps' => [
         'demo'  => true, // формулировки предварительные
         'title' => 'Как проходит обучение',

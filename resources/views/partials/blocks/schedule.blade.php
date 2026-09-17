@@ -1,46 +1,51 @@
 @php $s = config('home.schedule'); @endphp
 
-<section class="ab-schedule ab-reveal">
+{{--
+    Когда идут занятия.
+
+    Раньше здесь были три карточки с полосками-делениями: красиво, но
+    человек не понимал, во сколько занятие. Теперь простая таблица:
+    формат, время, длительность и кому подходит — читается за пару секунд.
+--}}
+<section class="ab-when ab-reveal">
     <div class="ab-container">
-        <h2 class="ab-h2">{{ $s['title'] }}</h2>
-        <p class="ab-lead">{{ $s['lead'] }}</p>
+        <div class="ab-when__head">
+            <div>
+                <h2 class="ab-h2">{{ $s['title'] }}</h2>
+                <p class="ab-lead">{{ $s['lead'] }}</p>
+            </div>
 
-        <ul class="ab-schedule__list">
-            @foreach ($s['items'] as $i => $item)
-                <li class="ab-schedule__card">
-                    <h3 class="ab-schedule__title">{{ $item['title'] }}</h3>
+            @if (!empty($s['note']))
+                <p class="ab-when__hint">{{ $s['note'] }}</p>
+            @endif
+        </div>
 
-                    <div class="ab-schedule__visual">
-                        @if (count($item['slots']))
-                            @foreach ($item['slots'] as $k => $slot)
-                                <div class="ab-schedule__row">
-                                    <span class="ab-schedule__slot">{{ $slot }}</span>
-                                    <div class="ab-schedule__bars">
-                                        @for ($b = 0; $b < count($item['slots']); $b++)
-                                            <span class="ab-schedule__bar @if ($b === $k) is-on @endif"></span>
-                                        @endfor
-                                    </div>
-                                </div>
+        <div class="ab-when__table">
+            <div class="ab-when__row ab-when__row--head" aria-hidden="true">
+                <span>Формат</span>
+                <span>Время занятий</span>
+                <span>Сколько длится</span>
+                <span>Кому подходит</span>
+            </div>
+
+            @foreach ($s['items'] as $item)
+                <div class="ab-when__row">
+                    <b class="ab-when__mode">{{ $item['title'] }}</b>
+
+                    <div class="ab-when__times" data-label="Время">
+                        @if (!empty($item['times']))
+                            @foreach ($item['times'] as $time)
+                                <span>{{ $time }}</span>
                             @endforeach
                         @else
-                            {{-- Двенадцать делений по кругу — как часовой циферблат:
-                                 время занятия выбирается любое. --}}
-                            <div class="ab-schedule__free" aria-hidden="true">
-                                <svg viewBox="0 0 120 120">
-                                    @for ($i = 0; $i < 12; $i++)
-                                        <line class="ab-schedule__tick" x1="60" y1="16" x2="60" y2="27"
-                                              transform="rotate({{ $i * 30 }} 60 60)"
-                                              style="--i: {{ $i }}"/>
-                                    @endfor
-                                </svg>
-                            </div>
+                            <span class="is-any">любое удобное</span>
                         @endif
                     </div>
 
-                    <p class="ab-schedule__summary">{{ $item['summary'] }}</p>
-                    <p class="ab-schedule__note">{{ $item['note'] }}</p>
-                </li>
+                    <span class="ab-when__len" data-label="Длительность">{{ $item['length'] }}</span>
+                    <span class="ab-when__for" data-label="Кому">{{ $item['audience'] }}</span>
+                </div>
             @endforeach
-        </ul>
+        </div>
     </div>
 </section>

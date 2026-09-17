@@ -13,7 +13,6 @@ import { onNextFrame } from '@/shared/utils';
 const TRACKS = [
     '.ab-tabs__grid',
     '.ab-rv__list',
-    '.ab-schedule__list',
     '.ab-dirs__cols',
     '.ab-ev__list',
     '.ab-steps__list',
