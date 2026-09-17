@@ -4,7 +4,7 @@
    ================================================================ */
 
 .ab-programs, .ab-ratings, .ab-when, .ab-steps,
-.ab-teachers-section, .ab-ctor, .ab-lead-block, .ab-partners {
+.ab-team, .ab-ctor, .ab-lead-block, .ab-partners {
     font-family: var(--ab-font);
     color: var(--ab-dark);
 }
@@ -178,49 +178,28 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 .ab-steps__text { margin: 0; font-size: 14px; line-height: 1.55; color: var(--ab-500); }
 
 /* ================= Преподаватели ================= */
-.ab-teachers-section { padding: 72px 0; background: var(--ab-950); }
-.ab-teachers-section .ab-h2 { color: var(--ab-white); }
-.ab-teachers-section .ab-lead { color: var(--ab-cream); }
+.ab-team { padding: 72px 0; background: var(--ab-50); }
+.ab-team__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px; margin: 28px 0 0; padding: 0; list-style: none; }
 
-.ab-teachers__stage { display: flex; align-items: center; gap: 16px; }
-.ab-teachers__arrow { flex: none; width: 48px; height: 48px; border: 1px solid rgba(255,255,255,.25);
-    border-radius: 50%; background: transparent; font-size: 24px; line-height: 1;
-    color: var(--ab-white); cursor: pointer; transition: all var(--ab-transition); }
-.ab-teachers__arrow:hover { background: var(--ab-600); border-color: var(--ab-600); }
-@media (max-width: 900px) { .ab-teachers__arrow { display: none; } }
+.ab-team__card { display: flex; flex-direction: column; overflow: hidden;
+    border: 1px solid var(--ab-100); border-radius: var(--ab-radius-lg); background: var(--ab-white); }
+.ab-team__photo { display: block; width: 100%; height: 300px; object-fit: cover; object-position: top center; }
+.ab-team__body { display: grid; align-content: start; gap: 8px; padding: 22px; }
+.ab-team__name { margin: 0; font-family: var(--ab-font-display); font-size: 20px; font-weight: 800; }
+.ab-team__role { margin: 0; font-size: 14px; line-height: 1.5; color: var(--ab-500); }
+.ab-team__exp { margin: 0; font-size: 14px; font-weight: 700; color: var(--ab-600); }
+.ab-team__skills { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 0; padding: 0; list-style: none; }
+.ab-team__skills li { padding: 6px 12px; border-radius: 999px; background: var(--ab-50);
+    font-size: 13px; font-weight: 600; }
 
-.ab-teachers__card { flex: 1; display: grid; grid-template-columns: 360px minmax(0, 1fr);
-    gap: 40px; align-items: center; padding: 32px; border-radius: 22px;
-    background: linear-gradient(135deg, #322a2a, #241e1e); }
-@media (max-width: 900px) { .ab-teachers__card { grid-template-columns: 1fr; gap: 22px; padding: 24px; } }
-.ab-teachers__photo { position: relative; border-radius: 16px; overflow: hidden;
-    background: var(--ab-800); }
-.ab-teachers__photo img { display: block; width: 100%; height: 420px; object-fit: cover; object-position: top center; }
-@media (max-width: 900px) { .ab-teachers__photo img { height: 320px; } }
-
-.ab-teachers__name { margin: 0 0 8px; font-family: var(--ab-font-display);
-    font-size: clamp(26px, 3vw, 38px); font-weight: 800; color: var(--ab-white); }
-.ab-teachers__role { margin: 0 0 24px; font-size: 16px; color: var(--ab-300); }
-.ab-teachers__skills-title { margin: 0 0 12px; font-size: 14px; font-weight: 700;
-    text-transform: uppercase; letter-spacing: .05em; color: var(--ab-400); }
-.ab-teachers__skills { display: grid; gap: 11px; margin: 0; padding: 0; list-style: none; }
-.ab-teachers__skills li { position: relative; padding-left: 20px; font-size: 16px; color: var(--ab-cream); }
-.ab-teachers__skills li::before { content: ''; position: absolute; left: 0; top: 9px;
-    width: 8px; height: 8px; border-radius: 50%; background: var(--ab-600); }
-
-.ab-teachers__thumbs { display: flex; flex-wrap: wrap; gap: 10px; margin: 24px 0 0 64px;
-    padding: 0; list-style: none; }
-@media (max-width: 900px) { .ab-teachers__thumbs { margin-left: 0; } }
-.ab-teachers__thumb { display: flex; align-items: center; gap: 10px; padding: 6px 18px 6px 6px;
-    border: 1px solid rgba(255,255,255,.18); border-radius: 999px; background: transparent;
-    font: inherit; font-size: 14px; color: var(--ab-cream); cursor: pointer; transition: all var(--ab-transition); }
-.ab-teachers__thumb img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; object-position: top center; }
-.ab-teachers__thumb:hover { border-color: var(--ab-600); }
-.ab-teachers__thumb.is-active { background: var(--ab-600); border-color: var(--ab-600); color: var(--ab-white); }
-
-/* смена карточки */
-.ab-fade-enter-active { transition: opacity .3s ease, transform .3s ease; }
-.ab-fade-enter-from { opacity: 0; transform: translateX(18px); }
+@media (max-width: 760px) {
+    .ab-team { padding: 44px 0; }
+    .ab-team__grid { gap: 14px; margin-top: 20px; }
+    .ab-team__photo { height: 260px; }
+    .ab-team__body { padding: 18px; }
+    .ab-team__name { font-size: 18px; }
+}
 
 /* ================= Партнёры ================= */
 .ab-partners { padding: 72px 0; overflow: hidden; }
@@ -1016,8 +995,6 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 .ab-events__head .ab-lead a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
 .ab-events__head .ab-lead a:hover { text-decoration: none; }
 
-/* стаж преподавателя — показываем, когда поле заполнено */
-.ab-teachers__exp { margin: 4px 0 0; font-weight: 600; color: var(--ab-700); }
 
 /* Блок документов убран с главной — отзывы встали сразу после «как проходит
    обучение», фон совпал. Разводим соседние секции. */
@@ -1043,22 +1020,8 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 /* Ссылка внутри строки нужна только на узком экране */
 .ab-licbar__link--inline { display: none; }
 
-/* Строка управления слайдером преподавателей: нужна там, где боковые
-   стрелки не помещаются. На широком экране скрыта. */
-.ab-teachers__nav { display: none; align-items: center; justify-content: center;
-    gap: 16px; margin-top: 18px; }
-.ab-teachers__nav-btn { display: inline-flex; align-items: center; justify-content: center;
-    width: 44px; height: 44px; padding: 0; border-radius: 50%;
-    border: 1px solid rgba(255,255,255,.28); background: transparent;
-    color: #fff; font-size: 22px; line-height: 1; cursor: pointer;
-    transition: background-color .2s ease, border-color .2s ease; }
-.ab-teachers__nav-btn:hover { background: var(--ab-600); border-color: var(--ab-600); }
-.ab-teachers__counter { min-width: 52px; text-align: center;
-    font-size: 15px; font-weight: 700; color: rgba(255,255,255,.75); }
-@media (max-width: 900px) { .ab-teachers__nav { display: flex; } }
-
-/* Ленты для узкого экрана: на широком их нет */
-.ab-rv__swipe, .ab-teachers__swipe { display: none; }
+/* Лента отзывов для узкого экрана: на широком её нет */
+.ab-rv__swipe { display: none; }
 
 /* Телефон и мессенджеры в блоке вопросов */
 .ab-faq__contacts { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }

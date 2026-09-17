@@ -113,9 +113,7 @@
    должны отзываться на палец. Без этого на телефоне непонятно,
    попал ты по кнопке или нет. Правила общие для всего проекта.       */
 
-.ab-teachers__nav-btn,
 .ab-rv__arrow,
-.ab-teachers__arrow,
 .ab-swipe-dots__dot,
 .ab-tabs__tab,
 .ab-shop__filter {
@@ -126,9 +124,7 @@
 }
 
 /* Нажатие: элемент проседает под пальцем и сразу возвращается */
-.ab-teachers__nav-btn:active,
-.ab-rv__arrow:active,
-.ab-teachers__arrow:active { transform: scale(.88); }
+.ab-rv__arrow:active { transform: scale(.88); }
 
 .ab-swipe-dots__dot:active { transform: scale(.75); }
 .ab-tabs__tab:active,
@@ -142,20 +138,18 @@
 .ab-btn:active { transform: scale(.97); }
 
 /* Видимая рамка при переходе с клавиатуры */
-.ab-teachers__nav-btn:focus-visible,
 .ab-rv__arrow:focus-visible,
-.ab-teachers__arrow:focus-visible,
 .ab-swipe-dots__dot:focus-visible {
     outline: 2px solid var(--ab-600);
     outline-offset: 3px;
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .ab-teachers__nav-btn, .ab-rv__arrow, .ab-teachers__arrow,
+    .ab-rv__arrow,
     .ab-swipe-dots__dot, .ab-tabs__tab, .ab-shop__filter, .ab-btn {
         transition: background-color .2s ease, color .2s ease;
     }
-    .ab-teachers__nav-btn:active, .ab-rv__arrow:active, .ab-teachers__arrow:active,
+    .ab-rv__arrow:active,
     .ab-swipe-dots__dot:active, .ab-tabs__tab:active,
     .ab-shop__filter:active, .ab-btn:active { transform: none; }
 }
