@@ -1,0 +1,230 @@
+/*
+ | Страница сервисного центра.
+ | Берём общие переменные и кнопки сайта, добавляем только своё:
+ | первый экран с формой, прайс и шаги работы.
+ */
+
+.ab-page--service { font-family: var(--ab-font); color: var(--ab-dark); }
+
+/* ---------- Первый экран ---------- */
+
+.ab-srv-hero { padding: 28px 0 64px; background: var(--ab-50); }
+
+.ab-srv-hero__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 420px;
+    gap: 40px;
+    align-items: start;
+}
+
+.ab-srv-hero__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 26px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ab-srv-hero__list li {
+    padding: 8px 14px;
+    border: 1px solid var(--ab-200);
+    border-radius: 999px;
+    background: var(--ab-white);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.ab-srv-form {
+    display: grid;
+    gap: 14px;
+    padding: 26px;
+    border: 1px solid var(--ab-100);
+    border-radius: var(--ab-radius-lg);
+    background: var(--ab-white);
+    box-shadow: 0 18px 44px rgba(26, 26, 26, .1);
+}
+
+.ab-srv-form__title {
+    font-family: var(--ab-font-display);
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1.2;
+    text-transform: uppercase;
+}
+
+.ab-srv-form__note { margin: -6px 0 2px; font-size: 14px; line-height: 1.5; color: var(--ab-500); }
+
+.ab-srv-form textarea {
+    width: 100%;
+    padding: 9px 0;
+    border: 0;
+    border-bottom: 1px solid var(--ab-200);
+    background: transparent;
+    color: var(--ab-dark);
+    font: inherit;
+    font-size: 15px;
+    resize: vertical;
+}
+
+/* ---------- Обещания ---------- */
+
+.ab-srv-benefits { padding: 56px 0 0; background: var(--ab-white); }
+
+.ab-srv-benefits__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 18px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ab-srv-benefits__list li {
+    display: grid;
+    gap: 8px;
+    padding: 22px;
+    border: 1px solid var(--ab-100);
+    border-radius: var(--ab-radius-lg);
+}
+
+.ab-srv-benefits__list b { font-size: 16px; }
+.ab-srv-benefits__list span { font-size: 14px; line-height: 1.6; color: var(--ab-500); }
+
+/* ---------- Что делаем ---------- */
+
+.ab-srv-works { padding: 56px 0 64px; background: var(--ab-white); }
+
+.ab-srv-works__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 28px;
+}
+
+.ab-srv-work {
+    display: grid;
+    align-content: start;
+    gap: 12px;
+    padding: 26px;
+    border: 1px solid var(--ab-100);
+    border-radius: var(--ab-radius-lg);
+    background: var(--ab-50);
+}
+
+.ab-srv-work h3 { margin: 0; font-size: 18px; font-weight: 800; line-height: 1.3; }
+.ab-srv-work p { margin: 0; font-size: 14px; line-height: 1.6; color: var(--ab-500); }
+
+.ab-srv-work ul { display: grid; gap: 8px; margin: 0; padding: 0 0 0 18px; list-style: disc; }
+.ab-srv-work li { font-size: 14px; line-height: 1.5; }
+.ab-srv-work li::marker { color: var(--ab-400); }
+
+/* ---------- Цены и шаги ---------- */
+
+.ab-srv-price { padding: 64px 0; background: var(--ab-50); }
+
+.ab-srv-price__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 380px;
+    gap: 40px;
+    align-items: start;
+}
+
+.ab-srv-price__list {
+    display: grid;
+    gap: 2px;
+    margin: 26px 0 0;
+    padding: 0;
+    list-style: none;
+    border: 1px solid var(--ab-100);
+    border-radius: var(--ab-radius-lg);
+    background: var(--ab-white);
+    overflow: hidden;
+}
+
+.ab-srv-price__list li {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--ab-100);
+}
+
+.ab-srv-price__list li:last-child { border-bottom: 0; }
+
+.ab-srv-price__list span { display: grid; gap: 3px; }
+.ab-srv-price__list b { font-size: 15px; }
+.ab-srv-price__list i { font-style: normal; font-size: 13px; color: var(--ab-400); }
+.ab-srv-price__list em { flex: none; font-style: normal; font-weight: 700; white-space: nowrap; }
+
+.ab-srv-steps {
+    display: grid;
+    gap: 14px;
+    margin: 0;
+    padding: 26px;
+    list-style: none;
+    border-radius: var(--ab-radius-lg);
+    background: var(--ab-dark);
+    color: var(--ab-white);
+    counter-reset: srv;
+}
+
+.ab-srv-steps li { display: grid; grid-template-columns: 30px 1fr; gap: 4px 14px; }
+.ab-srv-steps b { grid-column: 2; font-size: 16px; }
+.ab-srv-steps span:not(.ab-srv-steps__num) { grid-column: 2; font-size: 14px; line-height: 1.6; opacity: .78; }
+
+.ab-srv-steps__num {
+    display: grid;
+    grid-row: span 2;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .12);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+/* ---------- Техника ---------- */
+
+.ab-srv-equip { padding: 64px 0; background: var(--ab-white); }
+
+.ab-srv-equip__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 40px;
+    align-items: center;
+}
+
+.ab-srv-equip__list { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+
+.ab-srv-equip__list li {
+    padding: 16px 20px;
+    border: 1px solid var(--ab-100);
+    border-radius: var(--ab-radius);
+    background: var(--ab-50);
+    font-weight: 600;
+}
+
+/* ---------- Телефон ---------- */
+
+@media (max-width: 900px) {
+    .ab-srv-hero__grid,
+    .ab-srv-price__grid,
+    .ab-srv-equip__grid {
+        grid-template-columns: 1fr;
+        gap: 26px;
+    }
+
+    .ab-srv-hero { padding: 20px 0 40px; }
+    .ab-srv-benefits { padding-top: 36px; }
+    .ab-srv-works { padding: 36px 0 40px; }
+    .ab-srv-price,
+    .ab-srv-equip { padding: 40px 0; }
+
+    .ab-srv-form { padding: 20px; }
+
+    .ab-srv-price__list li { flex-direction: column; gap: 6px; }
+    .ab-srv-price__list em { align-self: flex-start; }
+}
