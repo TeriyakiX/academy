@@ -70,6 +70,7 @@
 /* ---------- Обещания ---------- */
 
 .ab-srv-benefits { padding: 56px 0 0; background: var(--ab-white); }
+.ab-srv-benefits + .ab-srv-works { padding-top: 48px; }
 
 .ab-srv-benefits__list {
     display: grid;
@@ -83,12 +84,13 @@
 .ab-srv-benefits__list li {
     display: grid;
     gap: 8px;
-    padding: 22px;
+    padding: 24px;
     border: 1px solid var(--ab-100);
     border-radius: var(--ab-radius-lg);
+    background: var(--ab-50);
 }
 
-.ab-srv-benefits__list b { font-size: 16px; }
+.ab-srv-benefits__list b { font-size: 17px; line-height: 1.3; }
 .ab-srv-benefits__list span { font-size: 14px; line-height: 1.6; color: var(--ab-500); }
 
 /* ---------- Что делаем ---------- */
@@ -192,12 +194,15 @@
 
 .ab-srv-equip__grid {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 460px) minmax(0, 1fr);
     gap: 40px;
     align-items: center;
 }
 
-.ab-srv-equip__list { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+/* Список в две колонки: одной колонкой пункты растягивались через
+   полстраницы и справа оставалась пустота. */
+.ab-srv-equip__list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    margin: 0; padding: 0; list-style: none; }
 
 .ab-srv-equip__list li {
     padding: 16px 20px;
@@ -225,6 +230,7 @@
 
     .ab-srv-form { padding: 20px; }
 
+    .ab-srv-equip__list { grid-template-columns: 1fr; }
     .ab-srv-price__list li { flex-direction: column; gap: 6px; }
     .ab-srv-price__list em { align-self: flex-start; }
 }
