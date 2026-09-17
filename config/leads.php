@@ -8,8 +8,10 @@
 
 return [
     'telegram' => [
-        // Пока заявки ведутся в CRM, уведомления в Telegram выключены.
-        'enabled' => (bool) env('TELEGRAM_LEADS_ENABLED', false),
+        /* Пока сайт не подключён к CRM, уведомления идут в Telegram.
+           Когда заявки начнут падать в CRM, строку TELEGRAM_LEADS_ENABLED=false
+           в .env достаточно поставить — и уведомления выключатся. */
+        'enabled' => (bool) env('TELEGRAM_LEADS_ENABLED', true),
         'token'   => env('TELEGRAM_BOT_TOKEN'),
         'chat_id' => env('TELEGRAM_CHAT_ID'),
     ],
