@@ -24,9 +24,7 @@
             <span class="ab-certdoc__corner ab-certdoc__corner--bl"></span>
             <span class="ab-certdoc__corner ab-certdoc__corner--br"></span>
 
-            {{-- Логотип целиком: надпись «Академия Бариста» уже внутри него.
-                 Раньше он стоял мелко и смотрелся сдвинутым — теперь крупнее
-                 и ровно по центру листа. --}}
+            {{-- Логотип целиком: надпись «Академия Бариста» уже внутри него. --}}
             <img class="ab-certdoc__logo" src="/assets/logo.svg" alt="Академия Бариста"
                  width="80" height="81" loading="lazy" decoding="async">
 

@@ -72,11 +72,11 @@
         .corner--bl { bottom: 4mm; left: 4mm; border-bottom-width: .7mm; border-left-width: .7mm; }
         .corner--br { bottom: 4mm; right: 4mm; border-bottom-width: .7mm; border-right-width: .7mm; }
 
-        .logo { width: 40mm; height: auto; margin-bottom: 5mm; }
+        .logo { width: 22mm; height: auto; margin-bottom: 4mm; }
 
         .title {
             margin: 0;
-            font-size: 16mm;
+            font-size: 19mm;
             font-weight: 800;
             letter-spacing: .12em;
             line-height: 1;
@@ -91,7 +91,7 @@
             color: #8a7466;
         }
 
-        .lines { width: 100%; margin-top: 8mm; }
+        .lines { width: 100%; margin-top: 10mm; }
 
         .label {
             font-size: 3.4mm;
@@ -102,7 +102,7 @@
         }
 
         .line {
-            margin: 1.5mm 0 6mm;
+            margin: 1.5mm 0 7mm;
             padding-bottom: 2mm;
             border-bottom: .3mm solid #cbb49f;
             min-height: 9mm;
