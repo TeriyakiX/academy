@@ -84,6 +84,11 @@
                     <input type="hidden" name="source" value="Подарочный сертификат">
                     <input type="hidden" name="page" :value="page">
                     <input type="hidden" name="courses" :value="summary">
+                    <!-- то же по полям: из них CRM оформит сертификат, сумму пересчитает сервер -->
+                    <input type="hidden" name="certificate[recipient]" :value="recipient.name">
+                    <input type="hidden" name="certificate[from]" :value="recipient.from">
+                    <input type="hidden" name="certificate[wish]" :value="recipient.wish">
+                    <input type="hidden" name="certificate[programs]" :value="pickedIds.join(',')">
 
                     <!-- ловушка для автоматических отправок -->
                     <div class="ab-guard" aria-hidden="true">

@@ -164,6 +164,13 @@ Route::post('/lead', function (
         'courses'   => ['nullable', 'string', 'max:1000'],
         'website'   => ['nullable', 'string', 'max:200'],
         'loaded_at' => ['nullable', 'string'],
+
+        // Подарочный сертификат: программы — идентификаторы через запятую.
+        'certificate'           => ['nullable', 'array'],
+        'certificate.recipient' => ['nullable', 'string', 'max:60'],
+        'certificate.from'      => ['nullable', 'string', 'max:60'],
+        'certificate.wish'      => ['nullable', 'string', 'max:160'],
+        'certificate.programs'  => ['nullable', 'string', 'max:500'],
     ]);
 
     if (\App\Services\LeadService::looksAutomated($data)) {
