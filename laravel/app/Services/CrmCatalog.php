@@ -65,7 +65,7 @@ class CrmCatalog
                 $pages[$url] = [
                     'title'   => $course['title'],
                     'lead'    => $course['lead'],
-                    'facts'   => $course['facts'] ?: ($pages[$url]['facts'] ?? []),
+                    'facts'   => $this->facts($course['facts'] ?: ($pages[$url]['facts'] ?? []), (int) $course['price']),
                     'program' => $course['program'],
                     'days'    => $course['days'],
                     'learn'   => $course['learn'],
@@ -103,6 +103,16 @@ class CrmCatalog
             'badge'    => $course['badge'],
             'photo'    => $course['photo'],
         ], fn ($value) => $value !== null);
+    }
+
+    /** В характеристиках цена записана текстом — берём её из CRM, чтобы не расходилась. */
+    private function facts(array $facts, int $price): array
+    {
+        if (isset($facts['стоимость'])) {
+            $facts['стоимость'] = 'за одного - ' . number_format($price, 0, '', ' ') . ' ₽';
+        }
+
+        return $facts;
     }
 
     /** Заголовки для поисковиков: из CRM, иначе прежние. */
