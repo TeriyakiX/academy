@@ -20,7 +20,6 @@ const TRACKS = [
     '.ab-bus__grid',        // услуги для бизнеса
     '.ctor__list',          // конструктор курсов
     '.ab-rv__swipe',        // отзывы
-    '.ab-teachers__swipe',  // преподаватели
 ];
 
 /*
@@ -28,7 +27,7 @@ const TRACKS = [
  | Точки им не нужны, нужен понятный признак, что полосу можно тянуть:
  | тень у того края, за которым ещё есть содержимое.
  */
-const ROWS = ['.ab-teachers__thumbs'];
+const ROWS: string[] = [];
 
 /** Индекс карточки, которая сейчас в центре экрана. */
 function activeIndex(track: HTMLElement): number {
