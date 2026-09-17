@@ -3,12 +3,12 @@
 namespace App\Services;
 
 /**
- * Курсы из CRM вместо файлов настроек.
+ * Курсы и тексты из CRM вместо файлов настроек.
  *
- * Шаблоны сайта читают курсы из config('courses'), config('course-pages')
- * и config('site.pages'). Чтобы не переписывать шаблоны, при запросе
- * подменяем эти настройки данными из CRM. Если CRM ничего не отдала,
- * настройки остаются как есть и сайт работает на файлах.
+ * Шаблоны сайта читают данные из config('home'), config('courses'),
+ * config('course-pages') и config('site.pages'). Чтобы не переписывать
+ * шаблоны, при запросе подменяем эти настройки данными из CRM. Если CRM
+ * ничего не отдала, настройки остаются как есть и сайт работает на файлах.
  */
 class CrmCatalog
 {
@@ -20,6 +20,27 @@ class CrmCatalog
     }
 
     public function apply(): void
+    {
+        $this->applyBlocks();
+        $this->applyCourses();
+    }
+
+    /**
+     * Тексты главной и скидки. Ключ блока в CRM совпадает с ключом
+     * настройки на сайте: home.faq → config('home.faq').
+     */
+    private function applyBlocks(): void
+    {
+        $blocks = $this->crm->cached('blocks')['blocks'] ?? [];
+
+        foreach ($blocks as $key => $value) {
+            if (is_array($value) && preg_match('/^(home|courses)\.[a-z_]+$/', $key)) {
+                config([$key => $value]);
+            }
+        }
+    }
+
+    private function applyCourses(): void
     {
         $data = $this->crm->cached('courses', ['full' => 1]);
 
