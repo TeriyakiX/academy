@@ -26,6 +26,7 @@ return [
     // Главное меню. children => выпадающий список.
     'main' => [
         ['title' => 'Курсы бариста', 'href' => '/courses.html', 'children' => [
+            ['title' => 'Бариста новичок',      'href' => '/courses/barista-novichok.html'],
             ['title' => 'Бариста базовый',      'href' => '/courses/barista-base.html'],
             ['title' => 'Бариста продвинутый',  'href' => '/courses/barista-advanced.html'],
             ['title' => 'Бариста техник',       'href' => '/courses/barista-technician.html'],
@@ -36,7 +37,6 @@ return [
             ['title' => 'Латте-арт',         'href' => '/master-class/latte-art.html'],
             ['title' => 'Юный бариста',      'href' => '/master-class/young-barista.html'],
             ['title' => 'Домашняя кофейня',  'href' => '/master-class/domashnyaya-kofeynya.html'],
-            ['title' => 'Бариста в Take Away','href' => '/master-class/barista-v-take-away.html'],
             ['title' => 'Домашний бариста',  'href' => '/master-class/domashniy-barista.html'],
         ]],
         ['title' => 'Барное дело', 'href' => '/courses/barnoe-delo.html', 'children' => [
@@ -70,6 +70,7 @@ return [
             ['title' => 'Контакты',    'href' => '/contact.html'],
         ],
         'Курсы бариста' => [
+            ['title' => 'Бариста новичок',      'href' => '/courses/barista-novichok.html'],
             ['title' => 'Бариста базовый',      'href' => '/courses/barista-base.html'],
             ['title' => 'Бариста продвинутый',  'href' => '/courses/barista-advanced.html'],
             ['title' => 'Бариста техник',       'href' => '/courses/barista-technician.html'],
@@ -80,7 +81,6 @@ return [
             ['title' => 'Латте-арт',           'href' => '/master-class/latte-art.html'],
             ['title' => 'Юный бариста',        'href' => '/master-class/young-barista.html'],
             ['title' => 'Домашняя кофейня',    'href' => '/master-class/domashnyaya-kofeynya.html'],
-            ['title' => 'Бариста в Take Away', 'href' => '/master-class/barista-v-take-away.html'],
             ['title' => 'Домашний бариста',    'href' => '/master-class/domashniy-barista.html'],
         ],
         'Барное дело' => [

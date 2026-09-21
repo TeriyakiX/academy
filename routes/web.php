@@ -162,7 +162,7 @@ foreach ([
        а не отдавать 404. */
     '/coming-soon.html'         => '/',
     '/barista-bazovyj'          => '/courses/barista-base.html',
-    '/barista-v-take-away'      => '/master-class/barista-v-take-away.html',
+    '/barista-v-take-away'      => '/courses/barista-novichok.html',
     '/metod-stir'               => '/barnoe-delo/metod-ctir.html',
     '/latte-art'                => '/master-class/latte-art.html',
     '/upravlyayushhij-kofejni'  => '/courses/upravlyayushchiy-kofeyni.html',
