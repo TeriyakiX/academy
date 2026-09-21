@@ -8,31 +8,10 @@
  */
 
 
+
 return array (
   'pages' => 
   array (
-    '/article.html' => 
-    array (
-      'view' => 'article',
-      'title' => 'Обучение бариста в Москве с нуля – Академия Бариста',
-      'description' => 'Обучение бариста в Москве с нуля – профессиональные курсы в Академии Бариста. Освойте искусство приготовления кофе, работу с оборудованием и подачу напитков. Запишитесь сейчас и станьте профессионалом своего дела!',
-      'keywords' => 'Академия Бариста, Курсы бариста, Барное дело, Мастер класс, бариста с нуля, как стать бариста, курсы бариста в Москве',
-      'og_title' => 'Обучение бариста в Москве с нуля – Академия Бариста',
-      'og_image' => '/assets/1.webp',
-      'canonical' => 'https://academy-barista.ru/article.html',
-      'robots' => NULL,
-      'css' => 
-      array (
-        0 => '/assets/article.css',
-      ),
-      'body_attrs' => 
-      array (
-        'class' => 'body',
-      ),
-      'js' => 
-      array (
-      ),
-    ),
     '/barnoe-delo/koktel-metodom-bild.html' => 
     array (
       'view' => 'barnoe-delo.koktel-metodom-bild',

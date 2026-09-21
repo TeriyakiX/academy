@@ -6,7 +6,7 @@ namespace App\Services;
  * Курсы и тексты из CRM вместо файлов настроек.
  *
  * Шаблоны сайта читают данные из config('home'), config('courses'),
- * config('course-pages') и config('site.pages'). Чтобы не переписывать
+ * config('course-pages'), config('site.pages') и config('blog'). Чтобы не переписывать
  * шаблоны, при запросе подменяем эти настройки данными из CRM. Если CRM
  * ничего не отдала, настройки остаются как есть и сайт работает на файлах.
  */
@@ -23,6 +23,17 @@ class CrmCatalog
     {
         $this->applyBlocks();
         $this->applyCourses();
+        $this->applyArticles();
+    }
+
+    /** Статьи блога. Пустой ответ CRM статьи из файла не стирает. */
+    private function applyArticles(): void
+    {
+        $articles = $this->crm->cached('articles')['articles'] ?? [];
+
+        if ($articles) {
+            config(['blog.articles' => $articles]);
+        }
     }
 
     /**
