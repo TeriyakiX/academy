@@ -105,12 +105,21 @@ class CrmCatalog
         ], fn ($value) => $value !== null);
     }
 
-    /** В характеристиках цена записана текстом — берём её из CRM, чтобы не расходилась. */
+    /**
+     * В характеристиках цена записана текстом — строку «за одного» берём
+     * из CRM, чтобы не расходилась. Цены за двоих и больше остаются как есть.
+     */
     private function facts(array $facts, int $price): array
     {
-        if (isset($facts['стоимость'])) {
-            $facts['стоимость'] = 'за одного - ' . number_format($price, 0, '', ' ') . ' ₽';
+        if (!isset($facts['стоимость'])) {
+            return $facts;
         }
+
+        $single = 'за одного — ' . number_format($price, 0, '', ' ') . ' ₽';
+        $lines = (array) $facts['стоимость'];
+        $lines[0] = $single;
+
+        $facts['стоимость'] = count($lines) === 1 ? $lines[0] : $lines;
 
         return $facts;
     }
