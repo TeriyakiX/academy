@@ -7,6 +7,7 @@
  | это условие сохранения позиций в поиске. Менять их нельзя.
  */
 
+
 return array (
   'pages' => 
   array (
@@ -123,28 +124,28 @@ return array (
       array (
       ),
     ),
-    '/service.html' =>
-  array (
-    'view' => 'service-center',
-    'title' => 'Ремонт и обслуживание кофемашин в Москве — Академия Бариста',
-    'description' => 'Ремонт и обслуживание кофейного оборудования в Москве: кофемашины, кофемолки, суперавтоматы. Диагностика, плановое обслуживание и настройка под ваш кофе. Работаем с кофейнями, офисами и частными владельцами.',
-    'keywords' => 'ремонт кофемашин Москва, обслуживание кофемашин, чистка кофемашины, ремонт кофемолок, сервис кофейного оборудования',
-    'og_title' => 'Ремонт и обслуживание кофемашин — Академия Бариста',
-    'og_image' => '/assets/3.webp',
-    'canonical' => 'https://academy-barista.ru/service.html',
-    'robots' => NULL,
-    'css' =>
+    '/service.html' => 
     array (
+      'view' => 'service-center',
+      'title' => 'Ремонт и обслуживание кофемашин в Москве — Академия Бариста',
+      'description' => 'Ремонт и обслуживание кофейного оборудования в Москве: кофемашины, кофемолки, суперавтоматы. Диагностика, плановое обслуживание и настройка под ваш кофе. Работаем с кофейнями, офисами и частными владельцами.',
+      'keywords' => 'ремонт кофемашин Москва, обслуживание кофемашин, чистка кофемашины, ремонт кофемолок, сервис кофейного оборудования',
+      'og_title' => 'Ремонт и обслуживание кофемашин — Академия Бариста',
+      'og_image' => '/assets/3.webp',
+      'canonical' => 'https://academy-barista.ru/service.html',
+      'robots' => NULL,
+      'css' => 
+      array (
+      ),
+      'body_attrs' => 
+      array (
+        'class' => 'body',
+      ),
+      'js' => 
+      array (
+      ),
     ),
-    'body_attrs' =>
-    array (
-      'class' => 'body',
-    ),
-    'js' =>
-    array (
-    ),
-  ),
-  '/busines.html' =>
+    '/busines.html' => 
     array (
       'view' => 'busines',
       'title' => 'Откройте кофейный бизнес с нуля – обучение от Академии Бариста',
@@ -166,20 +167,27 @@ return array (
       array (
       ),
     ),
-    '/o-nas.html' => [
-        'view'        => 'about',
-        'title'       => 'О школе Академия Бариста — преподаватели и обучение в Москве',
-        'description' => 'Академия Бариста — школа бариста, барменов и управляющих в Москве. Практикующие преподаватели, обучение по образовательной лицензии, свидетельство о квалификации.',
-        'keywords'    => 'Академия Бариста, о школе, преподаватели, школа бариста Москва',
-        'og_title'    => 'О школе Академия Бариста',
-        'og_image'    => '/assets/about.webp',
-        'canonical'   => 'https://academy-barista.ru/o-nas.html',
-        'robots'      => '',
-        'css'         => [],
-        'body_attrs'  => ['class' => 'body'],
-        'js'          => [],
-    ],
-
+    '/o-nas.html' => 
+    array (
+      'view' => 'about',
+      'title' => 'О школе Академия Бариста — преподаватели и обучение в Москве',
+      'description' => 'Академия Бариста — школа бариста, барменов и управляющих в Москве. Практикующие преподаватели, обучение по образовательной лицензии, свидетельство о квалификации.',
+      'keywords' => 'Академия Бариста, о школе, преподаватели, школа бариста Москва',
+      'og_title' => 'О школе Академия Бариста',
+      'og_image' => '/assets/about.webp',
+      'canonical' => 'https://academy-barista.ru/o-nas.html',
+      'robots' => '',
+      'css' => 
+      array (
+      ),
+      'body_attrs' => 
+      array (
+        'class' => 'body',
+      ),
+      'js' => 
+      array (
+      ),
+    ),
     '/contact.html' => 
     array (
       'view' => 'contact',
@@ -432,29 +440,6 @@ return array (
       array (
       ),
     ),
-    '/master-class/barista-v-take-away.html' => 
-    array (
-      'view' => 'master-class.barista-v-take-away',
-      'title' => 'Мастер-класс бариста в Take Away – Академия Бариста',
-      'description' => 'Мастер-класс бариста для Take Away в Москве. Освойте специфику работы в формате навынос: быстрая подготовка кофе, оптимизация процессов обслуживания в HoReCa и поддержание качества напитков при потоковом обслуживании.',
-      'keywords' => 'Академия Бариста, Курсы бариста, Барное дело, Бариста Продвинутый, Мастер класс, бариста с нуля, как стать бариста, курсы бариста в Москве',
-      'og_title' => 'Мастер-класс бариста в Take Away – Академия Бариста',
-      'og_image' => '/assets/1.webp',
-      'canonical' => 'https://academy-barista.ru/master-class/barista-v-take-away.html',
-      'robots' => NULL,
-      'css' => 
-      array (
-        0 => '/assets/splide.css',
-        1 => '/assets/masterClassBaristaTakeAwau.css',
-      ),
-      'body_attrs' => 
-      array (
-        'class' => 'body',
-      ),
-      'js' => 
-      array (
-      ),
-    ),
     '/master-class/domashniy-barista.html' => 
     array (
       'view' => 'master-class.domashniy-barista',
@@ -658,10 +643,34 @@ return array (
       array (
       ),
     ),
+    '/courses/barista-novichok.html' => 
+    array (
+      'view' => 'courses.barista-novichok',
+      'title' => 'Курс «Бариста новичок» в Москве — Академия Бариста',
+      'description' => 'Курс бариста для начинающих в Москве: за один день по 4 часа освоите кофемашину и кофемолку, эспрессо и молочные напитки и научитесь работать быстро. Практика на профессиональном оборудовании.',
+      'keywords' => 'Академия Бариста, Курсы бариста, Барное дело, Бариста Продвинутый, Мастер класс, бариста с нуля, как стать бариста, курсы бариста в Москве',
+      'og_title' => 'Курс «Бариста новичок» — Академия Бариста',
+      'og_image' => '/assets/1.webp',
+      'canonical' => 'https://academy-barista.ru/courses/barista-novichok.html',
+      'robots' => NULL,
+      'css' => 
+      array (
+        0 => '/assets/splide.css',
+        1 => '/assets/masterClassBaristaTakeAwau.css',
+      ),
+      'body_attrs' => 
+      array (
+        'class' => 'body',
+      ),
+      'js' => 
+      array (
+      ),
+    ),
   ),
   'redirects' => 
   array (
     '/glavnaya.html' => '/',
     '/courses/barista-test.html' => '/courses/barista-base.html',
+    '/master-class/barista-v-take-away.html' => '/courses/barista-novichok.html',
   ),
 );
