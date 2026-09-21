@@ -32,6 +32,8 @@
     border: 1px solid var(--ab-100); border-radius: var(--ab-radius); background: var(--ab-white); }
 .ab-cpage__facts span { font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--ab-400); }
 .ab-cpage__facts b { font-size: 15px; font-weight: 700; }
+/* Второстепенные строки списка — цена за двоих и больше, другие варианты расписания. */
+.ab-cpage__facts li.is-list b + b { font-size: 14px; font-weight: 600; color: var(--ab-500); }
 
 /* ---- карточка записи ---- */
 .ab-cpage__buy { position: sticky; top: 20px; padding: 28px; border-radius: var(--ab-radius-lg);

@@ -21,6 +21,8 @@
 
 @include('partials.blocks.reviews')
 
+@include('partials.blocks.partners')
+
 @include('partials.blocks.events')
 
 @include('partials.blocks.certificate')

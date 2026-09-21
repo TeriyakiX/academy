@@ -31,9 +31,12 @@
 
                         <ul class="ab-cpage__facts">
                             @foreach ($course['facts'] as $label => $value)
-                                <li>
+                                {{-- Значение бывает списком: цена за одного, за двоих, за троих. --}}
+                                <li @class(['is-list' => is_array($value)])>
                                     <span>{{ $label }}</span>
-                                    <b>{{ $value }}</b>
+                                    @foreach ((array) $value as $line)
+                                        <b>{{ $line }}</b>
+                                    @endforeach
                                 </li>
                             @endforeach
                         </ul>
