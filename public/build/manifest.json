@@ -12,6 +12,15 @@
     "src": "resources/src/app/assets/styles/app.css",
     "isEntry": true
   },
+  "resources/src/app/assets/styles/blog.css": {
+    "file": "assets/blog-4X4y4U4Y.css",
+    "name": "blog",
+    "names": [
+      "blog.css"
+    ],
+    "src": "resources/src/app/assets/styles/blog.css",
+    "isEntry": true
+  },
   "resources/src/app/assets/styles/certificate.css": {
     "file": "assets/certificate-CODeomjS.css",
     "name": "certificate",

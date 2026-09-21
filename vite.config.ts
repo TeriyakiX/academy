@@ -29,6 +29,7 @@ export default defineConfig({
                     'home-blocks',
                     'course',
                     'service',
+                    'blog',
                     'constructor',
                     'reviews',
                     'shop',

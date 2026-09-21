@@ -75,8 +75,39 @@ config(['site.pages' => $services
         'body_attrs'  => ['class' => 'body'],
     ])
     ->all() + config('site.pages', [])]);
+/*
+ | Статьи блога: у каждой свой адрес /blog/<адрес>.html.
+ | Добавляются к страницам сайта так же, как услуги.
+ */
+$articles = collect(config('blog.articles', []))
+    ->keyBy(fn ($article) => '/blog/' . $article['slug'] . '.html');
+
+config(['site.pages' => $articles
+    ->map(fn ($article, $url) => [
+        'view'        => 'blog-article',
+        'title'       => $article['seo_title'] ?? $article['title'],
+        'description' => $article['seo_description'] ?? $article['excerpt'],
+        'keywords'    => implode(', ', $article['tags'] ?? []),
+        'og_title'    => $article['title'],
+        'og_image'    => $article['image'],
+        'canonical'   => rtrim(config('seo.domain'), '/') . $url,
+        'robots'      => '',
+        'body_attrs'  => ['class' => 'body'],
+    ])
+    ->all() + config('site.pages', [])]);
+
 foreach (config('site.pages') as $uri => $page) {
     $routeName = 'page' . str_replace(['/', '.html', '.'], ['.', '', '_'], rtrim($uri, '/')) ?: 'home';
+
+    if ($articles->has($uri)) {
+        Route::get($uri, fn () => view('pages.blog-article', [
+            'seo'     => $page,
+            'article' => $articles->get($uri),
+            'others'  => $articles->except($uri)->take(3)->values()->all(),
+        ]))->name($routeName);
+
+        continue;
+    }
 
     if ($services->has($uri)) {
         $service = $services->get($uri);
@@ -154,6 +185,17 @@ Route::get('/sertifikat-blank.html', function (\Illuminate\Http\Request $request
         ])
         ->header('X-Robots-Tag', 'noindex, nofollow');
 })->name('certificate.blank');
+
+/*
+ | Старый блог открывал статьи по адресу /article.html?id=25.
+ | Эти ссылки есть в поиске и в соцсетях — ведём их на новые страницы.
+ */
+Route::get('/article.html', function (\Illuminate\Http\Request $request) {
+    $article = collect(config('blog.articles', []))
+        ->firstWhere('old_id', (int) $request->query('id'));
+
+    return redirect($article ? '/blog/' . $article['slug'] . '.html' : '/blog.html', 301);
+});
 
 // Старые адреса с WordPress-версии сайта
 foreach ([
@@ -264,7 +306,7 @@ Route::get('/sitemap.xml', function () {
         return '0.7';
     };
 
-    $skip = ['/thank-you.html', '/blog.html', '/article.html'];
+    $skip = ['/thank-you.html'];
 
     $urls = collect(array_keys(config('site.pages', [])))
         ->reject(fn ($uri) => in_array($uri, $skip, true));
