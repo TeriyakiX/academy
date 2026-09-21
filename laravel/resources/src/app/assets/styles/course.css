@@ -35,6 +35,14 @@
 /* Второстепенные строки списка — цена за двоих и больше, другие варианты расписания. */
 .ab-cpage__facts li.is-list b + b { font-size: 14px; font-weight: 600; color: var(--ab-500); }
 
+/* «цены для группы» — раскрываются по нажатию, как на прежнем сайте */
+.ab-cpage__more { display: grid; gap: 4px; }
+.ab-cpage__more summary { width: max-content; font-size: 13px; font-weight: 600; color: var(--ab-600);
+    list-style: none; border-bottom: 1px dashed currentColor; cursor: pointer; }
+.ab-cpage__more summary::-webkit-details-marker { display: none; }
+.ab-cpage__more[open] summary { margin-bottom: 2px; }
+.ab-cpage__more b { font-size: 14px; font-weight: 600; color: var(--ab-500); }
+
 /* ---- карточка записи ---- */
 .ab-cpage__buy { position: sticky; top: 20px; padding: 28px; border-radius: var(--ab-radius-lg);
     background: var(--ab-white); box-shadow: 0 20px 50px rgba(26,26,26,.12); }

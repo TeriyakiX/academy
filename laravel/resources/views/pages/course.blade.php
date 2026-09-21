@@ -31,12 +31,24 @@
 
                         <ul class="ab-cpage__facts">
                             @foreach ($course['facts'] as $label => $value)
-                                {{-- Значение бывает списком: цена за одного, за двоих, за троих. --}}
-                                <li @class(['is-list' => is_array($value)])>
+                                {{-- Значение бывает списком: цена за одного, за двоих, за троих.
+                                     Цены для группы свёрнуты: иначе в карточке простыня цифр. --}}
+                                @php $lines = (array) $value; @endphp
+                                <li @class(['is-list' => count($lines) > 1])>
                                     <span>{{ $label }}</span>
-                                    @foreach ((array) $value as $line)
-                                        <b>{{ $line }}</b>
-                                    @endforeach
+                                    @if ($label === 'стоимость' && count($lines) > 1)
+                                        <b>{{ $lines[0] }}</b>
+                                        <details class="ab-cpage__more">
+                                            <summary>цены для группы</summary>
+                                            @foreach (array_slice($lines, 1) as $line)
+                                                <b>{{ $line }}</b>
+                                            @endforeach
+                                        </details>
+                                    @else
+                                        @foreach ($lines as $line)
+                                            <b>{{ $line }}</b>
+                                        @endforeach
+                                    @endif
                                 </li>
                             @endforeach
                         </ul>
