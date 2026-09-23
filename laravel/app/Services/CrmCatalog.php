@@ -80,7 +80,7 @@ class CrmCatalog
                     'lead'    => $course['lead'],
                     'facts'   => $this->facts($course['facts'] ?: ($pages[$url]['facts'] ?? []), (int) $course['price']),
                     'program' => $course['program'],
-                    'days'    => $course['days'],
+                    'days'    => $course['days'] ?: ($pages[$url]['days'] ?? null),
                     'learn'   => $course['learn'],
                     'gallery' => $course['gallery'] ?: ($pages[$url]['gallery'] ?? []),
                     'groups'  => $course['groups'] ?? [],
