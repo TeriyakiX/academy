@@ -42,16 +42,9 @@ function activeIndex(track: HTMLElement): number {
     return best;
 }
 
-function buildDots(track: HTMLElement): void {
-    // скрытые списки не размечаем: у блока может быть и лента для телефона,
-    // и обычный список для широкого экрана
-    if (track.offsetParent === null) return;
-    if (track.children.length < 2) return;
-    if (!claim(track, 'swipeReady')) return;
-
-    const dots = document.createElement('div');
-    dots.className = 'ab-swipe-dots';
-    dots.setAttribute('aria-hidden', 'true');
+/** Точки по числу карточек: вкладки меняют содержимое ленты на ходу. */
+function fillDots(track: HTMLElement, dots: HTMLElement): void {
+    dots.textContent = '';
 
     Array.from(track.children).forEach((_, i) => {
         const dot = document.createElement('button');
@@ -64,7 +57,32 @@ function buildDots(track: HTMLElement): void {
 
         dots.appendChild(dot);
     });
+}
 
+function buildDots(track: HTMLElement): void {
+    // скрытые списки не размечаем: у блока может быть и лента для телефона,
+    // и обычный список для широкого экрана
+    if (track.offsetParent === null) return;
+    if (track.children.length < 2) return;
+
+    if (!claim(track, 'swipeReady')) {
+        // лента уже размечена: могло измениться число карточек
+        const shown = track.nextElementSibling;
+
+        if (shown instanceof HTMLElement && shown.classList.contains('ab-swipe-dots')
+            && shown.children.length !== track.children.length) {
+            fillDots(track, shown);
+            shown.firstElementChild?.classList.add('is-active');
+        }
+
+        return;
+    }
+
+    const dots = document.createElement('div');
+    dots.className = 'ab-swipe-dots';
+    dots.setAttribute('aria-hidden', 'true');
+
+    fillDots(track, dots);
     track.after(dots);
 
     const sync = () => {

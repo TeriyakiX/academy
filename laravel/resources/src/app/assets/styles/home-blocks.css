@@ -91,11 +91,7 @@
 
 .ab-tabs__more { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
 
-/* анимация смены вкладки */
-.ab-card-enter-active { transition: opacity .35s ease, transform .35s ease; }
-.ab-card-leave-active { transition: opacity .2s ease; position: absolute; }
-.ab-card-enter-from { opacity: 0; transform: translateY(16px); }
-.ab-card-leave-to { opacity: 0; }
+/* Смена вкладки идёт без анимации: уходящие карточки ложились поверх новых. */
 
 /* ================= Рейтинги ================= */
 .ab-ratings { padding: 0 0 20px; }
@@ -179,12 +175,15 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 
 /* ================= Преподаватели ================= */
 .ab-team { padding: 72px 0; background: var(--ab-50); }
-.ab-team__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+.ab-team__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 20px; margin: 28px 0 0; padding: 0; list-style: none; }
 
 .ab-team__card { display: flex; flex-direction: column; overflow: hidden;
     border: 1px solid var(--ab-100); border-radius: var(--ab-radius-lg); background: var(--ab-white); }
-.ab-team__photo { display: block; width: 100%; height: 300px; object-fit: cover; object-position: top center; }
+/* Портретная пропорция вместо жёсткой высоты: на узком экране карточка
+   растягивалась в полосу и от человека оставалась одна голова. */
+.ab-team__photo { display: block; width: 100%; aspect-ratio: 4 / 5; max-height: 380px;
+    object-fit: cover; object-position: center 20%; }
 .ab-team__body { display: grid; align-content: start; gap: 8px; padding: 22px; }
 .ab-team__name { margin: 0; font-family: var(--ab-font-display); font-size: 20px; font-weight: 800; }
 .ab-team__role { margin: 0; font-size: 14px; line-height: 1.5; color: var(--ab-500); }
@@ -196,9 +195,20 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 @media (max-width: 760px) {
     .ab-team { padding: 44px 0; }
     .ab-team__grid { gap: 14px; margin-top: 20px; }
-    .ab-team__photo { height: 260px; }
     .ab-team__body { padding: 18px; }
     .ab-team__name { font-size: 18px; }
+}
+
+/* На телефоне карточка становится строкой: фото слева, имя и навыки справа. */
+@media (max-width: 560px) {
+    .ab-team__card { flex-direction: row; }
+    /* min-width: 0 обязателен: иначе картинка растягивается до своего
+       собственного размера и вытесняет текст. */
+    .ab-team__photo { flex: 0 0 40%; width: 40%; min-width: 0; align-self: stretch;
+        aspect-ratio: auto; max-height: none; height: auto; }
+    .ab-team__body { flex: 1 1 auto; min-width: 0; padding: 16px; gap: 6px; }
+    .ab-team__skills { gap: 6px; }
+    .ab-team__skills li { padding: 5px 10px; font-size: 12px; }
 }
 
 /* ================= Партнёры ================= */
