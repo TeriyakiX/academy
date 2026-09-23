@@ -477,3 +477,52 @@
     .ab-near__price { text-align: right; }
     .ab-near__go { grid-column: 1 / -1; justify-self: start; }
 }
+
+/* Цифры в шапке каталога: сколько программ и с какой цены. */
+.ab-cpage__nums { display: flex; flex-wrap: wrap; gap: 12px 36px; margin: 26px 0 0; padding: 0; list-style: none; }
+.ab-cpage__nums li { display: grid; gap: 2px; }
+.ab-cpage__nums b { font-family: var(--ab-font-display); font-size: 24px; font-weight: 800;
+    line-height: 1.1; color: var(--ab-dark); }
+.ab-cpage__nums span { font-size: 13px; color: var(--ab-500); }
+
+/* ================= С чего начать и куда расти =================
+   Ступени идут в ряд, соединённые линией: видно порядок программ
+   и разницу в цене, не читая тринадцать карточек. */
+.ab-path { padding: 72px 0; background: var(--ab-white); }
+.ab-path__head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between;
+    gap: 16px 32px; margin-bottom: 34px; }
+.ab-path__head .ab-lead { margin-bottom: 0; max-width: 560px; }
+.ab-path__note { max-width: 300px; margin: 0; padding: 12px 16px; border-left: 2px solid var(--ab-600);
+    font-size: 13px; line-height: 1.5; color: var(--ab-500); }
+
+.ab-path__list { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 24px; margin: 0; padding: 0; list-style: none; counter-reset: path; }
+
+.ab-path__step { position: relative; display: grid; align-content: start; gap: 8px;
+    padding-top: 42px; }
+/* линия-связка между ступенями */
+.ab-path__step::before { content: ''; position: absolute; left: 0; right: -24px; top: 15px;
+    height: 1px; background: var(--ab-100); }
+.ab-path__step:last-child::before { right: 0; }
+
+.ab-path__n { position: absolute; left: 0; top: 0; z-index: 1; display: grid; place-items: center;
+    width: 31px; height: 31px; border-radius: 50%; background: var(--ab-600);
+    color: var(--ab-white); font-size: 14px; font-weight: 800; }
+
+.ab-path__title { margin: 0; font-family: var(--ab-font-display); font-size: 18px; font-weight: 800; line-height: 1.2; }
+.ab-path__title a { color: var(--ab-dark); text-decoration: none; }
+.ab-path__title a:hover { color: var(--ab-600); }
+.ab-path__text { margin: 0; font-size: 14px; line-height: 1.5; color: var(--ab-500); }
+.ab-path__meta { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; margin-top: 4px;
+    font-size: 13px; color: var(--ab-400); }
+.ab-path__meta b { font-size: 15px; font-weight: 800; color: var(--ab-dark); }
+
+@media (max-width: 860px) {
+    .ab-path { padding: 44px 0; }
+    .ab-path__note { max-width: none; }
+    .ab-path__list { grid-template-columns: minmax(0, 1fr); gap: 0; }
+    .ab-path__step { padding: 18px 0 18px 46px; border-top: 1px solid var(--ab-100); }
+    .ab-path__step:first-child { border-top: 0; }
+    .ab-path__step::before { display: none; }
+    .ab-path__n { top: 18px; width: 28px; height: 28px; font-size: 13px; }
+}
