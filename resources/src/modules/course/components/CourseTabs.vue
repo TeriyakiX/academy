@@ -17,8 +17,12 @@
             </button>
         </div>
 
-        <!-- Карточки -->
-        <transition-group name="ab-card" tag="div" class="ab-tabs__grid">
+        <!--
+            Карточки меняются сразу. Раньше здесь была анимация смены:
+            уходящие карточки на время перехода ложились поверх новых,
+            и переключение выглядело как наслоение и подтормаживание.
+        -->
+        <div ref="grid" class="ab-tabs__grid">
             <article v-for="course in schools[active]" :key="course.id" class="ab-card">
                 <div class="ab-card__head">
                     <h3 class="ab-card__title">{{ course.title }}</h3>
@@ -54,7 +58,7 @@
                     <a class="ab-btn ab-btn--primary" :href="course.url">Подробнее</a>
                 </div>
             </article>
-        </transition-group>
+        </div>
 
         <div class="ab-tabs__more">
             <a class="ab-btn ab-btn--outline" href="/courses.html">Все программы</a>
@@ -64,7 +68,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { nextTick, ref, watch } from 'vue';
 import { formatPrice } from '@/shared/utils';
 
 const props = defineProps<{
@@ -72,5 +76,13 @@ const props = defineProps<{
 }>();
 
 const active = ref(Object.keys(props.schools)[0]);
+const grid = ref<HTMLElement | null>(null);
+
+// На телефоне карточки листаются вбок: новую вкладку показываем с начала.
+watch(active, async () => {
+    await nextTick();
+    grid.value?.scrollTo({ left: 0 });
+});
+
 const money = (n: number) => formatPrice(n);
 </script>
