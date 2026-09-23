@@ -73,6 +73,8 @@ class CrmCatalog
 
                 $url = $course['url'];
 
+                /* Union с прежним значением: в CRM пока нет полей вроде
+                   «зачем и кому», и без него они терялись бы при подключении. */
                 $pages[$url] = [
                     'title'   => $course['title'],
                     'lead'    => $course['lead'],
@@ -82,7 +84,7 @@ class CrmCatalog
                     'learn'   => $course['learn'],
                     'gallery' => $course['gallery'] ?: ($pages[$url]['gallery'] ?? []),
                     'groups'  => $course['groups'] ?? [],
-                ];
+                ] + ($pages[$url] ?? []);
 
                 $seo[$url] = $this->seo($seo[$url] ?? null, $seo[self::PAGE_TEMPLATE] ?? [], $url, $course);
             }

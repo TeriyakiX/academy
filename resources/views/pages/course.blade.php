@@ -83,6 +83,9 @@
             </div>
         </section>
 
+        {{-- ---------- Зачем и кому ---------- --}}
+        @include('partials.blocks.course-pitch')
+
         {{-- ---------- Программа курса ----------
              Слева — темы по дням: в каждом дне теория и практика.
              Справа — карточка записи, она едет вместе с прокруткой,
@@ -99,6 +102,8 @@
                записи, и справа от неё оставалось пустое поле в пол-экрана.
                В таком случае ставим карточку под программой. */
             $shortProgram = count($days) === 1;
+            /* Курс бывает в нескольких форматах: их предлагаем выбрать в заявке. */
+            $formats = array_values((array) ($course['facts']['расписание на выбор'] ?? []));
         @endphp
 
         @if (count($days) && count($days[0]['groups']))
@@ -206,6 +211,19 @@
                                     <p class="ab-cmod__card-note">Оставьте заявку — менеджер свяжется с вами и подберёт дату.</p>
                                 @endif
 
+                                @if (count($formats) > 1)
+                                    {{-- Курс идёт в нескольких форматах: выбор сразу в заявке,
+                                         чтобы менеджеру не выяснять это звонком. --}}
+                                    <label class="ab-cmod__field ab-cmod__field--select">
+                                        <span>Удобный формат</span>
+                                        <select name="comment">
+                                            @foreach ($formats as $format)
+                                                <option value="Формат: {{ $format }}">{{ $format }}</option>
+                                            @endforeach
+                                        </select>
+                                    </label>
+                                @endif
+
                                 <label class="ab-cmod__field">
                                     <span>Имя</span>
                                     <input type="text" name="name" placeholder="Как к вам обращаться" required autocomplete="name">
@@ -258,6 +276,14 @@
 
         {{-- ---------- Преподаватели ---------- --}}
         @include('partials.blocks.teachers')
+
+        {{-- ---------- Документ об обучении ---------- --}}
+        @include('partials.blocks.course-diploma')
+
+        {{-- ---------- Свой набор программ ----------
+             Готовая программа подходит не всем: отсюда можно уйти
+             в конструктор и добрать недостающее со скидкой. --}}
+        @include('partials.blocks.constructor-cta')
 
         {{-- ---------- Другие программы ---------- --}}
         <section class="ab-programs ab-reveal">
