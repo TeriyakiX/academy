@@ -52,14 +52,6 @@
                                 </li>
                             @endforeach
                         </ul>
-
-                        {{-- Фото занятия: без него шапка была из одного текста
-                             и страница начиналась серой полосой. --}}
-                        <div class="ab-cpage__shot">
-                            <img src="{{ $course['gallery'][0] ?? $course['photo'] }}"
-                                 alt="{{ $course['title'] }}"
-                                 width="860" height="380" loading="eager" decoding="async">
-                        </div>
                     </div>
 
                     {{-- Карточка записи --}}
