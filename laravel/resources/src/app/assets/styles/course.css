@@ -304,3 +304,83 @@
 @media (min-width: 900px) {
     .ab-cmod__items--solo { grid-template-columns: 1fr 1fr; column-gap: 28px; }
 }
+
+/* ================= Зачем и кому =================
+   Два коротких текста сразу под шапкой и три главных навыка строкой.
+   Оформление нарочно спокойное: это место читают, а не рассматривают. */
+.ab-cwhy { padding: 56px 0; background: var(--ab-white); }
+.ab-cwhy__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+
+.ab-cwhy__card { padding: 26px 28px; border: 1px solid var(--ab-100);
+    border-radius: var(--ab-radius-lg); background: var(--ab-white); }
+.ab-cwhy__card--who { background: var(--ab-50); }
+
+.ab-cwhy__label { display: block; margin-bottom: 10px; font-size: 11px; font-weight: 700;
+    letter-spacing: .08em; text-transform: uppercase; color: var(--ab-600); }
+.ab-cwhy__text { margin: 0; font-size: 16px; line-height: 1.6; color: var(--ab-dark); }
+
+.ab-cwhy__points { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px 28px; margin: 26px 0 0; padding: 0; list-style: none; }
+.ab-cwhy__points li { padding-left: 16px; border-left: 2px solid var(--ab-600); }
+.ab-cwhy__points b { display: block; margin-bottom: 5px; font-size: 15px; font-weight: 800; }
+.ab-cwhy__points span { font-size: 14px; line-height: 1.55; color: var(--ab-500); }
+
+/* ================= Документ об обучении =================
+   Слева схема бланка (не скан: подделывать документ нельзя),
+   справа — что в нём написано и реквизиты лицензии. */
+.ab-cdoc { padding: 72px 0; background: var(--ab-white); }
+.ab-cdoc__grid { display: grid; grid-template-columns: minmax(0, 360px) minmax(0, 1fr);
+    gap: 48px; align-items: center; }
+
+.ab-cdoc__paper { position: relative; display: grid; align-content: start; gap: 10px;
+    padding: 34px 30px 46px; overflow: hidden;
+    border: 1px solid var(--ab-100); border-radius: 14px; background: var(--ab-white);
+    box-shadow: 0 22px 46px rgba(26,26,26,.12); }
+.ab-cdoc__paper-tag { font-size: 11px; font-weight: 700; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--ab-600); }
+.ab-cdoc__paper-title { font-family: var(--ab-font-display); font-size: 19px; font-weight: 800;
+    line-height: 1.25; color: var(--ab-dark); }
+.ab-cdoc__paper-line { height: 9px; border-radius: 5px; background: var(--ab-100); }
+.ab-cdoc__paper-line--name { height: 13px; width: 78%; background: var(--ab-200, #d8d3ce); }
+.ab-cdoc__paper-line--short { width: 55%; }
+.ab-cdoc__paper-note { font-size: 12px; color: var(--ab-400); }
+.ab-cdoc__paper-seal { position: absolute; right: -34px; bottom: -34px;
+    width: 130px; height: 130px; border: 10px solid var(--ab-50); border-radius: 50%; }
+
+.ab-cdoc__lead { margin: 0 0 20px; font-size: 16px; line-height: 1.6; color: var(--ab-500); }
+
+.ab-cdoc__list { display: grid; gap: 14px; margin: 0 0 22px; padding: 0; list-style: none; }
+.ab-cdoc__list b { display: block; margin-bottom: 4px; font-size: 15px; font-weight: 800; }
+.ab-cdoc__list span { font-size: 14px; line-height: 1.55; color: var(--ab-500); }
+
+.ab-cdoc__meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 12px 24px; margin: 0 0 18px; padding: 18px 0 0; border-top: 1px solid var(--ab-100); }
+.ab-cdoc__meta dt { font-size: 12px; text-transform: lowercase; color: var(--ab-400); }
+.ab-cdoc__meta dd { margin: 2px 0 0; font-size: 14px; font-weight: 700; color: var(--ab-dark); }
+
+.ab-cdoc__note { margin: 0; font-size: 13px; line-height: 1.6; color: var(--ab-400); }
+.ab-cdoc__note a { margin-left: 4px; color: var(--ab-600); }
+
+@media (max-width: 900px) {
+    .ab-cdoc { padding: 48px 0; }
+    .ab-cdoc__grid { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+    .ab-cdoc__paper { max-width: 340px; }
+}
+
+@media (max-width: 680px) {
+    .ab-cwhy { padding: 36px 0; }
+    .ab-cwhy__card { padding: 20px; }
+    .ab-cwhy__text { font-size: 15px; }
+    .ab-cwhy__points { gap: 14px; margin-top: 20px; }
+}
+
+/* Выбор формата в карточке записи: свой вид вместо системного. */
+.ab-cmod__field--select select { width: 100%; padding: 9px 22px 9px 0;
+    border: 0; border-bottom: 1px solid var(--ab-200, #d8d3ce); border-radius: 0;
+    background: transparent; color: var(--ab-dark); font: inherit; font-size: 15px;
+    appearance: none; cursor: pointer; }
+.ab-cmod__field--select { position: relative; }
+.ab-cmod__field--select::after { content: ''; position: absolute; right: 4px; bottom: 15px;
+    width: 8px; height: 8px; border-right: 2px solid var(--ab-500); border-bottom: 2px solid var(--ab-500);
+    transform: rotate(45deg); pointer-events: none; }
+.ab-cmod__field--select select:focus { outline: none; border-bottom-color: var(--ab-600); }
