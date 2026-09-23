@@ -3,9 +3,10 @@
 {{--
     Когда идут занятия.
 
-    Раньше здесь были три карточки с полосками-делениями: красиво, но
-    человек не понимал, во сколько занятие. Теперь простая таблица:
-    формат, время, длительность и кому подходит — читается за пару секунд.
+    Была таблица: читалась быстро, но выглядела как выгрузка из отчёта
+    и повторяла оформление соседних блоков. Теперь три колонки без рамок,
+    разделённые тонкой линией: формат, время крупно, под ним длительность
+    и кому подходит.
 --}}
 <section class="ab-when ab-reveal">
     <div class="ab-container">
@@ -20,32 +21,33 @@
             @endif
         </div>
 
-        <div class="ab-when__table">
-            <div class="ab-when__row ab-when__row--head" aria-hidden="true">
-                <span>Формат</span>
-                <span>Время занятий</span>
-                <span>Сколько длится</span>
-                <span>Кому подходит</span>
-            </div>
-
+        <ul class="ab-when__grid">
             @foreach ($s['items'] as $item)
-                <div class="ab-when__row">
+                <li class="ab-when__col">
                     <b class="ab-when__mode">{{ $item['title'] }}</b>
 
-                    <div class="ab-when__times" data-label="Время">
+                    <div class="ab-when__times">
                         @if (!empty($item['times']))
                             @foreach ($item['times'] as $time)
                                 <span>{{ $time }}</span>
                             @endforeach
                         @else
-                            <span class="is-any">любое удобное</span>
+                            <span class="is-any">время выбираете сами</span>
                         @endif
                     </div>
 
-                    <span class="ab-when__len" data-label="Длительность">{{ $item['length'] }}</span>
-                    <span class="ab-when__for" data-label="Кому">{{ $item['audience'] }}</span>
-                </div>
+                    <dl class="ab-when__meta">
+                        <div>
+                            <dt>Сколько длится</dt>
+                            <dd>{{ $item['length'] }}</dd>
+                        </div>
+                        <div>
+                            <dt>Кому подходит</dt>
+                            <dd>{{ $item['audience'] }}</dd>
+                        </div>
+                    </dl>
+                </li>
             @endforeach
-        </div>
+        </ul>
     </div>
 </section>
