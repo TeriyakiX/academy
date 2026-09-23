@@ -26,14 +26,25 @@
     font-size: clamp(30px, 4vw, 50px); font-weight: 800; line-height: 1.08; }
 .ab-cpage__lead { max-width: 620px; margin: 0 0 30px; font-size: 17px; line-height: 1.6; color: var(--ab-500); }
 
-.ab-cpage__facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 12px; margin: 0; padding: 0; list-style: none; }
-.ab-cpage__facts li { display: grid; gap: 4px; padding: 16px 18px;
-    border: 1px solid var(--ab-100); border-radius: var(--ab-radius); background: var(--ab-white); }
-.ab-cpage__facts span { font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--ab-400); }
-.ab-cpage__facts b { font-size: 15px; font-weight: 700; }
-/* Второстепенные строки списка — цена за двоих и больше, другие варианты расписания. */
-.ab-cpage__facts li.is-list b + b { font-size: 14px; font-weight: 600; color: var(--ab-500); }
+/* Факты курса строкой: пять одинаковых плиток занимали пол-экрана
+   и повторяли цену из карточки записи. */
+.ab-cpage__meta { display: flex; flex-wrap: wrap; gap: 8px 0; margin: 0; padding: 0;
+    border-top: 2px solid var(--ab-dark); }
+.ab-cpage__meta > div { flex: 1 1 180px; padding: 18px 26px; border-left: 1px solid var(--ab-100); }
+.ab-cpage__meta > div:first-child { padding-left: 0; border-left: 0; }
+.ab-cpage__meta dt { font-size: 11px; font-weight: 700; letter-spacing: .07em;
+    text-transform: uppercase; color: var(--ab-400); }
+.ab-cpage__meta dd { display: grid; gap: 2px; margin: 6px 0 0; }
+.ab-cpage__meta dd span { font-size: 15px; font-weight: 700; line-height: 1.35; color: var(--ab-dark); }
+/* Второй вариант расписания — подсказка, а не равнозначная строка. */
+.ab-cpage__meta dd span ~ span { font-size: 14px; font-weight: 500; color: var(--ab-500); }
+
+@media (max-width: 680px) {
+    .ab-cpage__meta { border-top-width: 1px; }
+    .ab-cpage__meta > div { flex: 1 1 150px; padding: 14px 0; border-left: 0;
+        border-top: 1px solid var(--ab-100); }
+    .ab-cpage__meta > div:first-child { border-top: 0; }
+}
 
 /* «цены для группы» — раскрываются по нажатию, как на прежнем сайте */
 .ab-cpage__more { display: grid; gap: 4px; }
@@ -526,3 +537,7 @@
     .ab-path__step::before { display: none; }
     .ab-path__n { top: 18px; width: 28px; height: 28px; font-size: 13px; }
 }
+
+/* «цены для группы» под основной ценой в карточке записи */
+.ab-cpage__buy .ab-cpage__more { margin: -12px 0 18px; }
+.ab-cpage__buy .ab-cpage__more b { display: block; font-size: 14px; color: var(--ab-500); }
