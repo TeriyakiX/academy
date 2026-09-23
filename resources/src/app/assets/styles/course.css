@@ -384,3 +384,62 @@
     width: 8px; height: 8px; border-right: 2px solid var(--ab-500); border-bottom: 2px solid var(--ab-500);
     transform: rotate(45deg); pointer-events: none; }
 .ab-cmod__field--select select:focus { outline: none; border-bottom-color: var(--ab-600); }
+
+/* ================= Программа: читаемость =================
+   Раньше день был подписью в скобках, а темы шли мелким серым
+   текстом сплошняком. День стал заметной полосой, модули внутри
+   получили воздух, размер строк поднят до основного текста. */
+.ab-cmod__day { padding: 26px 0 30px; }
+
+.ab-cmod__day-title { display: flex; align-items: center; gap: 12px; margin: 0 0 22px;
+    padding: 13px 18px; border-radius: 12px; background: var(--ab-50);
+    font-family: var(--ab-font-display); font-size: 17px; font-weight: 800;
+    letter-spacing: 0; text-transform: none; color: var(--ab-dark); }
+.ab-cmod__day-mark { width: 20px; height: 20px; }
+
+.ab-cmod__groups { gap: 26px 40px; }
+.ab-cmod__group-title { margin-bottom: 12px; font-size: 16px; }
+.ab-cmod__group-title svg { width: 18px; height: 18px; }
+
+.ab-cmod__items { gap: 9px; padding-left: 20px; font-size: 15px; line-height: 1.55; }
+.ab-cmod__items li { padding-left: 2px; }
+
+@media (max-width: 680px) {
+    .ab-cmod__day-title { margin-bottom: 16px; padding: 11px 14px; font-size: 15px; }
+    .ab-cmod__items { font-size: 14px; }
+}
+
+/* ================= Зачем и кому: крупнее =================
+   Блок читают первым, поэтому текст размером с абзац статьи,
+   а три главных навыка вынесены в карточки с номерами. */
+.ab-cwhy__card { padding: 30px 32px; }
+.ab-cwhy__card--who { border-color: transparent; }
+.ab-cwhy__label { margin-bottom: 12px; }
+.ab-cwhy__text { font-size: 18px; line-height: 1.65; }
+
+.ab-cwhy__points { counter-reset: cwhy; gap: 16px; margin-top: 18px; }
+.ab-cwhy__points li { counter-increment: cwhy; position: relative;
+    padding: 22px 24px 22px 62px; border-left: 0;
+    border: 1px solid var(--ab-100); border-radius: var(--ab-radius-lg); }
+.ab-cwhy__points li::before { content: counter(cwhy); position: absolute; left: 22px; top: 22px;
+    display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%;
+    background: var(--ab-600); color: var(--ab-white); font-size: 13px; font-weight: 800; }
+.ab-cwhy__points b { margin-bottom: 6px; font-size: 16px; }
+.ab-cwhy__points span { font-size: 15px; line-height: 1.6; }
+
+@media (max-width: 680px) {
+    .ab-cwhy__card { padding: 22px; }
+    .ab-cwhy__text { font-size: 16px; }
+    .ab-cwhy__points li { padding: 18px 18px 18px 56px; }
+    .ab-cwhy__points li::before { left: 18px; top: 18px; }
+}
+
+/* Фото в шапке курса: якорь первого экрана. */
+.ab-cpage__shot { margin-top: 22px; overflow: hidden; border-radius: var(--ab-radius-lg);
+    box-shadow: 0 20px 44px rgba(26,26,26,.14); }
+.ab-cpage__shot img { display: block; width: 100%; aspect-ratio: 16 / 7; object-fit: cover; }
+
+@media (max-width: 680px) {
+    .ab-cpage__shot { margin-top: 18px; }
+    .ab-cpage__shot img { aspect-ratio: 16 / 9; }
+}

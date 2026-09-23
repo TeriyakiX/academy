@@ -52,6 +52,14 @@
                                 </li>
                             @endforeach
                         </ul>
+
+                        {{-- Фото занятия: без него шапка была из одного текста
+                             и страница начиналась серой полосой. --}}
+                        <div class="ab-cpage__shot">
+                            <img src="{{ $course['gallery'][0] ?? $course['photo'] }}"
+                                 alt="{{ $course['title'] }}"
+                                 width="860" height="380" loading="eager" decoding="async">
+                        </div>
                     </div>
 
                     {{-- Карточка записи --}}
@@ -125,12 +133,12 @@
                                              ничего не добавляет: об этом уже сказано в заголовке. --}}
                                         @unless ($shortProgram)
                                         <h3 class="ab-cmod__day-title">
-                                            {{-- Номер уже в подписи — рядом значок зерна, как метка модуля. --}}
+                                            {{-- Номер дня уже в подписи, рядом значок зерна как метка. --}}
                                             <svg class="ab-cmod__day-mark" viewBox="0 0 24 24" aria-hidden="true">
                                                 <ellipse cx="12" cy="12" rx="7" ry="9.5" transform="rotate(35 12 12)" />
                                                 <path d="M8.5 5.5c3 2.5 1 5.5 3.5 7s1.5 4 3.5 6" />
                                             </svg>
-                                            [ {{ $day['label'] }} ]
+                                            {{ $day['label'] }}
                                         </h3>
                                         @endunless
 
