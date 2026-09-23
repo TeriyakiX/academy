@@ -117,32 +117,32 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 .ab-when__hint { max-width: 320px; margin: 0; padding: 12px 16px; border-left: 2px solid var(--ab-600);
     font-size: 14px; line-height: 1.5; color: var(--ab-500); }
 
-.ab-when__table { border: 1px solid var(--ab-100); border-radius: var(--ab-radius-lg);
-    background: var(--ab-white); overflow: hidden; }
-.ab-when__row { display: grid; grid-template-columns: 180px minmax(0, 1fr) 180px minmax(0, 1fr);
-    gap: 16px 24px; align-items: center; padding: 18px 24px; border-top: 1px solid var(--ab-100); }
-.ab-when__row:first-child { border-top: 0; }
-.ab-when__row--head { padding: 12px 24px; background: var(--ab-50); font-size: 12px; font-weight: 700;
-    letter-spacing: .06em; text-transform: uppercase; color: var(--ab-400); }
-.ab-when__row:not(.ab-when__row--head):hover { background: var(--ab-50); }
+/* Колонки без рамок: таблица выглядела выгрузкой из отчёта. */
+.ab-when__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 0; margin: 0; padding: 0; list-style: none;
+    border-top: 2px solid var(--ab-dark); }
+.ab-when__col { display: grid; align-content: start; gap: 14px; padding: 26px 32px 28px;
+    border-left: 1px solid var(--ab-100); }
+.ab-when__col:first-child { padding-left: 0; border-left: 0; }
 
-.ab-when__mode { font-family: var(--ab-font-display); font-size: 18px; font-weight: 800; }
+.ab-when__mode { font-family: var(--ab-font-display); font-size: 21px; font-weight: 800; line-height: 1.15; }
 .ab-when__times { display: flex; flex-wrap: wrap; gap: 8px; }
-.ab-when__times span { padding: 6px 12px; border-radius: 999px; background: var(--ab-50);
-    font-size: 13px; font-weight: 600; color: var(--ab-600); }
-.ab-when__times span.is-any { background: none; padding-left: 0; color: var(--ab-400); font-weight: 500; }
-.ab-when__len { font-size: 15px; font-weight: 700; }
-.ab-when__for { font-size: 14px; color: var(--ab-500); }
+.ab-when__times span { padding: 7px 14px; border-radius: 999px; background: var(--ab-50);
+    font-size: 13px; font-weight: 700; color: var(--ab-600); }
+.ab-when__times span.is-any { padding: 0; background: none; color: var(--ab-400); font-weight: 500; }
+
+.ab-when__meta { display: grid; gap: 12px; margin: 2px 0 0; }
+.ab-when__meta dt { font-size: 11px; font-weight: 700; letter-spacing: .06em;
+    text-transform: uppercase; color: var(--ab-400); }
+.ab-when__meta dd { margin: 3px 0 0; font-size: 15px; line-height: 1.45; color: var(--ab-dark); }
 
 @media (max-width: 860px) {
     .ab-when { padding: 44px 0; }
     .ab-when__hint { max-width: none; }
-    .ab-when__row--head { display: none; }
-    .ab-when__row { grid-template-columns: 1fr; gap: 10px; padding: 18px; }
-    .ab-when__len::before,
-    .ab-when__for::before,
-    .ab-when__times::before { content: attr(data-label) ': '; margin-right: 4px; color: var(--ab-400); }
-    .ab-when__times { align-items: center; }
+    .ab-when__grid { grid-template-columns: minmax(0, 1fr); border-top-width: 1px; }
+    .ab-when__col { padding: 22px 0; border-left: 0; border-top: 1px solid var(--ab-100); }
+    .ab-when__col:first-child { border-top: 0; }
+    .ab-when__meta { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px 20px; }
 }
 
 /* ================= Как проходит обучение ================= */

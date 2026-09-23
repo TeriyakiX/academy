@@ -61,16 +61,29 @@
     font-size: 16px; font-weight: 800; color: var(--ab-dark); text-decoration: none; }
 .ab-cpage__buy-phone span { display: block; font-size: 12px; font-weight: 400; color: var(--ab-400); }
 
-/* ---- чему научитесь ---- */
+/* ---- чему научитесь ----
+   Было восемь одинаковых плиток с галочками: они повторяли карточки
+   из соседних блоков и не показывали объём. Теперь нумерованный
+   список строками с тонкими разделителями. */
 .ab-clearn { padding: 72px 0; }
-.ab-clearn__list { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 14px; margin: 32px 0 0; padding: 0; list-style: none; }
-.ab-clearn__list li { display: flex; align-items: flex-start; gap: 12px; padding: 20px 22px;
-    border-radius: var(--ab-radius-lg); background: var(--ab-50);
-    font-size: 15px; line-height: 1.55; color: var(--ab-dark);
-    transition: background var(--ab-transition), transform var(--ab-transition); }
-.ab-clearn__list li:hover { background: var(--ab-100); transform: translateY(-3px); }
-.ab-clearn__list svg { width: 20px; height: 20px; flex: none; margin-top: 1px; color: var(--ab-600); }
+.ab-clearn__head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 460px);
+    gap: 24px 48px; align-items: end; }
+.ab-clearn__head .ab-h2 { margin-bottom: 0; }
+.ab-clearn__lead { margin: 0; font-size: 15px; line-height: 1.6; color: var(--ab-500); }
+
+.ab-clearn__list { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 0 56px; margin: 28px 0 0; padding: 0; list-style: none; }
+.ab-clearn__list li { display: grid; grid-template-columns: 42px minmax(0, 1fr); align-items: baseline;
+    gap: 14px; padding: 18px 0; border-top: 1px solid var(--ab-100);
+    font-size: 15px; line-height: 1.55; color: var(--ab-dark); }
+.ab-clearn__n { font-family: var(--ab-font-display); font-size: 20px; font-weight: 800; color: var(--ab-600); }
+
+@media (max-width: 760px) {
+    .ab-clearn { padding: 44px 0; }
+    .ab-clearn__head { grid-template-columns: minmax(0, 1fr); gap: 10px; align-items: start; }
+    .ab-clearn__list li { grid-template-columns: 34px minmax(0, 1fr); gap: 10px; padding: 15px 0; font-size: 14px; }
+    .ab-clearn__n { font-size: 17px; }
+}
 
 /* ================= Для бизнеса ================= */
 .ab-bus__intro { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 48px; align-items: center; }
@@ -425,4 +438,42 @@
     .ab-cwhy__text { font-size: 16px; }
     .ab-cwhy__points li { padding: 18px 18px 18px 56px; }
     .ab-cwhy__points li::before { left: 18px; top: 18px; }
+}
+
+/* ================= Рядом в этом направлении =================
+   Вместо вкладок со всем каталогом: три соседние программы строками.
+   Строка, а не карточка, чтобы блок не повторял остальные. */
+.ab-near { padding: 72px 0; }
+.ab-near__head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between;
+    gap: 16px 32px; margin-bottom: 26px; }
+.ab-near__head .ab-lead { margin-bottom: 0; }
+.ab-near__all { display: inline-flex; align-items: center; gap: 8px; flex: none;
+    font-size: 14px; font-weight: 700; color: var(--ab-600); text-decoration: none; }
+.ab-near__all svg { width: 17px; height: 17px; transition: transform var(--ab-transition); }
+.ab-near__all:hover svg { transform: translateX(3px); }
+
+.ab-near__list { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--ab-100); }
+.ab-near__row { display: grid; grid-template-columns: minmax(0, 1fr) auto auto auto;
+    gap: 18px 32px; align-items: center; padding: 22px 0; border-bottom: 1px solid var(--ab-100); }
+
+.ab-near__title { margin: 0 0 6px; font-family: var(--ab-font-display);
+    font-size: 19px; font-weight: 800; line-height: 1.2; }
+.ab-near__title a { color: var(--ab-dark); text-decoration: none; }
+.ab-near__title a:hover { color: var(--ab-600); }
+.ab-near__desc { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+    overflow: hidden; margin: 0; font-size: 14px; line-height: 1.55; color: var(--ab-500); }
+
+.ab-near__meta { display: grid; gap: 4px; font-size: 13px; color: var(--ab-500); text-align: right; }
+.ab-near__price { display: grid; gap: 2px; text-align: right; }
+.ab-near__price s { font-size: 13px; color: var(--ab-300); }
+.ab-near__price b { font-family: var(--ab-font-display); font-size: 21px; font-weight: 800; }
+.ab-near__go { flex: none; }
+
+@media (max-width: 900px) {
+    .ab-near { padding: 44px 0; }
+    .ab-near__row { grid-template-columns: minmax(0, 1fr) auto; gap: 12px 20px; padding: 20px 0; }
+    .ab-near__body { grid-column: 1 / -1; }
+    .ab-near__meta { text-align: left; }
+    .ab-near__price { text-align: right; }
+    .ab-near__go { grid-column: 1 / -1; justify-self: start; }
 }

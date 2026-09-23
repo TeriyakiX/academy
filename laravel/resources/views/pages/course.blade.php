@@ -251,17 +251,30 @@
 
         {{-- ---------- Чему научитесь ---------- --}}
         @if (count($course['learn']))
+            {{-- Пронумерованный список вместо одинаковых карточек с галочками:
+                 видно, сколько всего навыков, и блок не повторяет остальные. --}}
             <section class="ab-clearn ab-reveal">
                 <div class="ab-container">
-                    <h2 class="ab-h2">Чему вы научитесь</h2>
+                    <div class="ab-clearn__head">
+                        <h2 class="ab-h2">Чему вы научитесь</h2>
+                        @php
+                            $n = count($course['learn']);
+                            $tail = $n % 10;
+                            $word = ($tail === 1 && $n % 100 !== 11) ? 'навык'
+                                : (($tail >= 2 && $tail <= 4 && ($n % 100 < 10 || $n % 100 >= 20)) ? 'навыка' : 'навыков');
+                        @endphp
+                        <p class="ab-clearn__lead">
+                            {{ $n }} {{ $word }},
+                            которые останутся с вами после {{ $isClass ? 'мастер-класса' : 'курса' }}.
+                            Всё отрабатывается руками на занятии.
+                        </p>
+                    </div>
+
                     <ul class="ab-clearn__list">
-                        @foreach ($course['learn'] as $item)
+                        @foreach ($course['learn'] as $i => $item)
                             <li>
-                                <svg viewBox="0 0 24 24" aria-hidden="true">
-                                    <path d="m5 12 5 5L19 8" fill="none" stroke="currentColor"
-                                          stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                                {{ $item }}
+                                <b class="ab-clearn__n">{{ str_pad((string) ($i + 1), 2, '0', STR_PAD_LEFT) }}</b>
+                                <span>{{ $item }}</span>
                             </li>
                         @endforeach
                     </ul>
@@ -280,20 +293,10 @@
         {{-- ---------- Документ об обучении ---------- --}}
         @include('partials.blocks.course-diploma')
 
-        {{-- ---------- Свой набор программ ----------
-             Готовая программа подходит не всем: отсюда можно уйти
-             в конструктор и добрать недостающее со скидкой. --}}
-        @include('partials.blocks.constructor-cta')
-
-        {{-- ---------- Другие программы ---------- --}}
-        <section class="ab-programs ab-reveal">
-            <div class="ab-container">
-                <h2 class="ab-h2">Другие программы</h2>
-                <p class="ab-lead">Можно пройти по отдельности или собрать свой набор со скидкой.</p>
-                <div data-island="CourseTabs"
-                     data-props="{{ json_encode(['schools' => config('courses.schools')], JSON_UNESCAPED_UNICODE) }}"></div>
-            </div>
-        </section>
+        {{-- ---------- Соседние программы ----------
+             Вместо вкладок со всем каталогом: человек уже выбрал
+             направление, ему нужнее ближайшие программы. --}}
+        @include('partials.blocks.course-related')
 
         {{-- ---------- Заявка ---------- --}}
         @include('partials.blocks.lead')
