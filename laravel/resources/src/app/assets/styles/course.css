@@ -329,23 +329,16 @@
    Слева схема бланка (не скан: подделывать документ нельзя),
    справа — что в нём написано и реквизиты лицензии. */
 .ab-cdoc { padding: 72px 0; background: var(--ab-white); }
-.ab-cdoc__grid { display: grid; grid-template-columns: minmax(0, 360px) minmax(0, 1fr);
-    gap: 48px; align-items: center; }
+.ab-cdoc__grid { display: grid; grid-template-columns: minmax(0, 420px) minmax(0, 1fr);
+    gap: 56px; align-items: center; }
 
-.ab-cdoc__paper { position: relative; display: grid; align-content: start; gap: 10px;
-    padding: 34px 30px 46px; overflow: hidden;
-    border: 1px solid var(--ab-100); border-radius: 14px; background: var(--ab-white);
-    box-shadow: 0 22px 46px rgba(26,26,26,.12); }
-.ab-cdoc__paper-tag { font-size: 11px; font-weight: 700; letter-spacing: .16em;
-    text-transform: uppercase; color: var(--ab-600); }
-.ab-cdoc__paper-title { font-family: var(--ab-font-display); font-size: 19px; font-weight: 800;
-    line-height: 1.25; color: var(--ab-dark); }
-.ab-cdoc__paper-line { height: 9px; border-radius: 5px; background: var(--ab-100); }
-.ab-cdoc__paper-line--name { height: 13px; width: 78%; background: var(--ab-200, #d8d3ce); }
-.ab-cdoc__paper-line--short { width: 55%; }
-.ab-cdoc__paper-note { font-size: 12px; color: var(--ab-400); }
-.ab-cdoc__paper-seal { position: absolute; right: -34px; bottom: -34px;
-    width: 130px; height: 130px; border: 10px solid var(--ab-50); border-radius: 50%; }
+/* Наш бланк на светлом фоне: глубокая тень с тёмной главной тут лишняя. */
+.ab-cdoc__paper { display: grid; justify-items: center; gap: 16px; }
+.ab-cdoc__caption { font-size: 13px; color: var(--ab-400); }
+.ab-cdoc__subtitle { display: block; margin-bottom: 12px; font-size: 11px; font-weight: 700;
+    letter-spacing: .08em; text-transform: uppercase; color: var(--ab-600); }
+.ab-cdoc__paper .ab-certdoc { box-shadow: 0 24px 48px rgba(26,26,26,.18); }
+.ab-cdoc__paper .ab-certdoc-stack__back { box-shadow: 0 12px 28px rgba(26,26,26,.12); }
 
 .ab-cdoc__lead { margin: 0 0 20px; font-size: 16px; line-height: 1.6; color: var(--ab-500); }
 
@@ -432,14 +425,4 @@
     .ab-cwhy__text { font-size: 16px; }
     .ab-cwhy__points li { padding: 18px 18px 18px 56px; }
     .ab-cwhy__points li::before { left: 18px; top: 18px; }
-}
-
-/* Фото в шапке курса: якорь первого экрана. */
-.ab-cpage__shot { margin-top: 22px; overflow: hidden; border-radius: var(--ab-radius-lg);
-    box-shadow: 0 20px 44px rgba(26,26,26,.14); }
-.ab-cpage__shot img { display: block; width: 100%; aspect-ratio: 16 / 7; object-fit: cover; }
-
-@media (max-width: 680px) {
-    .ab-cpage__shot { margin-top: 18px; }
-    .ab-cpage__shot img { aspect-ratio: 16 / 9; }
 }

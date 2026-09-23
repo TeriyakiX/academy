@@ -6,10 +6,14 @@
     листа, поэтому на телефоне он уменьшается целиком, не разваливаясь.
 
     Параметры:
-      $price — цена «от …» на ярлыке рядом с листом, необязательно.
+      $price   — цена «от …» на ярлыке рядом с листом, необязательно;
+      $program — название программы в строке «Программа», необязательно;
+      $to      — имя в строке «Выдан», необязательно.
 --}}
 @php
-    $price  = $price ?? null;
+    $price   = $price ?? null;
+    $program = $program ?? null;
+    $to      = $to ?? null;
     /* У каждой печати свой идентификатор: лист может встретиться на странице дважды. */
     $sealId = 'ab-seal-' . \Illuminate\Support\Str::random(6);
 @endphp
@@ -32,10 +36,14 @@
             <span class="ab-certdoc__subtitle">на обучение в Академии Бариста</span>
 
             <span class="ab-certdoc__label">Выдан</span>
-            <span class="ab-certdoc__line"><i>имя получателя</i></span>
+            <span class="ab-certdoc__line">
+                @if ($to) {{ $to }} @else <i>имя получателя</i> @endif
+            </span>
 
             <span class="ab-certdoc__label">Программа</span>
-            <span class="ab-certdoc__line"><i>выбранные курсы и мастер-классы</i></span>
+            <span class="ab-certdoc__line">
+                @if ($program) {{ $program }} @else <i>выбранные курсы и мастер-классы</i> @endif
+            </span>
 
             <span class="ab-certdoc__foot">
                 <span class="ab-certdoc__meta">
