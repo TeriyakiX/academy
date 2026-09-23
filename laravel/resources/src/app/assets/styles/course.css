@@ -175,13 +175,16 @@
 .ab-page--events .ab-lead-block    { background: var(--ab-50); }
 .ab-page--events .ab-contacts-home { background: var(--ab-white); }
 
-/* Шапка раздела с фото справа: каталог курсов, оборудование. */
-.ab-cpage__split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 440px);
+/* Шапка раздела с фото справа: каталог курсов, оборудование.
+   Фото — спутник заголовка, а не главный герой: при коротком тексте
+   крупная картинка раздувала шапку до половины экрана. */
+.ab-cpage__split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 380px);
     gap: 48px; align-items: center; }
+.ab-cpage__split--solo { grid-template-columns: minmax(0, 1fr); }
 .ab-cpage__split .ab-cpage__lead { margin-bottom: 0; }
 .ab-cpage__media { position: relative; }
-.ab-cpage__media img { display: block; width: 100%; aspect-ratio: 16 / 11; object-fit: cover;
-    border-radius: var(--ab-radius-lg); box-shadow: 0 20px 44px rgba(26,26,26,.14); }
+.ab-cpage__media img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10;
+    object-fit: cover; border-radius: var(--ab-radius-lg); box-shadow: 0 20px 44px rgba(26,26,26,.14); }
 
 @media (max-width: 900px) {
     .ab-cpage__split { grid-template-columns: minmax(0, 1fr); gap: 20px; }
@@ -262,6 +265,22 @@
 .ab-cmod__legal { margin: 0; font-size: 11px; line-height: 1.45; color: var(--ab-400); }
 .ab-cmod__legal a { color: var(--ab-500); }
 
+/* Короткая программа: карточка записи идёт под ней, а темы занимают
+   всю ширину — иначе справа от короткого списка зияло пустое поле. */
+.ab-cmod__grid--short { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+.ab-cmod__grid--short .ab-cmod__aside { position: static; max-width: 460px; }
+
+@media (min-width: 761px) {
+    .ab-cmod__grid--short .ab-cmod__group:only-child { grid-column: 1 / -1; }
+    .ab-cmod__grid--short .ab-cmod__group:only-child .ab-cmod__items {
+        grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 32px; }
+}
+
+@media (min-width: 1100px) {
+    .ab-cmod__grid--short .ab-cmod__group:only-child .ab-cmod__items {
+        grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
 @media (max-width: 1000px) {
     .ab-cmod__grid { grid-template-columns: minmax(0, 1fr); gap: 32px; }
     .ab-cmod__aside { position: static; max-width: 460px; }
@@ -274,12 +293,6 @@
     .ab-cmod__day { padding: 18px 0; }
     .ab-cmod__items { font-size: 13px; }
 }
-
-/* Фото в шапке — спутник заголовка, а не главный герой: при коротком
-   тексте крупная картинка раздувала шапку до половины экрана. */
-.ab-cpage__split { grid-template-columns: minmax(0, 1fr) minmax(0, 380px); }
-.ab-cpage__media img { height: auto; aspect-ratio: 16 / 10; }
-.ab-cpage__split--solo { grid-template-columns: minmax(0, 1fr); }
 
 /* В каталоге вкладки идут сразу за шапкой: полный отступ секции
    давал пустую полосу в сотню пикселей. */

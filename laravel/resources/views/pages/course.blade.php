@@ -95,12 +95,16 @@
             $dayWord  = ($dayCount % 10 === 1 && $dayCount % 100 !== 11) ? 'дня' : 'дней';
             /* Мастер-класс — не курс: и в заголовке, и в карточке записи. */
             $isClass  = ($course['school'] ?? '') === 'Мастер-классы';
+            /* Короткая программа (одно занятие) не дотягивается до карточки
+               записи, и справа от неё оставалось пустое поле в пол-экрана.
+               В таком случае ставим карточку под программой. */
+            $shortProgram = count($days) === 1;
         @endphp
 
         @if (count($days) && count($days[0]['groups']))
             <section class="ab-cmod ab-reveal">
                 <div class="ab-container">
-                    <div class="ab-cmod__grid">
+                    <div class="ab-cmod__grid @if ($shortProgram) ab-cmod__grid--short @endif">
                         <div class="ab-cmod__main">
                             <h2 class="ab-cmod__title">
                                 Программа {{ $isClass ? 'мастер-класса' : 'курса' }} <b>{{ $course['title'] }}</b>
@@ -112,6 +116,9 @@
                             <ol class="ab-cmod__list">
                                 @foreach ($days as $day)
                                     <li class="ab-cmod__day">
+                                        {{-- У программы из одного занятия подпись «[ занятие ]»
+                                             ничего не добавляет: об этом уже сказано в заголовке. --}}
+                                        @unless ($shortProgram)
                                         <h3 class="ab-cmod__day-title">
                                             {{-- Номер уже в подписи — рядом значок зерна, как метка модуля. --}}
                                             <svg class="ab-cmod__day-mark" viewBox="0 0 24 24" aria-hidden="true">
@@ -120,6 +127,7 @@
                                             </svg>
                                             [ {{ $day['label'] }} ]
                                         </h3>
+                                        @endunless
 
                                         <div class="ab-cmod__groups">
                                             @foreach ($day['groups'] as $group)
