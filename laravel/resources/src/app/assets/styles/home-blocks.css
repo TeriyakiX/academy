@@ -324,11 +324,14 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 
 .ab-lead-block__promise { margin: 0 0 10px; font-size: 18px; font-weight: 800; color: var(--ab-white); }
 .ab-lead-block__note { max-width: 480px; margin: 0 0 22px; font-size: 15px; line-height: 1.6; color: var(--ab-cream); }
-.ab-lead-block__list { display: grid; gap: 11px; margin: 0 0 26px; padding: 0; list-style: none; }
-.ab-lead-block__list li { position: relative; padding-left: 26px; font-size: 15px; color: #ddd8d4; }
-.ab-lead-block__list li::before { content: ''; position: absolute; left: 0; top: 2px;
-    width: 18px; height: 18px; border-radius: 50%; background: rgba(255,255,255,.12)
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12 5 5L19 8'/%3E%3C/svg%3E") center / 11px no-repeat; }
+.ab-lead-block__list { display: grid; gap: 14px; margin: 0 0 26px; padding: 0;
+    list-style: none; counter-reset: lead; }
+.ab-lead-block__list li { counter-increment: lead; position: relative; padding-left: 38px;
+    font-size: 15px; line-height: 1.45; color: #ddd8d4; }
+.ab-lead-block__list li::before { content: counter(lead); position: absolute; left: 0; top: -1px;
+    display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%;
+    border: 1px solid rgba(255,255,255,.28); background: rgba(255,255,255,.06);
+    font-size: 13px; font-weight: 800; color: var(--ab-white); }
 .ab-lead-block__phone { display: inline-block; font-size: 22px; font-weight: 800;
     color: var(--ab-white); text-decoration: none; }
 .ab-lead-block__phone span { display: block; font-size: 13px; font-weight: 400; color: var(--ab-400); }
@@ -344,6 +347,19 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 .ab-lead-form__field input:focus { outline: none; border-color: var(--ab-500); }
 .ab-lead-form__note { margin: 0; font-size: 12px; line-height: 1.5; color: var(--ab-400); }
 .ab-lead-form__note a { color: var(--ab-cream); }
+
+/* Уровень одним нажатием: менеджер сразу знает, с чем звонить. */
+.ab-lead-form__levels { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; border: 0; }
+.ab-lead-form__levels .ab-lead-form__label { flex: 1 0 100%; margin-bottom: 2px; padding: 0; }
+.ab-lead-form__chip input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.ab-lead-form__chip span { display: inline-block; padding: 9px 14px; border-radius: 999px;
+    border: 1px solid rgba(255,255,255,.18); background: rgba(0,0,0,.25);
+    font-size: 13px; font-weight: 600; color: #ddd8d4; cursor: pointer;
+    transition: border-color var(--ab-transition), background var(--ab-transition), color var(--ab-transition); }
+.ab-lead-form__chip span:hover { border-color: rgba(255,255,255,.4); }
+.ab-lead-form__chip input:checked + span { border-color: var(--ab-cream, #e9e0d6);
+    background: var(--ab-cream, #e9e0d6); color: #241e1c; }
+.ab-lead-form__chip input:focus-visible + span { outline: 2px solid var(--ab-cream, #e9e0d6); outline-offset: 2px; }
 
 /* ================= Расписание мероприятий ================= */
 .ab-events { padding: 76px 0; background: var(--ab-50); }

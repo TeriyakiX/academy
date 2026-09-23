@@ -10,6 +10,14 @@
     ];
     $action  = $action  ?? 'Подобрать курс';
     $source  = $source  ?? 'Блок «Если не знаете, с чего начать»';
+
+    /* Уровень человека обычными радиокнопками: менеджер сразу видит,
+       с чем звонить, а форма работает и без JavaScript. */
+    $levels  = $levels ?? [
+        'Начинаю с нуля',
+        'Уже работаю за стойкой',
+        'Обучаю команду',
+    ];
 @endphp
 
 <section class="ab-lead-block ab-reveal">
@@ -21,11 +29,13 @@
                 <p class="ab-lead-block__promise">Оставьте заявку — свяжемся с вами <span>в течение рабочего дня</span></p>
                 <p class="ab-lead-block__note">{{ $note }}</p>
 
-                <ul class="ab-lead-block__list">
+                {{-- Шаги по порядку вместо трёх галочек: видно, что будет
+                     после заявки, а не просто список обещаний. --}}
+                <ol class="ab-lead-block__list">
                     @foreach ($points as $point)
                         <li>{{ $point }}</li>
                     @endforeach
-                </ul>
+                </ol>
 
                 <a class="ab-lead-block__phone" href="{{ config('nav.contacts.phone_href') }}">
                     {{ config('nav.contacts.phone') }}
@@ -38,6 +48,19 @@
                 @include('partials.form-guard')
 
                 <input type="hidden" name="source" value="{{ $source }}">
+
+                @if ($levels)
+                    <fieldset class="ab-lead-form__levels">
+                        <legend class="ab-lead-form__label">С чего начнём</legend>
+
+                        @foreach ($levels as $i => $level)
+                            <label class="ab-lead-form__chip">
+                                <input type="radio" name="comment" value="{{ $level }}" @checked($i === 0)>
+                                <span>{{ $level }}</span>
+                            </label>
+                        @endforeach
+                    </fieldset>
+                @endif
 
                 <label class="ab-lead-form__field">
                     <span class="ab-lead-form__label">Как вас зовут</span>

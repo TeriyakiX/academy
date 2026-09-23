@@ -29,29 +29,42 @@
                             <p class="ab-cpage__lead">{{ $course['lead'] }}</p>
                         @endif
 
-                        <ul class="ab-cpage__facts">
-                            @foreach ($course['facts'] as $label => $value)
-                                {{-- Значение бывает списком: цена за одного, за двоих, за троих.
-                                     Цены для группы свёрнуты: иначе в карточке простыня цифр. --}}
-                                @php $lines = (array) $value; @endphp
-                                <li @class(['is-list' => count($lines) > 1])>
-                                    <span>{{ $label }}</span>
-                                    @if ($label === 'стоимость' && count($lines) > 1)
-                                        <b>{{ $lines[0] }}</b>
-                                        <details class="ab-cpage__more">
-                                            <summary>цены для группы</summary>
-                                            @foreach (array_slice($lines, 1) as $line)
-                                                <b>{{ $line }}</b>
-                                            @endforeach
-                                        </details>
-                                    @else
-                                        @foreach ($lines as $line)
-                                            <b>{{ $line }}</b>
+                        @php
+                            /*
+                             | Короткая строка фактов вместо пяти одинаковых плиток.
+                             | Цена ушла в карточку записи, где она и так крупно,
+                             | «расписание на выбор» названо длительностью: там
+                             | записаны именно варианты занятий, а не время.
+                             */
+                            $facts = $course['facts'];
+                            $prices = (array) ($facts['стоимость'] ?? []);
+
+                            $meta = collect([
+                                'Длительность' => $facts['расписание на выбор'] ?? ($course['duration'] ?? null),
+                                'Когда'        => $facts['расписание'] ?? null,
+                                'Формат'       => $facts['формат обучения'] ?? null,
+                                'Документ'     => $facts['сертификат'] ?? null,
+                            ])
+                                /* Остальные факты курса, если школа добавила свои. */
+                                ->merge(collect($facts)->except([
+                                    'стоимость', 'расписание на выбор', 'расписание',
+                                    'формат обучения', 'сертификат',
+                                ]))
+                                ->filter(fn ($v) => !empty($v));
+                        @endphp
+
+                        <dl class="ab-cpage__meta">
+                            @foreach ($meta as $label => $value)
+                                <div>
+                                    <dt>{{ $label }}</dt>
+                                    <dd>
+                                        @foreach ((array) $value as $line)
+                                            <span>{{ $line }}</span>
                                         @endforeach
-                                    @endif
-                                </li>
+                                    </dd>
+                                </div>
                             @endforeach
-                        </ul>
+                        </dl>
                     </div>
 
                     {{-- Карточка записи --}}
@@ -64,6 +77,17 @@
                                 <strong>{{ number_format($course['price'], 0, ',', ' ') }} ₽</strong>
                             @endif
                         </div>
+
+                        {{-- Цены за двоих и больше: рядом с основной ценой, а не
+                             отдельной плиткой среди фактов курса. --}}
+                        @if (count($prices) > 1)
+                            <details class="ab-cpage__more">
+                                <summary>цены для группы</summary>
+                                @foreach (array_slice($prices, 1) as $line)
+                                    <b>{{ $line }}</b>
+                                @endforeach
+                            </details>
+                        @endif
 
                         <ul class="ab-cpage__buy-list">
                             <li>Обучение по образовательной лицензии</li>
