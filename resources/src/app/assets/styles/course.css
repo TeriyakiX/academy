@@ -407,10 +407,11 @@
    Раньше день был подписью в скобках, а темы шли мелким серым
    текстом сплошняком. День стал заметной полосой, модули внутри
    получили воздух, размер строк поднят до основного текста. */
-.ab-cmod__day { padding: 26px 0 30px; }
+.ab-cmod__day { padding: 0; border-top: 1px solid var(--ab-100); }
+.ab-cmod__day:first-child { border-top: 0; }
 
-.ab-cmod__day-title { display: flex; align-items: center; gap: 12px; margin: 0 0 22px;
-    padding: 13px 18px; border-radius: 12px; background: var(--ab-50);
+.ab-cmod__day-title { display: flex; align-items: center; gap: 12px; margin: 0;
+    padding: 18px 0; background: none;
     font-family: var(--ab-font-display); font-size: 17px; font-weight: 800;
     letter-spacing: 0; text-transform: none; color: var(--ab-dark); }
 .ab-cmod__day-mark { width: 20px; height: 20px; }
@@ -423,7 +424,7 @@
 .ab-cmod__items li { padding-left: 2px; }
 
 @media (max-width: 680px) {
-    .ab-cmod__day-title { margin-bottom: 16px; padding: 11px 14px; font-size: 15px; }
+    .ab-cmod__day-title { padding: 15px 0; font-size: 15px; }
     .ab-cmod__items { font-size: 14px; }
 }
 
@@ -540,14 +541,18 @@
 
 /* ---- дни программы раскрываются ----
    Вся программа сразу занимала три экрана телефона. */
-.ab-cmod__day > details > summary { list-style: none; cursor: pointer; position: relative;
-    padding-right: 40px; }
+.ab-cmod__day > details > summary { list-style: none; cursor: pointer; }
 .ab-cmod__day > details > summary::-webkit-details-marker { display: none; }
-.ab-cmod__day > details > summary::after { content: ''; position: absolute; right: 18px; top: 17px;
-    width: 9px; height: 9px; border-right: 2px solid var(--ab-500); border-bottom: 2px solid var(--ab-500);
+/* стрелка прижата к правому краю и всегда на середине строки */
+.ab-cmod__day > details > summary::after { content: ''; flex: none; margin-left: auto;
+    width: 9px; height: 9px; margin-top: -4px;
+    border-right: 2px solid var(--ab-500); border-bottom: 2px solid var(--ab-500);
     transform: rotate(45deg); transition: transform var(--ab-transition); }
-.ab-cmod__day > details[open] > summary::after { top: 21px; transform: rotate(-135deg); }
-.ab-cmod__day > details > summary:hover { background: var(--ab-100); }
+.ab-cmod__day > details[open] > summary::after { margin-top: 4px; transform: rotate(-135deg); }
+.ab-cmod__day > details > summary:hover { color: var(--ab-600); }
+.ab-cmod__day > details > summary:hover .ab-cmod__day-mark { fill: var(--ab-600); }
+/* содержимое дня отделено от следующей строки */
+.ab-cmod__day > details[open] > .ab-cmod__groups { padding: 4px 0 26px; }
 
 /* ---- документ об обучении: короче ----
    Блок вытягивался на полтора экрана из-за текста под сертификатом. */
