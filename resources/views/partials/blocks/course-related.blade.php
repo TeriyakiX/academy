@@ -15,7 +15,25 @@
             ->reject(fn ($c) => ($c['url'] ?? '') === ($course['url'] ?? ''));
     }
 
-    $near = $near->take(3);
+    /* Фото для карточки: сначала снимок со страницы курса, иначе
+       общий кадр направления. */
+    $pages = config('course-pages', []);
+    $shots = [
+        'Курсы бариста' => '/assets/barista.webp',
+        'Мастер-классы' => '/assets/master-class.webp',
+        'Барное дело'   => '/assets/barmen.webp',
+    ];
+
+    $near = $near->take(3)->map(function ($item) use ($pages, $shots, $schools) {
+        $shot = $pages[$item['url']]['gallery'][0] ?? null;
+
+        if (!$shot) {
+            $school = collect($schools)->search(fn ($list) => collect($list)->contains('url', $item['url']));
+            $shot = $shots[$school] ?? '/assets/barista.webp';
+        }
+
+        return $item + ['shot' => $shot];
+    });
 @endphp
 
 @if ($near->isNotEmpty())
@@ -36,6 +54,11 @@
             <ul class="ab-near__list">
                 @foreach ($near as $item)
                     <li class="ab-near__row">
+                        <a class="ab-near__media" href="{{ $item['url'] }}" tabindex="-1" aria-hidden="true">
+                            <img src="{{ $item['shot'] }}" alt="" width="320" height="200"
+                                 loading="lazy" decoding="async">
+                        </a>
+
                         <div class="ab-near__body">
                             <h3 class="ab-near__title">
                                 <a href="{{ $item['url'] }}">{{ $item['title'] }}</a>

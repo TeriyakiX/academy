@@ -464,8 +464,13 @@
 .ab-near__all:hover svg { transform: translateX(3px); }
 
 .ab-near__list { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--ab-100); }
-.ab-near__row { display: grid; grid-template-columns: minmax(0, 1fr) auto auto auto;
-    gap: 18px 32px; align-items: center; padding: 22px 0; border-bottom: 1px solid var(--ab-100); }
+.ab-near__row { display: grid; grid-template-columns: 148px minmax(0, 1fr) auto auto auto;
+    gap: 18px 28px; align-items: center; padding: 22px 0; border-bottom: 1px solid var(--ab-100); }
+
+.ab-near__media { display: block; overflow: hidden; border-radius: 12px; }
+.ab-near__media img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover;
+    transition: transform var(--ab-transition); }
+.ab-near__row:hover .ab-near__media img { transform: scale(1.04); }
 
 .ab-near__title { margin: 0 0 6px; font-family: var(--ab-font-display);
     font-size: 19px; font-weight: 800; line-height: 1.2; }
@@ -482,11 +487,26 @@
 
 @media (max-width: 900px) {
     .ab-near { padding: 44px 0; }
-    .ab-near__row { grid-template-columns: minmax(0, 1fr) auto; gap: 12px 20px; padding: 20px 0; }
-    .ab-near__body { grid-column: 1 / -1; }
-    .ab-near__meta { text-align: left; }
+    .ab-near__row { grid-template-columns: 120px minmax(0, 1fr) auto; gap: 12px 20px; padding: 20px 0; }
+    .ab-near__body { grid-column: 2 / -1; }
+    .ab-near__meta { grid-column: 2 / 3; text-align: left; }
     .ab-near__price { text-align: right; }
     .ab-near__go { grid-column: 1 / -1; justify-self: start; }
+}
+
+/* На телефоне — лента карточек вбок: фото сверху, под ним всё остальное. */
+@media (max-width: 760px) {
+    .ab-near__list { border-top: 0; }
+    .ab-near__row { display: flex; flex-direction: column; align-items: stretch;
+        gap: 12px; padding: 0 0 18px; border: 1px solid var(--ab-100);
+        border-radius: var(--ab-radius-lg); overflow: hidden; background: var(--ab-white); }
+    .ab-near__media { border-radius: 0; }
+    .ab-near__media img { aspect-ratio: 16 / 9; }
+    .ab-near__body, .ab-near__meta, .ab-near__price, .ab-near__go { margin-inline: 18px; }
+    .ab-near__meta { display: flex; flex-wrap: wrap; gap: 4px 14px; }
+    .ab-near__price { display: flex; align-items: baseline; gap: 10px; text-align: left; }
+    .ab-near__go { align-self: flex-start; }
+    .ab-near__head { align-items: flex-start; }
 }
 
 /* Цифры в шапке каталога: сколько программ и с какой цены. */

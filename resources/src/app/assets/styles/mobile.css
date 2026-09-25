@@ -27,6 +27,8 @@
     .ab-ev__list,
     .ab-steps__list,
     .ab-reasons__list,
+    .ab-team__grid,
+    .ab-near__list,
     .ctor__list {
         display: flex;
         grid-template-columns: none;
@@ -47,6 +49,8 @@
     .ab-ev__list::-webkit-scrollbar,
     .ab-steps__list::-webkit-scrollbar,
     .ab-reasons__list::-webkit-scrollbar,
+    .ab-team__grid::-webkit-scrollbar,
+    .ab-near__list::-webkit-scrollbar,
     .ctor__list::-webkit-scrollbar { display: none; }
 
     .ab-tabs__grid > *,
@@ -55,6 +59,8 @@
     .ab-ev__list > *,
     .ab-steps__list > *,
     .ab-reasons__list > *,
+    .ab-team__grid > *,
+    .ab-near__list > *,
     .ctor__list > * {
         flex: 0 0 100%;
         min-width: 0;
@@ -62,6 +68,13 @@
         box-sizing: border-box;
         scroll-snap-align: center;
     }
+
+    /* Преподаватели листаются вбок: фото сверху, под ним имя и навыки.
+       На телефоне карточка была строкой — в ленте она не читается. */
+    .ab-team__card { flex-direction: column; }
+    .ab-team__photo { flex: none; width: 100%; aspect-ratio: 1 / 1;
+        max-height: none; height: auto; object-position: center 18%; }
+    .ab-team__body { padding: 18px; }
 
     /* Короткие плитки помещаются по две в ряд — прокрутка им не нужна */
     .ab-stats__list {

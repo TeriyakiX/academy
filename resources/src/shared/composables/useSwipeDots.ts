@@ -17,6 +17,8 @@ const TRACKS = [
     '.ab-ev__list',
     '.ab-steps__list',
     '.ab-reasons__list',
+    '.ab-team__grid',       // преподаватели
+    '.ab-near__list',       // соседние программы на странице курса
     '.ab-bus__grid',        // услуги для бизнеса
     '.ctor__list',          // конструктор курсов
     '.ab-rv__swipe',        // отзывы
