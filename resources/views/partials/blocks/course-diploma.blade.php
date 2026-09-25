@@ -24,16 +24,20 @@
                 <h2 class="ab-h2">Сертификат после курса</h2>
                 <p class="ab-cdoc__lead">{{ $doc['lead'] }}</p>
 
-                <span class="ab-cdoc__subtitle">Свидетельство по образовательной лицензии</span>
+                {{-- Подробности про свидетельство раскрываются: сразу развёрнутыми
+                     они вытягивали блок на полтора экрана телефона. --}}
+                <details class="ab-cdoc__more">
+                    <summary>Что в свидетельстве по образовательной лицензии</summary>
 
-                <ul class="ab-cdoc__list">
-                    @foreach ($details as $item)
-                        <li>
-                            <b>{{ $item['title'] }}</b>
-                            <span>{{ $item['text'] }}</span>
-                        </li>
-                    @endforeach
-                </ul>
+                    <ul class="ab-cdoc__list">
+                        @foreach ($details as $item)
+                            <li>
+                                <b>{{ $item['title'] }}</b>
+                                <span>{{ $item['text'] }}</span>
+                            </li>
+                        @endforeach
+                    </ul>
+                </details>
 
                 @if (!empty($lic['meta']))
                     <dl class="ab-cdoc__meta">

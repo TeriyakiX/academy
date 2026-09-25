@@ -143,20 +143,20 @@
                             </h2>
 
                             <ol class="ab-cmod__list">
-                                @foreach ($days as $day)
+                                @foreach ($days as $i => $day)
+                                    {{-- День раскрывается по нажатию: вся программа
+                                         сразу занимала несколько экранов телефона.
+                                         Первый день открыт, чтобы было видно, что внутри. --}}
                                     <li class="ab-cmod__day">
-                                        {{-- У программы из одного занятия подпись «[ занятие ]»
-                                             ничего не добавляет: об этом уже сказано в заголовке. --}}
-                                        @unless ($shortProgram)
-                                        <h3 class="ab-cmod__day-title">
-                                            {{-- Номер дня уже в подписи, рядом значок зерна как метка. --}}
-                                            <svg class="ab-cmod__day-mark" viewBox="0 0 24 24" aria-hidden="true">
-                                                <ellipse cx="12" cy="12" rx="7" ry="9.5" transform="rotate(35 12 12)" />
-                                                <path d="M8.5 5.5c3 2.5 1 5.5 3.5 7s1.5 4 3.5 6" />
-                                            </svg>
-                                            {{ $day['label'] }}
-                                        </h3>
-                                        @endunless
+                                        <details @if ($shortProgram || $i === 0) open @endif>
+                                            <summary class="ab-cmod__day-title">
+                                                {{-- Номер дня уже в подписи, рядом значок зерна как метка. --}}
+                                                <svg class="ab-cmod__day-mark" viewBox="0 0 24 24" aria-hidden="true">
+                                                    <ellipse cx="12" cy="12" rx="7" ry="9.5" transform="rotate(35 12 12)" />
+                                                    <path d="M8.5 5.5c3 2.5 1 5.5 3.5 7s1.5 4 3.5 6" />
+                                                </svg>
+                                                {{ $shortProgram ? 'Что разбираем на занятии' : $day['label'] }}
+                                            </summary>
 
                                         <div class="ab-cmod__groups">
                                             @foreach ($day['groups'] as $group)
@@ -191,6 +191,7 @@
                                                 </div>
                                             @endforeach
                                         </div>
+                                        </details>
                                     </li>
                                 @endforeach
                             </ol>
@@ -269,39 +270,6 @@
                             </form>
                         </aside>
                     </div>
-                </div>
-            </section>
-        @endif
-
-        {{-- ---------- Чему научитесь ---------- --}}
-        @if (count($course['learn']))
-            {{-- Пронумерованный список вместо одинаковых карточек с галочками:
-                 видно, сколько всего навыков, и блок не повторяет остальные. --}}
-            <section class="ab-clearn ab-reveal">
-                <div class="ab-container">
-                    <div class="ab-clearn__head">
-                        <h2 class="ab-h2">Чему вы научитесь</h2>
-                        @php
-                            $n = count($course['learn']);
-                            $tail = $n % 10;
-                            $word = ($tail === 1 && $n % 100 !== 11) ? 'навык'
-                                : (($tail >= 2 && $tail <= 4 && ($n % 100 < 10 || $n % 100 >= 20)) ? 'навыка' : 'навыков');
-                        @endphp
-                        <p class="ab-clearn__lead">
-                            {{ $n }} {{ $word }},
-                            которые останутся с вами после {{ $isClass ? 'мастер-класса' : 'курса' }}.
-                            Всё отрабатывается руками на занятии.
-                        </p>
-                    </div>
-
-                    <ul class="ab-clearn__list">
-                        @foreach ($course['learn'] as $i => $item)
-                            <li>
-                                <b class="ab-clearn__n">{{ str_pad((string) ($i + 1), 2, '0', STR_PAD_LEFT) }}</b>
-                                <span>{{ $item }}</span>
-                            </li>
-                        @endforeach
-                    </ul>
                 </div>
             </section>
         @endif

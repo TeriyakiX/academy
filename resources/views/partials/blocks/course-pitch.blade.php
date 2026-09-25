@@ -3,39 +3,35 @@
 {{--
     «Зачем и кому» — первый блок после шапки.
 
-    Человек, открывший страницу курса, решает один вопрос: это про меня
-    или нет. Поэтому сначала задача, потом аудитория, потом три главных
-    навыка. Всё опирается на программу ниже, обещаний сверх неё нет.
+    Раньше два абзаца целиком занимали экран телефона. Теперь это
+    раскрывающиеся строки: открыт только первый ответ, остальное
+    человек открывает сам. Работает без JavaScript.
 --}}
 @if ($pitch)
     <section class="ab-cwhy ab-reveal">
         <div class="ab-container">
-            <div class="ab-cwhy__grid">
+            <div class="ab-cwhy__list">
                 @if (!empty($pitch['why']))
-                    <div class="ab-cwhy__card">
-                        <span class="ab-cwhy__label">Зачем этот курс</span>
+                    <details class="ab-cwhy__item" open>
+                        <summary>Зачем этот курс</summary>
                         <p class="ab-cwhy__text">{{ $pitch['why'] }}</p>
-                    </div>
+                    </details>
                 @endif
 
                 @if (!empty($pitch['who']))
-                    <div class="ab-cwhy__card ab-cwhy__card--who">
-                        <span class="ab-cwhy__label">Кому подойдёт</span>
+                    <details class="ab-cwhy__item">
+                        <summary>Кому подойдёт</summary>
                         <p class="ab-cwhy__text">{{ $pitch['who'] }}</p>
-                    </div>
+                    </details>
                 @endif
-            </div>
 
-            @if (!empty($pitch['points']))
-                <ul class="ab-cwhy__points">
-                    @foreach ($pitch['points'] as $point)
-                        <li>
-                            <b>{{ $point['title'] }}</b>
-                            <span>{{ $point['text'] }}</span>
-                        </li>
-                    @endforeach
-                </ul>
-            @endif
+                @foreach ($pitch['points'] ?? [] as $point)
+                    <details class="ab-cwhy__item">
+                        <summary>{{ $point['title'] }}</summary>
+                        <p class="ab-cwhy__text">{{ $point['text'] }}</p>
+                    </details>
+                @endforeach
+            </div>
         </div>
     </section>
 @endif
