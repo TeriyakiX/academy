@@ -392,17 +392,6 @@
     .ab-cdoc__paper { max-width: 340px; }
 }
 
-/* Выбор формата в карточке записи: свой вид вместо системного. */
-.ab-cmod__field--select select { width: 100%; padding: 9px 22px 9px 0;
-    border: 0; border-bottom: 1px solid var(--ab-200, #d8d3ce); border-radius: 0;
-    background: transparent; color: var(--ab-dark); font: inherit; font-size: 15px;
-    appearance: none; cursor: pointer; }
-.ab-cmod__field--select { position: relative; }
-.ab-cmod__field--select::after { content: ''; position: absolute; right: 4px; bottom: 15px;
-    width: 8px; height: 8px; border-right: 2px solid var(--ab-500); border-bottom: 2px solid var(--ab-500);
-    transform: rotate(45deg); pointer-events: none; }
-.ab-cmod__field--select select:focus { outline: none; border-bottom-color: var(--ab-600); }
-
 /* ================= Программа: читаемость =================
    Раньше день был подписью в скобках, а темы шли мелким серым
    текстом сплошняком. День стал заметной полосой, модули внутри

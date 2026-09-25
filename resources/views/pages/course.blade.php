@@ -126,8 +126,6 @@
                записи, и справа от неё оставалось пустое поле в пол-экрана.
                В таком случае ставим карточку под программой. */
             $shortProgram = count($days) === 1;
-            /* Курс бывает в нескольких форматах: их предлагаем выбрать в заявке. */
-            $formats = array_values((array) ($course['facts']['расписание на выбор'] ?? []));
         @endphp
 
         @if (count($days) && count($days[0]['groups']))
@@ -234,19 +232,6 @@
                                     <p class="ab-cmod__card-note">Оставьте заявку — менеджер забронирует место в группе.</p>
                                 @else
                                     <p class="ab-cmod__card-note">Оставьте заявку — менеджер свяжется с вами и подберёт дату.</p>
-                                @endif
-
-                                @if (count($formats) > 1)
-                                    {{-- Курс идёт в нескольких форматах: выбор сразу в заявке,
-                                         чтобы менеджеру не выяснять это звонком. --}}
-                                    <label class="ab-cmod__field ab-cmod__field--select">
-                                        <span>Удобный формат</span>
-                                        <select name="comment">
-                                            @foreach ($formats as $format)
-                                                <option value="Формат: {{ $format }}">{{ $format }}</option>
-                                            @endforeach
-                                        </select>
-                                    </label>
                                 @endif
 
                                 <label class="ab-cmod__field">
