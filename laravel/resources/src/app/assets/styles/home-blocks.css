@@ -324,14 +324,17 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 
 .ab-lead-block__promise { margin: 0 0 10px; font-size: 18px; font-weight: 800; color: var(--ab-white); }
 .ab-lead-block__note { max-width: 480px; margin: 0 0 22px; font-size: 15px; line-height: 1.6; color: var(--ab-cream); }
-.ab-lead-block__list { display: grid; gap: 14px; margin: 0 0 26px; padding: 0;
+/* Номер в своей колонке: при переносе текста на вторую строку
+   кружок съезжал и ряд выглядел кривым. */
+.ab-lead-block__list { display: grid; gap: 12px; margin: 0 0 26px; padding: 0;
     list-style: none; counter-reset: lead; }
-.ab-lead-block__list li { counter-increment: lead; position: relative; padding-left: 38px;
-    font-size: 15px; line-height: 1.45; color: #ddd8d4; }
-.ab-lead-block__list li::before { content: counter(lead); position: absolute; left: 0; top: -1px;
+.ab-lead-block__list li { counter-increment: lead; display: grid;
+    grid-template-columns: 26px minmax(0, 1fr); gap: 12px; align-items: start;
+    font-size: 15px; line-height: 26px; color: #ddd8d4; }
+.ab-lead-block__list li::before { content: counter(lead);
     display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%;
     border: 1px solid rgba(255,255,255,.28); background: rgba(255,255,255,.06);
-    font-size: 13px; font-weight: 800; color: var(--ab-white); }
+    font-size: 13px; font-weight: 800; line-height: 1; color: var(--ab-white); }
 .ab-lead-block__phone { display: inline-block; font-size: 22px; font-weight: 800;
     color: var(--ab-white); text-decoration: none; }
 .ab-lead-block__phone span { display: block; font-size: 13px; font-weight: 400; color: var(--ab-400); }
