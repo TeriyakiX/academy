@@ -330,24 +330,32 @@
 }
 
 /* ================= Зачем и кому =================
-   Два коротких текста сразу под шапкой и три главных навыка строкой.
-   Оформление нарочно спокойное: это место читают, а не рассматривают. */
-.ab-cwhy { padding: 56px 0; background: var(--ab-white); }
-.ab-cwhy__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+   Раскрывающиеся строки: на телефоне два абзаца занимали целый экран,
+   а сразу после них шли три карточки навыков. Открыт первый ответ,
+   остальные человек раскрывает сам. */
+.ab-cwhy { padding: 44px 0; background: var(--ab-white); }
+.ab-cwhy__list { display: grid; gap: 0; border-top: 1px solid var(--ab-100); }
 
-.ab-cwhy__card { padding: 26px 28px; border: 1px solid var(--ab-100);
-    border-radius: var(--ab-radius-lg); background: var(--ab-white); }
-.ab-cwhy__card--who { background: var(--ab-50); }
+.ab-cwhy__item { border-bottom: 1px solid var(--ab-100); }
+.ab-cwhy__item > summary { display: flex; align-items: center; gap: 12px;
+    padding: 16px 34px 16px 0; position: relative; list-style: none; cursor: pointer;
+    font-family: var(--ab-font-display); font-size: 17px; font-weight: 800;
+    line-height: 1.25; color: var(--ab-dark); }
+.ab-cwhy__item > summary::-webkit-details-marker { display: none; }
+/* стрелка-галочка справа, разворачивается вместе со строкой */
+.ab-cwhy__item > summary::after { content: ''; position: absolute; right: 6px; top: 22px;
+    width: 9px; height: 9px; border-right: 2px solid var(--ab-500); border-bottom: 2px solid var(--ab-500);
+    transform: rotate(45deg); transition: transform var(--ab-transition); }
+.ab-cwhy__item[open] > summary::after { top: 26px; transform: rotate(-135deg); }
+.ab-cwhy__item > summary:hover { color: var(--ab-600); }
 
-.ab-cwhy__label { display: block; margin-bottom: 10px; font-size: 11px; font-weight: 700;
-    letter-spacing: .08em; text-transform: uppercase; color: var(--ab-600); }
-.ab-cwhy__text { margin: 0; font-size: 16px; line-height: 1.6; color: var(--ab-dark); }
+.ab-cwhy__text { margin: 0 0 18px; max-width: 760px; font-size: 16px; line-height: 1.6; color: var(--ab-500); }
 
-.ab-cwhy__points { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 18px 28px; margin: 26px 0 0; padding: 0; list-style: none; }
-.ab-cwhy__points li { padding-left: 16px; border-left: 2px solid var(--ab-600); }
-.ab-cwhy__points b { display: block; margin-bottom: 5px; font-size: 15px; font-weight: 800; }
-.ab-cwhy__points span { font-size: 14px; line-height: 1.55; color: var(--ab-500); }
+@media (max-width: 680px) {
+    .ab-cwhy { padding: 28px 0; }
+    .ab-cwhy__item > summary { padding: 14px 30px 14px 0; font-size: 16px; }
+    .ab-cwhy__text { margin-bottom: 14px; font-size: 15px; }
+}
 
 /* ================= Документ об обучении =================
    Слева схема бланка (не скан: подделывать документ нельзя),
@@ -384,13 +392,6 @@
     .ab-cdoc__paper { max-width: 340px; }
 }
 
-@media (max-width: 680px) {
-    .ab-cwhy { padding: 36px 0; }
-    .ab-cwhy__card { padding: 20px; }
-    .ab-cwhy__text { font-size: 15px; }
-    .ab-cwhy__points { gap: 14px; margin-top: 20px; }
-}
-
 /* Выбор формата в карточке записи: свой вид вместо системного. */
 .ab-cmod__field--select select { width: 100%; padding: 9px 22px 9px 0;
     border: 0; border-bottom: 1px solid var(--ab-200, #d8d3ce); border-radius: 0;
@@ -424,31 +425,6 @@
 @media (max-width: 680px) {
     .ab-cmod__day-title { margin-bottom: 16px; padding: 11px 14px; font-size: 15px; }
     .ab-cmod__items { font-size: 14px; }
-}
-
-/* ================= Зачем и кому: крупнее =================
-   Блок читают первым, поэтому текст размером с абзац статьи,
-   а три главных навыка вынесены в карточки с номерами. */
-.ab-cwhy__card { padding: 30px 32px; }
-.ab-cwhy__card--who { border-color: transparent; }
-.ab-cwhy__label { margin-bottom: 12px; }
-.ab-cwhy__text { font-size: 18px; line-height: 1.65; }
-
-.ab-cwhy__points { counter-reset: cwhy; gap: 16px; margin-top: 18px; }
-.ab-cwhy__points li { counter-increment: cwhy; position: relative;
-    padding: 22px 24px 22px 62px; border-left: 0;
-    border: 1px solid var(--ab-100); border-radius: var(--ab-radius-lg); }
-.ab-cwhy__points li::before { content: counter(cwhy); position: absolute; left: 22px; top: 22px;
-    display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%;
-    background: var(--ab-600); color: var(--ab-white); font-size: 13px; font-weight: 800; }
-.ab-cwhy__points b { margin-bottom: 6px; font-size: 16px; }
-.ab-cwhy__points span { font-size: 15px; line-height: 1.6; }
-
-@media (max-width: 680px) {
-    .ab-cwhy__card { padding: 22px; }
-    .ab-cwhy__text { font-size: 16px; }
-    .ab-cwhy__points li { padding: 18px 18px 18px 56px; }
-    .ab-cwhy__points li::before { left: 18px; top: 18px; }
 }
 
 /* ================= Рядом в этом направлении =================
@@ -561,3 +537,45 @@
 /* «цены для группы» под основной ценой в карточке записи */
 .ab-cpage__buy .ab-cpage__more { margin: -12px 0 18px; }
 .ab-cpage__buy .ab-cpage__more b { display: block; font-size: 14px; color: var(--ab-500); }
+
+/* ---- дни программы раскрываются ----
+   Вся программа сразу занимала три экрана телефона. */
+.ab-cmod__day > details > summary { list-style: none; cursor: pointer; position: relative;
+    padding-right: 40px; }
+.ab-cmod__day > details > summary::-webkit-details-marker { display: none; }
+.ab-cmod__day > details > summary::after { content: ''; position: absolute; right: 18px; top: 17px;
+    width: 9px; height: 9px; border-right: 2px solid var(--ab-500); border-bottom: 2px solid var(--ab-500);
+    transform: rotate(45deg); transition: transform var(--ab-transition); }
+.ab-cmod__day > details[open] > summary::after { top: 21px; transform: rotate(-135deg); }
+.ab-cmod__day > details > summary:hover { background: var(--ab-100); }
+
+/* ---- документ об обучении: короче ----
+   Блок вытягивался на полтора экрана из-за текста под сертификатом. */
+.ab-cdoc { padding: 56px 0; }
+.ab-cdoc__lead { margin-bottom: 16px; font-size: 15px; }
+.ab-cdoc__list { gap: 10px; margin-bottom: 18px; }
+.ab-cdoc__list b { font-size: 14px; }
+.ab-cdoc__list span { font-size: 13px; }
+.ab-cdoc__meta { gap: 10px 20px; margin-bottom: 14px; padding-top: 14px; }
+
+@media (max-width: 760px) {
+    .ab-cdoc__grid { gap: 20px; }
+    .ab-cdoc__paper { max-width: 320px; margin: 0 auto; }
+    .ab-cdoc__caption { font-size: 12px; }
+    .ab-cdoc__subtitle { margin-bottom: 8px; }
+    .ab-cdoc__list { gap: 8px; }
+    .ab-cdoc__meta { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+}
+
+/* «Что в свидетельстве» — раскрывающаяся строка */
+.ab-cdoc__more { margin-bottom: 18px; border-top: 1px solid var(--ab-100);
+    border-bottom: 1px solid var(--ab-100); }
+.ab-cdoc__more > summary { position: relative; padding: 14px 34px 14px 0; list-style: none;
+    cursor: pointer; font-size: 14px; font-weight: 800; color: var(--ab-dark); }
+.ab-cdoc__more > summary::-webkit-details-marker { display: none; }
+.ab-cdoc__more > summary::after { content: ''; position: absolute; right: 6px; top: 18px;
+    width: 8px; height: 8px; border-right: 2px solid var(--ab-500); border-bottom: 2px solid var(--ab-500);
+    transform: rotate(45deg); transition: transform var(--ab-transition); }
+.ab-cdoc__more[open] > summary::after { top: 22px; transform: rotate(-135deg); }
+.ab-cdoc__more > summary:hover { color: var(--ab-600); }
+.ab-cdoc__more .ab-cdoc__list { margin-bottom: 16px; }
