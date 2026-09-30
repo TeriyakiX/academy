@@ -148,10 +148,34 @@ class CrmCatalog
             'url'      => $course['url'],
             'duration' => $course['duration'],
             'format'   => $course['format'],
-            'schedule' => $course['schedule'],
+            'schedule' => self::schedule($course['schedule']),
             'badge'    => $course['badge'],
             'photo'    => $course['photo'],
         ], fn ($value) => $value !== null);
+    }
+
+    /*
+     | «Расписание: индивидуальное обучение» — формулировка со старого сайта.
+     | Занятия ставим под гостя, поэтому и в карточке, и в характеристиках
+     | пишем «удобное вам время». В CRM текст пока прежний, правим здесь.
+     */
+    private static function schedule(?string $value): ?string
+    {
+        return preg_match('/расписан|индивидуальн/ui', (string) $value)
+            ? 'Удобное вам время'
+            : $value;
+    }
+
+    /** Переименовать характеристику, сохранив её место в списке. */
+    private static function rename(array $facts, string $from, string $to): array
+    {
+        $out = [];
+
+        foreach ($facts as $key => $value) {
+            $out[$key === $from ? $to : $key] = $value;
+        }
+
+        return $out;
     }
 
     /**
@@ -160,6 +184,11 @@ class CrmCatalog
      */
     private function facts(array $facts, int $price): array
     {
+        if (isset($facts['расписание'])) {
+            $facts = self::rename($facts, 'расписание', 'время занятий');
+            $facts['время занятий'] = self::schedule((string) $facts['время занятий']);
+        }
+
         if (!isset($facts['стоимость'])) {
             return $facts;
         }

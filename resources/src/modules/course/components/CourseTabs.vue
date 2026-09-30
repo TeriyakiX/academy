@@ -37,7 +37,7 @@
                         <span>Длительность</span><b>{{ course.duration }}</b>
                     </li>
                     <li v-if="course.schedule">
-                        <span>Расписание</span><b>{{ course.schedule }}</b>
+                        <span>Время занятий</span><b>{{ course.schedule }}</b>
                     </li>
                     <li v-if="course.format">
                         <span>Формат</span><b>{{ course.format }}</b>
