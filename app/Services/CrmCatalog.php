@@ -146,7 +146,7 @@ class CrmCatalog
             'price'    => (int) $course['price'],
             'old'      => $course['old'] ? (int) $course['old'] : null,
             'url'      => $course['url'],
-            'duration' => $course['duration'],
+            'duration' => self::duration($course['duration']),
             'format'   => $course['format'],
             'schedule' => self::schedule($course['schedule']),
             'badge'    => $course['badge'],
@@ -164,6 +164,16 @@ class CrmCatalog
         return preg_match('/расписан|индивидуальн/ui', (string) $value)
             ? 'Удобное вам время'
             : $value;
+    }
+
+    /*
+     | «1 день · 4 часа» — у однодневных программ день только мешает:
+     | рядом стоят «3 часа» и «4 часа», и строка выбивается. Дни оставляем
+     | там, где их правда несколько.
+     */
+    private static function duration(?string $value): ?string
+    {
+        return preg_replace('/^\s*1\s*день\s*(·\s*)?/ui', '', (string) $value) ?: $value;
     }
 
     /** Переименовать характеристику, сохранив её место в списке. */
@@ -184,6 +194,12 @@ class CrmCatalog
      */
     private function facts(array $facts, int $price): array
     {
+        foreach (['длительность', 'продолжительность'] as $key) {
+            if (isset($facts[$key])) {
+                $facts[$key] = self::duration((string) $facts[$key]);
+            }
+        }
+
         if (isset($facts['расписание'])) {
             $facts = self::rename($facts, 'расписание', 'время занятий');
             $facts['время занятий'] = self::schedule((string) $facts['время занятий']);
