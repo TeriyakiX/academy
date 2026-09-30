@@ -52,7 +52,7 @@ return array (
         'url' => '/courses/barista-novichok.html',
         'duration' => '1 день · 4 часа',
         'format' => 'Очная',
-        'schedule' => 'Индивидуальное обучение',
+        'schedule' => 'Удобное вам время',
       ),
       1 => 
       array (
@@ -64,7 +64,7 @@ return array (
         'url' => '/courses/barista-base.html',
         'duration' => '2 дня по 4 часа',
         'format' => 'Очная',
-        'schedule' => 'Индивидуальное обучение',
+        'schedule' => 'Удобное вам время',
       ),
       2 => 
       array (
@@ -87,7 +87,7 @@ return array (
         'url' => '/courses/barista-advanced.html',
         'duration' => '3 дня по 4 часа',
         'format' => 'Очная',
-        'schedule' => 'Индивидуальное обучение',
+        'schedule' => 'Удобное вам время',
       ),
       4 => 
       array (
@@ -99,7 +99,7 @@ return array (
         'url' => '/courses/barista-technician.html',
         'duration' => '3 дня по 4 часа',
         'format' => 'Очная',
-        'schedule' => 'Индивидуальное обучение',
+        'schedule' => 'Удобное вам время',
       ),
       5 => 
       array (
@@ -111,7 +111,7 @@ return array (
         'url' => '/courses/upravlyayushchiy-kofeyni.html',
         'duration' => '3 дня по 4 часа',
         'format' => 'Очная',
-        'schedule' => 'Индивидуальное обучение',
+        'schedule' => 'Удобное вам время',
       ),
     ),
     'Мастер-классы' => 
@@ -126,7 +126,7 @@ return array (
         'url' => '/master-class/young-barista.html',
         'duration' => '1 день · 4 часа',
         'format' => 'Очная',
-        'schedule' => 'Индивидуальное обучение',
+        'schedule' => 'Удобное вам время',
       ),
       1 => 
       array (
@@ -138,7 +138,7 @@ return array (
         'url' => '/master-class/latte-art.html',
         'duration' => '3 часа',
         'format' => 'Очная',
-        'schedule' => 'Индивидуальное обучение',
+        'schedule' => 'Удобное вам время',
       ),
       2 => 
       array (
@@ -150,7 +150,7 @@ return array (
         'url' => '/master-class/alternativnye-metody.html',
         'duration' => '1 день · 4 часа',
         'format' => 'Очная',
-        'schedule' => 'Индивидуальное обучение',
+        'schedule' => 'Удобное вам время',
         'short' => 'Альтернативные методы',
       ),
       3 => 
@@ -163,7 +163,7 @@ return array (
         'url' => '/master-class/domashniy-barista.html',
         'duration' => '4 часа',
         'format' => 'Очная',
-        'schedule' => 'Индивидуальное обучение',
+        'schedule' => 'Удобное вам время',
       ),
     ),
     'Барное дело' => 
@@ -178,7 +178,7 @@ return array (
         'url' => '/barnoe-delo/vstryakhni-i-poday.html',
         'duration' => '4 часа',
         'format' => 'Очная',
-        'schedule' => 'Индивидуальное обучение',
+        'schedule' => 'Удобное вам время',
         'short' => 'Встряхни и подай',
       ),
       1 => 
@@ -191,7 +191,7 @@ return array (
         'url' => '/barnoe-delo/metod-ctir.html',
         'duration' => '4 часа',
         'format' => 'Очная',
-        'schedule' => 'Индивидуальное обучение',
+        'schedule' => 'Удобное вам время',
         'short' => 'Метод Стир',
       ),
       2 => 
@@ -204,7 +204,7 @@ return array (
         'url' => '/barnoe-delo/koktel-metodom-bild.html',
         'duration' => '4 часа',
         'format' => 'Очная',
-        'schedule' => 'Индивидуальное обучение',
+        'schedule' => 'Удобное вам время',
         'short' => 'Коктейль методом Билд',
       ),
     ),
