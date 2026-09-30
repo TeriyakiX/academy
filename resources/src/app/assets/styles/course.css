@@ -258,6 +258,7 @@
     border: 1px solid var(--ab-100); border-radius: var(--ab-radius-lg);
     background: var(--ab-white); box-shadow: 0 18px 40px rgba(26,26,26,.08); }
 .ab-cmod__card > :not(.ab-cmod__photo) { margin-inline: 8px; }
+.ab-cmod__card-body { display: grid; align-content: start; gap: 12px; }
 
 .ab-cmod__photo { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover;
     border-radius: 12px; }
@@ -291,7 +292,25 @@
 /* Короткая программа: карточка записи идёт под ней, а темы занимают
    всю ширину — иначе справа от короткого списка зияло пустое поле. */
 .ab-cmod__grid--short { grid-template-columns: minmax(0, 1fr); gap: 32px; }
-.ab-cmod__grid--short .ab-cmod__aside { position: static; max-width: 460px; }
+.ab-cmod__grid--short .ab-cmod__aside { position: static; }
+
+@media (max-width: 760px) {
+    .ab-cmod__grid--short .ab-cmod__aside { max-width: 460px; }
+}
+
+/* Карточка записи под короткой программой занимает всю ширину: фото слева,
+   форма справа. Узкая колонка оставляла справа пустое поле в пол-экрана. */
+@media (min-width: 761px) {
+    .ab-cmod__grid--short .ab-cmod__card { grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
+        gap: 18px; padding: 12px 12px 16px; }
+    .ab-cmod__grid--short .ab-cmod__photo { height: 100%; aspect-ratio: auto; min-height: 300px; }
+    .ab-cmod__grid--short .ab-cmod__card-body { align-content: center;
+        grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 20px; padding-right: 8px; }
+    .ab-cmod__grid--short .ab-cmod__card-body > * { grid-column: 1 / -1; }
+    .ab-cmod__grid--short .ab-cmod__card-body > .ab-cmod__field { grid-column: auto; }
+    .ab-cmod__grid--short .ab-cmod__chips { grid-template-columns: repeat(auto-fit, minmax(0, 150px));
+        justify-content: start; }
+}
 
 @media (min-width: 761px) {
     .ab-cmod__grid--short .ab-cmod__group:only-child { grid-column: 1 / -1; }

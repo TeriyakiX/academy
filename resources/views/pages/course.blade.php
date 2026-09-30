@@ -205,6 +205,9 @@
                                 <img class="ab-cmod__photo" src="{{ $course['photo'] }}" alt="{{ $course['title'] }}"
                                      width="573" height="470" loading="lazy" decoding="async">
 
+                                {{-- Всё, кроме фото: у короткой программы карточка
+                                     широкая, и текст с формой встаёт рядом со снимком. --}}
+                                <div class="ab-cmod__card-body">
                                 <div class="ab-cmod__chips">
                                     @if (!empty($course['duration']))
                                         <span>{{ $course['duration'] }}</span>
@@ -249,6 +252,7 @@
                                     Отправляя форму, вы соглашаетесь с
                                     <a href="/privacy-policy.html">политикой обработки персональных данных</a>
                                 </p>
+                                </div>
                             </form>
                         </aside>
                     </div>
