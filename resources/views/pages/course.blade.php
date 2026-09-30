@@ -32,25 +32,12 @@
                         @php
                             /*
                              | Короткая строка фактов вместо пяти одинаковых плиток.
-                             | Цена ушла в карточку записи, где она и так крупно,
-                             | «расписание на выбор» названо длительностью: там
-                             | записаны именно варианты занятий, а не время.
+                             | Порядок и подписи берём из методички курса как есть,
+                             | цену показываем только в карточке записи.
                              */
                             $facts = $course['facts'];
                             $prices = (array) ($facts['стоимость'] ?? []);
-
-                            $meta = collect([
-                                'Длительность' => $facts['расписание на выбор'] ?? ($course['duration'] ?? null),
-                                'Когда'        => $facts['расписание'] ?? null,
-                                'Формат'       => $facts['формат обучения'] ?? null,
-                                'Документ'     => $facts['сертификат'] ?? null,
-                            ])
-                                /* Остальные факты курса, если школа добавила свои. */
-                                ->merge(collect($facts)->except([
-                                    'стоимость', 'расписание на выбор', 'расписание',
-                                    'формат обучения', 'сертификат',
-                                ]))
-                                ->filter(fn ($v) => !empty($v));
+                            $meta = collect($facts)->except('стоимость')->filter(fn ($v) => !empty($v));
                         @endphp
 
                         <dl class="ab-cpage__meta">
@@ -75,6 +62,9 @@
                             @endif
                             @if (!empty($course['price']))
                                 <strong>{{ number_format($course['price'], 0, ',', ' ') }} ₽</strong>
+                            @else
+                                {{-- Цена ещё не назначена: обещать сумму нельзя. --}}
+                                <strong class="ab-cpage__price--ask">Цена по запросу</strong>
                             @endif
                         </div>
 
@@ -115,8 +105,10 @@
              Справа — карточка записи, она едет вместе с прокруткой,
              чтобы записаться можно было из любого места программы. --}}
         @php
+            /* У курсов из методичек программа записана по дням сразу,
+               общий список тем им не нужен. */
             $days = \App\Support\CourseSchedule::days(
-                $course['program'], $course['duration'] ?? null, $course['days'] ?? null
+                $course['program'] ?? [], $course['duration'] ?? null, $course['days'] ?? null
             );
             $dayCount = \App\Support\CourseSchedule::dayCount($course['duration'] ?? null);
             $dayWord  = ($dayCount % 10 === 1 && $dayCount % 100 !== 11) ? 'дня' : 'дней';
@@ -155,6 +147,10 @@
                                                 </svg>
                                                 {{ $shortProgram ? 'Что разбираем на занятии' : $day['label'] }}
                                             </summary>
+
+                                        @if (!empty($day['note']))
+                                            <p class="ab-cmod__day-note">{{ $day['note'] }}</p>
+                                        @endif
 
                                         <div class="ab-cmod__groups">
                                             @foreach ($day['groups'] as $group)

@@ -81,6 +81,8 @@
                             @endif
                             @if (!empty($item['price']))
                                 <b>{{ number_format($item['price'], 0, ',', ' ') }} ₽</b>
+                            @else
+                                <b class="ab-near__ask">по запросу</b>
                             @endif
                         </div>
 

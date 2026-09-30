@@ -306,7 +306,8 @@ Route::get('/sitemap.xml', function () {
         return '0.7';
     };
 
-    $skip = ['/thank-you.html'];
+    /* Снятые программы в карту сайта не попадают, даже если остались в CRM. */
+    $skip = array_merge(['/thank-you.html'], config('site.retired', []));
 
     $urls = collect(array_keys(config('site.pages', [])))
         ->reject(fn ($uri) => in_array($uri, $skip, true));
