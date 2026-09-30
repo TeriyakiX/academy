@@ -17,7 +17,7 @@
                 </ul>
             </div>
 
-            @foreach (config('nav.footer') as $title => $links)
+            @foreach (\App\Support\Navigation::footer() as $title => $links)
                 <div class="site-footer__col">
                     <h3 class="site-footer__col-title">{{ $title }}</h3>
                     <ul>

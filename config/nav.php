@@ -25,25 +25,10 @@ return [
 
     // Главное меню. children => выпадающий список.
     'main' => [
-        ['title' => 'Курсы бариста', 'href' => '/courses.html', 'children' => [
-            ['title' => 'Бариста новичок',      'href' => '/courses/barista-novichok.html'],
-            ['title' => 'Бариста базовый',      'href' => '/courses/barista-base.html'],
-            ['title' => 'Бариста продвинутый',  'href' => '/courses/barista-advanced.html'],
-            ['title' => 'Бариста техник',       'href' => '/courses/barista-technician.html'],
-            ['title' => 'Бариста Professional', 'href' => '/courses/barista-professional.html'],
-            ['title' => 'Управляющий кофейни',  'href' => '/courses/upravlyayushchiy-kofeyni.html'],
-        ]],
-        ['title' => 'Мастер-классы', 'href' => '/courses/master-class.html', 'children' => [
-            ['title' => 'Латте-арт',         'href' => '/master-class/latte-art.html'],
-            ['title' => 'Юный бариста',      'href' => '/master-class/young-barista.html'],
-            ['title' => 'Домашняя кофейня',  'href' => '/master-class/domashnyaya-kofeynya.html'],
-            ['title' => 'Домашний бариста',  'href' => '/master-class/domashniy-barista.html'],
-        ]],
-        ['title' => 'Барное дело', 'href' => '/courses/barnoe-delo.html', 'children' => [
-            ['title' => 'Вкус и стиль: метод Стир',  'href' => '/barnoe-delo/metod-ctir.html'],
-            ['title' => 'Коктейль методом Билд',     'href' => '/barnoe-delo/koktel-metodom-bild.html'],
-            ['title' => 'Встряхни и подай',          'href' => '/barnoe-delo/vstryakhni-i-poday.html'],
-        ]],
+        // Списки программ подставляются из каталога: App\Support\Navigation.
+        ['title' => 'Курсы бариста', 'href' => '/courses.html', 'school' => 'Курсы бариста'],
+        ['title' => 'Мастер-классы', 'href' => '/courses/master-class.html', 'school' => 'Мастер-классы'],
+        ['title' => 'Барное дело',   'href' => '/courses/barnoe-delo.html', 'school' => 'Барное дело'],
         ['title' => 'Собрать свой курс', 'href' => '/constructor.html'],
         ['title' => 'Для бизнеса',       'href' => '/busines.html', 'accent' => true],
         ['title' => 'Сервис',            'href' => '/service.html'],
@@ -69,25 +54,10 @@ return [
     ['title' => 'Блог',        'href' => '/blog.html'],
             ['title' => 'Контакты',    'href' => '/contact.html'],
         ],
-        'Курсы бариста' => [
-            ['title' => 'Бариста новичок',      'href' => '/courses/barista-novichok.html'],
-            ['title' => 'Бариста базовый',      'href' => '/courses/barista-base.html'],
-            ['title' => 'Бариста продвинутый',  'href' => '/courses/barista-advanced.html'],
-            ['title' => 'Бариста техник',       'href' => '/courses/barista-technician.html'],
-            ['title' => 'Бариста Professional', 'href' => '/courses/barista-professional.html'],
-            ['title' => 'Управляющий кофейни',  'href' => '/courses/upravlyayushchiy-kofeyni.html'],
-        ],
-        'Мастер-классы' => [
-            ['title' => 'Латте-арт',           'href' => '/master-class/latte-art.html'],
-            ['title' => 'Юный бариста',        'href' => '/master-class/young-barista.html'],
-            ['title' => 'Домашняя кофейня',    'href' => '/master-class/domashnyaya-kofeynya.html'],
-            ['title' => 'Домашний бариста',    'href' => '/master-class/domashniy-barista.html'],
-        ],
-        'Барное дело' => [
-            ['title' => 'Вкус и стиль: метод Стир', 'href' => '/barnoe-delo/metod-ctir.html'],
-            ['title' => 'Коктейль методом Билд',    'href' => '/barnoe-delo/koktel-metodom-bild.html'],
-            ['title' => 'Встряхни и подай',         'href' => '/barnoe-delo/vstryakhni-i-poday.html'],
-        ],
+        // Те же списки, что и в шапке: собираются из каталога.
+        'Курсы бариста' => 'Курсы бариста',
+        'Мастер-классы' => 'Мастер-классы',
+        'Барное дело'   => 'Барное дело',
     ],
 
     'legal' => [
