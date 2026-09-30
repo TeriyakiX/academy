@@ -34,8 +34,9 @@ return [
         ['title' => 'Сервис',            'href' => '/service.html'],
         ['title' => 'Оборудование',     'href' => '/shop.html'],
         ['title' => 'Сертификат',        'href' => '/sertifikat.html'],
-        ['title' => 'О нас', 'href' => '/o-nas.html'],
-    ['title' => 'Блог',              'href' => '/blog.html'],
+        ['title' => 'Мероприятия',       'href' => '/events.html'],
+        ['title' => 'О нас',             'href' => '/o-nas.html'],
+        ['title' => 'Блог',              'href' => '/blog.html'],
         ['title' => 'Контакты',          'href' => '/contact.html'],
     ],
 
@@ -50,8 +51,8 @@ return [
             ['title' => 'Сервис',      'href' => '/service.html'],
             ['title' => 'Оборудование','href' => '/shop.html'],
             ['title' => 'Мероприятия', 'href' => '/events.html'],
-            ['title' => 'О нас', 'href' => '/o-nas.html'],
-    ['title' => 'Блог',        'href' => '/blog.html'],
+            ['title' => 'О нас',       'href' => '/o-nas.html'],
+            ['title' => 'Блог',        'href' => '/blog.html'],
             ['title' => 'Контакты',    'href' => '/contact.html'],
         ],
         // Те же списки, что и в шапке: собираются из каталога.
