@@ -48,10 +48,9 @@
 
 /* «цены для группы» — раскрываются по нажатию, как на прежнем сайте */
 .ab-cpage__more { display: grid; gap: 4px; }
-.ab-cpage__more summary { width: max-content; font-size: 13px; font-weight: 600; color: var(--ab-600);
-    list-style: none; border-bottom: 1px dashed currentColor; cursor: pointer; }
-.ab-cpage__more summary::-webkit-details-marker { display: none; }
-.ab-cpage__more[open] summary { margin-bottom: 2px; }
+/* Заголовок группы цен — подпись, а не кнопка: список открыт всегда. */
+.ab-cpage__more-title { margin-bottom: 2px; font-size: 13px; font-weight: 600;
+    color: var(--ab-600); text-transform: lowercase; }
 .ab-cpage__more b { font-size: 14px; font-weight: 600; color: var(--ab-500); }
 
 /* ---- карточка записи ---- */

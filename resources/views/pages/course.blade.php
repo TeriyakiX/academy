@@ -69,14 +69,15 @@
                         </div>
 
                         {{-- Цены за двоих и больше: рядом с основной ценой, а не
-                             отдельной плиткой среди фактов курса. --}}
+                             отдельной плиткой среди фактов курса. Показываем
+                             сразу — под раскрывающейся строкой их не замечали. --}}
                         @if (count($prices) > 1)
-                            <details class="ab-cpage__more">
-                                <summary>цены для группы</summary>
+                            <div class="ab-cpage__more">
+                                <span class="ab-cpage__more-title">цены для группы</span>
                                 @foreach (array_slice($prices, 1) as $line)
                                     <b>{{ $line }}</b>
                                 @endforeach
-                            </details>
+                            </div>
                         @endif
 
                         <ul class="ab-cpage__buy-list">
