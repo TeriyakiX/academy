@@ -34,7 +34,7 @@
 
             <nav class="site-nav" aria-label="Основное меню">
                 <ul class="site-nav__list">
-                    @foreach (config('nav.main') as $item)
+                    @foreach (\App\Support\Navigation::main() as $item)
                         @php $current = request()->getPathInfo() === $item['href']; @endphp
                         <li class="site-nav__item @if (!empty($item['children'])) site-nav__item--has-children @endif">
                             <a class="site-nav__link @if (!empty($item['accent'])) site-nav__link--accent @endif @if ($current) is-current @endif"
@@ -84,7 +84,7 @@
 
         <nav class="site-mobile__nav">
             <ul>
-                @foreach (config('nav.main') as $item)
+                @foreach (\App\Support\Navigation::main() as $item)
                     <li>
                         @if (!empty($item['children']))
                             <button class="site-mobile__toggle" type="button" aria-expanded="false">
