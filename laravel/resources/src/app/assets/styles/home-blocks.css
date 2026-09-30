@@ -353,7 +353,9 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 
 /* Уровень одним нажатием: менеджер сразу знает, с чем звонить.
    Кнопки в сетке, а не вразнобой по ширине текста. */
-.ab-lead-form__levels { display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+/* minmax(0, 1fr), а не 1fr: иначе длинная подпись («Уже работаю за стойкой»)
+   раздвигает свою колонку, и кнопки получаются разной ширины. */
+.ab-lead-form__levels { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px;
     margin: 0; padding: 0; border: 0; }
 .ab-lead-form__levels .ab-lead-form__label { grid-column: 1 / -1; margin-bottom: 2px; padding: 0; }
 /* Перед кнопками стоит подпись, поэтому непарная последняя кнопка —
@@ -365,7 +367,9 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 .ab-lead-form__chip span { display: grid; place-items: center; height: 100%;
     padding: 11px 12px; border-radius: 999px; text-align: center;
     border: 1px solid rgba(255,255,255,.18); background: rgba(0,0,0,.25);
-    font-size: 13px; font-weight: 600; color: #ddd8d4; cursor: pointer;
+    /* line-height задан явно: старые постраничные стили задают свою,
+       и кнопки получались разной высоты на разных страницах */
+    font-size: 13px; line-height: 1.25; font-weight: 600; color: #ddd8d4; cursor: pointer;
     transition: border-color var(--ab-transition), background var(--ab-transition), color var(--ab-transition); }
 .ab-lead-form__chip span:hover { border-color: rgba(255,255,255,.4); }
 .ab-lead-form__chip input:checked + span { border-color: var(--ab-cream, #e9e0d6);
