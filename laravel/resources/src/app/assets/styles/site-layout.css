@@ -165,6 +165,12 @@
 
 body.site-no-scroll { overflow: hidden; }
 
+/* Старые постраничные стили задают .wrapper { overflow: hidden }. Такой блок
+   становится областью прокрутки, и position: sticky внутри него перестаёт
+   работать — карточка записи не ехала за экраном. Clip режет так же, но
+   областью прокрутки не становится. */
+body > .wrapper { overflow: clip; }
+
 /* ---------------- Модалка заявки ---------------- */
 .ab-modal { position: fixed; inset: 0; z-index: 200; display: flex;
     align-items: center; justify-content: center; padding: 20px; }
