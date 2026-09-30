@@ -10,6 +10,15 @@
 
 
 return array (
+
+  /* Программы, снятые с сайта: в CRM они ещё числятся, но показывать
+     и раздавать по ним страницы больше не нужно. */
+  'retired' =>
+  array (
+    0 => '/courses/barista-professional.html',
+    1 => '/master-class/domashnyaya-kofeynya.html',
+  ),
+
   'pages' => 
   array (
     '/barnoe-delo/koktel-metodom-bild.html' => 
@@ -282,29 +291,6 @@ return array (
       array (
       ),
     ),
-    '/courses/barista-professional.html' => 
-    array (
-      'view' => 'courses.barista-professional',
-      'title' => 'Курсы Шеф-бариста в Москве – Академия Бариста',
-      'description' => 'Курсы Шеф-бариста в Москве – профессиональное обучение в Академии Бариста. Освойте управление кофейным производством, авторские методики обжарки и менеджмент кофейни. Практика под руководством Топ-бариста в HoReCa.',
-      'keywords' => 'Академия Бариста, Курсы бариста, Барное дело, Бариста Professional, Мастер класс, бариста с нуля, как стать бариста, курсы бариста в Москве',
-      'og_title' => 'Курсы Шеф-бариста в Москве – Академия Бариста',
-      'og_image' => '/assets/1.webp',
-      'canonical' => 'https://academy-barista.ru/courses/barista-professional.html',
-      'robots' => NULL,
-      'css' => 
-      array (
-        0 => '/assets/splide.css',
-        1 => '/assets/baristaProfessional.css',
-      ),
-      'body_attrs' => 
-      array (
-        'class' => 'body',
-      ),
-      'js' => 
-      array (
-      ),
-    ),
     '/courses/barista-technician.html' => 
     array (
       'view' => 'courses.barista-technician',
@@ -433,29 +419,6 @@ return array (
       array (
         0 => '/assets/splide.css',
         1 => '/assets/masterClassDomashniyBarista.css',
-      ),
-      'body_attrs' => 
-      array (
-        'class' => 'body',
-      ),
-      'js' => 
-      array (
-      ),
-    ),
-    '/master-class/domashnyaya-kofeynya.html' => 
-    array (
-      'view' => 'master-class.domashnyaya-kofeynya',
-      'title' => 'Приготовление кофе дома – мастер-класс по кофе в Москве',
-      'description' => 'Научитесь приготовлению кофе в домашних условиях на профессиональном мастер-классе от Академии Бариста! Освойте техники заваривания, работу с ручными инструментами и секреты вкусного кофе. Инструкции и вдохновение для создания домашней кофейни.',
-      'keywords' => 'Академия Бариста, Курсы бариста, Барное дело, Бариста Продвинутый, Мастер класс, бариста с нуля, как стать бариста, курсы бариста в Москве',
-      'og_title' => 'Приготовление кофе дома – мастер-класс по кофе в Москве',
-      'og_image' => '/assets/1.webp',
-      'canonical' => 'https://academy-barista.ru/master-class/domashnyaya-kofeynya.html',
-      'robots' => NULL,
-      'css' => 
-      array (
-        0 => '/assets/splide.css',
-        1 => '/assets/masterClassDomashnyayaKofeynya.css',
       ),
       'body_attrs' => 
       array (
@@ -645,11 +608,59 @@ return array (
       array (
       ),
     ),
+    '/courses/barista-base-group.html' => 
+    array (
+      'view' => 'courses.barista-base',
+      'title' => 'Базовый курс бариста в группе выходного дня – Академия Бариста',
+      'description' => 'Базовый курс бариста в группе до четырёх человек по выходным: зерно, экстракция, оборудование, молоко и основные напитки. Два занятия по четыре часа, свидетельство о повышении квалификации.',
+      'keywords' => 'Академия Бариста, Курсы бариста, Барное дело, Бариста базовый, Мастер класс, бариста с нуля, как стать бариста, курсы бариста в Москве',
+      'og_title' => 'Базовый курс бариста в группе выходного дня – Академия Бариста',
+      'og_image' => '/assets/1.webp',
+      'canonical' => 'https://academy-barista.ru/courses/barista-base-group.html',
+      'robots' => NULL,
+      'css' => 
+      array (
+        0 => '/assets/splide.css',
+        1 => '/assets/baristaBase.css',
+      ),
+      'body_attrs' => 
+      array (
+        'class' => 'body',
+      ),
+      'js' => 
+      array (
+      ),
+    ),
+    '/master-class/alternativnye-metody.html' => 
+    array (
+      'view' => 'master-class.domashnyaya-kofeynya',
+      'title' => 'Альтернативные методы заваривания кофе – мастер-класс в Москве',
+      'description' => 'Мастер-класс по альтернативным методам заваривания: воронка V60, френч-пресс, аэропресс и сифон. Настройка рецепта, оценка чашки по контрольной карте и сравнительная дегустация.',
+      'keywords' => 'Академия Бариста, Курсы бариста, Барное дело, Бариста Продвинутый, Мастер класс, бариста с нуля, как стать бариста, курсы бариста в Москве',
+      'og_title' => 'Альтернативные методы заваривания кофе – мастер-класс в Москве',
+      'og_image' => '/assets/1.webp',
+      'canonical' => 'https://academy-barista.ru/master-class/alternativnye-metody.html',
+      'robots' => NULL,
+      'css' => 
+      array (
+        0 => '/assets/splide.css',
+        1 => '/assets/masterClassDomashnyayaKofeynya.css',
+      ),
+      'body_attrs' => 
+      array (
+        'class' => 'body',
+      ),
+      'js' => 
+      array (
+      ),
+    ),
   ),
   'redirects' => 
   array (
     '/glavnaya.html' => '/',
     '/courses/barista-test.html' => '/courses/barista-base.html',
     '/master-class/barista-v-take-away.html' => '/courses/barista-novichok.html',
+    '/master-class/domashnyaya-kofeynya.html' => '/master-class/alternativnye-metody.html',
+    '/courses/barista-professional.html' => '/courses/barista-advanced.html',
   ),
 );

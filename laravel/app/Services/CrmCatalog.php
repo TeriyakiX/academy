@@ -59,34 +59,70 @@ class CrmCatalog
             return;
         }
 
-        $schools = [];
+        $local = config('courses.schools', []);
         $pages = config('course-pages', []);
         $seo = config('site.pages', []);
 
+        /* Снятые с сайта программы: в CRM они ещё есть, но показывать их не нужно. */
+        $retired = config('site.retired', []);
+
+        $fromCrm = [];
+
         foreach ($data['schools'] as $school => $courses) {
             foreach ($courses as $course) {
-                $schools[$school][] = $this->card($course);
+                $url = $course['url'];
+
+                if (in_array($url, $retired, true)) {
+                    continue;
+                }
+
+                $fromCrm[$school][$url] = $this->card($course);
 
                 if (!$course['has_page']) {
                     continue;
                 }
 
-                $url = $course['url'];
-
-                /* Union с прежним значением: в CRM пока нет полей вроде
-                   «зачем и кому», и без него они терялись бы при подключении. */
-                $pages[$url] = [
+                /*
+                 | Тексты курсов ведём в файлах сайта: их источник — методички
+                 | школы, а в CRM таких полей пока нет. Поэтому местное значение
+                 | главнее, из CRM берём то, чего в файлах нет: ближайшие группы
+                 | и всё, что школа заполнила сама.
+                 */
+                $pages[$url] = ($pages[$url] ?? []) + array_filter([
                     'title'   => $course['title'],
                     'lead'    => $course['lead'],
                     'facts'   => $this->facts($course['facts'] ?: ($pages[$url]['facts'] ?? []), (int) $course['price']),
                     'program' => $course['program'],
-                    'days'    => $course['days'] ?: ($pages[$url]['days'] ?? null),
+                    'days'    => $course['days'],
                     'learn'   => $course['learn'],
-                    'gallery' => $course['gallery'] ?: ($pages[$url]['gallery'] ?? []),
-                    'groups'  => $course['groups'] ?? [],
-                ] + ($pages[$url] ?? []);
+                    'gallery' => $course['gallery'],
+                ]) + ['groups' => $course['groups'] ?? []];
+
+                $pages[$url]['groups'] = $course['groups'] ?? [];
 
                 $seo[$url] = $this->seo($seo[$url] ?? null, $seo[self::PAGE_TEMPLATE] ?? [], $url, $course);
+            }
+        }
+
+        /* Порядок карточек берём из файлов: там он выверен под витрину.
+           Курс, которого в файлах ещё нет, добавляем следом. */
+        $schools = [];
+
+        foreach ($local as $school => $cards) {
+            foreach ($cards as $card) {
+                $url = $card['url'] ?? null;
+                if (in_array($url, $retired, true)) {
+                    continue;
+                }
+
+                $schools[$school][] = $fromCrm[$school][$url] ?? $card;
+                unset($fromCrm[$school][$url]);
+            }
+        }
+
+        foreach ($fromCrm as $school => $cards) {
+            foreach ($cards as $card) {
+                $schools[$school][] = $card;
             }
         }
 

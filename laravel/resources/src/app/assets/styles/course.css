@@ -573,3 +573,21 @@
 .ab-cdoc__more[open] > summary::after { top: 22px; transform: rotate(-135deg); }
 .ab-cdoc__more > summary:hover { color: var(--ab-600); }
 .ab-cdoc__more .ab-cdoc__list { margin-bottom: 16px; }
+
+/* Список внутри раскрывающейся строки «зачем и кому». */
+.ab-cwhy__points { display: grid; gap: 8px; margin: 0 0 18px; padding: 0 0 0 20px;
+    list-style: disc; max-width: 760px; }
+.ab-cwhy__points li { font-size: 15px; line-height: 1.55; color: var(--ab-500); }
+.ab-cwhy__points li::marker { color: var(--ab-400); }
+
+@media (min-width: 900px) {
+    .ab-cwhy__points { grid-template-columns: 1fr 1fr; column-gap: 40px; max-width: none; }
+}
+
+/* Примечание к занятию: границы программы, оговорки тренера. */
+.ab-cmod__day-note { max-width: 760px; margin: 0 0 18px; padding-left: 14px;
+    border-left: 2px solid var(--ab-100); font-size: 14px; line-height: 1.55; color: var(--ab-500); }
+
+/* Цена ещё не назначена. */
+.ab-cpage__price--ask { font-size: 22px !important; color: var(--ab-600) !important; }
+.ab-near__ask { font-size: 15px !important; color: var(--ab-600); }

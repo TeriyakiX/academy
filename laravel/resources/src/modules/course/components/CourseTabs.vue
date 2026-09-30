@@ -49,8 +49,9 @@
                         <span v-if="course.old" class="ab-card__save">
                             выгода {{ money(course.old - course.price) }}
                         </span>
+                        <!-- Цена может быть ещё не назначена: тогда не придумываем сумму. -->
                         <span class="ab-card__price-row">
-                            <strong>{{ money(course.price) }}</strong>
+                            <strong>{{ course.price ? money(course.price) : 'Цена по запросу' }}</strong>
                             <s v-if="course.old">{{ money(course.old) }}</s>
                         </span>
                     </div>
