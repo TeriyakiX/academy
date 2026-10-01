@@ -11,6 +11,16 @@
     <main class="ab-page ab-page--course">
         {{-- ---------- Шапка курса ---------- --}}
         <section class="ab-cpage__hero">
+            {{-- Пар над чашкой: три струйки поднимаются и тают.
+                 Это и есть «кофейная» анимация вместо абстрактной волны. --}}
+            <div class="ab-steam" aria-hidden="true">
+                <svg viewBox="0 0 120 180" fill="none">
+                    <path d="M26 174c0-26 13-30 13-56s-13-30-13-56 13-30 13-56" />
+                    <path d="M60 174c0-30 15-34 15-62s-15-32-15-60" />
+                    <path d="M94 174c0-26 13-30 13-56s-13-30-13-56 13-30 13-56" />
+                </svg>
+            </div>
+
             {{-- Волна в основании шапки: мягкий переход к следующему блоку. --}}
             <div class="ab-cpage__wave" aria-hidden="true">
                 <svg viewBox="0 0 1200 160" preserveAspectRatio="none">
