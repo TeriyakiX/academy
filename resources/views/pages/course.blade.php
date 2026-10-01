@@ -37,37 +37,110 @@
                              */
                             $facts = $course['facts'];
                             $prices = (array) ($facts['стоимость'] ?? []);
-                            /* Документ выносим из строки фактов: он один занимал
-                               целый ряд и висел в пустоте. */
+                            /* Документ показываем отдельной строкой. */
                             $doc = $facts['документ'] ?? null;
-                            $meta = collect($facts)->except(['стоимость', 'документ'])->filter(fn ($v) => !empty($v));
                         @endphp
 
-                        {{-- Характеристики и документ одной карточкой. --}}
-                        <div class="ab-cpage__facts">
-                        <dl class="ab-cpage__meta">
-                            @foreach ($meta as $label => $value)
-                                <div>
-                                    <span class="ab-cpage__meta-mark">
-                                        @include("partials.icons.fact", ["key" => $label])
-                                    </span>
-                                    <dt>{{ $label }}</dt>
-                                    <dd>
-                                        @foreach ((array) $value as $line)
-                                            <span>{{ $line }}</span>
-                                        @endforeach
-                                    </dd>
-                                </div>
-                            @endforeach
-                        </dl>
+                        @php
+                            /*
+                             | Характеристики курса. Длительность и входной уровень
+                             | показываем наглядно: часы — крупной цифрой с полосками
+                             | по числу занятий, уровень — шкалой из трёх делений.
+                             | Остальное остаётся строками.
+                             */
+                            $durKey = collect(['длительность', 'продолжительность'])
+                                ->first(fn ($k) => !empty($facts[$k]));
+                            $duration = $durKey ? (string) $facts[$durKey] : null;
 
-                        @if ($doc)
-                            <p class="ab-cpage__doc">
-                                @include("partials.icons.fact", ["key" => "документ"])
-                                <span>Документ</span>
-                                <b>{{ is_array($doc) ? implode(", ", $doc) : $doc }}</b>
-                            </p>
-                        @endif
+                            $dayCount = 1;
+                            $hours = null;
+                            if ($duration) {
+                                if (preg_match('/(\d+)\s*дн/ui', $duration, $m)) {
+                                    $dayCount = (int) $m[1];
+                                }
+                                if (preg_match('/(\d+)\s*час/ui', $duration, $m)) {
+                                    $hours = (int) $m[1];
+                                }
+                            }
+                            $totalHours = $hours ? $hours * $dayCount : null;
+
+                            $levelKey = collect(array_keys($facts))
+                                ->first(fn ($k) => str_contains(mb_strtolower($k), 'уровень'));
+                            $level = $levelKey ? (string) $facts[$levelKey] : null;
+                            $levelStep = 1;
+                            if ($level) {
+                                $low = mb_strtolower($level);
+                                if (str_contains($low, 'опыт работы') || str_contains($low, 'практикующ')) {
+                                    $levelStep = 3;
+                                } elseif (str_contains($low, 'базов') || str_contains($low, 'после курса')
+                                    || str_contains($low, 'желател')) {
+                                    $levelStep = 2;
+                                }
+                            }
+
+                            $rest = collect($facts)
+                                ->except(array_filter(['стоимость', 'документ', $durKey, $levelKey]))
+                                ->filter(fn ($v) => !empty($v));
+                        @endphp
+
+                        <div class="ab-cpage__facts">
+                            <div class="ab-cpage__spec">
+                                @if ($totalHours)
+                                    <div class="ab-cpage__tile ab-cpage__tile--hours">
+                                        <b>{{ $totalHours }}<i>ч</i></b>
+                                        <span>{{ $duration }}</span>
+                                        {{-- Полоска на каждое занятие: видно, что курс не на один вечер. --}}
+                                        <div class="ab-cpage__bars">
+                                            @for ($d = 0; $d < min($dayCount, 6); $d++)
+                                                <i style="--i: {{ $d }}"></i>
+                                            @endfor
+                                        </div>
+                                    </div>
+                                @elseif ($duration)
+                                    <div class="ab-cpage__tile ab-cpage__tile--hours">
+                                        <b>{{ $duration }}</b>
+                                        <span>{{ $durKey }}</span>
+                                    </div>
+                                @endif
+
+                                @if ($level)
+                                    <div class="ab-cpage__tile">
+                                        <span class="ab-cpage__tile-label">{{ $levelKey }}</span>
+                                        <div class="ab-cpage__level" data-step="{{ $levelStep }}">
+                                            @for ($n = 1; $n <= 3; $n++)
+                                                <i @class(['is-on' => $n <= $levelStep]) style="--i: {{ $n }}"></i>
+                                            @endfor
+                                        </div>
+                                        <p>{{ $level }}</p>
+                                    </div>
+                                @endif
+                            </div>
+
+                            @if ($rest->count())
+                                <dl class="ab-cpage__meta">
+                                    @foreach ($rest as $label => $value)
+                                        <div>
+                                            <span class="ab-cpage__meta-mark">
+                                                @include('partials.icons.fact', ['key' => $label])
+                                            </span>
+                                            <dt>{{ $label }}</dt>
+                                            <dd>
+                                                @foreach ((array) $value as $line)
+                                                    <span>{{ $line }}</span>
+                                                @endforeach
+                                            </dd>
+                                        </div>
+                                    @endforeach
+                                </dl>
+                            @endif
+
+                            @if ($doc)
+                                <p class="ab-cpage__doc">
+                                    @include('partials.icons.fact', ['key' => 'документ'])
+                                    <span>Документ</span>
+                                    <b>{{ is_array($doc) ? implode(', ', $doc) : $doc }}</b>
+                                </p>
+                            @endif
                         </div>
                     </div>
 
@@ -140,11 +213,17 @@
                         Программа {{ $isClass ? 'мастер-класса' : 'курса' }}
                     </h2>
 
-                    {{-- Снимок во всю ширину: он здесь уместнее, чем картинка
-                         в карточке, которая ехала вместе с прокруткой. --}}
-                    <div class="ab-prog__media">
-                        <img src="{{ $course['photo'] }}" alt="{{ $course['title'] }}"
-                             width="1600" height="500" loading="lazy" decoding="async">
+                    {{-- Волна вместо фотографии: снимок зала тут только мешал,
+                         а движение задаёт ритм блоку. --}}
+                    <div class="ab-prog__wave" aria-hidden="true">
+                        <svg viewBox="0 0 1200 160" preserveAspectRatio="none">
+                            <path class="ab-prog__wave-1"
+                                  d="M0 96c100-34 200-34 300 0s200 34 300 0 200-34 300 0 200 34 300 0v64H0Z" />
+                            <path class="ab-prog__wave-2"
+                                  d="M0 108c120-28 240-28 360 0s240 28 360 0 240-28 360 0 240 28 360 0v52H0Z" />
+                            <path class="ab-prog__wave-3"
+                                  d="M0 124c140-22 280-22 420 0s280 22 420 0 280-22 420 0v36H0Z" />
+                        </svg>
                     </div>
 
                     <div class="ab-prog__tabs">

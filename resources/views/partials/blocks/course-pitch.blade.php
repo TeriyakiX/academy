@@ -1,54 +1,78 @@
 @php $pitch = $course['pitch'] ?? null; @endphp
 
 {{--
-    Что за курс: вступление и карточки.
-
-    Содержимое приходит из методички курса. Раньше это были строки-вопросы
-    с раскрытием («Кому подойдёт», «Что будет на курсе») — читалось как
-    анкета. Теперь вступление идёт текстом, остальное — карточками.
+    Что за курс. Раньше это были одинаковые серые плитки — читалось как
+    анкета. Теперь у каждого куска своя подача: «для кого» — тёмная плашка,
+    «что внутри» — список с галочками, «как идёт занятие» — шаги с линией,
+    «чего не будет» — приглушённая сноска.
 --}}
 @if ($pitch)
     @php
-        $why = $pitch['why'] ?? null;
-
-        $cards = array_values(array_filter([
-            ['title' => 'Для кого',        'icon' => 'для кого',    'text' => $pitch['who'] ?? null],
-            ['title' => 'Что внутри',      'icon' => 'что будет',   'list' => $pitch['inside'] ?? null],
-            ['title' => 'С чем уйдёте',    'icon' => 'унесёт',      'list' => $pitch['takeaways'] ?? null],
-            ['title' => 'Как идёт занятие','icon' => 'как проходит','list' => $pitch['how'] ?? null],
-            ['title' => 'Чего не будет',   'icon' => 'не входит',   'text' => $pitch['limits'] ?? null],
-        ], fn ($card) => !empty($card['text']) || !empty($card['list'])));
+        $why       = $pitch['why'] ?? null;
+        $who       = $pitch['who'] ?? null;
+        $inside    = $pitch['inside'] ?? null;
+        $takeaways = $pitch['takeaways'] ?? null;
+        $how       = $pitch['how'] ?? null;
+        $limits    = $pitch['limits'] ?? null;
     @endphp
 
-    @if ($why || $cards)
+    @if ($why || $who || $inside || $takeaways || $how || $limits)
         <section class="ab-cwhy ab-reveal">
             <div class="ab-container">
                 @if ($why)
                     <p class="ab-cwhy__big">{{ $why }}</p>
                 @endif
 
-                @if ($cards)
-                    <div class="ab-cwhy__cards">
-                        @foreach ($cards as $card)
-                            <article class="ab-cwhy__card">
-                                <span class="ab-cwhy__mark">
-                                    @include('partials.icons.fact', ['key' => $card['icon']])
-                                </span>
-                                <h3 class="ab-cwhy__card-title">{{ $card['title'] }}</h3>
+                <div class="ab-cwhy__layout">
+                    <div class="ab-cwhy__side">
+                        @if ($who)
+                            <div class="ab-cwhy__who">
+                                <span class="ab-cwhy__eyebrow">Для кого</span>
+                                <p>{{ $who }}</p>
+                            </div>
+                        @endif
 
-                                @if (!empty($card['text']))
-                                    <p class="ab-cwhy__text">{{ $card['text'] }}</p>
-                                @else
-                                    <ul class="ab-cwhy__points">
-                                        @foreach ($card['list'] as $item)
-                                            <li>{{ $item }}</li>
-                                        @endforeach
-                                    </ul>
-                                @endif
-                            </article>
-                        @endforeach
+                        @if ($takeaways)
+                            <div class="ab-cwhy__take">
+                                <span class="ab-cwhy__eyebrow">С чем уйдёте</span>
+                                <ul>
+                                    @foreach ($takeaways as $n => $item)
+                                        <li style="--i: {{ $n }}">{{ $item }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
+                        @if ($limits)
+                            <p class="ab-cwhy__limits">
+                                <b>Чего не будет.</b> {{ $limits }}
+                            </p>
+                        @endif
                     </div>
-                @endif
+
+                    <div class="ab-cwhy__main">
+                        @if ($inside)
+                            <h3 class="ab-cwhy__h">Что внутри</h3>
+                            <ul class="ab-cwhy__inside">
+                                @foreach ($inside as $n => $item)
+                                    <li style="--i: {{ $n }}">
+                                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 5 5L19 8" /></svg>
+                                        {{ $item }}
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @endif
+
+                        @if ($how)
+                            <h3 class="ab-cwhy__h">Как идёт занятие</h3>
+                            <ol class="ab-cwhy__steps">
+                                @foreach ($how as $n => $item)
+                                    <li style="--i: {{ $n }}"><span>{{ $n + 1 }}</span>{{ $item }}</li>
+                                @endforeach
+                            </ol>
+                        @endif
+                    </div>
+                </div>
             </div>
         </section>
     @endif

@@ -42,13 +42,48 @@
 /* Длина строки для чтения, а не на всю колонку. */
 .ab-cpage__lead { max-width: 660px; margin: 0 0 30px; font-size: 17px; line-height: 1.6; color: var(--ab-500); }
 
-/* Характеристики: подпись и значение в одной строке, две колонки.
-   Раньше значение уходило под подпись, и блок занимал пол-экрана. */
-.ab-cpage__facts { margin-top: 26px; padding: 20px 24px; border-radius: 18px;
+/* Характеристики курса: часы и уровень — наглядно, остальное строками. */
+.ab-cpage__facts { margin-top: 26px; padding: 22px 24px; border-radius: 18px;
     background: var(--ab-white, #fff); box-shadow: 0 14px 32px rgba(26,26,26,.06); }
 
+.ab-cpage__spec { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 18px 26px; }
+.ab-cpage__tile { display: grid; align-content: start; gap: 6px; }
+.ab-cpage__tile--hours b { display: flex; align-items: baseline; gap: 2px;
+    font-family: var(--ab-font-display); font-size: 40px; font-weight: 800; line-height: 1;
+    color: var(--ab-dark); }
+.ab-cpage__tile--hours b i { font-size: 20px; font-style: normal; color: var(--ab-600); }
+.ab-cpage__tile--hours span { font-size: 13px; color: var(--ab-400); }
+.ab-cpage__tile-label { font-size: 13px; color: var(--ab-400); }
+.ab-cpage__tile p { margin: 0; font-size: 14px; font-weight: 600; line-height: 1.4; color: var(--ab-dark); }
+
+/* Полоски по числу занятий — «наливаются» одна за другой. */
+.ab-cpage__bars { display: flex; gap: 5px; margin-top: 4px; }
+.ab-cpage__bars i { width: 26px; height: 6px; border-radius: 3px; background: var(--ab-600);
+    transform-origin: left; animation: ab-bar-in .5s ease both;
+    animation-delay: calc(120ms + var(--i) * 90ms); }
+
+/* Шкала входного уровня: три деления, залитые до нужного. */
+.ab-cpage__level { display: flex; align-items: flex-end; gap: 4px; margin: 2px 0 2px; }
+.ab-cpage__level i { width: 16px; border-radius: 3px; background: var(--ab-100, #efe7df);
+    transform-origin: bottom; animation: ab-bar-up .45s ease both;
+    animation-delay: calc(140ms + var(--i) * 90ms); }
+.ab-cpage__level i:nth-child(1) { height: 10px; }
+.ab-cpage__level i:nth-child(2) { height: 16px; }
+.ab-cpage__level i:nth-child(3) { height: 22px; }
+.ab-cpage__level i.is-on { background: var(--ab-600); }
+
+@keyframes ab-bar-in { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes ab-bar-up { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+
+@media (prefers-reduced-motion: reduce) {
+    .ab-cpage__bars i, .ab-cpage__level i { animation: none; }
+}
+
+/* Остальные характеристики: подпись и значение в одной строке. */
 .ab-cpage__meta { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px 32px; margin: 0; padding: 0; }
+    gap: 10px 32px; margin: 18px 0 0; padding: 18px 0 0;
+    border-top: 1px solid var(--ab-100, #efe7df); }
 .ab-cpage__meta > div { display: grid; grid-template-columns: 18px auto minmax(0, 1fr);
     align-items: baseline; gap: 8px; }
 .ab-cpage__meta-mark { display: block; width: 18px; }
@@ -57,10 +92,9 @@
 .ab-cpage__meta dt { font-size: 13px; font-weight: 500; color: var(--ab-400); white-space: nowrap; }
 .ab-cpage__meta dd { margin: 0; }
 .ab-cpage__meta dd span { font-size: 14px; font-weight: 600; line-height: 1.4; color: var(--ab-dark); }
-/* Второй вариант расписания — подсказка, а не равнозначная строка. */
 .ab-cpage__meta dd span ~ span { display: block; font-weight: 500; color: var(--ab-500); }
 
-/* Документ — нижняя строка той же карточки. */
+/* Документ — нижняя строка карточки. */
 .ab-cpage__doc { display: grid; grid-template-columns: 18px auto minmax(0, 1fr);
     align-items: baseline; gap: 8px; margin: 14px 0 0; padding: 14px 0 0;
     border-top: 1px solid var(--ab-100, #efe7df); }
@@ -74,7 +108,8 @@
 }
 
 @media (max-width: 680px) {
-    .ab-cpage__facts { margin-top: 20px; padding: 16px 18px; border-radius: 14px; }
+    .ab-cpage__facts { margin-top: 20px; padding: 18px; border-radius: 14px; }
+    .ab-cpage__tile--hours b { font-size: 34px; }
 }
 
 /* «цены для группы» — раскрываются по нажатию, как на прежнем сайте */
@@ -371,36 +406,79 @@
 }
 
 /* ================= Что за курс =================
-   Вступление текстом, остальное — карточками в стиле шапки. */
-.ab-cwhy { padding: 46px 0; background: var(--ab-white); }
-.ab-cwhy__big { max-width: 820px; margin: 0 0 26px; font-size: 18px; line-height: 1.55;
+   У каждого куска своя подача, а не четыре одинаковые плитки. */
+.ab-cwhy { padding: 56px 0; background: var(--ab-white); }
+.ab-cwhy__big { max-width: 860px; margin: 0 0 30px; font-size: 19px; line-height: 1.6;
     color: var(--ab-dark); }
 
-/* Карточки раскладываются колонками по высоте содержимого: в обычной
-   сетке короткая карточка растягивалась до соседней и зияла пустотой. */
-.ab-cwhy__cards { column-count: 3; column-gap: 18px; }
-@media (max-width: 1100px) { .ab-cwhy__cards { column-count: 2; } }
-@media (max-width: 760px) { .ab-cwhy__cards { column-count: 1; } }
-.ab-cwhy__card { break-inside: avoid; margin-bottom: 18px; padding: 20px 22px; border-radius: 16px;
-    background: var(--ab-50, #f7f2ee); }
-.ab-cwhy__mark { display: grid; place-items: center; width: 30px; height: 30px; margin-bottom: 10px;
-    border-radius: 50%; background: var(--ab-white); }
-.ab-cwhy__mark .ab-ficon { width: 17px; height: 17px; fill: none; stroke: var(--ab-600);
-    stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
-.ab-cwhy__card-title { margin: 0 0 8px; font-family: var(--ab-font-display);
-    font-size: 16px; font-weight: 800; line-height: 1.2; color: var(--ab-dark); }
-.ab-cwhy__text { margin: 0; font-size: 14px; line-height: 1.55; color: var(--ab-500); }
-.ab-cwhy__points { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
-.ab-cwhy__points li { position: relative; padding-left: 15px; font-size: 14px; line-height: 1.45;
-    color: var(--ab-500); }
-.ab-cwhy__points li::before { content: ''; position: absolute; left: 0; top: 9px;
-    width: 6px; height: 6px; border-radius: 50%; background: var(--ab-300, #c9b8aa); }
+.ab-cwhy__layout { display: grid; grid-template-columns: minmax(0, 360px) minmax(0, 1fr);
+    gap: 28px 44px; align-items: start; }
+.ab-cwhy__side { display: grid; gap: 16px; }
 
-@media (max-width: 680px) {
-    .ab-cwhy { padding: 34px 0; }
+/* «Для кого» — тёмная плашка: единственное контрастное пятно в блоке. */
+.ab-cwhy__who { padding: 24px 26px; border-radius: 18px; background: var(--ab-dark, #1a1a1a); }
+.ab-cwhy__who p { margin: 0; font-size: 15px; line-height: 1.6; color: rgba(255,255,255,.82); }
+.ab-cwhy__who .ab-cwhy__eyebrow { color: rgba(255,255,255,.5); }
+
+.ab-cwhy__eyebrow { display: block; margin-bottom: 10px; font-size: 11px; font-weight: 700;
+    letter-spacing: .08em; text-transform: uppercase; color: var(--ab-400); }
+
+.ab-cwhy__take { padding: 22px 24px; border-radius: 18px; background: var(--ab-50, #f7f2ee); }
+.ab-cwhy__take ul { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.ab-cwhy__take li { position: relative; padding-left: 16px; font-size: 14px; line-height: 1.5;
+    color: var(--ab-500); }
+.ab-cwhy__take li::before { content: ''; position: absolute; left: 0; top: 8px;
+    width: 6px; height: 6px; border-radius: 50%; background: var(--ab-600); }
+
+.ab-cwhy__limits { margin: 0; padding: 16px 18px; border: 1px dashed var(--ab-200, #e2d8cf);
+    border-radius: 14px; font-size: 13px; line-height: 1.55; color: var(--ab-400); }
+.ab-cwhy__limits b { color: var(--ab-500); }
+
+.ab-cwhy__h { margin: 0 0 14px; font-family: var(--ab-font-display); font-size: 18px;
+    font-weight: 800; color: var(--ab-dark); }
+.ab-cwhy__main > .ab-cwhy__h ~ .ab-cwhy__h { margin-top: 28px; }
+
+/* «Что внутри» — две колонки с галочками. */
+.ab-cwhy__inside { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 10px 28px; margin: 0; padding: 0; list-style: none; }
+.ab-cwhy__inside li { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 9px;
+    align-items: start; font-size: 15px; line-height: 1.45; color: var(--ab-500); }
+.ab-cwhy__inside svg { width: 20px; height: 20px; margin-top: 1px; padding: 3px;
+    border-radius: 50%; background: var(--ab-50, #f7f2ee);
+    fill: none; stroke: var(--ab-600); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+
+/* «Как идёт занятие» — шаги с линией между номерами. */
+.ab-cwhy__steps { display: grid; gap: 14px; margin: 0; padding: 0; list-style: none;
+    counter-reset: step; }
+.ab-cwhy__steps li { position: relative; display: grid; grid-template-columns: 28px minmax(0, 1fr);
+    gap: 12px; align-items: start; font-size: 15px; line-height: 1.5; color: var(--ab-500); }
+.ab-cwhy__steps li span { display: grid; place-items: center; width: 28px; height: 28px;
+    border-radius: 50%; background: var(--ab-600); color: #fff; font-size: 13px; font-weight: 700; }
+/* Линия тянется от номера к следующему. */
+.ab-cwhy__steps li:not(:last-child)::before { content: ''; position: absolute; left: 13px; top: 30px;
+    bottom: -14px; width: 2px; background: var(--ab-100, #efe7df); }
+
+/* Появление по очереди, когда блок доехал до экрана. */
+.ab-reveal .ab-cwhy__inside li,
+.ab-reveal .ab-cwhy__steps li,
+.ab-reveal .ab-cwhy__take li { opacity: 0; transform: translateY(8px); }
+.ab-reveal.is-visible .ab-cwhy__inside li,
+.ab-reveal.is-visible .ab-cwhy__steps li,
+.ab-reveal.is-visible .ab-cwhy__take li { opacity: 1; transform: none;
+    transition: opacity .45s ease, transform .45s ease;
+    transition-delay: calc(80ms + var(--i, 0) * 60ms); }
+
+@media (prefers-reduced-motion: reduce) {
+    .ab-reveal .ab-cwhy__inside li,
+    .ab-reveal .ab-cwhy__steps li,
+    .ab-reveal .ab-cwhy__take li { opacity: 1; transform: none; transition: none; }
+}
+
+@media (max-width: 900px) {
+    .ab-cwhy { padding: 36px 0; }
     .ab-cwhy__big { margin-bottom: 22px; font-size: 17px; }
-    .ab-cwhy__cards { gap: 14px; }
-    .ab-cwhy__card { padding: 20px; border-radius: 16px; }
+    .ab-cwhy__layout { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+    .ab-cwhy__who { padding: 20px; }
 }
 
 /* ================= Документ об обучении =================
@@ -634,10 +712,23 @@
 .ab-prog__title { margin: 0 0 24px; font-family: var(--ab-font-display);
     font-size: clamp(24px, 3vw, 36px); font-weight: 800; line-height: 1.15; color: var(--ab-dark); }
 
-/* Снимок во всю ширину контейнера, невысокий. */
-.ab-prog__media { margin: 0 0 28px; border-radius: 22px; overflow: hidden; }
-.ab-prog__media img { display: block; width: 100%; height: clamp(180px, 24vw, 300px);
-    object-fit: cover; object-position: center 38%; }
+/* Волна под заголовком: три слоя плывут с разной скоростью.
+   Это декор, поэтому для читалок он скрыт, а при выключенной
+   анимации в системе просто стоит на месте. */
+.ab-prog__wave { position: relative; height: clamp(90px, 11vw, 140px); margin: 0 0 26px;
+    border-radius: 20px; overflow: hidden;
+    background: linear-gradient(180deg, var(--ab-50, #f7f2ee), var(--ab-100, #efe7df)); }
+.ab-prog__wave svg { position: absolute; inset: 0; width: 200%; height: 100%; }
+.ab-prog__wave path { fill: var(--ab-600); }
+.ab-prog__wave-1 { opacity: .16; animation: ab-wave 14s linear infinite; }
+.ab-prog__wave-2 { opacity: .26; animation: ab-wave 10s linear infinite reverse; }
+.ab-prog__wave-3 { opacity: .9; animation: ab-wave 18s linear infinite; }
+
+@keyframes ab-wave { from { transform: translateX(0); } to { transform: translateX(-600px); } }
+
+@media (prefers-reduced-motion: reduce) {
+    .ab-prog__wave path { animation: none; }
+}
 
 .ab-prog__radio { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
 
