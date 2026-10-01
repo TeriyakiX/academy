@@ -871,8 +871,9 @@
 /* ================= Границы между блоками =================
    Белым по белому блоки сливались: чередуем фон и добавляем
    волосок там, где два светлых блока всё же встречаются. */
-.ab-page--course .ab-cwhy      { background: var(--ab-white); }
-.ab-page--course .ab-cmod      { background: var(--ab-50, #f7f2ee); }
+/* «О курсе» на кремовом: окно ответа белое, и на белом фоне оно пропадало. */
+.ab-page--course .ab-cwhy      { background: var(--ab-50, #f7f2ee); }
+.ab-page--course .ab-cmod      { background: var(--ab-white); }
 .ab-page--course .ab-team      { background: var(--ab-white); }
 .ab-page--course .ab-cdoc      { background: var(--ab-50, #f7f2ee); }
 .ab-page--course .ab-near      { background: var(--ab-white); }
@@ -1229,26 +1230,59 @@ ul.ab-cpage__facts span { font-size: 12px; font-weight: 500; letter-spacing: 0;
     text-transform: none; color: var(--ab-400); }
 ul.ab-cpage__facts b { font-size: 16px; font-weight: 700; color: var(--ab-dark); }
 
-/* Карточка в шапке в одном ключе с формой у программы: снимок, плашки,
-   заголовок. Отличие — вместо полей сразу цена и кнопка. */
-.ab-cpage__buy { padding: 10px 10px 0; }
-.ab-cpage__buy > :not(.ab-cpage__buy-shot):not(.ab-cpage__buy-foot) { margin-inline: 14px; }
-.ab-cpage__buy-shot { display: block; width: 100%; height: 170px; object-fit: cover;
-    object-position: center 40%; border-radius: 12px; }
-.ab-cpage__buy-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 12px; }
-.ab-cpage__buy-chips span { padding: 7px 10px; border: 1px solid var(--ab-dark); border-radius: 8px;
-    font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--ab-dark);
-    white-space: nowrap; }
-.ab-cpage__buy-title { display: block; margin-bottom: 6px; font-size: 11px; font-weight: 700;
-    letter-spacing: .08em; text-transform: uppercase; color: var(--ab-400); }
-.ab-cpage__buy .ab-cpage__price { margin-bottom: 14px; }
-.ab-cpage__buy .ab-cpage__group { margin-bottom: 16px; }
-.ab-cpage__buy-foot { margin: 16px 0 0; padding: 14px 20px; border-radius: 0 0 var(--ab-radius-lg) var(--ab-radius-lg); }
-.ab-cpage__buy-eyebrow { display: none; }
+/* ================= Карточка записи =================
+   Карточка — одна колонка с общим полем. Снимок и подвал выходят
+   за поле наружу отрицательным отступом, остальное стоит по сетке. */
+.ab-cpage__buy { --buy-pad: 24px; display: block;
+    padding: 0 var(--buy-pad) var(--buy-pad); overflow: hidden; }
 
-/* Карточка не должна свисать ниже текста слева. */
-.ab-cpage__buy-shot { height: 128px; }
-.ab-cpage__buy-chips { margin: 12px 0 10px; }
-.ab-cpage__buy .ab-cpage__group { margin-bottom: 12px; padding-top: 12px; }
-.ab-cpage__buy .ab-cpage__group dd { margin-bottom: 0; }
-.ab-cpage__buy-foot { margin-top: 14px; padding: 12px 20px; }
+.ab-cpage__buy-shot { display: block; width: calc(100% + var(--buy-pad) * 2); max-width: none; height: 150px;
+    margin: 0 calc(var(--buy-pad) * -1); object-fit: cover;
+    object-position: center 40%; border-radius: 0; }
+
+.ab-cpage__buy-title { display: block; margin: 20px 0 8px; font-size: 11px;
+    font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--ab-400); }
+
+.ab-cpage__buy .ab-cpage__price { align-items: baseline; gap: 4px 10px; margin: 0; }
+.ab-cpage__buy .ab-cpage__price strong { font-size: 38px; }
+
+/* Цены для компании — таблицей, отделены волоском. */
+.ab-cpage__buy .ab-cpage__group { margin: 16px 0 0; padding-top: 16px; }
+.ab-cpage__buy .ab-cpage__group dd { margin: 0; padding: 6px 0; }
+.ab-cpage__buy .ab-cpage__group dd + dd { border-top: 1px dashed var(--ab-100, #efe7df); }
+
+.ab-cpage__buy .ab-btn { margin: 20px 0 0; }
+
+/* Подвал: контакты на кремовой подложке во всю ширину карточки. */
+.ab-cpage__buy-foot { margin: var(--buy-pad) calc(var(--buy-pad) * -1) calc(var(--buy-pad) * -1);
+    padding: 16px var(--buy-pad); border-radius: 0; }
+
+.ab-cpage__buy-eyebrow, .ab-cpage__buy-chips { display: none; }
+
+@media (max-width: 1100px) {
+    .ab-cpage__buy { --buy-pad: 20px; }
+    .ab-cpage__buy-shot { height: 130px; }
+    .ab-cpage__buy .ab-cpage__price strong { font-size: 34px; }
+}
+
+/* Окно ответа «Зачем этот курс» белым по почти белому не читалось:
+   секция кремовая, окно белое — разница в пару процентов. Волосок по
+   краю и тень поплотнее; по высоте — по тексту, а не во всю колонку. */
+.ab-page--course .ab-cwhy__windows { min-height: 0; align-self: start;
+    border: 1px solid var(--ab-100, #efe7df);
+    box-shadow: 0 18px 40px rgba(26, 26, 26, .10); }
+
+/* ================= Чередование фонов =================
+   Соседние секции шли одним цветом и сливались в одно полотно:
+   шапка и «Зачем этот курс» кремовые, программа и преподаватели
+   белые. Теперь цвет строго через один, а окно ответа внутри
+   кремовой секции — белое, внутри белой — кремовое. */
+.ab-page--course .ab-cpage__hero { background: var(--ab-50, #f7f2ee); }
+.ab-page--course .ab-cwhy        { background: var(--ab-white); }
+.ab-page--course .ab-cmod        { background: var(--ab-50, #f7f2ee); }
+.ab-page--course .ab-team        { background: var(--ab-white); }
+.ab-page--course .ab-cdoc        { background: var(--ab-50, #f7f2ee); }
+.ab-page--course .ab-near        { background: var(--ab-white); }
+
+.ab-page--course .ab-cwhy__windows { background: var(--ab-50, #f7f2ee); }
