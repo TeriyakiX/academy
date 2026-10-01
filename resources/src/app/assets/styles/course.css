@@ -1154,23 +1154,23 @@
 }
 
 /* ---- пар в шапке ----
-   Три струйки поднимаются и тают: узнаваемо «про кофе» и не отвлекает. */
-.ab-steam { position: absolute; left: 50%; bottom: 36px; width: 120px; height: 180px;
-    margin-left: -340px; pointer-events: none; opacity: .5; }
-.ab-steam svg { width: 100%; height: 100%; }
-.ab-steam path { stroke: var(--ab-600); stroke-width: 3; stroke-linecap: round;
-    filter: blur(.4px); transform-origin: bottom center;
-    animation: ab-steam 7s ease-in-out infinite; }
-.ab-steam path:nth-child(1) { animation-duration: 7.5s; animation-delay: -1.2s; }
-.ab-steam path:nth-child(2) { animation-duration: 6.2s; }
-.ab-steam path:nth-child(3) { animation-duration: 8.4s; animation-delay: -2.6s; }
+   Мягкие облачка поднимаются, расходятся и тают. Размытие и низкая
+   прозрачность: пар должен угадываться, а не бросаться в глаза. */
+.ab-steam { position: absolute; left: 50%; bottom: 20px; width: 220px; height: 240px;
+    margin-left: -380px; pointer-events: none; }
+.ab-steam i { position: absolute; bottom: 0; width: 86px; height: 86px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(123,94,77,.5) 0%, rgba(123,94,77,.18) 45%, transparent 70%);
+    filter: blur(12px); opacity: 0; animation: ab-steam 9s ease-out infinite; }
+.ab-steam i:nth-child(1) { left: 10px;  animation-duration: 9s;  animation-delay: 0s; }
+.ab-steam i:nth-child(2) { left: 64px;  animation-duration: 11s; animation-delay: -3.5s; }
+.ab-steam i:nth-child(3) { left: 118px; animation-duration: 10s; animation-delay: -6s; }
+.ab-steam i:nth-child(4) { left: 44px;  animation-duration: 12s; animation-delay: -8.5s; }
 
 @keyframes ab-steam {
-    0%   { opacity: 0;   transform: translateY(12px) scaleY(.92) skewX(0deg); }
-    25%  { opacity: .45; }
-    50%  { opacity: .3;  transform: translateY(-10px) scaleY(1.04) skewX(3deg); }
-    75%  { opacity: .18; }
-    100% { opacity: 0;   transform: translateY(-26px) scaleY(1.1) skewX(-2deg); }
+    0%   { opacity: 0;   transform: translate(0, 0) scale(.65); }
+    20%  { opacity: .55; }
+    60%  { opacity: .3;  transform: translate(14px, -120px) scale(1.15); }
+    100% { opacity: 0;   transform: translate(-10px, -215px) scale(1.5); }
 }
 
 @media (prefers-reduced-motion: reduce) { .ab-steam { display: none; } }
