@@ -28,8 +28,10 @@
 
 .ab-cpage__side { position: relative; }
 /* Круг крупнее колонки: он выходит вверх и влево, как дуга на макете. */
-.ab-cpage__hero-media { position: absolute; top: -90px; right: -90px;
-    width: clamp(320px, 36vw, 520px); aspect-ratio: 1; border-radius: 50%; overflow: hidden; }
+/* Размер круга ограничен: он должен выглядывать из-за карточки,
+   а не разрастаться на полэкрана и наезжать на характеристики. */
+.ab-cpage__hero-media { position: absolute; top: -130px; right: -40px;
+    width: min(460px, calc(100% + 140px)); aspect-ratio: 1; border-radius: 50%; overflow: hidden; }
 .ab-cpage__hero-media img { display: block; width: 100%; height: 100%; object-fit: cover;
     object-position: center 35%; }
 .ab-cpage__side .ab-cpage__buy { position: relative; z-index: 1; }
