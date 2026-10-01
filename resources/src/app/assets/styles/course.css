@@ -888,9 +888,9 @@
     height: clamp(80px, 11vw, 150px); overflow: hidden; pointer-events: none; }
 .ab-cpage__wave svg { position: absolute; inset: 0; width: 200%; height: 100%; }
 .ab-cpage__wave path { fill: var(--ab-600); }
-.ab-cpage__wave path:nth-child(1) { opacity: .07; animation: ab-wave 16s linear infinite; }
-.ab-cpage__wave path:nth-child(2) { opacity: .09; animation: ab-wave 11s linear infinite reverse; }
-.ab-cpage__wave path:nth-child(3) { opacity: .12; animation: ab-wave 21s linear infinite; }
+.ab-cpage__wave path:nth-child(1) { opacity: .05; }
+.ab-cpage__wave path:nth-child(2) { opacity: .07; }
+.ab-cpage__wave path:nth-child(3) { opacity: .1; }
 
 @media (prefers-reduced-motion: reduce) { .ab-cpage__wave path { animation: none; } }
 
@@ -1152,3 +1152,26 @@
 @media (prefers-reduced-motion: reduce) {
     .ab-cpage__buy-socials a:hover { transform: none; }
 }
+
+/* ---- пар в шапке ----
+   Три струйки поднимаются и тают: узнаваемо «про кофе» и не отвлекает. */
+.ab-steam { position: absolute; left: 50%; bottom: 36px; width: 120px; height: 180px;
+    margin-left: -340px; pointer-events: none; opacity: .5; }
+.ab-steam svg { width: 100%; height: 100%; }
+.ab-steam path { stroke: var(--ab-600); stroke-width: 3; stroke-linecap: round;
+    filter: blur(.4px); transform-origin: bottom center;
+    animation: ab-steam 7s ease-in-out infinite; }
+.ab-steam path:nth-child(1) { animation-duration: 7.5s; animation-delay: -1.2s; }
+.ab-steam path:nth-child(2) { animation-duration: 6.2s; }
+.ab-steam path:nth-child(3) { animation-duration: 8.4s; animation-delay: -2.6s; }
+
+@keyframes ab-steam {
+    0%   { opacity: 0;   transform: translateY(12px) scaleY(.92) skewX(0deg); }
+    25%  { opacity: .45; }
+    50%  { opacity: .3;  transform: translateY(-10px) scaleY(1.04) skewX(3deg); }
+    75%  { opacity: .18; }
+    100% { opacity: 0;   transform: translateY(-26px) scaleY(1.1) skewX(-2deg); }
+}
+
+@media (prefers-reduced-motion: reduce) { .ab-steam { display: none; } }
+@media (max-width: 1100px) { .ab-steam { display: none; } }
