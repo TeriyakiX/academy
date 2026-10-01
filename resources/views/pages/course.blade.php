@@ -49,6 +49,8 @@
                             $meta = collect($facts)->except(['стоимость', 'документ'])->filter(fn ($v) => !empty($v));
                         @endphp
 
+                        {{-- Характеристики и документ одной карточкой. --}}
+                        <div class="ab-cpage__facts">
                         <dl class="ab-cpage__meta">
                             @foreach ($meta as $label => $value)
                                 <div>
@@ -72,9 +74,10 @@
                                 <b>{{ is_array($doc) ? implode(", ", $doc) : $doc }}</b>
                             </p>
                         @endif
+                        </div>
                     </div>
 
-                    {{-- Карточка записи поверх круглого снимка. --}}
+                    {{-- Карточка записи. --}}
                     <div class="ab-cpage__side">
                     <aside class="ab-cpage__buy">
                         <div class="ab-cpage__price">
