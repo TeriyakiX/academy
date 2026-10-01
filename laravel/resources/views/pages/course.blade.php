@@ -13,7 +13,7 @@
         <section class="ab-cpage__hero">
             {{-- Пар: размытые облачка поднимаются и тают. Контурные линии
                  читались как закорючки, поэтому рисуем мягкими пятнами. --}}
-            <div class="ab-steam" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+            <div class="ab-steam" aria-hidden="true">@for ($i = 0; $i < 9; $i++)<i></i>@endfor</div>
 
             {{-- Волна в основании шапки: мягкий переход к следующему блоку. --}}
             <div class="ab-cpage__wave" aria-hidden="true">

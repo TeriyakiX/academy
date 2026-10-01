@@ -1156,15 +1156,21 @@
 /* ---- пар в шапке ----
    Мягкие облачка поднимаются, расходятся и тают. Размытие и низкая
    прозрачность: пар должен угадываться, а не бросаться в глаза. */
-.ab-steam { position: absolute; left: 50%; bottom: 20px; width: 220px; height: 240px;
-    margin-left: -380px; pointer-events: none; }
-.ab-steam i { position: absolute; bottom: 0; width: 86px; height: 86px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(123,94,77,.5) 0%, rgba(123,94,77,.18) 45%, transparent 70%);
-    filter: blur(12px); opacity: 0; animation: ab-steam 9s ease-out infinite; }
-.ab-steam i:nth-child(1) { left: 10px;  animation-duration: 9s;  animation-delay: 0s; }
-.ab-steam i:nth-child(2) { left: 64px;  animation-duration: 11s; animation-delay: -3.5s; }
-.ab-steam i:nth-child(3) { left: 118px; animation-duration: 10s; animation-delay: -6s; }
-.ab-steam i:nth-child(4) { left: 44px;  animation-duration: 12s; animation-delay: -8.5s; }
+.ab-steam { position: absolute; left: 0; right: 0; bottom: 12px; height: 260px;
+    pointer-events: none; }
+.ab-steam i { position: absolute; bottom: 0; width: 96px; height: 96px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(123,94,77,.45) 0%, rgba(123,94,77,.16) 45%, transparent 70%);
+    filter: blur(14px); opacity: 0; animation: ab-steam 10s ease-out infinite; }
+/* Пар идёт вдоль всей волны: разные точки, скорости и сдвиги. */
+.ab-steam i:nth-child(1) { left: 3%;  animation-duration: 10s; animation-delay: 0s; }
+.ab-steam i:nth-child(2) { left: 14%; animation-duration: 12s; animation-delay: -4s; }
+.ab-steam i:nth-child(3) { left: 25%; animation-duration: 9s;  animation-delay: -7s; }
+.ab-steam i:nth-child(4) { left: 36%; animation-duration: 13s; animation-delay: -2s; }
+.ab-steam i:nth-child(5) { left: 47%; animation-duration: 11s; animation-delay: -9s; }
+.ab-steam i:nth-child(6) { left: 58%; animation-duration: 10s; animation-delay: -5s; }
+.ab-steam i:nth-child(7) { left: 69%; animation-duration: 12s; animation-delay: -11s; }
+.ab-steam i:nth-child(8) { left: 80%; animation-duration: 9s;  animation-delay: -3s; }
+.ab-steam i:nth-child(9) { left: 91%; animation-duration: 13s; animation-delay: -8s; }
 
 @keyframes ab-steam {
     0%   { opacity: 0;   transform: translate(0, 0) scale(.65); }
