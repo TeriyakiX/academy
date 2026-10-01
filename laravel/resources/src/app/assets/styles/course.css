@@ -1228,3 +1228,27 @@ ul.ab-cpage__facts li { display: flex; align-items: baseline; gap: 8px; min-heig
 ul.ab-cpage__facts span { font-size: 12px; font-weight: 500; letter-spacing: 0;
     text-transform: none; color: var(--ab-400); }
 ul.ab-cpage__facts b { font-size: 16px; font-weight: 700; color: var(--ab-dark); }
+
+/* Карточка в шапке в одном ключе с формой у программы: снимок, плашки,
+   заголовок. Отличие — вместо полей сразу цена и кнопка. */
+.ab-cpage__buy { padding: 10px 10px 0; }
+.ab-cpage__buy > :not(.ab-cpage__buy-shot):not(.ab-cpage__buy-foot) { margin-inline: 14px; }
+.ab-cpage__buy-shot { display: block; width: 100%; height: 170px; object-fit: cover;
+    object-position: center 40%; border-radius: 12px; }
+.ab-cpage__buy-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 12px; }
+.ab-cpage__buy-chips span { padding: 7px 10px; border: 1px solid var(--ab-dark); border-radius: 8px;
+    font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--ab-dark);
+    white-space: nowrap; }
+.ab-cpage__buy-title { display: block; margin-bottom: 6px; font-size: 11px; font-weight: 700;
+    letter-spacing: .08em; text-transform: uppercase; color: var(--ab-400); }
+.ab-cpage__buy .ab-cpage__price { margin-bottom: 14px; }
+.ab-cpage__buy .ab-cpage__group { margin-bottom: 16px; }
+.ab-cpage__buy-foot { margin: 16px 0 0; padding: 14px 20px; border-radius: 0 0 var(--ab-radius-lg) var(--ab-radius-lg); }
+.ab-cpage__buy-eyebrow { display: none; }
+
+/* Карточка не должна свисать ниже текста слева. */
+.ab-cpage__buy-shot { height: 128px; }
+.ab-cpage__buy-chips { margin: 12px 0 10px; }
+.ab-cpage__buy .ab-cpage__group { margin-bottom: 12px; padding-top: 12px; }
+.ab-cpage__buy .ab-cpage__group dd { margin-bottom: 0; }
+.ab-cpage__buy-foot { margin-top: 14px; padding: 12px 20px; }
