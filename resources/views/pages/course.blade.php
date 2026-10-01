@@ -72,12 +72,6 @@
                              alt="Занятие в Академии Бариста" width="760" height="420"
                              loading="lazy" decoding="async">
 
-                        <div class="ab-cpage__buy-chips">
-                            @if (!empty($course['duration']))
-                                <span>{{ $course['duration'] }}</span>
-                            @endif
-                        </div>
-
                         <b class="ab-cpage__buy-title">Стоимость обучения</b>
 
                         <div class="ab-cpage__price">
