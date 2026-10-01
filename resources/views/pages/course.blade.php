@@ -11,13 +11,6 @@
     <main class="ab-page ab-page--course">
         {{-- ---------- Шапка курса ---------- --}}
         <section class="ab-cpage__hero">
-            {{-- Снимок школы: на большом экране фоном справа, под карточкой
-                 с ценой; на узком — отдельной карточкой над заголовком. --}}
-            <div class="ab-cpage__hero-media" aria-hidden="true">
-                <img src="{{ $course['photo'] }}" alt=""
-                     width="900" height="700" decoding="async">
-            </div>
-
             <div class="ab-container">
                 <nav class="ab-crumbs" aria-label="Хлебные крошки">
                     <a href="/">Главная</a>
@@ -75,7 +68,14 @@
                         @endif
                     </div>
 
-                    {{-- Карточка записи --}}
+                    {{-- Правая колонка: снимок и карточка записи поверх него.
+                         Связка одна на всех экранах, меняется только размер. --}}
+                    <div class="ab-cpage__side">
+                    <div class="ab-cpage__hero-media" aria-hidden="true">
+                        <img src="{{ $course['photo'] }}" alt=""
+                             width="900" height="700" decoding="async">
+                    </div>
+
                     <aside class="ab-cpage__buy">
                         <div class="ab-cpage__price">
                             @if (!empty($course['old_price']))
@@ -115,6 +115,7 @@
                             <span>{{ config('nav.contacts.hours') }}</span>
                         </a>
                     </aside>
+                    </div>
                 </div>
             </div>
         </section>

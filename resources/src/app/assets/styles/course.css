@@ -18,10 +18,14 @@
        и всё «липкое» внутри перестало бы работать. */
     overflow: clip;
     background: linear-gradient(180deg, var(--ab-50), var(--ab-white) 70%); }
-.ab-cpage__hero > .ab-container { position: relative; z-index: 1; }
+/* Текст всегда поверх снимка. */
+.ab-cpage__main { position: relative; z-index: 1; }
 
-/* Снимок фоном справа. Левый край привязан к колонке с карточкой, а не
-   к ширине экрана: иначе на широком мониторе он наползал на текст. */
+/* Снимок в правой колонке, карточка записи лежит на нём. Связка одна и та же
+   на всех экранах: на большом снимок уходит фоном за правый край, на узком —
+   остаётся панелью той же формы, только ниже.
+   .ab-cpage__side намеренно не позиционирован: снимок отсчитывается
+   от самой шапки, чтобы уходить за край экрана, а не за край колонки. */
 .ab-cpage__hero-media { position: absolute; top: 0; right: 0; left: calc(50% + 170px); height: 100%;
     border-radius: 180px 0 0 180px; overflow: hidden; }
 /* Снимки у школы тёмные: чуть осветляем, иначе справа получается плита. */
@@ -30,21 +34,19 @@
 .ab-cpage__hero-media::after { content: ''; position: absolute; inset: 0;
     background: linear-gradient(100deg, var(--ab-50) 0%, rgba(247,242,238,.55) 34%,
         rgba(247,242,238,.12) 72%, rgba(247,242,238,0) 100%); }
+.ab-cpage__side .ab-cpage__buy { z-index: 1; }
 
 @media (max-width: 1240px) { .ab-cpage__hero-media { left: calc(50% + 120px); border-radius: 120px 0 0 120px; } }
 
-/* Ниже 1000px места сбоку нет: снимок становится карточкой над заголовком. */
+/* Ниже 1000px снимок занимает ширину своей колонки, карточка ложится на него. */
 @media (max-width: 1000px) {
-    /* отступы по бокам как у контейнера страницы */
-    .ab-cpage__hero-media { position: static; height: 230px; margin: 0 20px 26px;
-        border-radius: 24px; }
+    .ab-cpage__side { display: grid; }
+    .ab-cpage__hero-media { position: relative; left: auto; height: 220px;
+        border-radius: 24px 24px 0 0; }
     .ab-cpage__hero-media img { object-position: center 32%; filter: none; }
     .ab-cpage__hero-media::after { display: none; }
+    .ab-cpage__side .ab-cpage__buy { margin: -28px 14px 0; }
 }
-@media (max-width: 680px) {
-    .ab-cpage__hero-media { height: 170px; border-radius: 18px; margin-bottom: 20px; }
-}
-
 .ab-cpage__grid { display: grid; grid-template-columns: minmax(0, 1fr) 380px;
     gap: 48px; align-items: start; }
 /* На промежуточной ширине карточка с ценой сужается, но остаётся справа:
