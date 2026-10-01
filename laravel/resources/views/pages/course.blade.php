@@ -89,6 +89,14 @@
                             </div>
                         @endif
 
+                        {{-- Снимок в карточке: он забирает пустоту между ценой
+                             и кнопкой, которая появилась, когда карточка
+                             вытянулась на всю высоту шапки. --}}
+                        <figure class="ab-cpage__buy-photo">
+                            <img src="{{ $course['photo'] }}" alt="Занятие в Академии Бариста"
+                                 width="760" height="520" loading="lazy" decoding="async">
+                        </figure>
+
                         <button class="ab-btn ab-btn--primary ab-btn--block ab-btn--lg"
                                 type="button" data-modal-path="consultation">Записаться на курс</button>
 
