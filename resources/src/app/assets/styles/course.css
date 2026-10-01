@@ -627,3 +627,100 @@
 /* Цена ещё не назначена. */
 .ab-cpage__price--ask { font-size: 22px !important; color: var(--ab-600) !important; }
 .ab-near__ask { font-size: 15px !important; color: var(--ab-600); }
+/* ================= Программа курса =================
+   Дни — шаги с номерами, содержимое переключается без перезагрузки
+   и без скриптов: радиокнопки плюс :has(). Форма записи отсюда убрана. */
+.ab-prog { padding: 64px 0; background: var(--ab-white); }
+.ab-prog__title { margin: 0 0 24px; font-family: var(--ab-font-display);
+    font-size: clamp(24px, 3vw, 36px); font-weight: 800; line-height: 1.15; color: var(--ab-dark); }
+
+/* Снимок во всю ширину контейнера, невысокий. */
+.ab-prog__media { margin: 0 0 28px; border-radius: 22px; overflow: hidden; }
+.ab-prog__media img { display: block; width: 100%; height: clamp(180px, 24vw, 300px);
+    object-fit: cover; object-position: center 38%; }
+
+.ab-prog__radio { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+
+/* ---- шаги ---- */
+.ab-prog__steps { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 10px;
+    margin-bottom: 26px; }
+.ab-prog__step { position: relative; display: grid; gap: 8px; padding: 16px 18px 18px;
+    border-radius: 16px; background: var(--ab-50, #f7f2ee); cursor: pointer;
+    transition: background var(--ab-transition), transform var(--ab-transition),
+        box-shadow var(--ab-transition); }
+.ab-prog__step b { font-family: var(--ab-font-display); font-size: 22px; font-weight: 800;
+    line-height: 1; color: var(--ab-300, #c9b8aa); transition: color var(--ab-transition); }
+.ab-prog__step span { font-size: 14px; font-weight: 600; line-height: 1.35; color: var(--ab-500); }
+/* Полоска под активным шагом «наливается» слева направо. */
+.ab-prog__step::after { content: ''; position: absolute; left: 18px; right: 18px; bottom: 10px;
+    height: 2px; border-radius: 2px; background: var(--ab-600);
+    transform: scaleX(0); transform-origin: left; transition: transform .45s ease; }
+.ab-prog__step:hover { background: var(--ab-100, #efe7df); }
+
+/* ---- панели ---- */
+.ab-prog__panel { display: none; }
+.ab-prog__note { max-width: 760px; margin: 0 0 18px; padding-left: 14px;
+    border-left: 2px solid var(--ab-100); font-size: 14px; line-height: 1.55; color: var(--ab-500); }
+.ab-prog__groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px 44px; }
+.ab-prog__group-title { display: flex; align-items: center; gap: 9px; margin: 0 0 12px;
+    font-size: 15px; font-weight: 800; color: var(--ab-dark); }
+.ab-prog__group-title svg { width: 20px; height: 20px; flex: none; fill: none; stroke: var(--ab-600);
+    stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.ab-prog__items { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.ab-prog__items li { position: relative; padding-left: 16px; font-size: 15px; line-height: 1.5;
+    color: var(--ab-500); }
+.ab-prog__items li::before { content: ''; position: absolute; left: 0; top: 9px;
+    width: 6px; height: 6px; border-radius: 50%; background: var(--ab-300, #c9b8aa); }
+
+/* ---- какой день открыт ---- */
+.ab-prog__tabs:has(#ab-prog-0:checked) .ab-prog__panel[data-day="0"],
+.ab-prog__tabs:has(#ab-prog-1:checked) .ab-prog__panel[data-day="1"],
+.ab-prog__tabs:has(#ab-prog-2:checked) .ab-prog__panel[data-day="2"],
+.ab-prog__tabs:has(#ab-prog-3:checked) .ab-prog__panel[data-day="3"],
+.ab-prog__tabs:has(#ab-prog-4:checked) .ab-prog__panel[data-day="4"],
+.ab-prog__tabs:has(#ab-prog-5:checked) .ab-prog__panel[data-day="5"] { display: block; }
+
+/* Активный шаг: белый, приподнят, номер в цвете, полоска налита. */
+#ab-prog-0:checked ~ .ab-prog__steps > :nth-child(1),
+#ab-prog-1:checked ~ .ab-prog__steps > :nth-child(2),
+#ab-prog-2:checked ~ .ab-prog__steps > :nth-child(3),
+#ab-prog-3:checked ~ .ab-prog__steps > :nth-child(4),
+#ab-prog-4:checked ~ .ab-prog__steps > :nth-child(5),
+#ab-prog-5:checked ~ .ab-prog__steps > :nth-child(6) {
+    background: var(--ab-white); box-shadow: 0 14px 30px rgba(26,26,26,.1); transform: translateY(-2px); }
+#ab-prog-0:checked ~ .ab-prog__steps > :nth-child(1) b,
+#ab-prog-1:checked ~ .ab-prog__steps > :nth-child(2) b,
+#ab-prog-2:checked ~ .ab-prog__steps > :nth-child(3) b,
+#ab-prog-3:checked ~ .ab-prog__steps > :nth-child(4) b,
+#ab-prog-4:checked ~ .ab-prog__steps > :nth-child(5) b,
+#ab-prog-5:checked ~ .ab-prog__steps > :nth-child(6) b { color: var(--ab-600); }
+#ab-prog-0:checked ~ .ab-prog__steps > :nth-child(1)::after,
+#ab-prog-1:checked ~ .ab-prog__steps > :nth-child(2)::after,
+#ab-prog-2:checked ~ .ab-prog__steps > :nth-child(3)::after,
+#ab-prog-3:checked ~ .ab-prog__steps > :nth-child(4)::after,
+#ab-prog-4:checked ~ .ab-prog__steps > :nth-child(5)::after,
+#ab-prog-5:checked ~ .ab-prog__steps > :nth-child(6)::after { transform: scaleX(1); }
+
+/* Появление дня и пунктов по очереди. */
+@keyframes ab-prog-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.ab-prog__panel[data-day] { animation: ab-prog-in .35s ease both; }
+.ab-prog__items li { animation: ab-prog-in .4s ease both; animation-delay: calc(60ms + var(--i, 0) * 45ms); }
+
+@media (prefers-reduced-motion: reduce) {
+    .ab-prog__panel[data-day], .ab-prog__items li { animation: none; }
+    .ab-prog__step, .ab-prog__step::after { transition: none; }
+}
+
+@media (max-width: 900px) {
+    .ab-prog { padding: 40px 0; }
+    .ab-prog__media { margin-bottom: 20px; border-radius: 16px; }
+    /* Шаги прокручиваются вбок: на телефоне три колонки не помещаются. */
+    .ab-prog__steps { grid-auto-columns: minmax(190px, 72%); overflow-x: auto;
+        margin: 0 -20px 20px; padding: 0 20px 4px; scroll-snap-type: x mandatory;
+        scrollbar-width: none; }
+    .ab-prog__steps::-webkit-scrollbar { display: none; }
+    .ab-prog__step { scroll-snap-align: start; }
+    .ab-prog__groups { gap: 20px; }
+}
+

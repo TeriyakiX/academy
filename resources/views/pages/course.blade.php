@@ -121,159 +121,95 @@
         @include('partials.blocks.course-pitch')
 
         {{-- ---------- Программа курса ----------
-             Слева — темы по дням: в каждом дне теория и практика.
-             Справа — карточка записи, она едет вместе с прокруткой,
-             чтобы записаться можно было из любого места программы. --}}
+             Дни переключаются шагами: номер, название, под ними — содержимое
+             дня. Форму записи отсюда убрали, она есть в шапке и в конце
+             страницы, а ехать за человеком по экрану ей незачем. --}}
         @php
             /* У курсов из методичек программа записана по дням сразу,
                общий список тем им не нужен. */
             $days = \App\Support\CourseSchedule::days(
                 $course['program'] ?? [], $course['duration'] ?? null, $course['days'] ?? null
             );
-            $dayCount = \App\Support\CourseSchedule::dayCount($course['duration'] ?? null);
-            $dayWord  = ($dayCount % 10 === 1 && $dayCount % 100 !== 11) ? 'дня' : 'дней';
-            /* Мастер-класс — не курс: и в заголовке, и в карточке записи. */
-            $isClass  = ($course['school'] ?? '') === 'Мастер-классы';
-            /* Короткая программа (одно занятие) не дотягивается до карточки
-               записи, и справа от неё оставалось пустое поле в пол-экрана.
-               В таком случае ставим карточку под программой. */
-            $shortProgram = count($days) === 1;
+            $isClass = ($course['school'] ?? '') === 'Мастер-классы';
         @endphp
 
         @if (count($days) && count($days[0]['groups']))
-            <section class="ab-cmod ab-reveal">
+            <section class="ab-prog ab-reveal">
                 <div class="ab-container">
-                    <div class="ab-cmod__grid @if ($shortProgram) ab-cmod__grid--short @endif">
-                        <div class="ab-cmod__main">
-                            <h2 class="ab-cmod__title">
-                                Программа {{ $isClass ? 'мастер-класса' : 'курса' }} <b>{{ $course['title'] }}</b>
-                                @if ($dayCount > 1)
-                                    <span>состоит из {{ $dayCount }} {{ $dayWord }}</span>
-                                @endif
-                            </h2>
+                    <h2 class="ab-prog__title">
+                        Программа {{ $isClass ? 'мастер-класса' : 'курса' }}
+                    </h2>
 
-                            <ol class="ab-cmod__list">
-                                @foreach ($days as $i => $day)
-                                    {{-- День раскрывается по нажатию: вся программа
-                                         сразу занимала несколько экранов телефона.
-                                         Первый день открыт, чтобы было видно, что внутри. --}}
-                                    <li class="ab-cmod__day">
-                                        <details @if ($shortProgram || $i === 0) open @endif>
-                                            <summary class="ab-cmod__day-title">
-                                                {{-- Номер дня уже в подписи, рядом значок зерна как метка. --}}
-                                                <svg class="ab-cmod__day-mark" viewBox="0 0 24 24" aria-hidden="true">
-                                                    <ellipse cx="12" cy="12" rx="7" ry="9.5" transform="rotate(35 12 12)" />
-                                                    <path d="M8.5 5.5c3 2.5 1 5.5 3.5 7s1.5 4 3.5 6" />
-                                                </svg>
-                                                {{ $shortProgram ? 'Что разбираем на занятии' : $day['label'] }}
-                                            </summary>
+                    {{-- Снимок во всю ширину: он здесь уместнее, чем картинка
+                         в карточке, которая ехала вместе с прокруткой. --}}
+                    <div class="ab-prog__media">
+                        <img src="{{ $course['photo'] }}" alt="{{ $course['title'] }}"
+                             width="1600" height="500" loading="lazy" decoding="async">
+                    </div>
 
-                                        @if (!empty($day['note']))
-                                            <p class="ab-cmod__day-note">{{ $day['note'] }}</p>
-                                        @endif
+                    <div class="ab-prog__tabs">
+                        @foreach ($days as $i => $day)
+                            <input class="ab-prog__radio" type="radio" name="ab-prog"
+                                   id="ab-prog-{{ $i }}" @if ($i === 0) checked @endif>
+                        @endforeach
 
-                                        <div class="ab-cmod__groups">
-                                            @foreach ($day['groups'] as $group)
-                                                <div class="ab-cmod__group">
-                                                    <h4 class="ab-cmod__group-title">
-                                                        @if ($group['icon'] === 'practice')
-                                                            <svg viewBox="0 0 24 24" aria-hidden="true">
-                                                                <path d="M4 10h13v4a6 6 0 0 1-6 6h-1a6 6 0 0 1-6-6v-4Z" />
-                                                                <path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H16" />
-                                                                <path d="M8 3c0 1.5 1 1.5 1 3M12 3c0 1.5 1 1.5 1 3" />
-                                                            </svg>
-                                                        @elseif ($group['icon'] === 'result')
-                                                            <svg viewBox="0 0 24 24" aria-hidden="true">
-                                                                <circle cx="12" cy="9" r="6" />
-                                                                <path d="m9 14-2 7 5-3 5 3-2-7" />
-                                                            </svg>
-                                                        @else
-                                                            <svg viewBox="0 0 24 24" aria-hidden="true">
-                                                                <path d="M4 20h4L19 9l-4-4L4 16v4Z" />
-                                                                <path d="M13 7l4 4" />
-                                                                <path d="M4 4h8" />
-                                                            </svg>
-                                                        @endif
-                                                        {{ $group['title'] }}
-                                                    </h4>
-
-                                                    <ul class="ab-cmod__items">
-                                                        @foreach ($group['items'] as $item)
-                                                            <li>{{ \Illuminate\Support\Str::ucfirst(trim($item)) }}</li>
-                                                        @endforeach
-                                                    </ul>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                        </details>
-                                    </li>
-                                @endforeach
-                            </ol>
+                        {{-- У однодневных программ переключать нечего. --}}
+                        @if (count($days) > 1)
+                        <div class="ab-prog__steps" role="tablist">
+                            @foreach ($days as $i => $day)
+                                @php
+                                    /* «День 1. Кофемашина» → номер отдельно, название отдельно. */
+                                    $label = preg_replace('/^День\s*\d+[.:]?\s*/ui', '', $day['label']);
+                                @endphp
+                                <label class="ab-prog__step" for="ab-prog-{{ $i }}">
+                                    <b>{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</b>
+                                    <span>{{ $label ?: $day['label'] }}</span>
+                                </label>
+                            @endforeach
                         </div>
+                        @endif
 
-                        {{-- Карточка записи рядом с программой. --}}
-                        <aside class="ab-cmod__aside">
-                            <form class="ab-cmod__card" method="post" action="/lead">
-                                @csrf
-                                @include('partials.form-guard')
-
-                                <input type="hidden" name="source" value="Программа курса">
-                                <input type="hidden" name="page" value="{{ request()->getPathInfo() }}">
-                                <input type="hidden" name="courses" value="{{ $course['title'] }}">
-
-                                <img class="ab-cmod__photo" src="{{ $course['photo'] }}" alt="{{ $course['title'] }}"
-                                     width="573" height="470" loading="lazy" decoding="async">
-
-                                {{-- Всё, кроме фото: у короткой программы карточка
-                                     широкая, и текст с формой встаёт рядом со снимком. --}}
-                                <div class="ab-cmod__card-body">
-                                <div class="ab-cmod__chips">
-                                    @if (!empty($course['duration']))
-                                        <span>{{ $course['duration'] }}</span>
-                                    @endif
-                                    @if (!empty($course['price']))
-                                        <span>{{ number_format($course['price'], 0, ',', ' ') }} ₽</span>
-                                    @endif
-                                </div>
-
-                                <b class="ab-cmod__card-title">Хочу записаться на {{ $isClass ? 'мастер-класс' : 'курс' }} «{{ $course['title'] }}»</b>
-                                @if (!empty($course['groups']))
-                                    {{-- Ближайшие группы ведутся в CRM. --}}
-                                    <ul class="ab-cmod__dates">
-                                        @foreach (array_slice($course['groups'], 0, 3) as $group)
-                                            <li>
-                                                <b>{{ \Illuminate\Support\Carbon::parse($group['date'])->locale('ru')->translatedFormat('j F') }}</b>
-                                                @if ($group['time']) <span>{{ $group['time'] }}</span> @endif
-                                                @if ($group['seats'] !== null) <i>{{ $group['seats'] ? 'мест: ' . $group['seats'] : 'мест нет' }}</i> @endif
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                    <p class="ab-cmod__card-note">Оставьте заявку — менеджер забронирует место в группе.</p>
-                                @else
-                                    <p class="ab-cmod__card-note">Оставьте заявку — менеджер свяжется с вами и подберёт дату.</p>
+                        @foreach ($days as $i => $day)
+                            <div class="ab-prog__panel" data-day="{{ $i }}">
+                                @if (!empty($day['note']))
+                                    <p class="ab-prog__note">{{ $day['note'] }}</p>
                                 @endif
 
-                                <label class="ab-cmod__field">
-                                    <span>Имя</span>
-                                    <input type="text" name="name" placeholder="Как к вам обращаться" required autocomplete="name">
-                                </label>
+                                <div class="ab-prog__groups">
+                                    @foreach ($day['groups'] as $group)
+                                        <div class="ab-prog__group">
+                                            <h3 class="ab-prog__group-title">
+                                                @if ($group['icon'] === 'practice')
+                                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                        <path d="M4 10h13v4a6 6 0 0 1-6 6h-1a6 6 0 0 1-6-6v-4Z" />
+                                                        <path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H16" />
+                                                        <path d="M8 3c0 1.5 1 1.5 1 3M12 3c0 1.5 1 1.5 1 3" />
+                                                    </svg>
+                                                @elseif ($group['icon'] === 'result')
+                                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                        <circle cx="12" cy="9" r="6" />
+                                                        <path d="m9 14-2 7 5-3 5 3-2-7" />
+                                                    </svg>
+                                                @else
+                                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                        <path d="M4 20h4L19 9l-4-4L4 16v4Z" />
+                                                        <path d="M13 7l4 4" />
+                                                        <path d="M4 4h8" />
+                                                    </svg>
+                                                @endif
+                                                {{ $group['title'] }}
+                                            </h3>
 
-                                <label class="ab-cmod__field">
-                                    <span>Телефон</span>
-                                    <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required autocomplete="tel">
-                                </label>
-
-                                <button class="ab-btn ab-btn--primary ab-btn--block ab-btn--lg" type="submit">
-                                    Отправить заявку
-                                </button>
-
-                                <p class="ab-cmod__legal">
-                                    Отправляя форму, вы соглашаетесь с
-                                    <a href="/privacy-policy.html">политикой обработки персональных данных</a>
-                                </p>
+                                            <ul class="ab-prog__items">
+                                                @foreach ($group['items'] as $n => $item)
+                                                    <li style="--i: {{ $n }}">{{ \Illuminate\Support\Str::ucfirst(trim($item)) }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endforeach
                                 </div>
-                            </form>
-                        </aside>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </section>
