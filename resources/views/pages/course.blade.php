@@ -11,6 +11,13 @@
     <main class="ab-page ab-page--course">
         {{-- ---------- Шапка курса ---------- --}}
         <section class="ab-cpage__hero">
+            {{-- Снимок школы во всю ширину под тёмной заливкой: кадры из зала
+                 тёмные, поэтому они работают фоном, а не светлой картинкой. --}}
+            <div class="ab-cpage__hero-media" aria-hidden="true">
+                <img src="{{ $course['photo'] }}" alt=""
+                     width="1600" height="700" decoding="async">
+            </div>
+
             <div class="ab-container">
                 <nav class="ab-crumbs" aria-label="Хлебные крошки">
                     <a href="/">Главная</a>
@@ -43,39 +50,11 @@
                             $meta = collect($facts)->except(['стоимость', 'документ'])->filter(fn ($v) => !empty($v));
                         @endphp
 
-                        <dl class="ab-cpage__meta">
-                            @foreach ($meta as $label => $value)
-                                <div>
-                                    <span class="ab-cpage__meta-mark">
-                                        @include('partials.icons.fact', ['key' => $label])
-                                    </span>
-                                    <dt>{{ $label }}</dt>
-                                    <dd>
-                                        @foreach ((array) $value as $line)
-                                            <span>{{ $line }}</span>
-                                        @endforeach
-                                    </dd>
-                                </div>
-                            @endforeach
-                        </dl>
-
-                        @if ($doc)
-                            <p class="ab-cpage__doc">
-                                @include('partials.icons.fact', ['key' => 'документ'])
-                                <span>Документ</span>
-                                <b>{{ is_array($doc) ? implode(', ', $doc) : $doc }}</b>
-                            </p>
-                        @endif
                     </div>
 
-                    {{-- Правая колонка: снимок и карточка записи поверх него.
-                         Связка одна на всех экранах, меняется только размер. --}}
+                    {{-- Карточка записи: лежит на тёмной шапке и свисает
+                         на светлую полосу с характеристиками. --}}
                     <div class="ab-cpage__side">
-                    <div class="ab-cpage__hero-media" aria-hidden="true">
-                        <img src="{{ $course['photo'] }}" alt=""
-                             width="900" height="700" decoding="async">
-                    </div>
-
                     <aside class="ab-cpage__buy">
                         <div class="ab-cpage__price">
                             @if (!empty($course['old_price']))
@@ -115,6 +94,41 @@
                             <span>{{ config('nav.contacts.hours') }}</span>
                         </a>
                     </aside>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {{-- ---------- Характеристики курса ----------
+             Светлая полоса под тёмной шапкой: длительность, для кого,
+             входной уровень, формат и документ об обучении. --}}
+        <section class="ab-cfacts">
+            <div class="ab-container">
+                <div class="ab-cfacts__grid">
+                    <div>
+                        <dl class="ab-cpage__meta">
+                            @foreach ($meta as $label => $value)
+                                <div>
+                                    <span class="ab-cpage__meta-mark">
+                                        @include('partials.icons.fact', ['key' => $label])
+                                    </span>
+                                    <dt>{{ $label }}</dt>
+                                    <dd>
+                                        @foreach ((array) $value as $line)
+                                            <span>{{ $line }}</span>
+                                        @endforeach
+                                    </dd>
+                                </div>
+                            @endforeach
+                        </dl>
+
+                        @if ($doc)
+                            <p class="ab-cpage__doc">
+                                @include('partials.icons.fact', ['key' => 'документ'])
+                                <span>Документ</span>
+                                <b>{{ is_array($doc) ? implode(', ', $doc) : $doc }}</b>
+                            </p>
+                        @endif
                     </div>
                 </div>
             </div>
