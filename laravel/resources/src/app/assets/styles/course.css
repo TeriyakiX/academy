@@ -34,8 +34,19 @@
         rgba(247,242,238,.12) 72%, rgba(247,242,238,0) 100%); }
 
 @media (max-width: 1240px) { .ab-cpage__hero-media { left: calc(50% + 120px); border-radius: 120px 0 0 120px; } }
-/* На узком экране снимок убираем: он уходил под текст, а не за карточку. */
-@media (max-width: 1000px) { .ab-cpage__hero-media { display: none; } }
+/* На узком экране снимок не прячем, а разворачиваем лентой над заголовком:
+   сбоку для него места нет, но без него шапка выглядит пустой. */
+@media (max-width: 1000px) {
+    .ab-cpage__hero { padding-top: 0; }
+    .ab-cpage__hero-media { position: static; height: 180px; margin-bottom: 24px;
+        border-radius: 0 0 28px 28px; }
+    .ab-cpage__hero-media img { object-position: center 38%; }
+    .ab-cpage__hero-media::after {
+        background: linear-gradient(180deg, rgba(247,242,238,0) 40%, rgba(247,242,238,.85) 100%); }
+}
+@media (max-width: 680px) {
+    .ab-cpage__hero-media { height: 140px; border-radius: 0 0 20px 20px; margin-bottom: 18px; }
+}
 .ab-cpage__grid { display: grid; grid-template-columns: minmax(0, 1fr) 380px;
     gap: 48px; align-items: start; }
 /* На промежуточной ширине карточка с ценой сужается, но остаётся справа:
@@ -52,14 +63,18 @@
 
 /* Факты курса строкой: пять одинаковых плиток занимали пол-экрана
    и повторяли цену из карточки записи. */
-.ab-cpage__meta { display: flex; flex-wrap: wrap; gap: 8px 0; margin: 0; padding: 0;
+/* Сетка с заданным числом колонок, а не flex-wrap: при переносе последняя
+   характеристика растягивалась на всю ширину и ряд выглядел кривым. */
+.ab-cpage__meta { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0; padding: 0;
     border-top: 2px solid var(--ab-dark); }
-.ab-cpage__meta > div { flex: 1 1 180px; padding: 18px 26px; border-left: 1px solid var(--ab-100);
+.ab-cpage__meta > div { padding: 18px 26px; border-left: 1px solid var(--ab-100);
     /* align-content: start — иначе строки растягиваются по высоте самой
        длинной колонки и значения перестают стоять на одной линии. */
     display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 0 10px;
     align-items: center; align-content: start; }
-.ab-cpage__meta > div:first-child { padding-left: 0; border-left: 0; }
+/* Первая колонка ряда — без отбивки и без вертикальной черты. */
+.ab-cpage__meta > div:nth-child(4n+1) { padding-left: 0; border-left: 0; }
+.ab-cpage__meta > div:nth-child(n+5) { border-top: 1px solid var(--ab-100); }
 /* Значок характеристики: кружок в наших цветах, без заливки внутри. */
 .ab-cpage__meta-mark { display: grid; place-items: center; width: 34px; height: 34px;
     border-radius: 50%; background: var(--ab-50, #f7f2ee); }
@@ -81,12 +96,19 @@
     text-transform: uppercase; color: var(--ab-400); }
 .ab-cpage__doc b { font-size: 15px; font-weight: 700; color: var(--ab-dark); }
 
+/* Узкая колонка — две характеристики в ряд. */
+@media (max-width: 1100px) {
+    .ab-cpage__meta { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .ab-cpage__meta > div { padding: 16px 20px; border-top: 0; }
+    .ab-cpage__meta > div:nth-child(2n+1) { padding-left: 0; border-left: 0; }
+    .ab-cpage__meta > div:nth-child(2n) { border-left: 1px solid var(--ab-100); }
+    .ab-cpage__meta > div:nth-child(n+3) { border-top: 1px solid var(--ab-100); }
+}
+
 @media (max-width: 680px) {
     .ab-cpage__meta { border-top-width: 1px; }
+    .ab-cpage__meta > div { padding: 14px 12px; }
     .ab-cpage__doc { padding: 14px 16px; }
-    .ab-cpage__meta > div { flex: 1 1 150px; padding: 14px 0; border-left: 0;
-        border-top: 1px solid var(--ab-100); }
-    .ab-cpage__meta > div:first-child { border-top: 0; }
 }
 
 /* «цены для группы» — раскрываются по нажатию, как на прежнем сайте */
