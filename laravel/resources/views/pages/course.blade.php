@@ -65,49 +65,81 @@
                     {{-- Карточка записи. --}}
                     <div class="ab-cpage__side">
                     <aside class="ab-cpage__buy">
+                        <span class="ab-cpage__buy-eyebrow">Стоимость обучения</span>
+
                         <div class="ab-cpage__price">
-                            @if (!empty($course['old_price']))
-                                <s>{{ number_format($course['old_price'], 0, ',', ' ') }} ₽</s>
-                            @endif
                             @if (!empty($course['price']))
                                 <strong>{{ number_format($course['price'], 0, ',', ' ') }} ₽</strong>
                             @else
                                 {{-- Цена ещё не назначена: обещать сумму нельзя. --}}
                                 <strong class="ab-cpage__price--ask">Цена по запросу</strong>
                             @endif
+
+                            @if (!empty($course['old_price']))
+                                <span class="ab-cpage__price-old">
+                                    <s>{{ number_format($course['old_price'], 0, ',', ' ') }} ₽</s>
+                                    <i>выгода {{ number_format($course['old_price'] - $course['price'], 0, ',', ' ') }} ₽</i>
+                                </span>
+                            @endif
                         </div>
 
-                        {{-- Цены за двоих и больше: рядом с основной ценой, а не
-                             отдельной плиткой среди фактов курса. Показываем
-                             сразу — под раскрывающейся строкой их не замечали. --}}
+                        {{-- Цены за двоих и больше идут таблицей: «за двоих» слева,
+                             сумма справа — так их читают, а не пробегают глазами. --}}
                         @if (count($prices) > 1)
-                            <div class="ab-cpage__more">
-                                <span class="ab-cpage__more-title">цены для группы</span>
+                            <dl class="ab-cpage__group">
+                                <dt class="ab-cpage__group-title">Если идёте компанией</dt>
                                 @foreach (array_slice($prices, 1) as $line)
-                                    <b>{{ $line }}</b>
+                                    @php
+                                        /* «за двоих — 7 000 ₽ с каждого» → подпись и сумма. */
+                                        $parts = preg_split('/\s+—\s+/u', $line, 2);
+                                    @endphp
+                                    <dd>
+                                        <span>{{ $parts[0] }}</span>
+                                        <b>{{ $parts[1] ?? '' }}</b>
+                                    </dd>
                                 @endforeach
-                            </div>
+                            </dl>
+                        @endif
+
+                        @if (!empty($course['groups']))
+                            {{-- Ближайшие наборы приходят из CRM. --}}
+                            <ul class="ab-cpage__dates">
+                                @foreach (array_slice($course['groups'], 0, 2) as $group)
+                                    <li>
+                                        <b>{{ \Illuminate\Support\Carbon::parse($group['date'])->locale('ru')->translatedFormat('j F') }}</b>
+                                        @if ($group['time']) <span>{{ $group['time'] }}</span> @endif
+                                        @if ($group['seats'] !== null)
+                                            <i>{{ $group['seats'] ? 'мест: ' . $group['seats'] : 'мест нет' }}</i>
+                                        @endif
+                                    </li>
+                                @endforeach
+                            </ul>
                         @endif
 
                         <button class="ab-btn ab-btn--primary ab-btn--block ab-btn--lg"
                                 type="button" data-modal-path="consultation">Записаться на курс</button>
 
-                        <a class="ab-cpage__buy-phone" href="{{ config('nav.contacts.phone_href') }}">
-                            {{ config('nav.contacts.phone') }}
-                            <span>{{ config('nav.contacts.hours') }}</span>
-                        </a>
+                        <p class="ab-cpage__buy-note">Запись ни к чему не обязывает: менеджер
+                            ответит на вопросы и подберёт дату.</p>
 
-                        {{-- Написать, а не звонить: часть людей так удобнее. --}}
-                        <ul class="ab-cpage__buy-socials">
-                            @foreach (collect(config('nav.socials'))->whereIn('icon', ['telegram', 'whatsapp', 'max']) as $s)
-                                <li>
-                                    <a href="{{ $s['href'] }}" target="_blank" rel="noopener"
-                                       title="{{ $s['title'] }}" aria-label="Написать в {{ $s['title'] }}">
-                                        <svg class="site-icon"><use href="#i-{{ $s['icon'] }}"></use></svg>
-                                    </a>
-                                </li>
-                            @endforeach
-                        </ul>
+                        <div class="ab-cpage__buy-foot">
+                            <a class="ab-cpage__buy-phone" href="{{ config('nav.contacts.phone_href') }}">
+                                {{ config('nav.contacts.phone') }}
+                                <span>{{ config('nav.contacts.hours') }}</span>
+                            </a>
+
+                            {{-- Написать, а не звонить: часть людей так удобнее. --}}
+                            <ul class="ab-cpage__buy-socials">
+                                @foreach (collect(config('nav.socials'))->whereIn('icon', ['telegram', 'whatsapp', 'max']) as $s)
+                                    <li>
+                                        <a href="{{ $s['href'] }}" target="_blank" rel="noopener"
+                                           title="{{ $s['title'] }}" aria-label="Написать в {{ $s['title'] }}">
+                                            <svg class="site-icon"><use href="#i-{{ $s['icon'] }}"></use></svg>
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
                     </aside>
                     </div>
                 </div>

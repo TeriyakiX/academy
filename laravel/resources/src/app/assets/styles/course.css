@@ -1167,3 +1167,40 @@
 .ab-cpage__buy { height: auto; }
 .ab-cpage__buy-photo { flex: 0 0 auto; height: 150px; min-height: 0; margin: 16px 0; }
 
+
+/* ================= Карточка записи =================
+   Структура вместо россыпи строк: подпись, цена с выгодой,
+   цены для компании таблицей, кнопка и подвал с контактами. */
+.ab-cpage__buy { display: block; padding: 26px 26px 0; overflow: hidden; }
+.ab-cpage__buy-eyebrow { display: block; margin-bottom: 8px; font-size: 11px; font-weight: 700;
+    letter-spacing: .08em; text-transform: uppercase; color: var(--ab-400); }
+
+.ab-cpage__price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px;
+    margin-bottom: 18px; }
+.ab-cpage__price strong { font-family: var(--ab-font-display); font-size: 40px; font-weight: 800;
+    line-height: 1; color: var(--ab-dark); }
+.ab-cpage__price-old { display: grid; gap: 2px; }
+.ab-cpage__price-old s { font-size: 15px; color: var(--ab-300, #c9b8aa); }
+.ab-cpage__price-old i { font-style: normal; font-size: 11px; font-weight: 700; letter-spacing: .04em;
+    text-transform: uppercase; color: var(--ab-600); }
+
+.ab-cpage__group { margin: 0 0 18px; padding: 16px 0 0; border-top: 1px solid var(--ab-100, #efe7df); }
+.ab-cpage__group-title { margin-bottom: 10px; font-size: 12px; color: var(--ab-400); }
+.ab-cpage__group dd { display: flex; align-items: baseline; gap: 10px; margin: 0 0 7px; }
+.ab-cpage__group dd span { font-size: 14px; color: var(--ab-500); }
+.ab-cpage__group dd b { margin-left: auto; font-size: 14px; font-weight: 700; color: var(--ab-dark); }
+
+.ab-cpage__dates { display: grid; gap: 6px; margin: 0 0 18px; padding: 0; list-style: none; }
+.ab-cpage__dates li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px;
+    padding: 9px 12px; border-radius: 10px; background: var(--ab-50, #f7f2ee);
+    font-size: 13px; color: var(--ab-dark); }
+.ab-cpage__dates i { margin-left: auto; font-style: normal; font-size: 12px; color: var(--ab-500); }
+
+.ab-cpage__buy-note { margin: 10px 0 20px; font-size: 12px; line-height: 1.5; color: var(--ab-400); }
+
+/* Подвал карточки: контакты на кремовой подложке во всю ширину. */
+.ab-cpage__buy-foot { display: grid; gap: 12px; margin: 0 -26px; padding: 16px 26px;
+    border-top: 1px solid var(--ab-100, #efe7df); background: var(--ab-50, #f7f2ee);
+    justify-items: center; }
+.ab-cpage__buy-foot .ab-cpage__buy-phone { margin: 0; }
+.ab-cpage__buy-socials { margin: 0; }
