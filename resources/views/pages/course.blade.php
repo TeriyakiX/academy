@@ -235,14 +235,69 @@
                             </ol>
                         </div>
 
-                        {{-- Справа — снимок школы: карточка с такой же кнопкой,
-                             как в шапке, тут только дублировалась. --}}
-                        <aside class="ab-cmod__aside">
-                            <figure class="ab-cmod__shot">
-                                <img src="{{ $course['photo'] }}" alt="Занятие в Академии Бариста"
-                                     width="760" height="520" loading="lazy" decoding="async">
-                                <figcaption>Занятия идут в нашей кофейне на {{ str_replace('г. Москва, ', '', config('nav.contacts.address')) }}</figcaption>
-                            </figure>
+                        {{-- Форма записи рядом с программой: так её и просил
+                             клиент — снимок, часы с ценой, два поля и кнопка. --}}
+<aside class="ab-cmod__aside">
+                            <form class="ab-cmod__card" method="post" action="/lead">
+                                @csrf
+                                @include('partials.form-guard')
+
+                                <input type="hidden" name="source" value="Программа курса">
+                                <input type="hidden" name="page" value="{{ request()->getPathInfo() }}">
+                                <input type="hidden" name="courses" value="{{ $course['title'] }}">
+
+                                <img class="ab-cmod__photo" src="{{ $course['photo'] }}" alt="{{ $course['title'] }}"
+                                     width="573" height="470" loading="lazy" decoding="async">
+
+                                {{-- Всё, кроме фото: у короткой программы карточка
+                                     широкая, и текст с формой встаёт рядом со снимком. --}}
+                                <div class="ab-cmod__card-body">
+                                <div class="ab-cmod__chips">
+                                    @if (!empty($course['duration']))
+                                        <span>{{ $course['duration'] }}</span>
+                                    @endif
+                                    @if (!empty($course['price']))
+                                        <span>{{ number_format($course['price'], 0, ',', ' ') }} ₽</span>
+                                    @endif
+                                </div>
+
+                                <b class="ab-cmod__card-title">Хочу записаться на {{ $isClass ? 'мастер-класс' : 'курс' }} «{{ $course['title'] }}»</b>
+                                @if (!empty($course['groups']))
+                                    {{-- Ближайшие группы ведутся в CRM. --}}
+                                    <ul class="ab-cmod__dates">
+                                        @foreach (array_slice($course['groups'], 0, 3) as $group)
+                                            <li>
+                                                <b>{{ \Illuminate\Support\Carbon::parse($group['date'])->locale('ru')->translatedFormat('j F') }}</b>
+                                                @if ($group['time']) <span>{{ $group['time'] }}</span> @endif
+                                                @if ($group['seats'] !== null) <i>{{ $group['seats'] ? 'мест: ' . $group['seats'] : 'мест нет' }}</i> @endif
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                    <p class="ab-cmod__card-note">Оставьте заявку — менеджер забронирует место в группе.</p>
+                                @else
+                                    <p class="ab-cmod__card-note">Оставьте заявку — менеджер свяжется с вами и подберёт дату.</p>
+                                @endif
+
+                                <label class="ab-cmod__field">
+                                    <span>Имя</span>
+                                    <input type="text" name="name" placeholder="Как к вам обращаться" required autocomplete="name">
+                                </label>
+
+                                <label class="ab-cmod__field">
+                                    <span>Телефон</span>
+                                    <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required autocomplete="tel">
+                                </label>
+
+                                <button class="ab-btn ab-btn--primary ab-btn--block ab-btn--lg" type="submit">
+                                    Отправить заявку
+                                </button>
+
+                                <p class="ab-cmod__legal">
+                                    Отправляя форму, вы соглашаетесь с
+                                    <a href="/privacy-policy.html">политикой обработки персональных данных</a>
+                                </p>
+                                </div>
+                            </form>
                         </aside>
 
                     </div>
