@@ -13,8 +13,37 @@
 .ab-crumbs b { color: var(--ab-dark); font-weight: 700; }
 
 /* ---- шапка курса ---- */
-.ab-cpage__hero { padding: 32px 0 60px;
+.ab-cpage__hero { position: relative; padding: 32px 0 60px;
+    /* overflow: clip, а не hidden: hidden сделал бы шапку областью прокрутки
+       и всё «липкое» внутри перестало бы работать. */
+    overflow: clip;
     background: linear-gradient(180deg, var(--ab-50), var(--ab-white) 70%); }
+.ab-cpage__hero > .ab-container { position: relative; z-index: 1; }
+
+/* Снимок фоном справа. Левый край привязан к колонке с карточкой, а не
+   к ширине экрана: иначе на широком мониторе он наползал на текст. */
+.ab-cpage__hero-media { position: absolute; top: 0; right: 0; left: calc(50% + 170px); height: 100%;
+    border-radius: 180px 0 0 180px; overflow: hidden; }
+/* Снимки у школы тёмные: чуть осветляем, иначе справа получается плита. */
+.ab-cpage__hero-media img { display: block; width: 100%; height: 100%; object-fit: cover;
+    object-position: 28% center; filter: brightness(1.1) saturate(.92); }
+.ab-cpage__hero-media::after { content: ''; position: absolute; inset: 0;
+    background: linear-gradient(100deg, var(--ab-50) 0%, rgba(247,242,238,.55) 34%,
+        rgba(247,242,238,.12) 72%, rgba(247,242,238,0) 100%); }
+
+@media (max-width: 1240px) { .ab-cpage__hero-media { left: calc(50% + 120px); border-radius: 120px 0 0 120px; } }
+
+/* Ниже 1000px места сбоку нет: снимок становится карточкой над заголовком. */
+@media (max-width: 1000px) {
+    /* отступы по бокам как у контейнера страницы */
+    .ab-cpage__hero-media { position: static; height: 230px; margin: 0 20px 26px;
+        border-radius: 24px; }
+    .ab-cpage__hero-media img { object-position: center 32%; filter: none; }
+    .ab-cpage__hero-media::after { display: none; }
+}
+@media (max-width: 680px) {
+    .ab-cpage__hero-media { height: 170px; border-radius: 18px; margin-bottom: 20px; }
+}
 
 .ab-cpage__grid { display: grid; grid-template-columns: minmax(0, 1fr) 380px;
     gap: 48px; align-items: start; }
