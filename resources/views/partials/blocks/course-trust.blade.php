@@ -7,18 +7,8 @@
     $rating = config('home.ratings.items.0');
     $stats  = collect(config('home.stats.items', []))->take(2);
 
-    /* Отзыв берём по направлению курса, иначе первый свежий. */
-    $reviews = collect(config('home.reviews.items', []));
-    $needle  = mb_strtolower($course['title'] ?? '');
-    $review  = $reviews->first(function ($r) use ($needle) {
-        $words = array_filter(explode(' ', $needle), fn ($w) => mb_strlen($w) > 5);
-        foreach ($words as $w) {
-            if (mb_stripos($r['text'] ?? '', $w) !== false) {
-                return true;
-            }
-        }
-        return false;
-    }) ?? $reviews->first();
+    /* Отзыв подбирается по ключевым словам курса. */
+    $review = \App\Support\CourseReviews::pick($course);
 @endphp
 
 @if ($rating || $stats->count())
@@ -37,7 +27,8 @@
 
         @foreach ($stats as $i => $stat)
             <div class="ab-trust__stat" style="--i: {{ $i }}">
-                <b>{{ $stat['value'] }}{{ $stat['suffix'] ?? '' }}</b>
+                {{-- Цифра набегает от нуля при появлении блока. --}}
+                <b><span data-count="{{ (int) $stat['value'] }}">0</span>{{ $stat['suffix'] ?? '' }}</b>
                 <span>{{ $stat['label'] }}</span>
             </div>
         @endforeach
