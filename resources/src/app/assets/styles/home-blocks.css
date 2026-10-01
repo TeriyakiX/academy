@@ -75,10 +75,12 @@
 .ab-card__foot { display: flex; align-items: center; justify-content: space-between; gap: 14px;
     padding-top: 16px; border-top: 1px solid var(--ab-100); }
 
+/* Цена в одну строку: плашка «выгода» над ценой делала подвал
+   выше у одних карточек и ниже у других. */
 .ab-card__price { display: grid; gap: 2px; }
-.ab-card__save { justify-self: start; padding: 3px 8px; border-radius: 999px;
-    background: var(--ab-50); font-size: 11px; font-weight: 700; color: var(--ab-600); }
-.ab-card__price-row { display: flex; align-items: baseline; gap: 8px; }
+.ab-card__save { font-size: 11px; font-weight: 700; letter-spacing: .04em;
+    text-transform: uppercase; color: var(--ab-600); }
+.ab-card__price-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; }
 .ab-card__price-row strong { font-family: var(--ab-font-display); font-size: 23px; font-weight: 800;
     line-height: 1.1; }
 .ab-card__price-row s { font-size: 13px; color: var(--ab-300); }
@@ -353,18 +355,18 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 
 /* Уровень одним нажатием: менеджер сразу знает, с чем звонить.
    Кнопки в сетке, а не вразнобой по ширине текста. */
-/* minmax(0, 1fr), а не 1fr: иначе длинная подпись («Уже работаю за стойкой»)
-   раздвигает свою колонку, и кнопки получаются разной ширины. */
-.ab-lead-form__levels { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px;
+/* Варианты в столбик: при двух колонках третий вариант оставался
+   один в ряду и растягивался на всю ширину — ряд выглядел кривым. */
+.ab-lead-form__levels { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px;
     margin: 0; padding: 0; border: 0; }
-.ab-lead-form__levels .ab-lead-form__label { grid-column: 1 / -1; margin-bottom: 2px; padding: 0; }
-/* Перед кнопками стоит подпись, поэтому непарная последняя кнопка —
-   чётный ребёнок; растягиваем её на две колонки, чтобы ряд был ровным. */
-.ab-lead-form__chip:last-child:nth-child(even) { grid-column: 1 / -1; }
+.ab-lead-form__levels .ab-lead-form__label { margin-bottom: 2px; padding: 0; }
 /* Кнопки одной высоты: текст в них разной длины и переносится. */
 .ab-lead-form__chip { display: grid; }
 .ab-lead-form__chip input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
-.ab-lead-form__chip span { display: grid; place-items: center; height: 100%;
+/* box-sizing обязателен: на этих страницах нет общего border-box,
+   и высота 100% вместе с полями делала плашки выше своей ячейки —
+   они наезжали друг на друга. */
+.ab-lead-form__chip span { box-sizing: border-box; display: grid; place-items: center; height: 100%;
     padding: 11px 12px; border-radius: 999px; text-align: center;
     border: 1px solid rgba(255,255,255,.18); background: rgba(0,0,0,.25);
     /* line-height задан явно: старые постраничные стили задают свою,
@@ -1287,10 +1289,11 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
     .ab-promo { transition: none; }
 }
 
-/* Снимок в карточке курса. */
-.ab-card__photo { display: block; margin: -1px -1px 16px; border-radius: 16px 16px 0 0;
+/* Снимок в карточке курса: во всю ширину карточки. Отрицательный
+   отступ был -1px, и снимок стоял в рамке внутри рамки с полем 24px. */
+.ab-card__photo { display: block; margin: -24px -24px 18px; border-radius: 15px 15px 0 0;
     overflow: hidden; }
-.ab-card__photo img { display: block; width: 100%; height: 150px; object-fit: cover;
+.ab-card__photo img { display: block; width: 100%; height: 168px; object-fit: cover;
     object-position: center 38%; transition: transform .5s ease; }
 .ab-card:hover .ab-card__photo img { transform: scale(1.04); }
 

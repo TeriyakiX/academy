@@ -62,69 +62,86 @@
                         @endphp
                     </div>
 
-                    {{-- Карточка записи. --}}
+                    @php
+                        /* Мастер-класс — не курс: и в заголовке формы, и в кнопке. */
+                        $isClass = ($course['school'] ?? '') === 'Мастер-классы';
+                    @endphp
+
+                    {{-- Справа — та же форма заявки, что на главной: плашка
+                         с обещанием, заголовок, стоимость, два поля и кнопка.
+                         Цена осталась в блоке: без неё до стоимости надо было
+                         листать всю страницу. --}}
                     <div class="ab-cpage__side">
-                    <aside class="ab-cpage__buy">
-                        {{-- Карточка собрана в том же ключе, что форма у программы:
-                             снимок, плашки, заголовок. Отличие — здесь не форма,
-                             а цена и кнопка: заполнять ничего не надо. --}}
-                        <img class="ab-cpage__buy-shot" src="{{ $course['photo'] }}"
-                             alt="Занятие в Академии Бариста" width="760" height="420"
-                             loading="lazy" decoding="async">
+                        <form class="ab-hero__form ab-cpage__form" method="post" action="/lead">
+                            @csrf
+                            @include('partials.form-guard')
 
-                        <b class="ab-cpage__buy-title">Стоимость обучения</b>
+                            <input type="hidden" name="source" value="Шапка курса">
+                            <input type="hidden" name="page" value="{{ request()->getPathInfo() }}">
+                            <input type="hidden" name="courses" value="{{ $course['title'] }}">
 
-                        <div class="ab-cpage__price">
-                            @if (!empty($course['price']))
-                                <strong>{{ number_format($course['price'], 0, ',', ' ') }} ₽</strong>
-                            @else
-                                {{-- Цена ещё не назначена: обещать сумму нельзя. --}}
-                                <strong class="ab-cpage__price--ask">Цена по запросу</strong>
+                            <span class="ab-hero__form-badge">Ответим в течение рабочего дня</span>
+
+                            <b class="ab-hero__form-title">
+                                Записаться на {{ $isClass ? 'мастер-класс' : 'курс' }} «{{ $course['title'] }}»
+                            </b>
+
+                            <div class="ab-cpage__form-price">
+                                @if (!empty($course['price']))
+                                    <span>Стоимость</span>
+                                    <strong>{{ number_format($course['price'], 0, ',', ' ') }} ₽</strong>
+
+                                    @if (!empty($course['old_price']))
+                                        <s>{{ number_format($course['old_price'], 0, ',', ' ') }} ₽</s>
+                                    @endif
+                                @else
+                                    {{-- Цена ещё не назначена: обещать сумму нельзя. --}}
+                                    <span>Стоимость</span>
+                                    <strong class="ab-cpage__price--ask">по запросу</strong>
+                                @endif
+                            </div>
+
+                            @if (count($prices) > 1)
+                                <dl class="ab-cpage__form-group">
+                                    @foreach (array_slice($prices, 1) as $line)
+                                        @php $parts = preg_split('/\s+—\s+/u', $line, 2); @endphp
+                                        <div>
+                                            <dt>{{ $parts[0] }}</dt>
+                                            <dd>{{ $parts[1] ?? '' }}</dd>
+                                        </div>
+                                    @endforeach
+                                </dl>
                             @endif
 
-                            @if (!empty($course['old_price']))
-                                <span class="ab-cpage__price-old">
-                                    <s>{{ number_format($course['old_price'], 0, ',', ' ') }} ₽</s>
-                                    <i>выгода {{ number_format($course['old_price'] - $course['price'], 0, ',', ' ') }} ₽</i>
-                                </span>
-                            @endif
-                        </div>
+                            <p class="ab-hero__form-note">
+                                Оставьте номер — перезвоним, расскажем про даты, места и стоимость.
+                            </p>
 
-                        @if (count($prices) > 1)
-                            <dl class="ab-cpage__group">
-                                <dt class="ab-cpage__group-title">Если идёте компанией</dt>
-                                @foreach (array_slice($prices, 1) as $line)
-                                    @php $parts = preg_split('/\s+—\s+/u', $line, 2); @endphp
-                                    <dd>
-                                        <span>{{ $parts[0] }}</span>
-                                        <b>{{ $parts[1] ?? '' }}</b>
-                                    </dd>
-                                @endforeach
-                            </dl>
-                        @endif
+                            <label class="ab-hero__field">
+                                <span>Как вас зовут</span>
+                                <input type="text" name="name" placeholder="Имя" required autocomplete="name">
+                            </label>
 
-                        <button class="ab-btn ab-btn--primary ab-btn--block ab-btn--lg"
-                                type="button" data-modal-path="consultation">Записаться на курс</button>
+                            <label class="ab-hero__field">
+                                <span>Телефон</span>
+                                <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required autocomplete="tel">
+                            </label>
 
-                        <div class="ab-cpage__buy-foot">
-                            <a class="ab-cpage__buy-phone" href="{{ config('nav.contacts.phone_href') }}">
+                            <button class="ab-btn ab-btn--primary ab-btn--block ab-btn--lg" type="submit">
+                                Записаться на {{ $isClass ? 'мастер-класс' : 'курс' }}
+                            </button>
+
+                            {{-- Кому удобнее позвонить самому — пусть звонит. --}}
+                            <a class="ab-hero__form-phone" href="{{ config('nav.contacts.phone_href') }}">
                                 {{ config('nav.contacts.phone') }}
-                                <span>{{ config('nav.contacts.hours') }}</span>
+                                <i>{{ config('nav.contacts.hours') }}</i>
                             </a>
 
-                            {{-- Написать, а не звонить: часть людей так удобнее. --}}
-                            <ul class="ab-cpage__buy-socials">
-                                @foreach (collect(config('nav.socials'))->whereIn('icon', ['telegram', 'whatsapp', 'max']) as $s)
-                                    <li>
-                                        <a href="{{ $s['href'] }}" target="_blank" rel="noopener"
-                                           title="{{ $s['title'] }}" aria-label="Написать в {{ $s['title'] }}">
-                                            <svg class="site-icon"><use href="#i-{{ $s['icon'] }}"></use></svg>
-                                        </a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </aside>
+                            <p class="ab-hero__form-legal">
+                                Нажимая кнопку, вы соглашаетесь с
+                                <a href="/privacy-policy.html">политикой конфиденциальности</a>
+                            </p>
+                        </form>
                     </div>
                 </div>
             </div>
