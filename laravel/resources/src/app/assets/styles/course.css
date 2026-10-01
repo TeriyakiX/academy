@@ -889,33 +889,7 @@
 
 
 
-/* ---- о курсе: слева зачем и кому, справа окна с содержанием ---- */
-.ab-cwhy__why { padding: 2px 0 2px 16px; border-left: 3px solid var(--ab-600); }
-.ab-cwhy__why p { margin: 0; font-size: 17px; line-height: 1.6; color: var(--ab-dark); }
-.ab-cwhy__who p { margin: 0; font-size: 15px; line-height: 1.6; color: rgba(255,255,255,.82); }
 
-.ab-cwhy__main { display: grid; gap: 12px; align-content: start; }
-.ab-cwhy__win { border: 1px solid var(--ab-100, #efe7df); border-radius: 16px;
-    background: var(--ab-white); transition: border-color var(--ab-transition),
-        box-shadow var(--ab-transition); }
-.ab-cwhy__win[open] { border-color: transparent; box-shadow: 0 16px 36px rgba(26,26,26,.08); }
-.ab-cwhy__win > summary { display: flex; align-items: center; gap: 12px; padding: 16px 20px;
-    list-style: none; cursor: pointer; }
-.ab-cwhy__win > summary::-webkit-details-marker { display: none; }
-.ab-cwhy__win > summary b { font-family: var(--ab-font-display); font-size: 17px; font-weight: 800;
-    color: var(--ab-dark); }
-.ab-cwhy__win > summary span { padding: 4px 10px; border-radius: 999px;
-    background: var(--ab-50, #f7f2ee); font-size: 12px; font-weight: 600; color: var(--ab-500); }
-/* стрелка справа */
-.ab-cwhy__win > summary::after { content: ''; width: 9px; height: 9px; margin-left: auto;
-    border-right: 2px solid var(--ab-400); border-bottom: 2px solid var(--ab-400);
-    transform: translateY(-3px) rotate(45deg); transition: transform var(--ab-transition); }
-.ab-cwhy__win[open] > summary::after { transform: translateY(2px) rotate(-135deg); }
-.ab-cwhy__win > summary:hover b { color: var(--ab-600); }
-.ab-cwhy__win > :not(summary) { padding: 0 20px 20px; }
-.ab-cwhy__win[open] > :not(summary) { animation: ab-win-in .3s ease both; }
-
-@keyframes ab-win-in { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .ab-cwhy__win[open] > :not(summary) { animation: none; } }
 
 /* ---- характеристики в шапке: один плотный ряд ---- */
@@ -1158,3 +1132,20 @@
 .ab-cpage__specs--left dt { font-size: 11px; font-weight: 700; letter-spacing: .06em;
     text-transform: uppercase; color: var(--ab-400); }
 .ab-cpage__specs--left dd { font-size: 15px; font-weight: 600; line-height: 1.4; color: var(--ab-dark); }
+
+/* Окно ответа: без рамки внутри рамки, с ровными полями. */
+.ab-cwhy__windows { display: grid; align-content: start; }
+.ab-cwhy__win { border: 0; background: transparent; box-shadow: none; }
+.ab-cwhy__win-title { margin: 0 0 16px; }
+
+/* Карточка записи во всю высоту шапки. */
+.ab-cpage__grid { align-items: stretch; }
+.ab-cpage__side { display: grid; }
+.ab-cpage__buy { display: flex; flex-direction: column; height: 100%; }
+/* Кнопка и контакты прижаты к низу, цена и строки — к верху. */
+.ab-cpage__buy .ab-btn { margin-top: auto; }
+.ab-cpage__buy-phone { margin-top: 14px; }
+
+/* Преподаватели: карточки ниже — блок занимал целый экран. */
+.ab-team__photo { aspect-ratio: 1 / 1; max-height: 260px; }
+.ab-team__grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
