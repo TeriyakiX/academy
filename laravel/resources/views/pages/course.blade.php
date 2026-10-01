@@ -11,18 +11,6 @@
     <main class="ab-page ab-page--course">
         {{-- ---------- Шапка курса ---------- --}}
         <section class="ab-cpage__hero">
-            {{-- Зёрна медленно падают и вращаются: тихий фон, который
-                 сразу читается как кофе. Рисуем контуром, чтобы не зависеть
-                 от цвета подложки. --}}
-            <div class="ab-beans" aria-hidden="true">
-                @for ($b = 0; $b < 7; $b++)
-                    <svg viewBox="0 0 24 32">
-                        <ellipse cx="12" cy="16" rx="10" ry="15" />
-                        <path d="M12 2c3 5-3 7 0 14s-3 9 0 14" />
-                    </svg>
-                @endfor
-            </div>
-
             {{-- Волна в основании шапки: мягкий переход к следующему блоку. --}}
             <div class="ab-cpage__wave" aria-hidden="true">
                 <svg viewBox="0 0 1200 160" preserveAspectRatio="none">
