@@ -1154,3 +1154,32 @@
 }
 
 
+
+/* ---- зёрна в шапке ----
+   Падают сверху вниз и поворачиваются. Контурные, тонкой линией:
+   не зависят от цвета фона и не читаются как пятна. */
+.ab-beans { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.ab-beans svg { position: absolute; top: -60px; width: 26px; height: 34px;
+    fill: none; stroke: var(--ab-600); stroke-width: 1.4; opacity: .16;
+    animation: ab-bean-fall linear infinite; }
+.ab-beans svg:nth-child(1) { left: 6%;  width: 22px; animation-duration: 17s; animation-delay: -3s; }
+.ab-beans svg:nth-child(2) { left: 19%; width: 30px; animation-duration: 23s; animation-delay: -11s; }
+.ab-beans svg:nth-child(3) { left: 33%; width: 20px; animation-duration: 19s; animation-delay: -7s; }
+.ab-beans svg:nth-child(4) { left: 47%; width: 26px; animation-duration: 26s; animation-delay: -17s; }
+.ab-beans svg:nth-child(5) { left: 62%; width: 22px; animation-duration: 21s; animation-delay: -5s; }
+.ab-beans svg:nth-child(6) { left: 76%; width: 28px; animation-duration: 24s; animation-delay: -14s; }
+.ab-beans svg:nth-child(7) { left: 89%; width: 20px; animation-duration: 18s; animation-delay: -9s; }
+
+@keyframes ab-bean-fall {
+    0%   { transform: translate(0, 0) rotate(0deg); }
+    100% { transform: translate(24px, 760px) rotate(260deg); }
+}
+
+@media (prefers-reduced-motion: reduce) { .ab-beans { display: none; } }
+/* На телефоне оставляем три зерна: семь на узком экране — рябь. */
+@media (max-width: 680px) {
+    .ab-beans svg:nth-child(2),
+    .ab-beans svg:nth-child(4),
+    .ab-beans svg:nth-child(6),
+    .ab-beans svg:nth-child(7) { display: none; }
+}
