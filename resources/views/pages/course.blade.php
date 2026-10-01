@@ -65,7 +65,20 @@
                     {{-- Карточка записи. --}}
                     <div class="ab-cpage__side">
                     <aside class="ab-cpage__buy">
-                        <span class="ab-cpage__buy-eyebrow">Стоимость обучения</span>
+                        {{-- Карточка собрана в том же ключе, что форма у программы:
+                             снимок, плашки, заголовок. Отличие — здесь не форма,
+                             а цена и кнопка: заполнять ничего не надо. --}}
+                        <img class="ab-cpage__buy-shot" src="{{ $course['photo'] }}"
+                             alt="Занятие в Академии Бариста" width="760" height="420"
+                             loading="lazy" decoding="async">
+
+                        <div class="ab-cpage__buy-chips">
+                            @if (!empty($course['duration']))
+                                <span>{{ $course['duration'] }}</span>
+                            @endif
+                        </div>
+
+                        <b class="ab-cpage__buy-title">Стоимость обучения</b>
 
                         <div class="ab-cpage__price">
                             @if (!empty($course['price']))
@@ -83,16 +96,11 @@
                             @endif
                         </div>
 
-                        {{-- Цены за двоих и больше идут таблицей: «за двоих» слева,
-                             сумма справа — так их читают, а не пробегают глазами. --}}
                         @if (count($prices) > 1)
                             <dl class="ab-cpage__group">
                                 <dt class="ab-cpage__group-title">Если идёте компанией</dt>
                                 @foreach (array_slice($prices, 1) as $line)
-                                    @php
-                                        /* «за двоих — 7 000 ₽ с каждого» → подпись и сумма. */
-                                        $parts = preg_split('/\s+—\s+/u', $line, 2);
-                                    @endphp
+                                    @php $parts = preg_split('/\s+—\s+/u', $line, 2); @endphp
                                     <dd>
                                         <span>{{ $parts[0] }}</span>
                                         <b>{{ $parts[1] ?? '' }}</b>
@@ -101,26 +109,8 @@
                             </dl>
                         @endif
 
-                        @if (!empty($course['groups']))
-                            {{-- Ближайшие наборы приходят из CRM. --}}
-                            <ul class="ab-cpage__dates">
-                                @foreach (array_slice($course['groups'], 0, 2) as $group)
-                                    <li>
-                                        <b>{{ \Illuminate\Support\Carbon::parse($group['date'])->locale('ru')->translatedFormat('j F') }}</b>
-                                        @if ($group['time']) <span>{{ $group['time'] }}</span> @endif
-                                        @if ($group['seats'] !== null)
-                                            <i>{{ $group['seats'] ? 'мест: ' . $group['seats'] : 'мест нет' }}</i>
-                                        @endif
-                                    </li>
-                                @endforeach
-                            </ul>
-                        @endif
-
                         <button class="ab-btn ab-btn--primary ab-btn--block ab-btn--lg"
                                 type="button" data-modal-path="consultation">Записаться на курс</button>
-
-                        <p class="ab-cpage__buy-note">Запись ни к чему не обязывает: менеджер
-                            ответит на вопросы и подберёт дату.</p>
 
                         <div class="ab-cpage__buy-foot">
                             <a class="ab-cpage__buy-phone" href="{{ config('nav.contacts.phone_href') }}">
