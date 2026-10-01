@@ -37,12 +37,18 @@
                              */
                             $facts = $course['facts'];
                             $prices = (array) ($facts['стоимость'] ?? []);
-                            $meta = collect($facts)->except('стоимость')->filter(fn ($v) => !empty($v));
+                            /* Документ выносим из строки фактов: он один занимал
+                               целый ряд и висел в пустоте. */
+                            $doc = $facts['документ'] ?? null;
+                            $meta = collect($facts)->except(['стоимость', 'документ'])->filter(fn ($v) => !empty($v));
                         @endphp
 
                         <dl class="ab-cpage__meta">
                             @foreach ($meta as $label => $value)
                                 <div>
+                                    <span class="ab-cpage__meta-mark">
+                                        @include('partials.icons.fact', ['key' => $label])
+                                    </span>
                                     <dt>{{ $label }}</dt>
                                     <dd>
                                         @foreach ((array) $value as $line)
@@ -52,6 +58,14 @@
                                 </div>
                             @endforeach
                         </dl>
+
+                        @if ($doc)
+                            <p class="ab-cpage__doc">
+                                @include('partials.icons.fact', ['key' => 'документ'])
+                                <span>Документ</span>
+                                <b>{{ is_array($doc) ? implode(', ', $doc) : $doc }}</b>
+                            </p>
+                        @endif
                     </div>
 
                     {{-- Карточка записи --}}
