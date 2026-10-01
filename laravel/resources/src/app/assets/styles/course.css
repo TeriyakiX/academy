@@ -1160,3 +1160,14 @@
 @media (max-width: 820px) {
     .ab-cpage__buy-photo { min-height: 170px; max-height: 220px; }
 }
+
+/* Карточка не растягивается, а заканчивается там же, где текст слева:
+   растянутая карточка снова создавала пустоту внизу. */
+.ab-cpage__grid { align-items: start; }
+.ab-cpage__buy { height: auto; }
+.ab-cpage__buy-photo { flex: 0 0 auto; height: 150px; min-height: 0; margin: 16px 0; }
+
+/* Снимок — обложкой сверху карточки, во всю её ширину. */
+.ab-cpage__buy { padding: 0 24px 24px; overflow: hidden; }
+.ab-cpage__buy-photo { height: 130px; margin: 0 -24px 20px; border-radius: 0; }
+.ab-cpage__buy-photo img { object-position: center 40%; }
