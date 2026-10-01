@@ -150,7 +150,7 @@ foreach (config('site.pages') as $uri => $page) {
                 'url'       => $uri,
                 /* Фото направления — для карточки записи рядом с программой. */
                 'photo'     => [
-                    'Курсы бариста' => '/assets/barista.webp',
+                    'Курсы бариста' => '/assets/1.webp',
                     'Мастер-классы' => '/assets/master-class.webp',
                     'Барное дело'   => '/assets/barmen.webp',
                 ][$card['school'] ?? ''] ?? '/assets/barista.webp',

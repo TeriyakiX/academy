@@ -1141,7 +1141,7 @@
 /* Карточка записи во всю высоту шапки. */
 .ab-cpage__grid { align-items: stretch; }
 .ab-cpage__side { display: grid; }
-.ab-cpage__buy { display: flex; flex-direction: column; height: 100%; }
+.ab-cpage__buy { display: flex; flex-direction: column; }
 /* Кнопка и контакты прижаты к низу, цена и строки — к верху. */
 .ab-cpage__buy .ab-btn { margin-top: auto; }
 .ab-cpage__buy-phone { margin-top: 14px; }
@@ -1167,7 +1167,3 @@
 .ab-cpage__buy { height: auto; }
 .ab-cpage__buy-photo { flex: 0 0 auto; height: 150px; min-height: 0; margin: 16px 0; }
 
-/* Снимок — обложкой сверху карточки, во всю её ширину. */
-.ab-cpage__buy { padding: 0 24px 24px; overflow: hidden; }
-.ab-cpage__buy-photo { height: 130px; margin: 0 -24px 20px; border-radius: 0; }
-.ab-cpage__buy-photo img { object-position: center 40%; }
