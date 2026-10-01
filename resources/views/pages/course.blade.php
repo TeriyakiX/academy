@@ -11,14 +11,6 @@
     <main class="ab-page ab-page--course">
         {{-- ---------- Шапка курса ---------- --}}
         <section class="ab-cpage__hero">
-            {{-- Снимок школы фоном справа: уходит под карточку с ценой и
-                 растворяется в кремовом фоне, поэтому текст остаётся читаемым. --}}
-            <div class="ab-cpage__hero-media" aria-hidden="true">
-                {{-- Берём снимок направления: он крупнее, чем картинка из галереи. --}}
-                <img src="{{ $course['photo'] }}" alt=""
-                     width="900" height="700" decoding="async">
-            </div>
-
             <div class="ab-container">
                 <nav class="ab-crumbs" aria-label="Хлебные крошки">
                     <a href="/">Главная</a>

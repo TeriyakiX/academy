@@ -13,40 +13,9 @@
 .ab-crumbs b { color: var(--ab-dark); font-weight: 700; }
 
 /* ---- шапка курса ---- */
-.ab-cpage__hero { position: relative; padding: 32px 0 60px;
-    /* overflow: clip, а не hidden: hidden сделал бы шапку областью прокрутки
-       и карточка с ценой перестала бы липнуть при скролле. */
-    overflow: clip;
+.ab-cpage__hero { padding: 32px 0 60px;
     background: linear-gradient(180deg, var(--ab-50), var(--ab-white) 70%); }
-.ab-cpage__hero > .ab-container { position: relative; z-index: 1; }
 
-/* Фоновый снимок справа. Скруглён снизу слева и слева растворяется в фоне. */
-/* Левый край привязан к колонке с карточкой, а не к ширине экрана:
-   иначе на широком мониторе снимок наползал на текст. */
-.ab-cpage__hero-media { position: absolute; top: 0; right: 0; left: calc(50% + 170px); height: 100%;
-    border-radius: 180px 0 0 180px; overflow: hidden; }
-/* Снимки у школы тёмные: чуть осветляем, иначе справа получается плита. */
-.ab-cpage__hero-media img { display: block; width: 100%; height: 100%; object-fit: cover;
-    /* кадр смещён влево: справа от карточки оставались обрезанные лица */
-    object-position: 28% center; filter: brightness(1.1) saturate(.92); }
-.ab-cpage__hero-media::after { content: ''; position: absolute; inset: 0;
-    background: linear-gradient(100deg, var(--ab-50) 0%, rgba(247,242,238,.55) 34%,
-        rgba(247,242,238,.12) 72%, rgba(247,242,238,0) 100%); }
-
-@media (max-width: 1240px) { .ab-cpage__hero-media { left: calc(50% + 120px); border-radius: 120px 0 0 120px; } }
-/* На узком экране снимок не прячем, а разворачиваем лентой над заголовком:
-   сбоку для него места нет, но без него шапка выглядит пустой. */
-@media (max-width: 1000px) {
-    .ab-cpage__hero { padding-top: 0; }
-    .ab-cpage__hero-media { position: static; height: 180px; margin-bottom: 24px;
-        border-radius: 0 0 28px 28px; }
-    .ab-cpage__hero-media img { object-position: center 38%; }
-    .ab-cpage__hero-media::after {
-        background: linear-gradient(180deg, rgba(247,242,238,0) 40%, rgba(247,242,238,.85) 100%); }
-}
-@media (max-width: 680px) {
-    .ab-cpage__hero-media { height: 140px; border-radius: 0 0 20px 20px; margin-bottom: 18px; }
-}
 .ab-cpage__grid { display: grid; grid-template-columns: minmax(0, 1fr) 380px;
     gap: 48px; align-items: start; }
 /* На промежуточной ширине карточка с ценой сужается, но остаётся справа:
