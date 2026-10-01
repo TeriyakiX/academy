@@ -32,21 +32,8 @@
                             </div>
                         @endif
 
-                        @if ($takeaways)
-                            <div class="ab-cwhy__take">
-                                <span class="ab-cwhy__eyebrow">С чем уйдёте</span>
-                                <ul>
-                                    @foreach ($takeaways as $n => $item)
-                                        <li style="--i: {{ $n }}">{{ $item }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-
                         @if ($limits)
-                            <p class="ab-cwhy__limits">
-                                <b>Чего не будет.</b> {{ $limits }}
-                            </p>
+                            <p class="ab-cwhy__limits"><b>Чего не будет.</b> {{ $limits }}</p>
                         @endif
                     </div>
 
@@ -63,13 +50,28 @@
                             </ul>
                         @endif
 
-                        @if ($how)
-                            <h3 class="ab-cwhy__h">Как идёт занятие</h3>
-                            <ol class="ab-cwhy__steps">
-                                @foreach ($how as $n => $item)
-                                    <li style="--i: {{ $n }}"><span>{{ $n + 1 }}</span>{{ $item }}</li>
-                                @endforeach
-                            </ol>
+                        @if ($how || $takeaways)
+                            {{-- Остальное — по запросу: на экране и так много текста. --}}
+                            <details class="ab-cwhy__more">
+                                <summary>Как проходит занятие и что останется после</summary>
+
+                                @if ($how)
+                                    <ol class="ab-cwhy__steps">
+                                        @foreach ($how as $n => $item)
+                                            <li style="--i: {{ $n }}"><span>{{ $n + 1 }}</span>{{ $item }}</li>
+                                        @endforeach
+                                    </ol>
+                                @endif
+
+                                @if ($takeaways)
+                                    <p class="ab-cwhy__take-title">С чем уйдёте</p>
+                                    <ul class="ab-cwhy__take-list">
+                                        @foreach ($takeaways as $item)
+                                            <li>{{ $item }}</li>
+                                        @endforeach
+                                    </ul>
+                                @endif
+                            </details>
                         @endif
                     </div>
                 </div>
