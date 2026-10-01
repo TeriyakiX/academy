@@ -7,7 +7,6 @@ import { setupLead } from '@/modules/lead';
 import { setupShop } from '@/modules/shop';
 import { usePromo } from '@/shared/composables/usePromo';
 import { useRail } from '@/shared/composables/useRail';
-import { useCountUp } from '@/shared/composables/useCountUp';
 import { useReveal } from '@/shared/composables/useReveal';
 import { useSwipeDots } from '@/shared/composables/useSwipeDots';
 import { qsa } from '@/shared/utils/dom';
@@ -48,7 +47,6 @@ function bootstrap(): void {
     useRail();
     usePromo();
     useReveal();
-    useCountUp();
     useSwipeDots();
 
     mountIslands();

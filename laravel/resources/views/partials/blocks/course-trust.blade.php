@@ -27,8 +27,7 @@
 
         @foreach ($stats as $i => $stat)
             <div class="ab-trust__stat" style="--i: {{ $i }}">
-                {{-- Цифра набегает от нуля при появлении блока. --}}
-                <b><span data-count="{{ (int) $stat['value'] }}">0</span>{{ $stat['suffix'] ?? '' }}</b>
+                <b>{{ $stat['value'] }}{{ $stat['suffix'] ?? '' }}</b>
                 <span>{{ $stat['label'] }}</span>
             </div>
         @endforeach
