@@ -1286,3 +1286,14 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 @media (prefers-reduced-motion: reduce) {
     .ab-promo { transition: none; }
 }
+
+/* Снимок в карточке курса. */
+.ab-card__photo { display: block; margin: -1px -1px 16px; border-radius: 16px 16px 0 0;
+    overflow: hidden; }
+.ab-card__photo img { display: block; width: 100%; height: 150px; object-fit: cover;
+    object-position: center 38%; transition: transform .5s ease; }
+.ab-card:hover .ab-card__photo img { transform: scale(1.04); }
+
+@media (prefers-reduced-motion: reduce) {
+    .ab-card:hover .ab-card__photo img { transform: none; }
+}
