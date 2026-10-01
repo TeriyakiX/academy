@@ -871,8 +871,8 @@
 /* ================= Границы между блоками =================
    Белым по белому блоки сливались: чередуем фон и добавляем
    волосок там, где два светлых блока всё же встречаются. */
-.ab-page--course .ab-cmod      { background: var(--ab-white); }
-.ab-page--course .ab-cwhy      { background: var(--ab-50, #f7f2ee); }
+.ab-page--course .ab-cwhy      { background: var(--ab-white); }
+.ab-page--course .ab-cmod      { background: var(--ab-50, #f7f2ee); }
 .ab-page--course .ab-team      { background: var(--ab-white); }
 .ab-page--course .ab-cdoc      { background: var(--ab-50, #f7f2ee); }
 .ab-page--course .ab-near      { background: var(--ab-white); }
@@ -1147,9 +1147,12 @@
 .ab-cpage__buy-phone { margin-top: 14px; }
 
 /* Преподаватели: карточки ниже — блок занимал целый экран. */
-/* Снимки преподавателей 327x332 — показываем целиком, без обрезки. */
-.ab-team__photo { aspect-ratio: 327 / 332; max-height: 230px; object-position: center top; }
-.ab-team__grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+/* Карточки преподавателей меньше, но кадр остаётся вертикальным:
+   в широкой рамке квадратный снимок обрезался до одних голов. */
+.ab-team__photo { aspect-ratio: 4 / 5; max-height: 290px; object-position: center 22%; }
+/* Колонки ограничены по ширине: иначе рамка становится шире кадра
+   и снимок обрезается сверху и снизу — остаются одни головы. */
+.ab-team__grid { grid-template-columns: repeat(auto-fit, minmax(180px, 236px)); justify-content: center; }
 
 /* Снимок внутри карточки записи: тянется и забирает пустоту. */
 .ab-cpage__buy-photo { flex: 1 1 auto; min-height: 150px; margin: 18px 0; border-radius: 14px;
