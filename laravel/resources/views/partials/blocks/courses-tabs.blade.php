@@ -1,3 +1,24 @@
+@php
+    /* Направления из каталога плюс услуги для бизнеса: клиент просил
+       показывать их в том же блоке, отдельной вкладкой. У услуг свои
+       снимки, поэтому карточка берёт фото из данных. */
+    $schools = config('courses.schools');
+
+    $schools['Для бизнеса'] = collect(config('business.items', []))
+        ->map(fn ($item) => [
+            'id'       => $item['slug'],
+            'title'    => $item['title'],
+            'desc'     => $item['text'] ?? ($item['short'] ?? ''),
+            'price'    => $item['price'] ?? null,
+            'url'      => $item['url'],
+            'duration' => $item['duration'] ?? null,
+            'format'   => 'Услуга для заведения',
+            'photo'    => $item['image'] ?? null,
+        ])
+        ->values()
+        ->all();
+@endphp
+
 <section class="ab-programs ab-reveal">
     <div class="ab-container">
         <div class="ab-programs__head">
@@ -11,6 +32,6 @@
         </div>
 
         <div data-island="CourseTabs"
-             data-props="{{ json_encode(['schools' => config('courses.schools')], JSON_UNESCAPED_UNICODE) }}"></div>
+             data-props="{{ json_encode(['schools' => $schools], JSON_UNESCAPED_UNICODE) }}"></div>
     </div>
 </section>
