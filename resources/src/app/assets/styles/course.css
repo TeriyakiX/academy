@@ -30,17 +30,36 @@
    и повторяли цену из карточки записи. */
 .ab-cpage__meta { display: flex; flex-wrap: wrap; gap: 8px 0; margin: 0; padding: 0;
     border-top: 2px solid var(--ab-dark); }
-.ab-cpage__meta > div { flex: 1 1 180px; padding: 18px 26px; border-left: 1px solid var(--ab-100); }
+.ab-cpage__meta > div { flex: 1 1 180px; padding: 18px 26px; border-left: 1px solid var(--ab-100);
+    /* align-content: start — иначе строки растягиваются по высоте самой
+       длинной колонки и значения перестают стоять на одной линии. */
+    display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 0 10px;
+    align-items: center; align-content: start; }
 .ab-cpage__meta > div:first-child { padding-left: 0; border-left: 0; }
+/* Значок характеристики: кружок в наших цветах, без заливки внутри. */
+.ab-cpage__meta-mark { display: grid; place-items: center; width: 34px; height: 34px;
+    border-radius: 50%; background: var(--ab-50, #f7f2ee); }
+.ab-cpage__meta-mark .ab-ficon { width: 18px; height: 18px; fill: none; stroke: var(--ab-600);
+    stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 .ab-cpage__meta dt { font-size: 11px; font-weight: 700; letter-spacing: .07em;
     text-transform: uppercase; color: var(--ab-400); }
-.ab-cpage__meta dd { display: grid; gap: 2px; margin: 6px 0 0; }
+.ab-cpage__meta dd { grid-column: 1 / -1; display: grid; gap: 2px; margin: 8px 0 0; }
 .ab-cpage__meta dd span { font-size: 15px; font-weight: 700; line-height: 1.35; color: var(--ab-dark); }
 /* Второй вариант расписания — подсказка, а не равнозначная строка. */
 .ab-cpage__meta dd span ~ span { font-size: 14px; font-weight: 500; color: var(--ab-500); }
 
+/* Документ об обучении — отдельной полосой под фактами. */
+.ab-cpage__doc { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px;
+    margin: 18px 0 0; padding: 14px 20px; border-radius: 14px; background: var(--ab-50, #f7f2ee); }
+.ab-cpage__doc .ab-ficon { width: 20px; height: 20px; flex: none; fill: none; stroke: var(--ab-600);
+    stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.ab-cpage__doc span { font-size: 11px; font-weight: 700; letter-spacing: .07em;
+    text-transform: uppercase; color: var(--ab-400); }
+.ab-cpage__doc b { font-size: 15px; font-weight: 700; color: var(--ab-dark); }
+
 @media (max-width: 680px) {
     .ab-cpage__meta { border-top-width: 1px; }
+    .ab-cpage__doc { padding: 14px 16px; }
     .ab-cpage__meta > div { flex: 1 1 150px; padding: 14px 0; border-left: 0;
         border-top: 1px solid var(--ab-100); }
     .ab-cpage__meta > div:first-child { border-top: 0; }
