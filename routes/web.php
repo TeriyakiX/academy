@@ -294,6 +294,18 @@ Route::post('/lead', function (
 | данных, по которым строится сайт, и устареть не может.
 */
 
+/* Служебная страница с вариантами блока характеристик: показываем клиенту,
+   выбираем один. В карту сайта не входит. */
+Route::get('/spec-demo', function () {
+    $uri = '/courses/barista-technician.html';
+    $pages = config('course-pages');
+
+    return view('pages.spec-demo', [
+        'seo'    => (config('site.pages')[$uri] ?? []) + ['robots' => 'noindex'],
+        'course' => ($pages[$uri] ?? []) + ['title' => 'Бариста-техник'],
+    ]);
+})->name('spec.demo');
+
 Route::get('/sitemap.xml', function () {
     $base = rtrim(config('seo.domain'), '/');
 

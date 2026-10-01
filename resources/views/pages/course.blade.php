@@ -92,62 +92,54 @@
                                 ->filter(fn ($v) => !empty($v));
                         @endphp
 
-                        <div class="ab-cpage__facts">
-                            <div class="ab-cpage__facts-row">
-                            {{-- Часы и уровень — наглядно, остальное строками,
-                                 но всё в одном ряду, без провалов. --}}
+                        {{-- Паспорт курса: слева кольцо с объёмом часов, оно
+                             прочерчивается при загрузке; справа — короткие
+                             строки, внизу документ. --}}
+                        <div class="ab-spec ab-reveal">
                             @if ($totalHours)
-                                <div class="ab-cpage__fact ab-cpage__fact--hours">
-                                    <b>{{ $totalHours }}<i>ч</i></b>
-                                    <span>{{ $duration }}</span>
-                                    <div class="ab-cpage__bars">
-                                        @for ($d = 0; $d < min($dayCount, 6); $d++)
-                                            <i style="--i: {{ $d }}"></i>
-                                        @endfor
+                                <div class="ab-spec__ring">
+                                    <svg viewBox="0 0 132 132" aria-hidden="true">
+                                        <circle class="ab-spec__track" cx="66" cy="66" r="58" />
+                                        <circle class="ab-spec__bar" cx="66" cy="66" r="58" />
+                                    </svg>
+                                    <div class="ab-spec__num">
+                                        <b>{{ $totalHours }}</b>
+                                        <i>{{ $totalHours % 10 === 1 && $totalHours % 100 !== 11 ? 'час' : 'часов' }}</i>
                                     </div>
-                                </div>
-                            @elseif ($duration)
-                                <div class="ab-cpage__fact ab-cpage__fact--hours">
-                                    <b>{{ $duration }}</b>
-                                    <span>{{ $durKey }}</span>
                                 </div>
                             @endif
 
-                            @if ($level)
-                                <div class="ab-cpage__fact">
-                                    <dt>{{ $levelKey }}</dt>
-                                    <div class="ab-cpage__level">
-                                        @for ($n = 1; $n <= 3; $n++)
-                                            <i @class(['is-on' => $n <= $levelStep]) style="--i: {{ $n }}"></i>
-                                        @endfor
+                            <dl class="ab-spec__list">
+                                @if ($duration)
+                                    <div>
+                                        <dt>Занятия</dt>
+                                        <dd>{{ $duration }}</dd>
                                     </div>
-                                    <dd>{{ $level }}</dd>
-                                </div>
-                            @endif
+                                @endif
 
-                            @foreach ($rest as $label => $value)
-                                <div class="ab-cpage__fact">
-                                    <dt>
-                                        <span class="ab-cpage__meta-mark">
-                                            @include('partials.icons.fact', ['key' => $label])
-                                        </span>
-                                        {{ $label }}
-                                    </dt>
-                                    <dd>
-                                        @foreach ((array) $value as $line)
-                                            <span>{{ $line }}</span>
-                                        @endforeach
-                                    </dd>
-                                </div>
-                            @endforeach
+                                @if ($level)
+                                    <div>
+                                        <dt>{{ $levelKey }}</dt>
+                                        <dd>{{ $level }}</dd>
+                                    </div>
+                                @endif
 
-                            </div>
+                                @foreach ($rest as $label => $value)
+                                    <div>
+                                        <dt>{{ $label }}</dt>
+                                        <dd>
+                                            @foreach ((array) $value as $line)
+                                                <span>{{ $line }}</span>
+                                            @endforeach
+                                        </dd>
+                                    </div>
+                                @endforeach
+                            </dl>
 
                             @if ($doc)
-                                <p class="ab-cpage__doc">
+                                <p class="ab-spec__doc">
                                     @include('partials.icons.fact', ['key' => 'документ'])
-                                    <span>Документ</span>
-                                    <b>{{ is_array($doc) ? implode(', ', $doc) : $doc }}</b>
+                                    {{ is_array($doc) ? implode(', ', $doc) : $doc }}
                                 </p>
                             @endif
                         </div>
