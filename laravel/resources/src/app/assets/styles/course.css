@@ -934,3 +934,51 @@
 .ab-cpage__fact--hours span { font-size: 12px; color: var(--ab-400); }
 /* документ — отдельной строкой во всю ширину карточки */
 .ab-cpage__facts .ab-cpage__doc { grid-column: 1 / -1; }
+
+/* Карточка характеристик: плотно, без провала перед строкой документа. */
+.ab-cpage__facts { align-content: start; align-self: start; gap: 18px 24px;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+.ab-cpage__facts .ab-cpage__doc { margin: 2px 0 0; padding: 14px 0 0; }
+.ab-cpage__fact--hours b { font-size: 32px; }
+.ab-cpage__bars { margin-top: 2px; }
+.ab-cpage__level { margin: 0; }
+
+/* ================= Характеристики курса: лента-спецификация =================
+   Карточка с «головой» и «подвалом»: сверху равные ячейки, разделённые
+   волоском, снизу — полоса с документом. Первая ячейка подсвечена:
+   с неё начинается чтение. */
+.ab-cpage__facts { display: block; padding: 0; overflow: hidden; align-self: start;
+    border-radius: 18px; background: var(--ab-white, #fff);
+    box-shadow: 0 14px 32px rgba(26,26,26,.06); }
+.ab-cpage__facts-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.ab-cpage__facts .ab-cpage__fact { display: grid; align-content: start; gap: 8px;
+    min-height: 118px; padding: 22px 22px 24px; border-left: 1px solid var(--ab-100, #efe7df); }
+.ab-cpage__facts .ab-cpage__fact:first-child { border-left: 0; background: var(--ab-50, #f7f2ee); }
+.ab-cpage__facts .ab-cpage__fact dt { display: flex; align-items: center; gap: 7px;
+    font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--ab-400); }
+.ab-cpage__facts .ab-cpage__fact dd { margin: 0; font-size: 15px; font-weight: 600;
+    line-height: 1.45; color: var(--ab-dark); }
+.ab-cpage__facts .ab-cpage__fact--hours b { font-size: 44px; }
+.ab-cpage__facts .ab-cpage__fact--hours b i { font-size: 20px; }
+.ab-cpage__facts .ab-cpage__fact--hours span { font-size: 12px; color: var(--ab-500); }
+
+/* Подвал карточки с документом. */
+.ab-cpage__facts .ab-cpage__doc { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px;
+    margin: 0; padding: 14px 22px; border-top: 1px solid var(--ab-100, #efe7df);
+    background: var(--ab-50, #f7f2ee); }
+.ab-cpage__facts .ab-cpage__doc span { font-size: 11px; font-weight: 700; letter-spacing: .06em;
+    text-transform: uppercase; color: var(--ab-400); }
+.ab-cpage__facts .ab-cpage__doc b { font-size: 14px; font-weight: 600; color: var(--ab-dark); }
+
+@media (max-width: 1100px) {
+    .ab-cpage__facts-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .ab-cpage__facts .ab-cpage__fact:nth-child(odd) { border-left: 0; }
+    .ab-cpage__facts .ab-cpage__fact:nth-child(n+3) { border-top: 1px solid var(--ab-100, #efe7df); }
+}
+
+@media (max-width: 680px) {
+    .ab-cpage__facts-row { grid-template-columns: minmax(0, 1fr); }
+    .ab-cpage__facts .ab-cpage__fact { min-height: 0; border-left: 0; }
+    .ab-cpage__facts .ab-cpage__fact:not(:first-child) { border-top: 1px solid var(--ab-100, #efe7df); }
+}

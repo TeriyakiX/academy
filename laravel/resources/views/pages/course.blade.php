@@ -93,6 +93,7 @@
                         @endphp
 
                         <div class="ab-cpage__facts">
+                            <div class="ab-cpage__facts-row">
                             {{-- Часы и уровень — наглядно, остальное строками,
                                  но всё в одном ряду, без провалов. --}}
                             @if ($totalHours)
@@ -139,6 +140,8 @@
                                     </dd>
                                 </div>
                             @endforeach
+
+                            </div>
 
                             @if ($doc)
                                 <p class="ab-cpage__doc">
