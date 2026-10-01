@@ -11,15 +11,6 @@
     <main class="ab-page ab-page--course">
         {{-- ---------- Шапка курса ---------- --}}
         <section class="ab-cpage__hero">
-            {{-- Волна в основании шапки: мягкий переход к следующему блоку. --}}
-            <div class="ab-cpage__wave" aria-hidden="true">
-                <svg viewBox="0 0 1200 160" preserveAspectRatio="none">
-                    <path d="M0 96c100-34 200-34 300 0s200 34 300 0 200-34 300 0 200 34 300 0v64H0Z" />
-                    <path d="M0 108c120-28 240-28 360 0s240 28 360 0 240-28 360 0 240 28 360 0v52H0Z" />
-                    <path d="M0 124c140-22 280-22 420 0s280 22 420 0 280-22 420 0v36H0Z" />
-                </svg>
-            </div>
-
             <div class="ab-container">
                 <nav class="ab-crumbs" aria-label="Хлебные крошки">
                     <a href="/">Главная</a>
@@ -37,6 +28,31 @@
                         @if ($course['lead'])
                             <p class="ab-cpage__lead">{{ $course['lead'] }}</p>
                         @endif
+
+                        {{-- Главное о курсе — в текстовой колонке, а не внизу карточки:
+                             там его не замечали. --}}
+                        @php
+                            $f = $course['facts'];
+                            $specs = array_values(array_filter([
+                                !empty($f['длительность']) ? ['Занятия', $f['длительность']] : null,
+                                !empty($f['формат']) ? ['Формат', $f['формат']] : null,
+                                !empty($f['размер группы']) ? ['Группа', $f['размер группы']] : null,
+                                !empty($f['документ']) ? ['Документ', $f['документ']] : null,
+                            ]));
+                        @endphp
+
+                        @if ($specs)
+                            <dl class="ab-cpage__specs ab-cpage__specs--left">
+                                @foreach ($specs as $row)
+                                    <div>
+                                        <dt>{{ $row[0] }}</dt>
+                                        <dd>{{ is_array($row[1]) ? implode(', ', $row[1]) : $row[1] }}</dd>
+                                    </div>
+                                @endforeach
+                            </dl>
+                        @endif
+
+
 
                         @include('partials.blocks.course-trust')
 
@@ -72,30 +88,6 @@
                                 @endforeach
                             </div>
                         @endif
-
-                        {{-- Главное о курсе здесь же: раньше это была вторая
-                             карточка у программы, с такой же кнопкой. --}}
-                        @php
-                            $f = $course['facts'];
-                            $specs = array_values(array_filter([
-                                !empty($f['длительность']) ? ['Занятия', $f['длительность']] : null,
-                                !empty($f['формат']) ? ['Формат', $f['формат']] : null,
-                                !empty($f['размер группы']) ? ['Группа', $f['размер группы']] : null,
-                                !empty($f['документ']) ? ['Документ', $f['документ']] : null,
-                            ]));
-                        @endphp
-
-                        @if ($specs)
-                            <dl class="ab-cpage__specs">
-                                @foreach ($specs as $row)
-                                    <div>
-                                        <dt>{{ $row[0] }}</dt>
-                                        <dd>{{ is_array($row[1]) ? implode(', ', $row[1]) : $row[1] }}</dd>
-                                    </div>
-                                @endforeach
-                            </dl>
-                        @endif
-
 
                         <button class="ab-btn ab-btn--primary ab-btn--block ab-btn--lg"
                                 type="button" data-modal-path="consultation">Записаться на курс</button>

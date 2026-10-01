@@ -70,6 +70,7 @@
         <div class="ab-tabs__more">
             <a class="ab-btn ab-btn--outline" href="/courses.html">Все программы</a>
             <a class="ab-btn ab-btn--dark" href="/constructor.html">Собрать свой курс</a>
+            <a class="ab-btn ab-btn--outline" href="/busines.html">Обучение для бизнеса</a>
         </div>
     </div>
 </template>
