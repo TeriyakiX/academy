@@ -405,80 +405,83 @@
     .ab-cmod__items--solo { grid-template-columns: 1fr 1fr; column-gap: 28px; }
 }
 
-/* ================= Что за курс =================
-   У каждого куска своя подача, а не четыре одинаковые плитки. */
-.ab-cwhy { padding: 56px 0; background: var(--ab-white); }
-.ab-cwhy__big { max-width: 860px; margin: 0 0 30px; font-size: 19px; line-height: 1.6;
-    color: var(--ab-dark); }
+/* ================= О курсе =================
+   Слева вопросы, справа — ответ на выбранный. Радиокнопки и :has(),
+   поэтому работает без скриптов. */
+.ab-cwhy { padding: 52px 0; background: var(--ab-50, #f7f2ee); }
+.ab-cwhy__tabs { display: grid; grid-template-columns: minmax(0, 320px) minmax(0, 1fr); gap: 28px 36px;
+    align-items: start; }
+.ab-cwhy__radio { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
 
-.ab-cwhy__layout { display: grid; grid-template-columns: minmax(0, 360px) minmax(0, 1fr);
-    gap: 28px 44px; align-items: start; }
-.ab-cwhy__side { display: grid; gap: 16px; }
+/* ---- колонка вопросов ---- */
+.ab-cwhy__list { display: grid; gap: 8px; }
+.ab-cwhy__q { display: block; padding: 14px 18px; border-radius: 14px; cursor: pointer;
+    background: transparent; font-size: 15px; font-weight: 600; color: var(--ab-500);
+    transition: background var(--ab-transition), color var(--ab-transition); }
+.ab-cwhy__q span { display: flex; align-items: center; gap: 10px; }
+.ab-cwhy__q span::after { content: ''; width: 8px; height: 8px; margin-left: auto;
+    border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
+    transform: rotate(-45deg); opacity: 0; transition: opacity var(--ab-transition); }
+.ab-cwhy__q:hover { background: var(--ab-100, #efe7df); color: var(--ab-dark); }
 
-/* «Для кого» — тёмная плашка: единственное контрастное пятно в блоке. */
-.ab-cwhy__who { padding: 24px 26px; border-radius: 18px; background: var(--ab-dark, #1a1a1a); }
-.ab-cwhy__who p { margin: 0; font-size: 15px; line-height: 1.6; color: rgba(255,255,255,.82); }
-.ab-cwhy__who .ab-cwhy__eyebrow { color: rgba(255,255,255,.5); }
+/* Выбранный вопрос: тёмная плашка со стрелкой. */
+#ab-cwhy-0:checked ~ .ab-cwhy__list > :nth-child(1),
+#ab-cwhy-1:checked ~ .ab-cwhy__list > :nth-child(2),
+#ab-cwhy-2:checked ~ .ab-cwhy__list > :nth-child(3),
+#ab-cwhy-3:checked ~ .ab-cwhy__list > :nth-child(4),
+#ab-cwhy-4:checked ~ .ab-cwhy__list > :nth-child(5) {
+    background: var(--ab-dark, #1a1a1a); color: #fff; }
+#ab-cwhy-0:checked ~ .ab-cwhy__list > :nth-child(1) span::after,
+#ab-cwhy-1:checked ~ .ab-cwhy__list > :nth-child(2) span::after,
+#ab-cwhy-2:checked ~ .ab-cwhy__list > :nth-child(3) span::after,
+#ab-cwhy-3:checked ~ .ab-cwhy__list > :nth-child(4) span::after,
+#ab-cwhy-4:checked ~ .ab-cwhy__list > :nth-child(5) span::after { opacity: .7; }
 
-.ab-cwhy__eyebrow { display: block; margin-bottom: 10px; font-size: 11px; font-weight: 700;
-    letter-spacing: .08em; text-transform: uppercase; color: var(--ab-400); }
-
-.ab-cwhy__take { padding: 22px 24px; border-radius: 18px; background: var(--ab-50, #f7f2ee); }
-.ab-cwhy__take ul { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
-.ab-cwhy__take li { position: relative; padding-left: 16px; font-size: 14px; line-height: 1.5;
-    color: var(--ab-500); }
-.ab-cwhy__take li::before { content: ''; position: absolute; left: 0; top: 8px;
-    width: 6px; height: 6px; border-radius: 50%; background: var(--ab-600); }
-
-.ab-cwhy__limits { margin: 0; padding: 16px 18px; border: 1px dashed var(--ab-200, #e2d8cf);
-    border-radius: 14px; font-size: 13px; line-height: 1.55; color: var(--ab-400); }
+.ab-cwhy__limits { margin: 10px 0 0; padding: 14px 16px; border: 1px dashed var(--ab-200, #e2d8cf);
+    border-radius: 12px; font-size: 13px; line-height: 1.55; color: var(--ab-400); }
 .ab-cwhy__limits b { color: var(--ab-500); }
 
-.ab-cwhy__h { margin: 0 0 14px; font-family: var(--ab-font-display); font-size: 18px;
-    font-weight: 800; color: var(--ab-dark); }
-.ab-cwhy__main > .ab-cwhy__h ~ .ab-cwhy__h { margin-top: 28px; }
+/* ---- окно с ответом ---- */
+.ab-cwhy__windows { position: relative; min-height: 260px; padding: 26px 28px; border-radius: 20px;
+    background: var(--ab-white); box-shadow: 0 16px 36px rgba(26,26,26,.07); }
+.ab-cwhy__win { display: none; }
+.ab-cwhy__tabs:has(#ab-cwhy-0:checked) .ab-cwhy__win[data-tab="0"],
+.ab-cwhy__tabs:has(#ab-cwhy-1:checked) .ab-cwhy__win[data-tab="1"],
+.ab-cwhy__tabs:has(#ab-cwhy-2:checked) .ab-cwhy__win[data-tab="2"],
+.ab-cwhy__tabs:has(#ab-cwhy-3:checked) .ab-cwhy__win[data-tab="3"],
+.ab-cwhy__tabs:has(#ab-cwhy-4:checked) .ab-cwhy__win[data-tab="4"] {
+    display: block; animation: ab-win-in .3s ease both; }
 
-/* «Что внутри» — две колонки с галочками. */
+.ab-cwhy__win-title { margin: 0 0 14px; font-family: var(--ab-font-display); font-size: 20px;
+    font-weight: 800; color: var(--ab-dark); }
+.ab-cwhy__text { margin: 0; font-size: 16px; line-height: 1.6; color: var(--ab-500); }
+
 .ab-cwhy__inside { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 10px 28px; margin: 0; padding: 0; list-style: none; }
 .ab-cwhy__inside li { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 9px;
     align-items: start; font-size: 15px; line-height: 1.45; color: var(--ab-500); }
-.ab-cwhy__inside svg { width: 20px; height: 20px; margin-top: 1px; padding: 3px;
-    border-radius: 50%; background: var(--ab-50, #f7f2ee);
-    fill: none; stroke: var(--ab-600); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.ab-cwhy__inside svg { width: 20px; height: 20px; margin-top: 1px; padding: 3px; border-radius: 50%;
+    background: var(--ab-50, #f7f2ee); fill: none; stroke: var(--ab-600); stroke-width: 3;
+    stroke-linecap: round; stroke-linejoin: round; }
 
-/* «Как идёт занятие» — шаги с линией между номерами. */
-.ab-cwhy__steps { display: grid; gap: 14px; margin: 0; padding: 0; list-style: none;
-    counter-reset: step; }
+.ab-cwhy__steps { display: grid; gap: 14px; margin: 0; padding: 0; list-style: none; }
 .ab-cwhy__steps li { position: relative; display: grid; grid-template-columns: 28px minmax(0, 1fr);
     gap: 12px; align-items: start; font-size: 15px; line-height: 1.5; color: var(--ab-500); }
 .ab-cwhy__steps li span { display: grid; place-items: center; width: 28px; height: 28px;
     border-radius: 50%; background: var(--ab-600); color: #fff; font-size: 13px; font-weight: 700; }
-/* Линия тянется от номера к следующему. */
 .ab-cwhy__steps li:not(:last-child)::before { content: ''; position: absolute; left: 13px; top: 30px;
     bottom: -14px; width: 2px; background: var(--ab-100, #efe7df); }
 
-/* Появление по очереди, когда блок доехал до экрана. */
-.ab-reveal .ab-cwhy__inside li,
-.ab-reveal .ab-cwhy__steps li,
-.ab-reveal .ab-cwhy__take li { opacity: 0; transform: translateY(8px); }
-.ab-reveal.is-visible .ab-cwhy__inside li,
-.ab-reveal.is-visible .ab-cwhy__steps li,
-.ab-reveal.is-visible .ab-cwhy__take li { opacity: 1; transform: none;
-    transition: opacity .45s ease, transform .45s ease;
-    transition-delay: calc(80ms + var(--i, 0) * 60ms); }
+@keyframes ab-win-in { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
 
 @media (prefers-reduced-motion: reduce) {
-    .ab-reveal .ab-cwhy__inside li,
-    .ab-reveal .ab-cwhy__steps li,
-    .ab-reveal .ab-cwhy__take li { opacity: 1; transform: none; transition: none; }
+    .ab-cwhy__tabs .ab-cwhy__win { animation: none; }
 }
 
 @media (max-width: 900px) {
-    .ab-cwhy { padding: 36px 0; }
-    .ab-cwhy__big { margin-bottom: 22px; font-size: 17px; }
-    .ab-cwhy__layout { grid-template-columns: minmax(0, 1fr); gap: 22px; }
-    .ab-cwhy__who { padding: 20px; }
+    .ab-cwhy { padding: 34px 0; }
+    .ab-cwhy__tabs { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+    .ab-cwhy__windows { min-height: 0; padding: 20px; }
 }
 
 /* ================= Документ об обучении =================
@@ -884,15 +887,7 @@
     width: 620px; height: 620px; border-radius: 50%; pointer-events: none;
     background: radial-gradient(circle, rgba(123,94,77,.16) 0%, rgba(123,94,77,.06) 45%, transparent 70%); }
 
-.ab-cpage__wave { position: absolute; left: 0; right: 0; bottom: -1px;
-    height: clamp(80px, 11vw, 150px); overflow: hidden; pointer-events: none; }
-.ab-cpage__wave svg { position: absolute; inset: 0; width: 200%; height: 100%; }
-.ab-cpage__wave path { fill: var(--ab-600); }
-.ab-cpage__wave path:nth-child(1) { opacity: .05; }
-.ab-cpage__wave path:nth-child(2) { opacity: .07; }
-.ab-cpage__wave path:nth-child(3) { opacity: .1; }
 
-@media (prefers-reduced-motion: reduce) { .ab-cpage__wave path { animation: none; } }
 
 /* ---- о курсе: слева зачем и кому, справа окна с содержанием ---- */
 .ab-cwhy__why { padding: 2px 0 2px 16px; border-left: 3px solid var(--ab-600); }
@@ -1154,3 +1149,12 @@
 }
 
 
+
+/* Характеристики курса в текстовой колонке: ряд, а не узкий столбик. */
+.ab-cpage__specs--left { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 18px 28px; margin: 26px 0 0; padding: 20px 0 0;
+    border-top: 1px solid var(--ab-200, #e2d8cf); }
+.ab-cpage__specs--left > div { display: grid; grid-template-columns: minmax(0, 1fr); gap: 4px; }
+.ab-cpage__specs--left dt { font-size: 11px; font-weight: 700; letter-spacing: .06em;
+    text-transform: uppercase; color: var(--ab-400); }
+.ab-cpage__specs--left dd { font-size: 15px; font-weight: 600; line-height: 1.4; color: var(--ab-dark); }
