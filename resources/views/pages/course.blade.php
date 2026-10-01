@@ -81,7 +81,6 @@
                                 !empty($f['длительность']) ? ['Занятия', $f['длительность']] : null,
                                 !empty($f['формат']) ? ['Формат', $f['формат']] : null,
                                 !empty($f['размер группы']) ? ['Группа', $f['размер группы']] : null,
-                                !empty($f['входной уровень']) ? ['Входной уровень', $f['входной уровень']] : null,
                                 !empty($f['документ']) ? ['Документ', $f['документ']] : null,
                             ]));
                         @endphp
@@ -97,11 +96,6 @@
                             </dl>
                         @endif
 
-                        <ul class="ab-cpage__buy-list">
-                            <li>Обучение по образовательной лицензии</li>
-                            <li>Практика на профессиональном оборудовании</li>
-                        </ul>
-
 
                         <button class="ab-btn ab-btn--primary ab-btn--block ab-btn--lg"
                                 type="button" data-modal-path="consultation">Записаться на курс</button>
@@ -110,6 +104,18 @@
                             {{ config('nav.contacts.phone') }}
                             <span>{{ config('nav.contacts.hours') }}</span>
                         </a>
+
+                        {{-- Написать, а не звонить: часть людей так удобнее. --}}
+                        <ul class="ab-cpage__buy-socials">
+                            @foreach (collect(config('nav.socials'))->whereIn('icon', ['telegram', 'whatsapp', 'max']) as $s)
+                                <li>
+                                    <a href="{{ $s['href'] }}" target="_blank" rel="noopener"
+                                       title="{{ $s['title'] }}" aria-label="Написать в {{ $s['title'] }}">
+                                        <svg class="site-icon"><use href="#i-{{ $s['icon'] }}"></use></svg>
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
                     </aside>
                     </div>
                 </div>

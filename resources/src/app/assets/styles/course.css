@@ -879,6 +879,11 @@
 
 /* ---- живая волна в шапке ---- */
 .ab-cpage__hero::after { content: none; }
+/* Мягкое пятно света в правом верхнем углу — фон перестаёт быть плоским. */
+.ab-cpage__hero::before { content: ''; position: absolute; top: -220px; right: -160px;
+    width: 620px; height: 620px; border-radius: 50%; pointer-events: none;
+    background: radial-gradient(circle, rgba(123,94,77,.16) 0%, rgba(123,94,77,.06) 45%, transparent 70%); }
+
 .ab-cpage__wave { position: absolute; left: 0; right: 0; bottom: -1px;
     height: clamp(80px, 11vw, 150px); overflow: hidden; pointer-events: none; }
 .ab-cpage__wave svg { position: absolute; inset: 0; width: 200%; height: 100%; }
@@ -1129,3 +1134,21 @@
 .ab-cmod__shot img { display: block; width: 100%; height: 240px; object-fit: cover;
     object-position: center 38%; border-radius: 16px; }
 .ab-cmod__shot figcaption { margin-top: 10px; font-size: 13px; line-height: 1.45; color: var(--ab-400); }
+
+/* ---- соцсети в карточке записи ---- */
+.ab-cpage__buy-socials { display: flex; justify-content: center; gap: 10px;
+    margin: 14px 0 0; padding: 0; list-style: none; }
+.ab-cpage__buy-socials a { display: grid; place-items: center; width: 38px; height: 38px;
+    border-radius: 50%; background: var(--ab-50, #f7f2ee); color: var(--ab-600);
+    transition: background var(--ab-transition), color var(--ab-transition),
+        transform var(--ab-transition); }
+.ab-cpage__buy-socials a:hover { background: var(--ab-600); color: #fff; transform: translateY(-2px); }
+.ab-cpage__buy-socials .site-icon { width: 18px; height: 18px; fill: currentColor; }
+
+/* Карточка записи стала короче: строки главного о курсе компактнее. */
+.ab-cpage__specs { gap: 8px; margin-bottom: 16px; padding-top: 14px; }
+.ab-cpage__buy { padding: 24px; }
+
+@media (prefers-reduced-motion: reduce) {
+    .ab-cpage__buy-socials a:hover { transform: none; }
+}
