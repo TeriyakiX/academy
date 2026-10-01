@@ -11,6 +11,12 @@
     <main class="ab-page ab-page--course">
         {{-- ---------- Шапка курса ---------- --}}
         <section class="ab-cpage__hero">
+            {{-- Снимок справа: левый край срезан дугой, как на макете. --}}
+            <div class="ab-cpage__hero-media" aria-hidden="true">
+                <img src="{{ $course['photo'] }}" alt=""
+                     width="1200" height="900" decoding="async">
+            </div>
+
             <div class="ab-container">
                 <nav class="ab-crumbs" aria-label="Хлебные крошки">
                     <a href="/">Главная</a>
@@ -70,12 +76,6 @@
 
                     {{-- Карточка записи поверх круглого снимка. --}}
                     <div class="ab-cpage__side">
-                    {{-- Круглый снимок за карточкой — как на макете. --}}
-                    <div class="ab-cpage__hero-media" aria-hidden="true">
-                        <img src="{{ $course['photo'] }}" alt=""
-                             width="900" height="900" decoding="async">
-                    </div>
-
                     <aside class="ab-cpage__buy">
                         <div class="ab-cpage__price">
                             @if (!empty($course['old_price']))
