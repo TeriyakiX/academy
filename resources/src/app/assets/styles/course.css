@@ -864,3 +864,73 @@
     gap: 6px 24px; margin: 0; padding: 0 0 0 18px; list-style: disc; }
 .ab-cwhy__take-list li { font-size: 14px; line-height: 1.5; color: var(--ab-500); }
 .ab-cwhy__take-list li::marker { color: var(--ab-300, #c9b8aa); }
+
+/* ================= Границы между блоками =================
+   Белым по белому блоки сливались: чередуем фон и добавляем
+   волосок там, где два светлых блока всё же встречаются. */
+.ab-page--course .ab-cwhy      { background: var(--ab-white); }
+.ab-page--course .ab-cmod      { background: var(--ab-50, #f7f2ee); }
+.ab-page--course .ab-team      { background: var(--ab-white); }
+.ab-page--course .ab-cdoc      { background: var(--ab-50, #f7f2ee); }
+.ab-page--course .ab-near      { background: var(--ab-white); }
+.ab-page--course .ab-lead-block { background: var(--ab-dark, #1a1a1a); }
+.ab-page--course section + section { border-top: 1px solid rgba(26,22,20,.06); }
+.ab-page--course .ab-lead-block { border-top: 0; }
+
+/* ---- живая волна в шапке ---- */
+.ab-cpage__hero::after { content: none; }
+.ab-cpage__wave { position: absolute; left: 0; right: 0; bottom: -1px;
+    height: clamp(80px, 11vw, 150px); overflow: hidden; pointer-events: none; }
+.ab-cpage__wave svg { position: absolute; inset: 0; width: 200%; height: 100%; }
+.ab-cpage__wave path { fill: var(--ab-600); }
+.ab-cpage__wave path:nth-child(1) { opacity: .07; animation: ab-wave 16s linear infinite; }
+.ab-cpage__wave path:nth-child(2) { opacity: .09; animation: ab-wave 11s linear infinite reverse; }
+.ab-cpage__wave path:nth-child(3) { opacity: .12; animation: ab-wave 21s linear infinite; }
+
+@media (prefers-reduced-motion: reduce) { .ab-cpage__wave path { animation: none; } }
+
+/* ---- о курсе: слева зачем и кому, справа окна с содержанием ---- */
+.ab-cwhy__why { padding: 2px 0 2px 16px; border-left: 3px solid var(--ab-600); }
+.ab-cwhy__why p { margin: 0; font-size: 17px; line-height: 1.6; color: var(--ab-dark); }
+.ab-cwhy__who p { margin: 0; font-size: 15px; line-height: 1.6; color: rgba(255,255,255,.82); }
+
+.ab-cwhy__main { display: grid; gap: 12px; align-content: start; }
+.ab-cwhy__win { border: 1px solid var(--ab-100, #efe7df); border-radius: 16px;
+    background: var(--ab-white); transition: border-color var(--ab-transition),
+        box-shadow var(--ab-transition); }
+.ab-cwhy__win[open] { border-color: transparent; box-shadow: 0 16px 36px rgba(26,26,26,.08); }
+.ab-cwhy__win > summary { display: flex; align-items: center; gap: 12px; padding: 16px 20px;
+    list-style: none; cursor: pointer; }
+.ab-cwhy__win > summary::-webkit-details-marker { display: none; }
+.ab-cwhy__win > summary b { font-family: var(--ab-font-display); font-size: 17px; font-weight: 800;
+    color: var(--ab-dark); }
+.ab-cwhy__win > summary span { padding: 4px 10px; border-radius: 999px;
+    background: var(--ab-50, #f7f2ee); font-size: 12px; font-weight: 600; color: var(--ab-500); }
+/* стрелка справа */
+.ab-cwhy__win > summary::after { content: ''; width: 9px; height: 9px; margin-left: auto;
+    border-right: 2px solid var(--ab-400); border-bottom: 2px solid var(--ab-400);
+    transform: translateY(-3px) rotate(45deg); transition: transform var(--ab-transition); }
+.ab-cwhy__win[open] > summary::after { transform: translateY(2px) rotate(-135deg); }
+.ab-cwhy__win > summary:hover b { color: var(--ab-600); }
+.ab-cwhy__win > :not(summary) { padding: 0 20px 20px; }
+.ab-cwhy__win[open] > :not(summary) { animation: ab-win-in .3s ease both; }
+
+@keyframes ab-win-in { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .ab-cwhy__win[open] > :not(summary) { animation: none; } }
+
+/* ---- характеристики в шапке: один плотный ряд ---- */
+.ab-cpage__facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
+    gap: 20px 26px; margin-top: 26px; padding: 22px 24px; border-radius: 18px;
+    background: var(--ab-white, #fff); box-shadow: 0 14px 32px rgba(26,26,26,.06); }
+.ab-cpage__fact { display: grid; align-content: start; gap: 6px; }
+.ab-cpage__fact dt { display: flex; align-items: center; gap: 7px;
+    font-size: 12px; font-weight: 500; color: var(--ab-400); }
+.ab-cpage__fact dd { margin: 0; font-size: 14px; font-weight: 600; line-height: 1.4; color: var(--ab-dark); }
+.ab-cpage__fact dd span ~ span { display: block; font-weight: 500; color: var(--ab-500); }
+.ab-cpage__fact--hours b { display: flex; align-items: baseline; gap: 2px;
+    font-family: var(--ab-font-display); font-size: 36px; font-weight: 800; line-height: 1;
+    color: var(--ab-dark); }
+.ab-cpage__fact--hours b i { font-size: 18px; font-style: normal; color: var(--ab-600); }
+.ab-cpage__fact--hours span { font-size: 12px; color: var(--ab-400); }
+/* документ — отдельной строкой во всю ширину карточки */
+.ab-cpage__facts .ab-cpage__doc { grid-column: 1 / -1; }
