@@ -209,8 +209,9 @@
                              как в шапке, тут только дублировалась. --}}
                         <aside class="ab-cmod__aside">
                             <figure class="ab-cmod__shot">
-                                <img src="{{ $course['photo'] }}" alt="{{ $course['title'] }}"
-                                     width="760" height="980" loading="lazy" decoding="async">
+                                <img src="{{ $course['photo'] }}" alt="Занятие в Академии Бариста"
+                                     width="760" height="520" loading="lazy" decoding="async">
+                                <figcaption>Занятия идут в нашей кофейне на {{ str_replace('г. Москва, ', '', config('nav.contacts.address')) }}</figcaption>
                             </figure>
                         </aside>
 
