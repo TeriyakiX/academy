@@ -24,6 +24,12 @@
         -->
         <div ref="grid" class="ab-tabs__grid">
             <article v-for="course in schools[active]" :key="course.id" class="ab-card">
+                <!-- Снимок направления: карточки без картинки выглядели пустыми. -->
+                <a class="ab-card__photo" :href="course.url" tabindex="-1" aria-hidden="true">
+                    <img :src="photo(course)" :alt="course.title" width="600" height="360"
+                         loading="lazy" decoding="async">
+                </a>
+
                 <div class="ab-card__head">
                     <h3 class="ab-card__title">{{ course.title }}</h3>
 
@@ -84,6 +90,15 @@ watch(active, async () => {
     await nextTick();
     grid.value?.scrollTo({ left: 0 });
 });
+
+// Снимок берём из данных курса, иначе общий по направлению.
+const SHOTS: Record<string, string> = {
+    'Курсы бариста': '/assets/barista.webp',
+    'Мастер-классы': '/assets/master-class.webp',
+    'Барное дело': '/assets/barmen.webp',
+};
+
+const photo = (course: ICourse) => course.photo ?? SHOTS[active.value] ?? '/assets/barista.webp';
 
 const money = (n: number) => formatPrice(n);
 </script>

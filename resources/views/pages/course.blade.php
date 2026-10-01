@@ -73,11 +73,35 @@
                             </div>
                         @endif
 
+                        {{-- Главное о курсе здесь же: раньше это была вторая
+                             карточка у программы, с такой же кнопкой. --}}
+                        @php
+                            $f = $course['facts'];
+                            $specs = array_values(array_filter([
+                                !empty($f['длительность']) ? ['Занятия', $f['длительность']] : null,
+                                !empty($f['формат']) ? ['Формат', $f['формат']] : null,
+                                !empty($f['размер группы']) ? ['Группа', $f['размер группы']] : null,
+                                !empty($f['входной уровень']) ? ['Входной уровень', $f['входной уровень']] : null,
+                                !empty($f['документ']) ? ['Документ', $f['документ']] : null,
+                            ]));
+                        @endphp
+
+                        @if ($specs)
+                            <dl class="ab-cpage__specs">
+                                @foreach ($specs as $row)
+                                    <div>
+                                        <dt>{{ $row[0] }}</dt>
+                                        <dd>{{ is_array($row[1]) ? implode(', ', $row[1]) : $row[1] }}</dd>
+                                    </div>
+                                @endforeach
+                            </dl>
+                        @endif
+
                         <ul class="ab-cpage__buy-list">
                             <li>Обучение по образовательной лицензии</li>
                             <li>Практика на профессиональном оборудовании</li>
-                            <li>Свидетельство о присвоении квалификации</li>
                         </ul>
+
 
                         <button class="ab-btn ab-btn--primary ab-btn--block ab-btn--lg"
                                 type="button" data-modal-path="consultation">Записаться на курс</button>
@@ -181,74 +205,13 @@
                             </ol>
                         </div>
 
-                        {{-- Карточка записи рядом с программой. --}}
-                        {{-- Справа — короткая сводка по курсу вместо формы:
-                             форма ехала за человеком и выглядела навязчиво,
-                             а пустая колонка смотрелась незаконченной. --}}
+                        {{-- Справа — снимок школы: карточка с такой же кнопкой,
+                             как в шапке, тут только дублировалась. --}}
                         <aside class="ab-cmod__aside">
-                            <div class="ab-cmod__sum">
-                                <span class="ab-cmod__sum-eyebrow">Коротко</span>
-
-                                @php
-                                    $sumHours = null;
-                                    $sumDur = $course['facts']['длительность']
-                                        ?? $course['facts']['продолжительность'] ?? $course['duration'] ?? null;
-                                    if ($sumDur) {
-                                        $dd = preg_match('/(\d+)\s*дн/ui', $sumDur, $m1) ? (int) $m1[1] : 1;
-                                        $hh = preg_match('/(\d+)\s*час/ui', $sumDur, $m2) ? (int) $m2[1] : null;
-                                        $sumHours = $hh ? $hh * $dd : null;
-                                    }
-
-                                    $sumRows = array_values(array_filter([
-                                        $sumDur ? ['Занятия', $sumDur] : null,
-                                        !empty($course['facts']['размер группы'])
-                                            ? ['Группа', $course['facts']['размер группы']] : null,
-                                        !empty($course['facts']['формат'])
-                                            ? ['Формат', $course['facts']['формат']] : null,
-                                        !empty($course['facts']['входной уровень'])
-                                            ? ['Входной уровень', $course['facts']['входной уровень']] : null,
-                                        !empty($course['facts']['для кого'])
-                                            ? ['Для кого', $course['facts']['для кого']] : null,
-                                        !empty($course['facts']['документ'])
-                                            ? ['Документ', $course['facts']['документ']] : null,
-                                    ]));
-                                @endphp
-
-                                @if ($sumHours)
-                                    <div class="ab-cmod__sum-hours">
-                                        <b>{{ $sumHours }}</b><i>часов практики и теории</i>
-                                    </div>
-                                @endif
-
-                                <dl class="ab-cmod__sum-list">
-                                    @foreach ($sumRows as $row)
-                                        <div>
-                                            <dt>{{ $row[0] }}</dt>
-                                            <dd>{{ is_array($row[1]) ? implode(', ', $row[1]) : $row[1] }}</dd>
-                                        </div>
-                                    @endforeach
-                                </dl>
-
-                                @if (!empty($course['groups']))
-                                    {{-- Ближайшие группы ведутся в CRM. --}}
-                                    <ul class="ab-cmod__sum-dates">
-                                        @foreach (array_slice($course['groups'], 0, 3) as $group)
-                                            <li>
-                                                <b>{{ \Illuminate\Support\Carbon::parse($group['date'])->locale('ru')->translatedFormat('j F') }}</b>
-                                                @if ($group['time']) <span>{{ $group['time'] }}</span> @endif
-                                                @if ($group['seats'] !== null) <i>{{ $group['seats'] ? 'мест: ' . $group['seats'] : 'мест нет' }}</i> @endif
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                @endif
-
-                                <button class="ab-btn ab-btn--primary ab-btn--block" type="button"
-                                        data-modal-path="consultation">Записаться на курс</button>
-
-                                <a class="ab-cmod__sum-phone" href="{{ config('nav.contacts.phone_href') }}">
-                                    {{ config('nav.contacts.phone') }}
-                                </a>
-                            </div>
+                            <figure class="ab-cmod__shot">
+                                <img src="{{ $course['photo'] }}" alt="{{ $course['title'] }}"
+                                     width="760" height="980" loading="lazy" decoding="async">
+                            </figure>
                         </aside>
 
                     </div>
