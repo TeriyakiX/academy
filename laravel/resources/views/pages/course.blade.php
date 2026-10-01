@@ -65,13 +65,6 @@
                     {{-- Карточка записи. --}}
                     <div class="ab-cpage__side">
                     <aside class="ab-cpage__buy">
-                        {{-- Снимок сверху карточки: так он читается как обложка,
-                             а не как заплатка между ценой и кнопкой. --}}
-                        <figure class="ab-cpage__buy-photo">
-                            <img src="{{ $course['photo'] }}" alt="Занятие в Академии Бариста"
-                                 width="760" height="420" loading="lazy" decoding="async">
-                        </figure>
-
                         <div class="ab-cpage__price">
                             @if (!empty($course['old_price']))
                                 <s>{{ number_format($course['old_price'], 0, ',', ' ') }} ₽</s>
