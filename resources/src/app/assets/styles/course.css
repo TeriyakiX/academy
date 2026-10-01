@@ -868,8 +868,8 @@
 /* ================= Границы между блоками =================
    Белым по белому блоки сливались: чередуем фон и добавляем
    волосок там, где два светлых блока всё же встречаются. */
-.ab-page--course .ab-cwhy      { background: var(--ab-white); }
-.ab-page--course .ab-cmod      { background: var(--ab-50, #f7f2ee); }
+.ab-page--course .ab-cmod      { background: var(--ab-white); }
+.ab-page--course .ab-cwhy      { background: var(--ab-50, #f7f2ee); }
 .ab-page--course .ab-team      { background: var(--ab-white); }
 .ab-page--course .ab-cdoc      { background: var(--ab-50, #f7f2ee); }
 .ab-page--course .ab-near      { background: var(--ab-white); }
