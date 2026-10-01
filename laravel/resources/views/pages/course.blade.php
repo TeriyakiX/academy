@@ -39,110 +39,9 @@
                         @endif
 
                         @php
-                            /*
-                             | Короткая строка фактов вместо пяти одинаковых плиток.
-                             | Порядок и подписи берём из методички курса как есть,
-                             | цену показываем только в карточке записи.
-                             */
-                            $facts = $course['facts'];
-                            $prices = (array) ($facts['стоимость'] ?? []);
-                            /* Документ показываем отдельной строкой. */
-                            $doc = $facts['документ'] ?? null;
+                            /* Цены за двоих и больше — в карточке записи. */
+                            $prices = (array) ($course['facts']['стоимость'] ?? []);
                         @endphp
-
-                        @php
-                            /*
-                             | Характеристики курса. Длительность и входной уровень
-                             | показываем наглядно: часы — крупной цифрой с полосками
-                             | по числу занятий, уровень — шкалой из трёх делений.
-                             | Остальное остаётся строками.
-                             */
-                            $durKey = collect(['длительность', 'продолжительность'])
-                                ->first(fn ($k) => !empty($facts[$k]));
-                            $duration = $durKey ? (string) $facts[$durKey] : null;
-
-                            $dayCount = 1;
-                            $hours = null;
-                            if ($duration) {
-                                if (preg_match('/(\d+)\s*дн/ui', $duration, $m)) {
-                                    $dayCount = (int) $m[1];
-                                }
-                                if (preg_match('/(\d+)\s*час/ui', $duration, $m)) {
-                                    $hours = (int) $m[1];
-                                }
-                            }
-                            $totalHours = $hours ? $hours * $dayCount : null;
-
-                            $levelKey = collect(array_keys($facts))
-                                ->first(fn ($k) => str_contains(mb_strtolower($k), 'уровень'));
-                            $level = $levelKey ? (string) $facts[$levelKey] : null;
-                            $levelStep = 1;
-                            if ($level) {
-                                $low = mb_strtolower($level);
-                                if (str_contains($low, 'опыт работы') || str_contains($low, 'практикующ')) {
-                                    $levelStep = 3;
-                                } elseif (str_contains($low, 'базов') || str_contains($low, 'после курса')
-                                    || str_contains($low, 'желател')) {
-                                    $levelStep = 2;
-                                }
-                            }
-
-                            $rest = collect($facts)
-                                ->except(array_filter(['стоимость', 'документ', $durKey, $levelKey]))
-                                ->filter(fn ($v) => !empty($v));
-                        @endphp
-
-                        {{-- Паспорт курса: слева кольцо с объёмом часов, оно
-                             прочерчивается при загрузке; справа — короткие
-                             строки, внизу документ. --}}
-                        <div class="ab-spec ab-reveal">
-                            @if ($totalHours)
-                                <div class="ab-spec__ring">
-                                    <svg viewBox="0 0 132 132" aria-hidden="true">
-                                        <circle class="ab-spec__track" cx="66" cy="66" r="58" />
-                                        <circle class="ab-spec__bar" cx="66" cy="66" r="58" />
-                                    </svg>
-                                    <div class="ab-spec__num">
-                                        <b>{{ $totalHours }}</b>
-                                        <i>{{ $totalHours % 10 === 1 && $totalHours % 100 !== 11 ? 'час' : 'часов' }}</i>
-                                    </div>
-                                </div>
-                            @endif
-
-                            <dl class="ab-spec__list">
-                                @if ($duration)
-                                    <div>
-                                        <dt>Занятия</dt>
-                                        <dd>{{ $duration }}</dd>
-                                    </div>
-                                @endif
-
-                                @if ($level)
-                                    <div>
-                                        <dt>{{ $levelKey }}</dt>
-                                        <dd>{{ $level }}</dd>
-                                    </div>
-                                @endif
-
-                                @foreach ($rest as $label => $value)
-                                    <div>
-                                        <dt>{{ $label }}</dt>
-                                        <dd>
-                                            @foreach ((array) $value as $line)
-                                                <span>{{ $line }}</span>
-                                            @endforeach
-                                        </dd>
-                                    </div>
-                                @endforeach
-                            </dl>
-
-                            @if ($doc)
-                                <p class="ab-spec__doc">
-                                    @include('partials.icons.fact', ['key' => 'документ'])
-                                    {{ is_array($doc) ? implode(', ', $doc) : $doc }}
-                                </p>
-                            @endif
-                        </div>
                     </div>
 
                     {{-- Карточка записи. --}}
@@ -306,6 +205,10 @@
                                             ? ['Группа', $course['facts']['размер группы']] : null,
                                         !empty($course['facts']['формат'])
                                             ? ['Формат', $course['facts']['формат']] : null,
+                                        !empty($course['facts']['входной уровень'])
+                                            ? ['Входной уровень', $course['facts']['входной уровень']] : null,
+                                        !empty($course['facts']['для кого'])
+                                            ? ['Для кого', $course['facts']['для кого']] : null,
                                         !empty($course['facts']['документ'])
                                             ? ['Документ', $course['facts']['документ']] : null,
                                     ]));
