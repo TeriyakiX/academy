@@ -38,6 +38,8 @@
                             <p class="ab-cpage__lead">{{ $course['lead'] }}</p>
                         @endif
 
+                        @include('partials.blocks.course-trust')
+
                         @php
                             /* Цены за двоих и больше — в карточке записи. */
                             $prices = (array) ($course['facts']['стоимость'] ?? []);
