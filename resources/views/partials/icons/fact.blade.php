@@ -16,6 +16,10 @@
         str_contains($key, 'сопровожд'), str_contains($key, 'поддержк') => 'chat',
         str_contains($key, 'автоматизац'), str_contains($key, 'систем') => 'monitor',
         str_contains($key, 'документ'), str_contains($key, 'свидетельств') => 'doc',
+        str_contains($key, 'унесёт'), str_contains($key, 'унесет'), str_contains($key, 'с собой') => 'gift',
+        str_contains($key, 'не входит') => 'info',
+        str_contains($key, 'как проходит'), str_contains($key, 'обучение') => 'route',
+        str_contains($key, 'что будет') => 'list',
         default => 'bean',
     };
 @endphp
@@ -65,6 +69,27 @@
         @case('doc')
             <path d="M6 3.5h7.5L19 9v11.5H6V3.5Z" />
             <path d="M13 3.5V9h6M9 13h6M9 16.5h4" />
+            @break
+
+        @case('gift')
+            <path d="M3.5 10.5h17V20a1.5 1.5 0 0 1-1.5 1.5H5A1.5 1.5 0 0 1 3.5 20v-9.5Z" />
+            <path d="M2.5 6.5h19v4h-19zM12 6.5v15" />
+            <path d="M12 6.5S10.6 2.5 8.4 2.5a2 2 0 0 0 0 4M12 6.5s1.4-4 3.6-4a2 2 0 0 1 0 4" />
+            @break
+
+        @case('info')
+            <circle cx="12" cy="12" r="8.5" />
+            <path d="M12 11v5.5M12 7.8v.4" />
+            @break
+
+        @case('route')
+            <circle cx="6" cy="6" r="2.5" />
+            <circle cx="18" cy="18" r="2.5" />
+            <path d="M8.5 6H14a3.5 3.5 0 0 1 0 7h-4a3.5 3.5 0 0 0 0 7h5.5" />
+            @break
+
+        @case('list')
+            <path d="M9 6.5h11M9 12h11M9 17.5h11M4.2 6.5h.01M4.2 12h.01M4.2 17.5h.01" />
             @break
 
         @default

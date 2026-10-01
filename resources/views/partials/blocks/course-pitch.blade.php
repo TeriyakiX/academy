@@ -9,8 +9,11 @@
 --}}
 @if ($pitch)
     @php
+        /* Первый ответ — не строка аккордеона, а вступление: его читают все,
+           и прятать его за раскрытием смысла нет. */
+        $why = $pitch['why'] ?? null;
+
         $rows = array_values(array_filter([
-            ['title' => 'Зачем этот курс',       'text' => $pitch['why'] ?? null],
             ['title' => 'Кому подойдёт',          'text' => $pitch['who'] ?? null],
             ['title' => 'Что будет на курсе',     'list' => $pitch['inside'] ?? null],
             ['title' => 'Что вы унесёте с собой', 'list' => $pitch['takeaways'] ?? null],
@@ -19,13 +22,26 @@
         ], fn ($row) => !empty($row['text']) || !empty($row['list'])));
     @endphp
 
-    @if ($rows)
+    @if ($why || $rows)
         <section class="ab-cwhy ab-reveal">
             <div class="ab-container">
+                <div class="ab-cwhy__grid">
+                    @if ($why)
+                        <div class="ab-cwhy__intro">
+                            <span class="ab-cwhy__eyebrow">Зачем этот курс</span>
+                            <p class="ab-cwhy__big">{{ $why }}</p>
+                        </div>
+                    @endif
+
                 <div class="ab-cwhy__list">
                     @foreach ($rows as $i => $row)
-                        <details class="ab-cwhy__item" @if ($i === 0) open @endif>
-                            <summary>{{ $row['title'] }}</summary>
+                        <details class="ab-cwhy__item">
+                            <summary>
+                                <span class="ab-cwhy__mark">
+                                    @include('partials.icons.fact', ['key' => $row['title']])
+                                </span>
+                                {{ $row['title'] }}
+                            </summary>
 
                             @if (!empty($row['text']))
                                 <p class="ab-cwhy__text">{{ $row['text'] }}</p>
@@ -38,6 +54,7 @@
                             @endif
                         </details>
                     @endforeach
+                </div>
                 </div>
             </div>
         </section>
