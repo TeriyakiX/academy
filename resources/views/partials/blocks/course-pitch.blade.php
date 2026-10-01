@@ -1,61 +1,54 @@
 @php $pitch = $course['pitch'] ?? null; @endphp
 
 {{--
-    «Зачем и кому» — раскрывающиеся строки после шапки.
+    Что за курс: вступление и карточки.
 
-    Содержимое приходит из методички курса: коротко о курсе, для кого,
-    что будет на занятиях, что участник уносит с собой, что не входит
-    в программу и как устроено обучение. Открыт только первый ответ.
+    Содержимое приходит из методички курса. Раньше это были строки-вопросы
+    с раскрытием («Кому подойдёт», «Что будет на курсе») — читалось как
+    анкета. Теперь вступление идёт текстом, остальное — карточками.
 --}}
 @if ($pitch)
     @php
-        /* Первый ответ — не строка аккордеона, а вступление: его читают все,
-           и прятать его за раскрытием смысла нет. */
         $why = $pitch['why'] ?? null;
 
-        $rows = array_values(array_filter([
-            ['title' => 'Кому подойдёт',          'text' => $pitch['who'] ?? null],
-            ['title' => 'Что будет на курсе',     'list' => $pitch['inside'] ?? null],
-            ['title' => 'Что вы унесёте с собой', 'list' => $pitch['takeaways'] ?? null],
-            ['title' => 'Что не входит в курс',   'text' => $pitch['limits'] ?? null],
-            ['title' => 'Как проходит обучение',  'list' => $pitch['how'] ?? null],
-        ], fn ($row) => !empty($row['text']) || !empty($row['list'])));
+        $cards = array_values(array_filter([
+            ['title' => 'Для кого',        'icon' => 'для кого',    'text' => $pitch['who'] ?? null],
+            ['title' => 'Что внутри',      'icon' => 'что будет',   'list' => $pitch['inside'] ?? null],
+            ['title' => 'С чем уйдёте',    'icon' => 'унесёт',      'list' => $pitch['takeaways'] ?? null],
+            ['title' => 'Как идёт занятие','icon' => 'как проходит','list' => $pitch['how'] ?? null],
+            ['title' => 'Чего не будет',   'icon' => 'не входит',   'text' => $pitch['limits'] ?? null],
+        ], fn ($card) => !empty($card['text']) || !empty($card['list'])));
     @endphp
 
-    @if ($why || $rows)
+    @if ($why || $cards)
         <section class="ab-cwhy ab-reveal">
             <div class="ab-container">
-                <div class="ab-cwhy__grid">
-                    @if ($why)
-                        <div class="ab-cwhy__intro">
-                            <span class="ab-cwhy__eyebrow">Зачем этот курс</span>
-                            <p class="ab-cwhy__big">{{ $why }}</p>
-                        </div>
-                    @endif
+                @if ($why)
+                    <p class="ab-cwhy__big">{{ $why }}</p>
+                @endif
 
-                <div class="ab-cwhy__list">
-                    @foreach ($rows as $i => $row)
-                        <details class="ab-cwhy__item">
-                            <summary>
+                @if ($cards)
+                    <div class="ab-cwhy__cards">
+                        @foreach ($cards as $card)
+                            <article class="ab-cwhy__card">
                                 <span class="ab-cwhy__mark">
-                                    @include('partials.icons.fact', ['key' => $row['title']])
+                                    @include('partials.icons.fact', ['key' => $card['icon']])
                                 </span>
-                                {{ $row['title'] }}
-                            </summary>
+                                <h3 class="ab-cwhy__card-title">{{ $card['title'] }}</h3>
 
-                            @if (!empty($row['text']))
-                                <p class="ab-cwhy__text">{{ $row['text'] }}</p>
-                            @else
-                                <ul class="ab-cwhy__points">
-                                    @foreach ($row['list'] as $item)
-                                        <li>{{ $item }}</li>
-                                    @endforeach
-                                </ul>
-                            @endif
-                        </details>
-                    @endforeach
-                </div>
-                </div>
+                                @if (!empty($card['text']))
+                                    <p class="ab-cwhy__text">{{ $card['text'] }}</p>
+                                @else
+                                    <ul class="ab-cwhy__points">
+                                        @foreach ($card['list'] as $item)
+                                            <li>{{ $item }}</li>
+                                        @endforeach
+                                    </ul>
+                                @endif
+                            </article>
+                        @endforeach
+                    </div>
+                @endif
             </div>
         </section>
     @endif
