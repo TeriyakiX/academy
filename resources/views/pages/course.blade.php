@@ -48,7 +48,7 @@
                                 $specs[] = [\Illuminate\Support\Str::ucfirst($key), $value, $key];
                             }
 
-                            $specs = array_slice($specs, 0, 6);
+                            $specs = array_slice($specs, 0, 8);
                         @endphp
 
                         @if ($specs)
@@ -318,9 +318,6 @@
                 </div>
             </section>
         @endif
-
-        {{-- ---------- Кому и зачем: после программы, как просил клиент ---------- --}}
-        @include('partials.blocks.course-pitch')
 
         {{-- ---------- Документ об обучении ---------- --}}
         @include('partials.blocks.course-diploma')
