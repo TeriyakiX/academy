@@ -1118,6 +1118,11 @@
 .ab-cpage__specs--left dt { font-size: 11px; font-weight: 700; letter-spacing: .06em;
     text-transform: uppercase; color: var(--ab-400); }
 .ab-cpage__specs--left dd { font-size: 15px; font-weight: 600; line-height: 1.4; color: var(--ab-dark); }
+/* Значок рядом с подписью: шесть характеристик подряд читались как
+   сплошной текст, со значками видно, где начинается следующая. */
+.ab-cpage__specs--left dt { display: flex; align-items: center; gap: 7px; }
+.ab-cpage__specs--left dt .ab-ficon { width: 16px; height: 16px; flex: none; fill: none;
+    stroke: var(--ab-600); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 
 /* Окно ответа: без рамки внутри рамки, с ровными полями. */
 .ab-cwhy__windows { display: grid; align-content: start; }
@@ -1158,11 +1163,12 @@ ul.ab-cpage__facts b { font-size: 16px; font-weight: 700; color: var(--ab-dark);
    свидетельство. Соседние секции не должны идти одним цветом. */
 .ab-page--course .ab-cpage__hero { background: var(--ab-50, #f7f2ee); }
 .ab-page--course .ab-cmod        { background: var(--ab-white); }
-.ab-page--course .ab-cwhy        { background: var(--ab-50, #f7f2ee); }
-.ab-page--course .ab-cdoc        { background: var(--ab-white); }
-.ab-page--course .ab-team        { background: var(--ab-50, #f7f2ee); }
-.ab-page--course .ab-near        { background: var(--ab-white); }
-.ab-page--course .ab-faq         { background: var(--ab-50, #f7f2ee); }
+.ab-page--course .ab-clearn      { background: var(--ab-50, #f7f2ee); }
+.ab-page--course .ab-cwhy        { background: var(--ab-white); }
+.ab-page--course .ab-cdoc        { background: var(--ab-50, #f7f2ee); }
+.ab-page--course .ab-team        { background: var(--ab-white); }
+.ab-page--course .ab-near        { background: var(--ab-50, #f7f2ee); }
+.ab-page--course .ab-faq         { background: var(--ab-white); }
 
 /* Окно ответа внутри кремовой секции — белое, с волоском по краю:
    белое по почти белому не читалось. */
@@ -1201,3 +1207,7 @@ ul.ab-cpage__facts b { font-size: 16px; font-weight: 700; color: var(--ab-dark);
 @media (prefers-reduced-motion: reduce) {
     .ab-page--course .ab-team__card:hover .ab-team__photo { transform: none; }
 }
+
+/* Снимок бланка подарочного сертификата вместо нарисованного документа. */
+.ab-cert__shot { display: block; width: 100%; height: auto; border-radius: 14px;
+    box-shadow: 0 22px 50px rgba(26, 26, 26, .14); }
