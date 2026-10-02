@@ -53,12 +53,12 @@
                 <div class="ab-card__foot">
                     <div class="ab-card__price">
                         <!-- Цена может быть ещё не назначена: тогда не придумываем сумму. -->
+                        <span v-if="course.old" class="ab-card__save">
+                            выгода {{ money(course.old - course.price) }}
+                        </span>
                         <span class="ab-card__price-row">
                             <strong>{{ course.price ? money(course.price) : 'Цена по запросу' }}</strong>
                             <s v-if="course.old">{{ money(course.old) }}</s>
-                            <span v-if="course.old" class="ab-card__save">
-                                −{{ money(course.old - course.price) }}
-                            </span>
                         </span>
                     </div>
 

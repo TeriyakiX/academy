@@ -9,16 +9,6 @@
                         {{ config('nav.contacts.phone') }}
                     </a>
 
-                    <ul class="ab-faq__socials">
-                        @foreach (config('nav.socials') as $social)
-                            <li>
-                                <a class="site-social" href="{{ $social['href'] }}"
-                                   target="_blank" rel="noopener" aria-label="{{ $social['title'] }}">
-                                    <svg class="site-icon"><use href="#i-{{ $social['icon'] }}"></use></svg>
-                                </a>
-                            </li>
-                        @endforeach
-                    </ul>
                 </div>
             </div>
 
