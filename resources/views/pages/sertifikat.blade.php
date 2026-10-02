@@ -32,9 +32,12 @@
                         </ul>
                     </div>
 
-                    {{-- Сертификат — бумажный документ, нарисованный вёрсткой. --}}
-                    <div class="ab-cert__media ab-cert__media--light" aria-hidden="true">
-                        @include('partials.certificate-paper')
+                    {{-- Бланк подарочного сертификата — тот, что школа выдаёт.
+                         Раньше здесь был документ, нарисованный вёрсткой. --}}
+                    <div class="ab-cert__media ab-cert__media--light">
+                        <img class="ab-cert__shot" src="/assets/gift-certificate.png"
+                             alt="Подарочный сертификат Академии Бариста"
+                             width="1779" height="1265" loading="lazy" decoding="async">
                     </div>
                 </div>
             </div>

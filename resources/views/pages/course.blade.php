@@ -32,20 +32,33 @@
                         {{-- Главное о курсе — в текстовой колонке, а не внизу карточки:
                              там его не замечали. --}}
                         @php
-                            $f = $course['facts'];
-                            $specs = array_values(array_filter([
-                                !empty($f['длительность']) ? ['Занятия', $f['длительность']] : null,
-                                !empty($f['формат']) ? ['Формат', $f['формат']] : null,
-                                !empty($f['размер группы']) ? ['Группа', $f['размер группы']] : null,
-                                !empty($f['документ']) ? ['Документ', $f['документ']] : null,
-                            ]));
+                            /* Характеристики берём как они записаны в методичках:
+                               у части программ это «длительность / формат», у других
+                               «продолжительность / время занятий / формат обучения».
+                               Жёсткий список ключей оставлял такие страницы без
+                               характеристик вовсе. Стоимость не показываем — она
+                               в карточке записи. Значок подбирается по подписи. */
+                            $specs = [];
+
+                            foreach (($course['facts'] ?? []) as $key => $value) {
+                                if ($key === 'стоимость' || empty($value)) {
+                                    continue;
+                                }
+
+                                $specs[] = [\Illuminate\Support\Str::ucfirst($key), $value, $key];
+                            }
+
+                            $specs = array_slice($specs, 0, 6);
                         @endphp
 
                         @if ($specs)
                             <dl class="ab-cpage__specs ab-cpage__specs--left">
                                 @foreach ($specs as $row)
                                     <div>
-                                        <dt>{{ $row[0] }}</dt>
+                                        <dt>
+                                            @include('partials.icons.fact', ['key' => $row[2]])
+                                            {{ $row[0] }}
+                                        </dt>
                                         <dd>{{ is_array($row[1]) ? implode(', ', $row[1]) : $row[1] }}</dd>
                                     </div>
                                 @endforeach
@@ -272,6 +285,39 @@
             </section>
         @endif
 
+
+        {{-- ---------- Чему научитесь ---------- --}}
+        @if (count($course['learn']))
+            {{-- Пронумерованный список вместо одинаковых карточек с галочками:
+                 видно, сколько всего навыков, и блок не повторяет остальные. --}}
+            <section class="ab-clearn ab-reveal">
+                <div class="ab-container">
+                    <div class="ab-clearn__head">
+                        <h2 class="ab-h2">Чему вы научитесь</h2>
+                        @php
+                            $n = count($course['learn']);
+                            $tail = $n % 10;
+                            $word = ($tail === 1 && $n % 100 !== 11) ? 'навык'
+                                : (($tail >= 2 && $tail <= 4 && ($n % 100 < 10 || $n % 100 >= 20)) ? 'навыка' : 'навыков');
+                        @endphp
+                        <p class="ab-clearn__lead">
+                            {{ $n }} {{ $word }},
+                            которые останутся с вами после {{ $isClass ? 'мастер-класса' : 'курса' }}.
+                            Всё отрабатывается руками на занятии.
+                        </p>
+                    </div>
+
+                    <ul class="ab-clearn__list">
+                        @foreach ($course['learn'] as $i => $item)
+                            <li>
+                                <b class="ab-clearn__n">{{ str_pad((string) ($i + 1), 2, '0', STR_PAD_LEFT) }}</b>
+                                <span>{{ $item }}</span>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </section>
+        @endif
 
         {{-- ---------- Кому и зачем: после программы, как просил клиент ---------- --}}
         @include('partials.blocks.course-pitch')
