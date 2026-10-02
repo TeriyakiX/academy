@@ -1163,9 +1163,10 @@ ul.ab-cpage__facts b { font-size: 16px; font-weight: 700; color: var(--ab-dark);
 .ab-page--course .ab-cpage__hero { background: var(--ab-50, #f7f2ee); }
 .ab-page--course .ab-cmod        { background: var(--ab-white); }
 .ab-page--course .ab-cwhy        { background: var(--ab-50, #f7f2ee); }
-.ab-page--course .ab-team        { background: var(--ab-white); }
-.ab-page--course .ab-cdoc        { background: var(--ab-50, #f7f2ee); }
-.ab-page--course .ab-faq         { background: var(--ab-white); }
+.ab-page--course .ab-cdoc        { background: var(--ab-white); }
+.ab-page--course .ab-team        { background: var(--ab-50, #f7f2ee); }
+.ab-page--course .ab-near        { background: var(--ab-white); }
+.ab-page--course .ab-faq         { background: var(--ab-50, #f7f2ee); }
 
 /* Окно ответа внутри кремовой секции — белое, с волоском по краю:
    белое по почти белому не читалось. */
