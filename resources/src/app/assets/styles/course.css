@@ -141,27 +141,44 @@
 .ab-cpage__buy-phone span { display: block; font-size: 12px; font-weight: 400; color: var(--ab-400); }
 
 /* ---- чему научитесь ----
-   Было восемь одинаковых плиток с галочками: они повторяли карточки
-   из соседних блоков и не показывали объём. Теперь нумерованный
-   список строками с тонкими разделителями. */
+   Сначала были одинаковые плитки с галочками, потом строки списком —
+   строки читались как опись. Теперь карточки с номером в кружке:
+   видно объём, и блок не похож на соседние. */
 .ab-clearn { padding: 72px 0; }
 .ab-clearn__head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 460px);
     gap: 24px 48px; align-items: end; }
 .ab-clearn__head .ab-h2 { margin-bottom: 0; }
 .ab-clearn__lead { margin: 0; font-size: 15px; line-height: 1.6; color: var(--ab-500); }
 
-.ab-clearn__list { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-    gap: 0 56px; margin: 28px 0 0; padding: 0; list-style: none; }
-.ab-clearn__list li { display: grid; grid-template-columns: 42px minmax(0, 1fr); align-items: baseline;
-    gap: 14px; padding: 18px 0; border-top: 1px solid var(--ab-100);
-    font-size: 15px; line-height: 1.55; color: var(--ab-dark); }
-.ab-clearn__n { font-family: var(--ab-font-display); font-size: 20px; font-weight: 800; color: var(--ab-600); }
+.ab-clearn__list { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 14px; margin: 28px 0 0; padding: 0; list-style: none; }
+.ab-clearn__list li { display: grid; grid-template-columns: 38px minmax(0, 1fr); align-items: start;
+    gap: 14px; padding: 18px 20px; border: 1px solid var(--ab-100); border-radius: 16px;
+    background: var(--ab-white); font-size: 15px; line-height: 1.5; color: var(--ab-dark);
+    transition: transform var(--ab-transition), box-shadow var(--ab-transition),
+        border-color var(--ab-transition); }
+.ab-clearn__list li:hover { transform: translateY(-3px); border-color: var(--ab-200, #e2d8cf);
+    box-shadow: 0 14px 30px rgba(26, 26, 26, .08); }
+
+/* Номер в кружке: нумерация показывает объём, а кружок держит строку. */
+.ab-clearn__n { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%;
+    background: var(--ab-50, #f7f2ee); font-family: var(--ab-font-display); font-size: 15px;
+    font-weight: 800; color: var(--ab-600); }
+.ab-clearn__list li:hover .ab-clearn__n { background: var(--ab-600); color: #fff; }
+
+@media (prefers-reduced-motion: reduce) {
+    .ab-clearn__list li:hover { transform: none; }
+}
 
 @media (max-width: 760px) {
     .ab-clearn { padding: 44px 0; }
     .ab-clearn__head { grid-template-columns: minmax(0, 1fr); gap: 10px; align-items: start; }
-    .ab-clearn__list li { grid-template-columns: 34px minmax(0, 1fr); gap: 10px; padding: 15px 0; font-size: 14px; }
-    .ab-clearn__n { font-size: 17px; }
+    /* Колонка была минимум 340px при контейнере 335 — строки не влезали
+       и текст обрезался справа. На телефоне карточки в одну колонку. */
+    .ab-clearn__list { grid-template-columns: minmax(0, 1fr); gap: 10px; margin-top: 20px; }
+    .ab-clearn__list li { grid-template-columns: 32px minmax(0, 1fr); gap: 12px;
+        padding: 14px 16px; font-size: 14px; }
+    .ab-clearn__n { width: 32px; height: 32px; font-size: 14px; }
 }
 
 /* ================= Для бизнеса ================= */
