@@ -31,7 +31,10 @@
 .ab-cpage__main { position: relative; z-index: 1; padding-top: 10px; }
 
 .ab-cpage__side { position: relative; }
-.ab-cpage__side .ab-cpage__buy { position: relative; z-index: 1; }
+/* sticky, а не relative: иначе карточка стояла на месте даже с
+   position: sticky ниже — это правило перебивало его. */
+.ab-cpage__side .ab-cpage__buy { position: sticky; top: 20px; z-index: 1; }
+@media (max-width: 1000px) { .ab-cpage__side .ab-cpage__buy { position: static; } }
 
 
 .ab-cpage__tag { display: inline-block; align-self: flex-start; margin-bottom: 14px; padding: 7px 14px;
@@ -688,18 +691,13 @@
     .ab-cdoc__meta { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
 }
 
-/* «Что в свидетельстве» — раскрывающаяся строка */
-.ab-cdoc__more { margin-bottom: 18px; border-top: 1px solid var(--ab-100);
+/* «Что в свидетельстве» — обычный блок между волосками: раскрывающимся
+   он сдвигал реквизиты под собой, и блок дёргался. */
+.ab-cdoc__more { margin-bottom: 18px; padding: 14px 0; border-top: 1px solid var(--ab-100);
     border-bottom: 1px solid var(--ab-100); }
-.ab-cdoc__more > summary { position: relative; padding: 14px 34px 14px 0; list-style: none;
-    cursor: pointer; font-size: 14px; font-weight: 800; color: var(--ab-dark); }
-.ab-cdoc__more > summary::-webkit-details-marker { display: none; }
-.ab-cdoc__more > summary::after { content: ''; position: absolute; right: 6px; top: 18px;
-    width: 8px; height: 8px; border-right: 2px solid var(--ab-500); border-bottom: 2px solid var(--ab-500);
-    transform: rotate(45deg); transition: transform var(--ab-transition); }
-.ab-cdoc__more[open] > summary::after { top: 22px; transform: rotate(-135deg); }
-.ab-cdoc__more > summary:hover { color: var(--ab-600); }
-.ab-cdoc__more .ab-cdoc__list { margin-bottom: 16px; }
+.ab-cdoc__more-title { display: block; margin-bottom: 12px; font-size: 14px; font-weight: 800;
+    color: var(--ab-dark); }
+.ab-cdoc__more .ab-cdoc__list { margin-bottom: 0; }
 
 /* Примечание к занятию: границы программы, оговорки тренера. */
 .ab-cmod__day-note { max-width: 760px; margin: 0 0 18px; padding-left: 14px;
@@ -1159,52 +1157,50 @@ ul.ab-cpage__facts span { font-size: 12px; font-weight: 500; letter-spacing: 0;
     text-transform: none; color: var(--ab-400); }
 ul.ab-cpage__facts b { font-size: 16px; font-weight: 700; color: var(--ab-dark); }
 
-/* ================= Форма записи в шапке =================
-   Та же форма, что на главной: класс .ab-hero__form задаёт рамку,
-   поля и кнопку, здесь добавлены стоимость и прокрутка. */
-.ab-cpage__form { position: sticky; top: 24px; }
-@media (max-width: 1000px) { .ab-cpage__form { position: static; } }
-
-/* Стоимость одной строкой: цена, рядом зачёркнутая старая. */
-.ab-cpage__form-price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px;
-    margin: 0 0 14px; padding-bottom: 14px; border-bottom: 1px solid var(--ab-100, #efe7df); }
-.ab-cpage__form-price span { width: 100%; font-size: 11px; font-weight: 700; letter-spacing: .08em;
-    text-transform: uppercase; color: var(--ab-400); }
-.ab-cpage__form-price strong { font-family: var(--ab-font-display); font-size: 32px; font-weight: 800;
-    line-height: 1; color: var(--ab-dark); }
-.ab-cpage__form-price s { font-size: 15px; color: var(--ab-300, #c9b8aa); }
-
-/* Цены для компании — мелкой строкой под ценой. */
-.ab-cpage__form-group { margin: -6px 0 14px; }
-.ab-cpage__form-group div { display: flex; align-items: baseline; gap: 10px; }
-.ab-cpage__form-group dt { font-size: 13px; color: var(--ab-500); }
-.ab-cpage__form-group dd { margin: 0 0 0 auto; font-size: 13px; font-weight: 700; color: var(--ab-dark); }
-
-/* ================= Преподаватели на странице курса =================
-   Размер карточек прежний, но снимки у школы квадратные (327×332):
-   в рамке 4/5 они растягивались и обрезали головы. Берём кадр как он
-   есть, карточки равной высоты, плашки навыков прижаты к низу. */
-.ab-page--course .ab-team__grid { align-items: stretch; }
-.ab-page--course .ab-team__card { height: 100%; }
-.ab-page--course .ab-team__photo { aspect-ratio: 1 / 1; max-height: none;
-    object-position: center top; }
-.ab-page--course .ab-team__body { display: flex; flex-direction: column; gap: 6px;
-    padding: 16px 18px 18px; }
-.ab-page--course .ab-team__name { font-size: 18px; }
-.ab-page--course .ab-team__role { font-size: 13px; }
-.ab-page--course .ab-team__skills { margin-top: auto; padding-top: 10px; gap: 6px; }
-.ab-page--course .ab-team__skills li { padding: 5px 9px; font-size: 11px; }
-
 /* ================= Чередование фонов =================
-   Соседние секции шли одним цветом и сливались в одно полотно:
-   шапка и «Зачем этот курс» кремовые, программа и преподаватели
-   белые. Теперь цвет строго через один, а окно ответа внутри
-   кремовой секции — белое, внутри белой — кремовое. */
+   Порядок блоков: шапка, программа, кому и зачем, преподаватели,
+   свидетельство. Соседние секции не должны идти одним цветом. */
 .ab-page--course .ab-cpage__hero { background: var(--ab-50, #f7f2ee); }
-.ab-page--course .ab-cwhy        { background: var(--ab-white); }
-.ab-page--course .ab-cmod        { background: var(--ab-50, #f7f2ee); }
+.ab-page--course .ab-cmod        { background: var(--ab-white); }
+.ab-page--course .ab-cwhy        { background: var(--ab-50, #f7f2ee); }
 .ab-page--course .ab-team        { background: var(--ab-white); }
 .ab-page--course .ab-cdoc        { background: var(--ab-50, #f7f2ee); }
-.ab-page--course .ab-near        { background: var(--ab-white); }
+.ab-page--course .ab-faq         { background: var(--ab-white); }
 
-.ab-page--course .ab-cwhy__windows { background: var(--ab-50, #f7f2ee); }
+/* Окно ответа внутри кремовой секции — белое, с волоском по краю:
+   белое по почти белому не читалось. */
+.ab-page--course .ab-cwhy__windows { min-height: 0; align-self: start;
+    background: var(--ab-white); border: 1px solid var(--ab-100, #efe7df);
+    box-shadow: 0 18px 40px rgba(26, 26, 26, .10); }
+
+/* ================= Преподаватели на странице курса =================
+   Кадр во всю карточку, имя, роль и навыки — поверх снимка на
+   затемнении. Раньше это были три узких колонки с серым студийным
+   фоном и подписями в столбик: блок читался как таблица. */
+.ab-page--course .ab-team__grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    max-width: 1100px; margin-inline: auto; gap: 20px; }
+
+.ab-page--course .ab-team__card { position: relative; display: block; overflow: hidden; }
+
+/* Снимки у школы квадратные (327×332): в рамке 4/5 их растягивало и
+   срезало головы — берём кадр как есть. */
+.ab-page--course .ab-team__photo { display: block; width: 100%; aspect-ratio: 1 / 1;
+    max-height: none; object-fit: cover; object-position: center top;
+    transition: transform .5s ease; }
+.ab-page--course .ab-team__card:hover .ab-team__photo { transform: scale(1.04); }
+
+.ab-page--course .ab-team__body { position: absolute; inset: auto 0 0 0;
+    display: grid; align-content: end; gap: 6px; padding: 70px 18px 18px;
+    background: linear-gradient(to top, rgba(18, 16, 15, .94) 14%, rgba(18, 16, 15, .6) 52%, transparent); }
+.ab-page--course .ab-team__name { font-size: 19px; color: #fff; }
+.ab-page--course .ab-team__role { font-size: 13px; line-height: 1.4; color: rgba(255, 255, 255, .7); }
+.ab-page--course .ab-team__exp { font-size: 13px; color: #e9e0d6; }
+
+/* Навыки плашками по рамке: на снимке сплошная подложка выглядела грязно. */
+.ab-page--course .ab-team__skills { gap: 6px; margin-top: 4px; }
+.ab-page--course .ab-team__skills li { padding: 5px 10px; font-size: 11px; color: #e9e0d6;
+    border: 1px solid rgba(255, 255, 255, .22); background: rgba(255, 255, 255, .06); }
+
+@media (prefers-reduced-motion: reduce) {
+    .ab-page--course .ab-team__card:hover .ab-team__photo { transform: none; }
+}

@@ -75,12 +75,12 @@
 .ab-card__foot { display: flex; align-items: center; justify-content: space-between; gap: 14px;
     padding-top: 16px; border-top: 1px solid var(--ab-100); }
 
-/* Цена в одну строку: плашка «выгода» над ценой делала подвал
-   выше у одних карточек и ниже у других. */
 .ab-card__price { display: grid; gap: 2px; }
-.ab-card__save { font-size: 11px; font-weight: 700; letter-spacing: .04em;
-    text-transform: uppercase; color: var(--ab-600); }
-.ab-card__price-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; }
+/* Выгода плашкой над ценой: так её видно, мелкой строкой рядом с ценой
+   она терялась. Высоту подвала держит min-height у заголовка карточки. */
+.ab-card__save { justify-self: start; padding: 3px 8px; border-radius: 999px;
+    background: var(--ab-50); font-size: 11px; font-weight: 700; color: var(--ab-600); }
+.ab-card__price-row { display: flex; align-items: baseline; gap: 8px; }
 .ab-card__price-row strong { font-family: var(--ab-font-display); font-size: 23px; font-weight: 800;
     line-height: 1.1; }
 .ab-card__price-row s { font-size: 13px; color: var(--ab-300); }
@@ -511,6 +511,10 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
     font: inherit; font-size: 15px; }
 .ab-hero__field input:focus,
 .ab-hero__field select:focus { outline: 2px solid var(--ab-600); outline-offset: 1px; border-color: transparent; }
+/* Выпадающий список — как в каталоге: своя галочка вместо системной. */
+.ab-hero__field select { padding-right: 40px; appearance: none; cursor: pointer;
+    background-image: var(--ab-chevron); background-repeat: no-repeat;
+    background-position: right 14px center; background-size: 16px 16px; }
 
 /* Позвонить самому — вариант не хуже заявки, номер должен быть под рукой. */
 .ab-hero__form-phone { display: flex; align-items: baseline; justify-content: center; gap: 8px;

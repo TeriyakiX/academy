@@ -52,10 +52,6 @@
                             </dl>
                         @endif
 
-
-
-                        @include('partials.blocks.course-trust')
-
                         @php
                             /* Цены за двоих и больше — в карточке записи. */
                             $prices = (array) ($course['facts']['стоимость'] ?? []);
@@ -63,93 +59,58 @@
                     </div>
 
                     @php
-                        /* Мастер-класс — не курс: и в заголовке формы, и в кнопке. */
+                        /* Мастер-класс — не курс: и в кнопке, и в заголовке формы. */
                         $isClass = ($course['school'] ?? '') === 'Мастер-классы';
                     @endphp
 
-                    {{-- Справа — та же форма заявки, что на главной: плашка
-                         с обещанием, заголовок, стоимость, два поля и кнопка.
-                         Цена осталась в блоке: без неё до стоимости надо было
-                         листать всю страницу. --}}
+                    {{-- Карточка записи: цена, цены для группы, что входит,
+                         кнопка и телефон. Заполнять ничего не надо — форма
+                         стоит ниже, у программы. --}}
                     <div class="ab-cpage__side">
-                        <form class="ab-hero__form ab-cpage__form" method="post" action="/lead">
-                            @csrf
-                            @include('partials.form-guard')
+                        <aside class="ab-cpage__buy">
+                            <div class="ab-cpage__price">
+                                @if (!empty($course['old_price']))
+                                    <s>{{ number_format($course['old_price'], 0, ',', ' ') }} ₽</s>
+                                @endif
 
-                            <input type="hidden" name="source" value="Шапка курса">
-                            <input type="hidden" name="page" value="{{ request()->getPathInfo() }}">
-                            <input type="hidden" name="courses" value="{{ $course['title'] }}">
-
-                            <span class="ab-hero__form-badge">Ответим в течение рабочего дня</span>
-
-                            <b class="ab-hero__form-title">
-                                Записаться на {{ $isClass ? 'мастер-класс' : 'курс' }} «{{ $course['title'] }}»
-                            </b>
-
-                            <div class="ab-cpage__form-price">
                                 @if (!empty($course['price']))
-                                    <span>Стоимость</span>
                                     <strong>{{ number_format($course['price'], 0, ',', ' ') }} ₽</strong>
-
-                                    @if (!empty($course['old_price']))
-                                        <s>{{ number_format($course['old_price'], 0, ',', ' ') }} ₽</s>
-                                    @endif
                                 @else
                                     {{-- Цена ещё не назначена: обещать сумму нельзя. --}}
-                                    <span>Стоимость</span>
-                                    <strong class="ab-cpage__price--ask">по запросу</strong>
+                                    <strong class="ab-cpage__price--ask">Цена по запросу</strong>
                                 @endif
                             </div>
 
                             @if (count($prices) > 1)
-                                <dl class="ab-cpage__form-group">
+                                <div class="ab-cpage__more">
+                                    <span class="ab-cpage__more-title">цены для группы</span>
                                     @foreach (array_slice($prices, 1) as $line)
-                                        @php $parts = preg_split('/\s+—\s+/u', $line, 2); @endphp
-                                        <div>
-                                            <dt>{{ $parts[0] }}</dt>
-                                            <dd>{{ $parts[1] ?? '' }}</dd>
-                                        </div>
+                                        <b>{{ $line }}</b>
                                     @endforeach
-                                </dl>
+                                </div>
                             @endif
 
-                            <p class="ab-hero__form-note">
-                                Оставьте номер — перезвоним, расскажем про даты, места и стоимость.
-                            </p>
+                            <ul class="ab-cpage__buy-list">
+                                <li>Обучение по образовательной лицензии</li>
+                                <li>Практика на профессиональном оборудовании</li>
+                                <li>{{ $course['facts']['документ'] ?? 'Документ об обучении' }}</li>
+                            </ul>
 
-                            <label class="ab-hero__field">
-                                <span>Как вас зовут</span>
-                                <input type="text" name="name" placeholder="Имя" required autocomplete="name">
-                            </label>
-
-                            <label class="ab-hero__field">
-                                <span>Телефон</span>
-                                <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required autocomplete="tel">
-                            </label>
-
-                            <button class="ab-btn ab-btn--primary ab-btn--block ab-btn--lg" type="submit">
+                            <button class="ab-btn ab-btn--primary ab-btn--block ab-btn--lg"
+                                    type="button" data-modal-path="consultation">
                                 Записаться на {{ $isClass ? 'мастер-класс' : 'курс' }}
                             </button>
 
-                            {{-- Кому удобнее позвонить самому — пусть звонит. --}}
-                            <a class="ab-hero__form-phone" href="{{ config('nav.contacts.phone_href') }}">
+                            <a class="ab-cpage__buy-phone" href="{{ config('nav.contacts.phone_href') }}">
                                 {{ config('nav.contacts.phone') }}
-                                <i>{{ config('nav.contacts.hours') }}</i>
+                                <span>{{ config('nav.contacts.hours') }}</span>
                             </a>
-
-                            <p class="ab-hero__form-legal">
-                                Нажимая кнопку, вы соглашаетесь с
-                                <a href="/privacy-policy.html">политикой конфиденциальности</a>
-                            </p>
-                        </form>
+                        </aside>
                     </div>
                 </div>
             </div>
         </section>
 
-
-        {{-- ---------- О курсе: зачем, кому и что внутри ---------- --}}
-        @include('partials.blocks.course-pitch')
 
         {{-- ---------- Программа курса ----------
              Слева — темы по дням: в каждом дне теория и практика.
@@ -237,11 +198,12 @@
                                     </li>
                                 @endforeach
                             </ol>
+
                         </div>
 
                         {{-- Форма записи рядом с программой: так её и просил
                              клиент — снимок, часы с ценой, два поля и кнопка. --}}
-<aside class="ab-cmod__aside">
+                        <aside class="ab-cmod__aside">
                             <form class="ab-cmod__card" method="post" action="/lead">
                                 @csrf
                                 @include('partials.form-guard')
@@ -304,11 +266,15 @@
                             </form>
                         </aside>
 
+
                     </div>
                 </div>
             </section>
         @endif
 
+
+        {{-- ---------- Кому и зачем: после программы, как просил клиент ---------- --}}
+        @include('partials.blocks.course-pitch')
 
         {{-- ---------- Преподаватели ---------- --}}
         @include('partials.blocks.teachers')
@@ -316,13 +282,9 @@
         {{-- ---------- Документ об обучении ---------- --}}
         @include('partials.blocks.course-diploma')
 
-        {{-- ---------- Соседние программы ----------
-             Вместо вкладок со всем каталогом: человек уже выбрал
-             направление, ему нужнее ближайшие программы. --}}
-        @include('partials.blocks.course-related')
+        {{-- ---------- Ответы на вопросы ---------- --}}
+        @include('partials.blocks.faq')
 
-        {{-- ---------- Заявка ---------- --}}
-        @include('partials.blocks.lead')
     </main>
 
     @include('partials.site.footer')
