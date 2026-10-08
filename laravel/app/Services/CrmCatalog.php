@@ -36,6 +36,16 @@ class CrmCatalog
         }
     }
 
+    /*
+     | Блоки, которые ведём в файлах сайта, а не в CRM.
+     |
+     | «Чем занимается школа» — это структура сайта: направления появляются
+     | вместе со страницами. Когда блок шёл из CRM, новое направление надо
+     | было заводить дважды, и правка в файле на боевом просто не появлялась.
+     | Тексты, которые школа правит сама (например home.faq), остаются в CRM.
+     */
+    private const OWN_BLOCKS = ['home.lines'];
+
     /**
      * Тексты главной и скидки. Ключ блока в CRM совпадает с ключом
      * настройки на сайте: home.faq → config('home.faq').
@@ -45,6 +55,10 @@ class CrmCatalog
         $blocks = $this->crm->cached('blocks')['blocks'] ?? [];
 
         foreach ($blocks as $key => $value) {
+            if (in_array($key, self::OWN_BLOCKS, true)) {
+                continue;
+            }
+
             if (is_array($value) && preg_match('/^(home|courses)\.[a-z_]+$/', $key)) {
                 config([$key => $value]);
             }

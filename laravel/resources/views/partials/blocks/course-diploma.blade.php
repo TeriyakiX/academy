@@ -1,13 +1,6 @@
 @php
     $doc = config('documents');
     $lic = $doc['items'][0] ?? [];
-    /* Показываем свойства свидетельства, кроме тех, что ещё в разработке. */
-    $details = collect($doc['details']['items'] ?? [])->reject(fn ($i) => !empty($i['demo']))->values();
-
-    /* Мастер-класс — не программа повышения квалификации: разряд по нему
-       не присваивают, поэтому этот пункт показывать нельзя. */
-    $details = $details->reject(fn ($i) => ($course['school'] ?? '') === 'Мастер-классы'
-        && str_contains(mb_strtolower($i['title']), 'квалификац'))->values();
 
     /*
      | Документ зависит от программы.
@@ -71,23 +64,9 @@
                 <h2 class="ab-h2">{{ $heading }}</h2>
                 <p class="ab-cdoc__lead">{{ $lead }}</p>
 
-                {{-- Раскрывающийся список убран: при раскрытии реквизиты под
-                     ним съезжали вниз и блок прыгал. Пунктов два, они короткие —
-                     показываем сразу. --}}
-                <div class="ab-cdoc__more">
-                    <b class="ab-cdoc__more-title">
-                        {{ $isClass ? 'Что это за документ' : 'Что в свидетельстве по образовательной лицензии' }}
-                    </b>
-
-                    <ul class="ab-cdoc__list">
-                        @foreach ($details as $item)
-                            <li>
-                                <b>{{ $item['title'] }}</b>
-                                <span>{{ $item['text'] }}</span>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
+                {{-- Список «что в свидетельстве» снят по просьбе школы
+                     (октябрь 2026): про квалификацию и бланк на странице
+                     курса больше не пишем. --}}
 
                 @if (!empty($lic['meta']))
                     <dl class="ab-cdoc__meta">
