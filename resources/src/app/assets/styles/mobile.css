@@ -723,7 +723,10 @@
     .ab-lines__card { padding: 12px; }
     .ab-lines__text { display: none; }
     .ab-lines__title { font-size: 15px; line-height: 1.2; }
-    .ab-lines__foot { margin-top: 10px; padding-top: 10px; }
+    /* margin-top: auto прижимает «Перейти» к низу карточки — иначе
+       у плитки с заголовком в две строки ссылка съезжает ниже
+       соседней и ряд выглядит кривым. */
+    .ab-lines__foot { margin-top: auto; padding-top: 10px; }
     .ab-lines__foot i { display: none; }
 
     /* Нижняя карточка на всю строку: в ней место есть — оставляем описание. */
