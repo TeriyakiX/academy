@@ -53,9 +53,12 @@
                     <fieldset class="ab-lead-form__levels">
                         <legend class="ab-lead-form__label">С чего начнём</legend>
 
-                        @foreach ($levels as $i => $level)
+                        @foreach ($levels as $level)
                             <label class="ab-lead-form__chip">
-                                <input type="radio" name="comment" value="{{ $level }}" @checked($i === 0)>
+                                {{-- Ничего не отмечено заранее: на телефоне
+                                     выбор уровня скрыт, и отмеченный пункт
+                                     уходил бы в заявку за человека. --}}
+                                <input type="radio" name="comment" value="{{ $level }}">
                                 <span>{{ $level }}</span>
                             </label>
                         @endforeach

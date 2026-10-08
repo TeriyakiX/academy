@@ -32,6 +32,9 @@
 
                 <div class="ab-cpage__split">
                     <div>
+                        {{-- Плашка над заголовком — как на странице курса
+                             и на странице услуги: начало страницы одинаковое. --}}
+                        <span class="ab-cpage__tag">{{ $catalog['school'] ?? 'Каталог программ' }}</span>
                         <h1 class="ab-cpage__title">{{ $catalog['h1'] }}</h1>
                         <p class="ab-cpage__lead">{{ $catalog['lead'] }}</p>
 
@@ -40,7 +43,11 @@
                             @if ($from)
                                 <li><b>от {{ number_format($from, 0, ',', ' ') }} ₽</b><span>за обучение</span></li>
                             @endif
-                            <li><b>{{ count($catalog['schools']) }}</b><span>{{ count($catalog['schools']) === 1 ? 'направление' : 'направления' }}</span></li>
+                            {{-- «1 направление» на странице одного направления
+                                 ничего не сообщает — показываем только в общем каталоге. --}}
+                            @if (count($catalog['schools']) > 1)
+                                <li><b>{{ count($catalog['schools']) }}</b><span>направления</span></li>
+                            @endif
                             <li><b>очно</b><span>в Москве, малые группы</span></li>
                         </ul>
                     </div>

@@ -5,7 +5,7 @@
             <div class="site-footer__brand">
                 <a class="site-footer__logo" href="/"><img src="/assets/logo.svg" alt="Академия Бариста" width="64" height="64" loading="lazy"></a>
                 <p class="site-footer__tagline">
-                    Профессиональное обучение бариста, барменов и управляющих кофеен в Москве.
+                    Профессиональное обучение бариста и управляющих кофейнями в Москве.
                     Работаем по образовательной лицензии.
                 </p>
                 <ul class="site-footer__socials">

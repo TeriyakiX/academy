@@ -28,7 +28,6 @@ return [
         // Списки программ подставляются из каталога: App\Support\Navigation.
         ['title' => 'Курсы бариста', 'href' => '/courses.html', 'school' => 'Курсы бариста'],
         ['title' => 'Мастер-классы', 'href' => '/courses/master-class.html', 'school' => 'Мастер-классы'],
-        ['title' => 'Барное дело',   'href' => '/courses/barnoe-delo.html', 'school' => 'Барное дело'],
         ['title' => 'Собрать свой курс', 'href' => '/constructor.html'],
         ['title' => 'Для бизнеса',       'href' => '/busines.html', 'accent' => true],
         ['title' => 'Сервис',            'href' => '/service.html'],
@@ -58,7 +57,6 @@ return [
         // Те же списки, что и в шапке: собираются из каталога.
         'Курсы бариста' => 'Курсы бариста',
         'Мастер-классы' => 'Мастер-классы',
-        'Барное дело'   => 'Барное дело',
     ],
 
     'legal' => [

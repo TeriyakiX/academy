@@ -22,8 +22,15 @@
     <main class="ab-page">
         @include('partials.blocks.about', ['asTitle' => true])
         @include('partials.blocks.reasons')
+
+        {{-- Блоки ниже предложены заказчиком (октябрь 2026): как устроено
+             занятие, кто учит, на чём работаем, куда можно расти. --}}
+        @include('partials.blocks.about-process')
         @include('partials.blocks.teachers')
-        @include('partials.blocks.partners')
+        @include('partials.blocks.partners', ['withRoles' => true])
+        @include('partials.blocks.about-profession')
+        @include('partials.blocks.faq')
+        @include('partials.blocks.contacts')
 
         @include('partials.blocks.lead', [
             'title' => 'Остались вопросы о школе?',

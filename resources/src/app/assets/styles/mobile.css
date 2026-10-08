@@ -517,18 +517,40 @@
     .ab-cert__media--light { margin-bottom: 4px; }
 }
 
-/* Совсем узкие экраны: по две плитки уже не помещаются. */
+/* Совсем узкие экраны. Цифры оставляем по две в ряд и на них:
+   столбцом из четырёх плиток блок вырастал почти на экран. */
 @media (max-width: 360px) {
-    .ab-stats__list,
     .ab-buscta__list { grid-template-columns: minmax(0, 1fr); }
 }
 
 /*
- | Услуги для бизнеса на телефоне — обычным списком, а не лентой
- | с прокруткой: услуг восемь, листать их вбок неудобно.
+ | Услуги для бизнеса листаются вбок, как карточки курсов: столбцом
+ | девять карточек с фото — это шесть экранов прокрутки.
  */
 @media (max-width: 760px) {
-    .ab-bus__grid { grid-template-columns: 1fr; gap: 14px; }
+    .ab-bus__grid {
+        display: flex;
+        grid-template-columns: none;
+        min-width: 0;
+        gap: 14px;
+        margin-inline: 0;
+        padding: 2px 0 10px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        overscroll-behavior-x: contain;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .ab-bus__grid::-webkit-scrollbar { display: none; }
+
+    .ab-bus__grid > * {
+        flex: 0 0 100%;
+        min-width: 0;
+        box-sizing: border-box;
+        scroll-snap-align: center;
+    }
+
     .ab-bus__media img { height: 150px; }
     .ab-bus__body { padding: 18px; }
     .ab-bus__title { font-size: 16px; }
@@ -550,13 +572,6 @@
 @media (max-width: 760px) {
     /* «Занятия / Формат / Документ» занимали треть первого экрана:
        подписи мельче, строки плотнее. */
-    /* Характеристик стало пять-шесть: строки плотнее, иначе до карточки
-       с ценой надо листать почти два экрана. */
-    .ab-cpage__specs--left { gap: 10px; margin-top: 18px; padding-top: 14px; }
-    .ab-cpage__specs--left > div { gap: 2px; }
-    .ab-cpage__specs--left dt { font-size: 10px; letter-spacing: .05em; }
-    .ab-cpage__specs--left dt .ab-ficon { width: 14px; height: 14px; }
-    .ab-cpage__specs--left dd { font-size: 13.5px; line-height: 1.3; }
 
     /* Цена и выгода в карточке: крупный кегль ломал строку на узком экране. */
     .ab-cpage__price strong { font-size: 32px; }
@@ -576,4 +591,329 @@
     /* Вопросы: заголовок и телефон над аккордеоном, без лишнего воздуха. */
     .ab-faq__aside { gap: 10px; }
     .ab-faq__contacts { margin-top: 4px; }
+}
+
+/* ---------- Ленты новых блоков ----------
+   Те же правила, что и у лент выше: на телефоне эти сетки складывались
+   в один длинный столбец, и страница уезжала вниз на несколько экранов.
+   Точки-индикаторы добавляет useSwipeDots. */
+@media (max-width: 760px) {
+    .ab-aprocess__grid,
+    .ab-aprof__grid,
+    .ab-partners__roles,
+    .ab-evwhat__grid,
+    .ab-cdoc__papers.is-pair {
+        display: flex;
+        grid-template-columns: none;
+        gap: 14px;
+        margin-inline: 0;
+        padding: 2px 0 10px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        overscroll-behavior-x: contain;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        max-width: none;
+    }
+
+    .ab-aprocess__grid::-webkit-scrollbar,
+    .ab-aprof__grid::-webkit-scrollbar,
+    .ab-partners__roles::-webkit-scrollbar,
+    .ab-evwhat__grid::-webkit-scrollbar,
+    .ab-cdoc__papers.is-pair::-webkit-scrollbar { display: none; }
+
+    .ab-aprocess__grid > *,
+    .ab-aprof__grid > *,
+    .ab-partners__roles > *,
+    .ab-evwhat__grid > *,
+    .ab-cdoc__papers.is-pair > * {
+        flex: 0 0 100%;
+        min-width: 0;
+        box-sizing: border-box;
+        scroll-snap-align: center;
+        max-width: none;
+    }
+
+    /* Как проходит работа — плитками по две, как навыки на странице
+       курса: шагов четыре, листать их вбок дольше, чем окинуть взглядом.
+       Номер над заголовком: слева он съедал половину узкой плитки. */
+    .ab-srv__steps { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+    .ab-srv__steps li { grid-template-columns: minmax(0, 1fr); gap: 6px; padding: 12px; }
+    .ab-srv__steps li:last-child:nth-child(odd) { grid-column: 1 / -1; }
+    .ab-srv__steps-n { font-size: 14px; }
+    .ab-srv__steps li span { font-size: 13px; line-height: 1.4; }
+    .ab-srv__steps li span b { font-size: 14px; }
+}
+
+/* ---------- Частые вопросы листаются вбок ----------
+   Столбцом из семи строк блок занимал пол-экрана прокрутки, а ответы
+   приходилось раскрывать по одному. В ленте вопрос и ответ видны сразу,
+   поэтому раскрытие на телефоне не нужно: плюс прячем, высоту снимаем.
+   max-height у ответа ставит скрипт аккордеона прямо в атрибуте style —
+   перебить её можно только !important. */
+@media (max-width: 760px) {
+    /* Колонка сетки и обёртка острова тянулись по содержимому ленты:
+       без min-width карточки выходили за экран. */
+    .ab-faq__grid > * { min-width: 0; }
+
+    .ab-faq__list {
+        min-width: 0;
+        display: flex;
+        gap: 14px;
+        margin-inline: 0;
+        padding: 2px 0 10px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        overscroll-behavior-x: contain;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .ab-faq__list::-webkit-scrollbar { display: none; }
+
+    .ab-faq__item {
+        flex: 0 0 100%;
+        min-width: 0;
+        box-sizing: border-box;
+        scroll-snap-align: center;
+    }
+
+    .ab-faq__question { padding: 18px 18px 10px; cursor: default; font-size: 15px; }
+    .ab-faq__icon { display: none; }
+    .ab-faq__body { max-height: none !important; }
+    .ab-faq__answer { padding: 0 18px 18px; }
+
+    /* Рамка «открытого» вопроса в ленте выделяла случайную карточку. */
+    .ab-faq__item.is-open { border-color: var(--ab-100); box-shadow: none; }
+}
+
+/* ---------- «Чему вы научитесь»: плитки по две ----------
+   Столбцом семь навыков занимали почти два экрана, а лентой
+   на экране оставалась одна карточка и много пустого места.
+   Две в ряд: нечётный последний навык занимает строку целиком. */
+@media (max-width: 760px) {
+    .ab-clearn__list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+    .ab-clearn__list li { grid-template-columns: minmax(0, 1fr); gap: 6px; padding: 12px; }
+    .ab-clearn__list li:last-child:nth-child(odd) { grid-column: 1 / -1; }
+    .ab-clearn__n { font-size: 12px; }
+    .ab-clearn__list li span, .ab-clearn__list li b + * { font-size: 13px; line-height: 1.35; }
+}
+
+/* ---------- Цифры компактнее ----------
+   Четыре плитки занимали пол-экрана. Две в ряд, шрифты меньше,
+   примечание убрано: подпись под числом уже всё объясняет.
+   Оценка площадки остаётся отдельной широкой строкой снизу. */
+@media (max-width: 760px) {
+    .ab-stats__list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+    .ab-stats__item { padding: 12px 12px 14px; }
+    .ab-stats__num { font-size: 22px; }
+    .ab-stats__suffix { font-size: 15px; }
+    .ab-stats__label { font-size: 12px; line-height: 1.3; }
+    .ab-stats__note { display: none; }
+    .ab-stats__ratings { margin-top: 10px; }
+    .ab-stats__ratings a, .ab-stats__ratings div { padding: 12px 14px; }
+    .ab-stats__rating-score { font-size: 20px; }
+}
+
+/* ---------- «Чем занимается школа»: плитки компактнее ----------
+   Две в ряд на любой ширине телефона, описание скрыто: в карточке
+   остаётся раздел, название и ссылка — этого хватает, чтобы выбрать. */
+@media (max-width: 760px) {
+    .ab-lines__list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+    .ab-lines__card { padding: 12px; }
+    .ab-lines__text { display: none; }
+    .ab-lines__title { font-size: 15px; line-height: 1.2; }
+    .ab-lines__foot { margin-top: 10px; padding-top: 10px; }
+    .ab-lines__foot i { display: none; }
+
+    /* Нижняя карточка на всю строку: в ней место есть — оставляем описание. */
+    .ab-lines__item:last-child:nth-child(odd) .ab-lines__text { display: block; margin-bottom: 10px; }
+    .ab-lines__item:last-child:nth-child(odd) .ab-lines__foot i { display: block; }
+}
+
+/* ---------- Конструктор на телефоне ----------
+   Плашки скидок тонули в тёмном фоне: процент теперь крупный и светлый,
+   подпись мелкая. Превью «Ваш курс» ужато — это иллюстрация, а не
+   рабочий экран, занимать треть блока ей незачем. */
+@media (max-width: 760px) {
+    .ab-ctor__points { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-bottom: 22px; }
+    .ab-ctor__points li {
+        display: flex; flex-direction: column; align-items: center; gap: 2px;
+        padding: 12px 6px; padding-left: 6px; border: 1px solid rgba(255, 255, 255, .16);
+        border-radius: 14px; background: rgba(255, 255, 255, .06); text-align: center;
+    }
+    .ab-ctor__points li::before { display: none; }
+    .ab-ctor__points li b { order: 2; font-size: 11px; font-weight: 600; color: rgba(255, 255, 255, .55); }
+    .ab-ctor__points li span { order: 1; font-size: 0; }
+    .ab-ctor__points li i { font-size: 20px; font-weight: 800; line-height: 1.1;
+        font-family: var(--ab-font-display); color: var(--ab-cream, #fff); }
+
+    .ab-ctor__inner { padding: 22px 16px; gap: 20px; }
+    .ab-ctor__lead { margin-bottom: 16px; font-size: 15px; }
+    .ab-ctor__screen { padding: 14px; border-radius: 14px; }
+    .ab-ctor__screen-title { margin-bottom: 10px; }
+    .ab-ctor__screen-list { gap: 7px; margin-bottom: 10px; }
+    .ab-ctor__screen-list li { font-size: 13px; }
+    .ab-ctor__screen-sale { padding: 9px 12px; font-size: 13px; }
+    .ab-ctor__screen-total { margin-top: 10px; }
+    .ab-ctor__screen-total strong { font-size: 20px; }
+}
+
+/* ---------- Блок заявки короче ----------
+   На телефоне он вырастал почти на полтора экрана. Три шага «что будет
+   после заявки» прячем: человек уже дошёл до формы, а то же самое
+   сказано строкой выше. */
+@media (max-width: 760px) {
+    .ab-lead-block__inner { padding: 24px 16px; gap: 20px; }
+    .ab-lead-block__list { display: none; }
+    .ab-lead-block__promise { margin-bottom: 8px; font-size: 15px; }
+    .ab-lead-block__note { margin-bottom: 14px; font-size: 14px; line-height: 1.5; }
+    .ab-lead-block__phone { margin-top: 0; }
+
+    /* Выбор уровня на телефоне убран: три кнопки в ряд не помещались
+       и превращались в кружки с переносами. Поле необязательное —
+       менеджер уточнит при звонке. */
+    .ab-lead-form__levels { display: none; }
+}
+
+/* ---------- Программа курса: теория и практика вкладками ----------
+   Днём подряд шли два длинных списка — экран на каждый. Вкладки
+   оставляют на виду один список и сразу показывают, сколько тем
+   в каждом. Переключение на радиокнопках: без скрипта и работает
+   даже пока островки Vue не загрузились. */
+@media (max-width: 760px) {
+    .ab-cmod__switches {
+        display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 6px; margin: 0 0 14px;
+    }
+
+    .ab-cmod__switches label {
+        display: flex; align-items: center; justify-content: center; gap: 6px;
+        padding: 9px 8px; border: 1px solid var(--ab-100); border-radius: 10px;
+        background: var(--ab-white);
+        font-size: 13px; font-weight: 700; color: var(--ab-500); cursor: pointer;
+    }
+
+    .ab-cmod__switches label i {
+        font-style: normal; font-size: 11px; font-weight: 700;
+        padding: 1px 6px; border-radius: 999px;
+        background: var(--ab-50, #f7f2ee); color: var(--ab-400);
+    }
+
+    /* Активная вкладка. Порядок детей в блоке: радиокнопки, затем
+       переключатель (nav), затем группы (div) — поэтому nth-of-type
+       у input и у div совпадают по номеру. */
+    .ab-cmod__groups:has(> .ab-cmod__switch:nth-of-type(1):checked) > .ab-cmod__switches label:nth-child(1),
+    .ab-cmod__groups:has(> .ab-cmod__switch:nth-of-type(2):checked) > .ab-cmod__switches label:nth-child(2),
+    .ab-cmod__groups:has(> .ab-cmod__switch:nth-of-type(3):checked) > .ab-cmod__switches label:nth-child(3) {
+        border-color: var(--ab-600); background: var(--ab-600); color: #fff;
+    }
+
+    .ab-cmod__groups:has(> .ab-cmod__switch:nth-of-type(1):checked) > .ab-cmod__switches label:nth-child(1) i,
+    .ab-cmod__groups:has(> .ab-cmod__switch:nth-of-type(2):checked) > .ab-cmod__switches label:nth-child(2) i,
+    .ab-cmod__groups:has(> .ab-cmod__switch:nth-of-type(3):checked) > .ab-cmod__switches label:nth-child(3) i {
+        background: rgba(255, 255, 255, .2); color: #fff;
+    }
+
+    /* Виден только выбранный список. */
+    .ab-cmod__groups > .ab-cmod__group { display: none; }
+
+    .ab-cmod__groups:has(> .ab-cmod__switch:nth-of-type(1):checked) > div.ab-cmod__group:nth-of-type(1),
+    .ab-cmod__groups:has(> .ab-cmod__switch:nth-of-type(2):checked) > div.ab-cmod__group:nth-of-type(2),
+    .ab-cmod__groups:has(> .ab-cmod__switch:nth-of-type(3):checked) > div.ab-cmod__group:nth-of-type(3) {
+        display: block;
+    }
+
+    /* Заголовок группы дублирует вкладку. */
+    .ab-cmod__groups > .ab-cmod__group > .ab-cmod__group-title { display: none; }
+}
+
+/* ---------- Характеристики курса плитками ----------
+   Сухим списком «подпись — значение» блок читался как таблица
+   и занимал пол-экрана. Плитки по две в ряд: значок и подпись
+   сверху, значение под ними. Длинные значения (их помечает
+   шаблон) занимают строку целиком, иначе рвутся по словам. */
+@media (max-width: 760px) {
+    .ab-cpage__specs--left {
+        display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px; margin-top: 18px; padding-top: 0; border-top: 0;
+    }
+
+    .ab-cpage__specs--left > div {
+        grid-template-columns: minmax(0, 1fr); gap: 6px;
+        padding: 12px; border: 1px solid var(--ab-100);
+        border-radius: 14px; background: var(--ab-white);
+    }
+
+    .ab-cpage__specs--left > div.is-wide { grid-column: 1 / -1; }
+
+    .ab-cpage__specs--left dt { font-size: 10px; line-height: 1.3; }
+    .ab-cpage__specs--left dt .ab-ficon { width: 14px; height: 14px; }
+    .ab-cpage__specs--left dd { font-size: 14px; line-height: 1.35; }
+}
+
+/* ---------- Страница «Для бизнеса» ----------
+   Три цифры столбцом занимали треть экрана. Две в ряд, третья —
+   строкой целиком. Телефон в кнопке рвался на три строки, потому
+   что кнопки делили ширину поровну: уменьшаем в нём шрифт. */
+@media (max-width: 760px) {
+    /* Три цифры в один ряд: при двух в ряд третья стояла одна
+       и справа от неё оставалась пустая половина строки. */
+    .ab-bus__stats { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+    .ab-bus__stats li { padding: 12px 10px; }
+    .ab-bus__stats b { font-size: 19px; }
+    .ab-bus__stats span { font-size: 11px; line-height: 1.25; }
+
+    /* Телефон в кнопке не переносим: кнопки делят ширину поровну,
+       и номер рвался на две-три строки. */
+    .ab-cpage__hero .ab-hero__actions .ab-btn {
+        padding-inline: 8px; font-size: 13.5px; white-space: nowrap;
+    }
+}
+
+/* ---------- «Другие услуги» листаются вбок ----------
+   Это подборка из трёх соседних услуг внизу страницы услуги,
+   а не каталог: столбцом она растягивала страницу на три экрана.
+   Полный список на /busines.html остаётся списком — там их девять. */
+@media (max-width: 760px) {
+    .ab-bus__grid--near {
+        display: flex;
+        grid-template-columns: none;
+        min-width: 0;
+        gap: 14px;
+        margin-inline: 0;
+        padding: 2px 0 10px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        overscroll-behavior-x: contain;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .ab-bus__grid--near::-webkit-scrollbar { display: none; }
+
+    .ab-bus__grid--near > * {
+        flex: 0 0 100%;
+        min-width: 0;
+        box-sizing: border-box;
+        scroll-snap-align: center;
+    }
+}
+
+/* ---------- На телефоне нажимается вся карточка ----------
+   Пальцем целиться в ссылку «Подробнее» неудобно. Невидимая
+   растяжка от ссылки накрывает карточку целиком; вторая кнопка
+   («Оставить заявку») лежит выше неё и работает как прежде. */
+@media (max-width: 760px) {
+    .ab-bus__card, .ab-card { position: relative; }
+
+    .ab-bus__title a::after,
+    .ab-card .ab-card__foot .ab-btn::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+    }
+
+    .ab-bus__actions, .ab-card__foot .ab-card__price { position: relative; z-index: 2; }
 }

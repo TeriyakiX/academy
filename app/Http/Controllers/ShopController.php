@@ -62,10 +62,11 @@ class ShopController extends Controller
             ->unique(fn ($p) => $p->variant_group ?: 'p' . $p->id)
             ->values();
 
-        /* Показываем каталог порциями: 24 карточки за раз.
+        /* Показываем каталог порциями: 12 карточек за раз.
            Кнопка «Показать ещё» добавляет следующую порцию, а адрес
-           страницы остаётся рабочим и без JavaScript. */
-        $perPage = 24;
+           страницы остаётся рабочим и без JavaScript.
+           Было 24 — на телефоне это четыре экрана прокрутки до кнопки. */
+        $perPage = 12;
         $shown = (int) $request->query('show', $perPage);
         $shown = max($perPage, min($shown, $products->count()));
         $total = $products->count();

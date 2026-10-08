@@ -1,7 +1,8 @@
 <template>
     <div class="ab-tabs">
         <!-- Вкладки направлений -->
-        <div class="ab-tabs__nav" role="tablist">
+        <!-- Одна вкладка переключать не на что: на странице направления её прячем. -->
+        <div v-if="Object.keys(schools).length > 1" class="ab-tabs__nav" role="tablist">
             <button
                 v-for="(list, name) in schools"
                 :key="name"
@@ -28,6 +29,9 @@
                 <a class="ab-card__photo" :href="course.url" tabindex="-1" aria-hidden="true">
                     <img :src="photo(course)" :alt="course.title" width="600" height="360"
                          loading="lazy" decoding="async">
+
+                    <!-- Алкогольный формат: ограничение видно до перехода на страницу. -->
+                    <span v-if="course.age" class="ab-card__age">{{ course.age }}</span>
                 </a>
 
                 <div class="ab-card__head">
@@ -97,7 +101,6 @@ const SHOTS: Record<string, string> = {
     'Курсы бариста': '/assets/barista.webp',
     'Для бизнеса': '/assets/business.webp',
     'Мастер-классы': '/assets/master-class.webp',
-    'Барное дело': '/assets/barmen.webp',
 };
 
 const photo = (course: ICourse) => course.photo ?? SHOTS[active.value] ?? '/assets/barista.webp';

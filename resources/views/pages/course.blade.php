@@ -23,10 +23,27 @@
                 <div class="ab-cpage__grid">
                     <div class="ab-cpage__main">
                         <span class="ab-cpage__tag">{{ $course['school'] }}</span>
+
+                        {{-- Возрастное ограничение рядом с направлением:
+                             у алкогольного мастер-класса его нельзя пропустить. --}}
+                        @if (!empty($course['age']))
+                            <span class="ab-cpage__tag ab-cpage__tag--age">{{ $course['age'] }}</span>
+                        @endif
+
                         <h1 class="ab-cpage__title">{{ $course['title'] }}</h1>
 
                         @if ($course['lead'])
                             <p class="ab-cpage__lead">{{ $course['lead'] }}</p>
+                        @endif
+
+                        {{-- Короткое «кратко о курсе» из методички: что именно
+                             разбираем, помимо строки-описания. --}}
+                        @if (!empty($course['intro']))
+                            <p class="ab-cpage__intro">{{ $course['intro'] }}</p>
+                        @endif
+
+                        @if (!empty($course['age_note']))
+                            <p class="ab-cpage__agenote">{{ $course['age_note'] }}</p>
                         @endif
 
                         {{-- Главное о курсе — в текстовой колонке, а не внизу карточки:
@@ -45,21 +62,44 @@
                                     continue;
                                 }
 
-                                $specs[] = [\Illuminate\Support\Str::ucfirst($key), $value, $key];
+                                $text = is_array($value) ? implode(', ', $value) : $value;
+
+                                $specs[] = [
+                                    \Illuminate\Support\Str::ucfirst($key),
+                                    $text,
+                                    $key,
+                                    /* На телефоне характеристики стоят плитками по две.
+                                       Длинное значение в узкой плитке рвётся на пять
+                                       строк, поэтому такие занимают строку целиком. */
+                                    'wide' => mb_strlen($text) > 24,
+                                ];
                             }
 
                             $specs = array_slice($specs, 0, 8);
+
+                            /* Короткие плитки вперёд, длинные следом: вперемешку
+                               рядом с длинной оставалась пустая половина строки.
+                               Если коротких нечётное число, последняя из них
+                               тоже занимает строку целиком. */
+                            $short = array_values(array_filter($specs, fn ($s) => !$s['wide']));
+                            $wide  = array_values(array_filter($specs, fn ($s) => $s['wide']));
+
+                            if (count($short) % 2 === 1) {
+                                $short[count($short) - 1]['wide'] = true;
+                            }
+
+                            $specs = array_merge($short, $wide);
                         @endphp
 
                         @if ($specs)
                             <dl class="ab-cpage__specs ab-cpage__specs--left">
                                 @foreach ($specs as $row)
-                                    <div>
+                                    <div @class(['is-wide' => $row['wide']])>
                                         <dt>
                                             @include('partials.icons.fact', ['key' => $row[2]])
                                             {{ $row[0] }}
                                         </dt>
-                                        <dd>{{ is_array($row[1]) ? implode(', ', $row[1]) : $row[1] }}</dd>
+                                        <dd>{{ $row[1] }}</dd>
                                     </div>
                                 @endforeach
                             </dl>
@@ -174,7 +214,27 @@
                                             <p class="ab-cmod__day-note">{{ $day['note'] }}</p>
                                         @endif
 
+                                        {{-- На телефоне теория и практика показываются
+                                             вкладками: списком подряд день занимал
+                                             три экрана. Переключатель на радиокнопках,
+                                             без скрипта; на широком экране он скрыт,
+                                             и обе колонки видны сразу. --}}
                                         <div class="ab-cmod__groups">
+                                            @foreach ($day['groups'] as $gi => $group)
+                                                <input class="ab-cmod__switch" type="radio"
+                                                       name="ab-day-{{ $i }}" id="ab-day-{{ $i }}-{{ $gi }}"
+                                                       @checked($gi === 0) tabindex="-1">
+                                            @endforeach
+
+                                            <nav class="ab-cmod__switches" aria-hidden="true">
+                                                @foreach ($day['groups'] as $gi => $group)
+                                                    <label for="ab-day-{{ $i }}-{{ $gi }}">
+                                                        {{ $group['title'] }}
+                                                        <i>{{ count($group['items']) }}</i>
+                                                    </label>
+                                                @endforeach
+                                            </nav>
+
                                             @foreach ($day['groups'] as $group)
                                                 <div class="ab-cmod__group">
                                                     <h4 class="ab-cmod__group-title">

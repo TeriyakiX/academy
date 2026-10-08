@@ -21,7 +21,6 @@
     $shots = [
         'Курсы бариста' => '/assets/barista.webp',
         'Мастер-классы' => '/assets/master-class.webp',
-        'Барное дело'   => '/assets/barmen.webp',
     ];
 
     $near = $near->take(3)->map(function ($item) use ($pages, $shots, $schools) {

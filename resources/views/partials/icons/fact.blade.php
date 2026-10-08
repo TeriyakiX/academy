@@ -7,10 +7,12 @@
     $key = mb_strtolower($key ?? '');
 
     $name = match (true) {
-        str_contains($key, 'длительн'), str_contains($key, 'продолжительн') => 'clock',
+        str_contains($key, 'длительн'), str_contains($key, 'продолжительн'), str_contains($key, 'срок') => 'clock',
+        str_contains($key, 'стоимост'), str_contains($key, 'цена') => 'price',
         str_contains($key, 'время'), str_contains($key, 'когда'), str_contains($key, 'расписан') => 'calendar',
         str_contains($key, 'группы'), str_contains($key, 'групп') => 'users',
         str_contains($key, 'для кого'), str_contains($key, 'кому') => 'user',
+        str_contains($key, 'возраст') => 'age',
         str_contains($key, 'уровень') => 'levels',
         str_contains($key, 'формат') => 'cup',
         str_contains($key, 'сопровожд'), str_contains($key, 'поддержк') => 'chat',
@@ -26,6 +28,16 @@
 
 <svg class="ab-ficon" viewBox="0 0 24 24" aria-hidden="true">
     @switch($name)
+        @case('price')
+            <path d="M4.5 10.5 11.3 3.7a2.4 2.4 0 0 1 1.7-.7h5.1a1.9 1.9 0 0 1 1.9 1.9v5.1a2.4 2.4 0 0 1-.7 1.7l-6.8 6.8a1.9 1.9 0 0 1-2.7 0l-5.3-5.3a1.9 1.9 0 0 1 0-2.7Z" />
+            <path d="M16.5 7.5h.01" />
+            @break
+
+        @case('age')
+            <circle cx="12" cy="12" r="8.5" />
+            <path d="M12 7.5v5M12 16h.01" />
+            @break
+
         @case('clock')
             <circle cx="12" cy="12" r="8.5" />
             <path d="M12 7.5V12l3 2" />
