@@ -1227,3 +1227,110 @@ ul.ab-cpage__facts b { font-size: 16px; font-weight: 700; color: var(--ab-dark);
 /* Снимок бланка подарочного сертификата вместо нарисованного документа. */
 .ab-cert__shot { display: block; width: 100%; height: auto; border-radius: 14px;
     box-shadow: 0 22px 50px rgba(26, 26, 26, .14); }
+
+/* ---------- Возрастное ограничение и «кратко о курсе» ----------
+   Отметка 18+ стоит рядом с направлением, предупреждение — отдельной
+   строкой под описанием: условие по сертификатам юридически значимо. */
+.ab-cpage__tag--age { margin-left: 8px; background: #8c1d1d; }
+
+/* Отступ задаём лиду, а не отрицательным полем у intro: на телефоне
+   у лида свой margin-bottom, и абзацы наезжали друг на друга. */
+.ab-cpage__lead:has(+ .ab-cpage__intro) { margin-bottom: 14px; }
+.ab-cpage__intro { max-width: 660px; margin: 0 0 26px; font-size: 16px;
+    line-height: 1.65; color: var(--ab-600); }
+
+.ab-cpage__agenote { max-width: 660px; margin: 0 0 26px; padding: 14px 16px;
+    border-left: 3px solid #8c1d1d; border-radius: 0 10px 10px 0;
+    background: rgba(140, 29, 29, .06);
+    font-size: 15px; line-height: 1.55; color: var(--ab-600); }
+
+/* ---------- Бланки свидетельств на странице курса ----------
+   Снимки настоящих бланков вместо нарисованного подарочного листа.
+   У курсов их два — русский и английский, поэтому колонка делится
+   пополам; у мастер-класса бланк один и занимает колонку целиком. */
+.ab-cdoc__papers { display: grid; gap: 18px; align-content: start; }
+.ab-cdoc__papers.is-pair { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.ab-cdoc__papers .ab-cdoc__paper { display: grid; gap: 10px; margin: 0; max-width: none;
+    justify-items: center; }
+.ab-cdoc__papers img { display: block; width: 100%; height: auto;
+    border-radius: 8px; box-shadow: 0 18px 40px rgba(26, 26, 26, .18); }
+
+@media (max-width: 860px) {
+    .ab-cdoc__papers { max-width: 420px; margin: 0 auto; }
+}
+
+/* Две версии бланка рядом: левая колонка шире, чем под один лист. */
+.ab-cdoc__grid:has(.is-pair) { grid-template-columns: minmax(0, 520px) minmax(0, 1fr); }
+
+@media (max-width: 900px) {
+    .ab-cdoc__grid:has(.is-pair) { grid-template-columns: minmax(0, 1fr); }
+    .ab-cdoc__papers.is-pair { max-width: 520px; margin: 0 auto; }
+}
+
+/* На телефоне два бланка в ряд нечитаемы — ставим их друг под другом. */
+@media (max-width: 560px) {
+    .ab-cdoc__papers.is-pair { grid-template-columns: minmax(0, 1fr); gap: 18px; max-width: 320px; }
+}
+
+/* ---------- Страница услуги: порядок работы ----------
+   Под списком «что входит» оставалось пустое место рядом с формой —
+   закрываем его шагами работы и результатом. */
+.ab-srv__subtitle { margin: 34px 0 16px; font-family: var(--ab-font-display);
+    font-size: 20px; font-weight: 800; }
+.ab-srv__subtitle:first-child { margin-top: 0; }
+
+.ab-srv__steps { display: grid; gap: 14px; margin: 0; padding: 0; list-style: none; }
+.ab-srv__steps li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 14px;
+    align-items: start; padding: 14px 16px; border: 1px solid var(--ab-100);
+    border-radius: 14px; background: var(--ab-white); }
+.ab-srv__steps-n { font-family: var(--ab-font-display); font-size: 18px; font-weight: 800;
+    line-height: 1.2; color: var(--ab-300, #c9bdb3); }
+.ab-srv__steps li span { font-size: 15px; line-height: 1.55; color: var(--ab-500); }
+.ab-srv__steps li span b { display: block; margin-bottom: 3px; font-size: 15px;
+    font-weight: 800; color: var(--ab-dark); }
+
+/* ---------- Мероприятия: что это за встречи ----------
+   Страница обрывалась на последней строке расписания. */
+.ab-evwhat { padding: 64px 0; background: var(--ab-50, #f7f2ee); }
+.ab-evwhat__grid { display: grid; gap: 18px; margin-top: 26px;
+    grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+/* Четыре в ряд не влезают — лучше два ровных ряда, чем «три и один». */
+@media (max-width: 1080px) {
+    .ab-evwhat__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 560px) {
+    .ab-evwhat__grid { grid-template-columns: minmax(0, 1fr); }
+}
+.ab-evwhat__grid article { padding: 22px; border: 1px solid var(--ab-100);
+    border-radius: 16px; background: var(--ab-white); }
+.ab-evwhat__grid b { display: block; margin-bottom: 8px; font-size: 16px; font-weight: 800; }
+.ab-evwhat__grid p { margin: 0; font-size: 15px; line-height: 1.6; color: var(--ab-500); }
+
+@media (max-width: 640px) {
+    .ab-evwhat { padding: 44px 0; }
+    .ab-evwhat__grid { gap: 12px; }
+    .ab-evwhat__grid article { padding: 18px; }
+}
+
+/* Плашки над формой: при длинной подписи («от 3 часов на занятие»)
+   равные колонки с nowrap выталкивали плашку за край карточки. */
+.ab-cmod__chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.ab-cmod__chips span { flex: 1 1 auto; min-width: 0; white-space: normal; }
+
+/* ---------- Защита бланков свидетельства ----------
+   Полностью запретить сохранение нельзя — остаётся снимок экрана,
+   но убираем простые способы: правый клик по снимку, перетаскивание
+   и выделение. Прозрачный слой перехватывает указатель, поэтому
+   браузер не считает целью <img> и не предлагает её сохранить. */
+.ab-cdoc__shot { position: relative; display: block; }
+.ab-cdoc__shot img { pointer-events: none; -webkit-user-drag: none;
+    user-select: none; -webkit-user-select: none; }
+.ab-cdoc__shield { position: absolute; inset: 0; display: block; border-radius: 8px; }
+
+/* ---------- Теория и практика: переключатель ----------
+   Радиокнопки и подписи нужны только на телефоне, на широком экране
+   обе колонки видны сразу. Прячем их так, чтобы разметка не ломалась. */
+.ab-cmod__switch { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.ab-cmod__switches { display: none; }

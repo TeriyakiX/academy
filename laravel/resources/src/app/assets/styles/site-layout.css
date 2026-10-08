@@ -205,3 +205,8 @@ body > .wrapper { overflow: clip; }
     outline: none; border-color: #6b5a53; }
 .ab-modal__note { margin: 0; font-size: 12px; line-height: 1.5; color: #aea196; }
 .ab-modal__note a { color: #6b5a53; }
+
+/* У подвала был отступ сверху 60px: на страницах, где последний блок
+   со своим фоном, между ним и подвалом оставалась белая полоса.
+   Своих полей у подвала хватает — отступ убираем. */
+.site-footer { margin-top: 0; }

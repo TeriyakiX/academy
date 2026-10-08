@@ -7,8 +7,26 @@ import { observeOnce } from './useIntersection';
  * привязаны к этому классу, поэтому запускаются в нужный момент.
  */
 export function useReveal(): void {
+    const blocks = qsa<HTMLElement>('.ab-reveal');
+
+    /*
+     | Блоки, которые уже попали в первый экран, показываем сразу.
+     | Наблюдатель ждёт, пока в экран войдёт 8% высоты блока, а у
+     | высокой секции это несколько сотен пикселей: её верх уже виден,
+     | но блок ещё прозрачный — под первым экраном оставалось белое поле.
+     */
+    const rest = blocks.filter((el) => {
+        if (el.getBoundingClientRect().top >= window.innerHeight) {
+            return true;
+        }
+
+        el.classList.add('is-visible');
+
+        return false;
+    });
+
     observeOnce(
-        qsa('.ab-reveal'),
+        rest,
         (el) => el.classList.add('is-visible'),
         { rootMargin: '0px 0px -12% 0px', threshold: 0.08 },
     );

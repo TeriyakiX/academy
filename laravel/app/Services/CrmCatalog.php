@@ -115,7 +115,9 @@ class CrmCatalog
                     continue;
                 }
 
-                $schools[$school][] = $fromCrm[$school][$url] ?? $card;
+                /* Значения из CRM главнее, но поля, которых в CRM нет
+                   (короткое имя, отметка 18+), берём из файла. */
+                $schools[$school][] = ($fromCrm[$school][$url] ?? []) + $card;
                 unset($fromCrm[$school][$url]);
             }
         }

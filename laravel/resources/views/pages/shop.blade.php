@@ -27,6 +27,8 @@
                      пустой полосой, а человек пришёл смотреть на технику. --}}
                 <div class="ab-cpage__split{{ ($current || $brand) ? ' ab-cpage__split--solo' : '' }}">
                     <div>
+                        {{-- Плашка над заголовком — как на остальных страницах. --}}
+                        <span class="ab-cpage__tag">Оборудование</span>
                         <h1 class="ab-cpage__title">
                             {{ $current->title ?? 'Оборудование для кофеен' }}@if ($brand) <span class="ab-cpage__title-brand">{{ $brand }}</span>@endif
                         </h1>

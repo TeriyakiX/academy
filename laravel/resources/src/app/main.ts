@@ -9,6 +9,7 @@ import { usePromo } from '@/shared/composables/usePromo';
 import { useRail } from '@/shared/composables/useRail';
 import { useReveal } from '@/shared/composables/useReveal';
 import { useSwipeDots } from '@/shared/composables/useSwipeDots';
+import { useProtectedShots } from '@/shared/composables/useProtectedShots';
 import { qsa } from '@/shared/utils/dom';
 
 /*
@@ -48,6 +49,7 @@ function bootstrap(): void {
     usePromo();
     useReveal();
     useSwipeDots();
+    useProtectedShots();
 
     mountIslands();
 }

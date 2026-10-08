@@ -44,12 +44,6 @@ $catalogPages = [
         'school' => 'Мастер-классы',
         'image'  => '/assets/master-class.webp',
     ],
-    '/courses/barnoe-delo.html' => [
-        'h1'     => 'Барное дело',
-        'lead'   => 'Курсы бармена: методы приготовления коктейлей, баланс вкуса и подача.',
-        'school' => 'Барное дело',
-        'image'  => '/assets/barmen.webp',
-    ],
 ];
 
 /*
@@ -148,11 +142,11 @@ foreach (config('site.pages') as $uri => $page) {
                 'old_price' => $card['old']       ?? null,
                 'duration'  => $card['duration']  ?? null,
                 'url'       => $uri,
-                /* Фото направления — для карточки записи рядом с программой. */
-                'photo'     => [
+                /* Снимок программы — для карточки записи рядом с программой.
+                   Если у курса своего нет, берём общий по направлению. */
+                'photo'     => $card['photo'] ?? [
                     'Курсы бариста' => '/assets/1.webp',
                     'Мастер-классы' => '/assets/master-class.webp',
-                    'Барное дело'   => '/assets/barmen.webp',
                 ][$card['school'] ?? ''] ?? '/assets/barista.webp',
             ],
         ]))->name($routeName);
@@ -205,7 +199,7 @@ foreach ([
     '/coming-soon.html'         => '/',
     '/barista-bazovyj'          => '/courses/barista-base.html',
     '/barista-v-take-away'      => '/courses/barista-novichok.html',
-    '/metod-stir'               => '/barnoe-delo/metod-ctir.html',
+    '/metod-stir'               => '/master-class/koktejli-18plus.html',
     '/latte-art'                => '/master-class/latte-art.html',
     '/upravlyayushhij-kofejni'  => '/courses/upravlyayushchiy-kofeyni.html',
 ] as $from => $to) {

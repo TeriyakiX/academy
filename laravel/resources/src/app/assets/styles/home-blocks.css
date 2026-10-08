@@ -1204,9 +1204,12 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 .ab-lines__list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 12px; margin: 0; padding: 0; list-style: none; }
 @media (max-width: 1100px) { .ab-lines__list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-/* На телефоне держим две в ряд: четыре карточки в столбик — это
-   почти полтора экрана ради четырёх ссылок. */
-@media (max-width: 360px)  { .ab-lines__list { grid-template-columns: minmax(0, 1fr); } }
+/* На телефоне держим две в ряд на любой ширине: столбиком это
+   почти полтора экрана ради пяти ссылок. Нечётная последняя
+   карточка занимает строку целиком, иначе рядом с ней дыра. */
+@media (max-width: 760px) {
+    .ab-lines__item:last-child:nth-child(odd) { grid-column: 1 / -1; }
+}
 
 .ab-lines__card { display: flex; flex-direction: column; height: 100%; padding: 18px;
     border: 1px solid var(--ab-100); border-radius: var(--ab-radius); background: var(--ab-white);
@@ -1304,3 +1307,62 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 @media (prefers-reduced-motion: reduce) {
     .ab-card:hover .ab-card__photo img { transform: none; }
 }
+
+/* Отметка «18+» на снимке карточки: алкогольный мастер-класс должен
+   отличаться от остальных ещё в каталоге, до перехода на страницу. */
+.ab-card__photo { position: relative; }
+.ab-card__age {
+    position: absolute; top: 12px; right: 12px;
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 42px; height: 28px; padding: 0 10px;
+    border-radius: 999px;
+    background: #1b1715; color: #fff;
+    font-size: 13px; font-weight: 700; letter-spacing: .02em;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .25);
+}
+
+/* ---------- Страница «О нас»: как проходит занятие ----------
+   Структура предложена заказчиком: четыре шага одного занятия. */
+.ab-aprocess { padding: 72px 0; background: var(--ab-white); }
+.ab-aprocess__grid { display: grid; gap: 18px; margin: 28px 0 0; padding: 0; list-style: none;
+    grid-template-columns: repeat(4, minmax(0, 1fr)); counter-reset: none; }
+.ab-aprocess__grid li { padding: 24px; border: 1px solid var(--ab-100);
+    border-radius: 18px; background: var(--ab-50, #f7f2ee); }
+.ab-aprocess__n { display: block; margin-bottom: 12px; font-family: var(--ab-font-display);
+    font-size: 22px; font-weight: 800; color: var(--ab-300, #c9bdb3); }
+.ab-aprocess__grid h3 { margin: 0 0 8px; font-size: 17px; font-weight: 800; }
+.ab-aprocess__grid p { margin: 0; font-size: 15px; line-height: 1.6; color: var(--ab-500); }
+
+/* ---------- Страница «О нас»: профессия ---------- */
+.ab-aprof { padding: 72px 0; background: var(--ab-50, #f7f2ee); }
+.ab-aprof__grid { display: grid; gap: 18px; margin-top: 28px;
+    grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.ab-aprof__grid article { padding: 26px; border: 1px solid var(--ab-100);
+    border-radius: 18px; background: var(--ab-white); }
+.ab-aprof__grid h3 { margin: 0 0 10px; font-size: 18px; font-weight: 800; }
+.ab-aprof__grid p { margin: 0; font-size: 15px; line-height: 1.6; color: var(--ab-500); }
+
+/* ---------- Партнёры: за что отвечает каждый ---------- */
+.ab-partners__roles { display: grid; gap: 14px; margin: 26px 0 0; padding: 0; list-style: none;
+    grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.ab-partners__roles li { padding: 18px; border: 1px solid var(--ab-100);
+    border-radius: 14px; }
+.ab-partners__roles b { display: block; margin-bottom: 6px; font-size: 15px; font-weight: 800; }
+.ab-partners__roles span { font-size: 14px; line-height: 1.5; color: var(--ab-500); }
+
+@media (max-width: 1000px) {
+    .ab-aprocess__grid,
+    .ab-partners__roles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .ab-aprof__grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 560px) {
+    .ab-aprocess, .ab-aprof { padding: 48px 0; }
+    .ab-aprocess__grid,
+    .ab-partners__roles { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+    .ab-aprocess__grid li { padding: 20px; }
+    .ab-aprof__grid article { padding: 22px; }
+}
+
+/* Курсив в процентах скидки не нужен: это число, а не акцент в тексте. */
+.ab-ctor__points i { font-style: normal; }

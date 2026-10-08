@@ -33,24 +33,51 @@
                         <h1 class="ab-cpage__title">{{ $service['title'] }}</h1>
                         <p class="ab-cpage__lead">{{ $service['text'] }}</p>
 
-                        <ul class="ab-cpage__facts">
-                            @if (!empty($service['price']))
-                                <li>
-                                    <span>стоимость</span>
-                                    <b>{{ number_format($service['price'], 0, '', ' ') }} ₽</b>
-                                </li>
-                            @endif
-                            @if (!empty($service['duration']))
-                                <li>
-                                    <span>сроки</span>
-                                    <b>{{ $service['duration'] }}</b>
-                                </li>
-                            @endif
-                            <li>
-                                <span>формат</span>
-                                <b>очно и онлайн</b>
-                            </li>
-                        </ul>
+                        {{-- Характеристики как на странице курса: одинаковый
+                             вид по всему сайту, значок подбирается по подписи. --}}
+                        @php
+                            $specs = array_filter([
+                                'стоимость' => !empty($service['price'])
+                                    ? 'от ' . number_format($service['price'], 0, '', ' ') . ' ₽'
+                                    : null,
+                                'сроки'  => $service['duration'] ?? null,
+                                /* Выездное обучение идёт только на территории
+                                   заведения: онлайн тут обещать нельзя. */
+                                'формат' => $service['format'] ?? 'очно и онлайн',
+                            ]);
+                        @endphp
+
+                        {{-- На телефоне характеристики стоят плитками по две,
+                             поэтому длинное значение и непарную последнюю
+                             плитку растягиваем на всю строку: иначе рядом
+                             остаётся пустая половина. --}}
+                        @php
+                            $wide = [];
+                            $i = 0;
+
+                            foreach ($specs as $key => $value) {
+                                $wide[$key] = mb_strlen((string) $value) > 24;
+                                $i++;
+                            }
+
+                            $narrow = array_keys(array_filter($wide, fn ($w) => !$w));
+
+                            if (count($narrow) % 2 === 1) {
+                                $wide[end($narrow)] = true;
+                            }
+                        @endphp
+
+                        <dl class="ab-cpage__specs ab-cpage__specs--left">
+                            @foreach ($specs as $key => $value)
+                                <div @class(['is-wide' => $wide[$key]])>
+                                    <dt>
+                                        @include('partials.icons.fact', ['key' => $key])
+                                        {{ \Illuminate\Support\Str::ucfirst($key) }}
+                                    </dt>
+                                    <dd>{{ $value }}</dd>
+                                </div>
+                            @endforeach
+                        </dl>
                     </div>
 
                     @if (!empty($service['image']))
@@ -75,6 +102,34 @@
                                     <li>{{ \Illuminate\Support\Str::ucfirst(trim($point)) }}</li>
                                 @endforeach
                             </ul>
+
+                            {{-- Порядок работы и результат: без них под списком
+                                 оставалось пустое место рядом с формой. --}}
+                            @if (!empty($service['steps']))
+                                <h3 class="ab-srv__subtitle">Как проходит работа</h3>
+
+                                <ol class="ab-srv__steps">
+                                    @foreach ($service['steps'] as $i => $step)
+                                        <li>
+                                            <b class="ab-srv__steps-n">{{ str_pad((string) ($i + 1), 2, '0', STR_PAD_LEFT) }}</b>
+                                            <span>
+                                                <b>{{ $step['title'] }}</b>
+                                                {{ $step['text'] }}
+                                            </span>
+                                        </li>
+                                    @endforeach
+                                </ol>
+                            @endif
+
+                            @if (!empty($service['result']))
+                                <h3 class="ab-srv__subtitle">Что получает заведение</h3>
+
+                                <ul class="ab-cmod__items ab-cmod__items--solo">
+                                    @foreach ($service['result'] as $line)
+                                        <li>{{ $line }}</li>
+                                    @endforeach
+                                </ul>
+                            @endif
                         </div>
 
                         <aside class="ab-cmod__aside">
@@ -86,6 +141,14 @@
                                 <input type="hidden" name="page" value="{{ request()->getPathInfo() }}">
                                 <input type="hidden" name="courses" value="{{ $service['title'] }}">
 
+                                {{-- Снимок сверху — как в карточке записи на курс:
+                                     карточки по сайту должны выглядеть одинаково. --}}
+                                @if (!empty($service['image']))
+                                    <img class="ab-cmod__photo" src="{{ $service['image'] }}" alt="{{ $service['title'] }}"
+                                         width="573" height="470" loading="lazy" decoding="async">
+                                @endif
+
+                                <div class="ab-cmod__card-body">
                                 <div class="ab-cmod__chips">
                                     @if (!empty($service['price']))
                                         <span>от {{ number_format($service['price'], 0, '', ' ') }} ₽</span>
@@ -118,6 +181,7 @@
                                     Отправляя форму, вы соглашаетесь с
                                     <a href="/privacy-policy.html">политикой обработки персональных данных</a>
                                 </p>
+                                </div>
                             </form>
                         </aside>
                     </div>
@@ -130,7 +194,7 @@
                 <div class="ab-container">
                     <h2 class="ab-h2">Другие услуги</h2>
 
-                    <div class="ab-bus__grid">
+                    <div class="ab-bus__grid ab-bus__grid--near">
                         @each('partials.blocks.service-card', $others, 'service')
                     </div>
                 </div>
