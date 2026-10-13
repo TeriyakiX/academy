@@ -592,7 +592,6 @@
    в один длинный столбец, и страница уезжала вниз на несколько экранов.
    Точки-индикаторы добавляет useSwipeDots. */
 @media (max-width: 760px) {
-    .ab-evwhat__grid,
     .ab-cdoc__papers.is-pair {
         display: flex;
         grid-template-columns: none;
@@ -607,10 +606,8 @@
         max-width: none;
     }
 
-    .ab-evwhat__grid::-webkit-scrollbar,
     .ab-cdoc__papers.is-pair::-webkit-scrollbar { display: none; }
 
-    .ab-evwhat__grid > *,
     .ab-cdoc__papers.is-pair > * {
         flex: 0 0 100%;
         min-width: 0;
@@ -938,10 +935,11 @@
     }
 }
 
-/* ---------- Страница «О нас»: блоки плитками ----------
-   Лентами эти четыре блока листались по одной карточке и выглядели
-   пустовато. Плитки по две в ряд: видно весь блок целиком, а страница
-   не вытягивается в столбец. Нечётная последняя занимает строку. */
+/* ---------- Страница «О нас» ----------
+   Короткие подписи (партнёры) стоят плитками по две. Блоки с
+   описаниями по сто символов — одной колонкой: в колонке 156px
+   такой текст рвался на восемь строк, и ряд из двух плиток выходил
+   выше, чем те же карточки подряд. Нечётная плитка занимает строку. */
 @media (max-width: 760px) {
     .ab-reasons__list,
     .ab-aprocess__grid,
@@ -971,16 +969,31 @@
     .ab-partners__roles > *:last-child:nth-child(odd),
     .ab-aprof__grid > *:last-child:nth-child(odd) { grid-column: 1 / -1; }
 
-    /* В узкой плитке текст мельче, иначе он рвётся по слогам. */
-    .ab-reasons__title, .ab-aprocess__grid h3, .ab-aprof__grid h3 { font-size: 14px; line-height: 1.25; }
-    .ab-reasons__text, .ab-aprocess__grid p, .ab-aprof__grid p { font-size: 12.5px; line-height: 1.45; }
+    /* Блоки с описаниями — одной колонкой. */
+    .ab-reasons__list,
+    .ab-aprocess__grid,
+    .ab-aprof__grid { grid-template-columns: minmax(0, 1fr); }
+
+    .ab-reasons__list,
+    .ab-aprocess__grid,
+    .ab-aprof__grid { gap: 6px; }
+
+    .ab-reasons__list > *,
+    .ab-aprocess__grid > *,
+    .ab-aprof__grid > * { padding: 12px 14px; }
+
+    .ab-reasons__title, .ab-aprocess__grid h3, .ab-aprof__grid h3 {
+        margin-bottom: 2px; font-size: 14px; line-height: 1.2;
+    }
+    .ab-reasons__text, .ab-aprocess__grid p, .ab-aprof__grid p { font-size: 13px; line-height: 1.4; }
     .ab-partners__roles b { font-size: 13px; }
     .ab-partners__roles span { font-size: 12.5px; line-height: 1.4; }
 
-    /* Номер над заголовком, а не слева: сбоку он съедал треть плитки. */
-    .ab-reasons__item { grid-template-columns: minmax(0, 1fr); gap: 6px; }
-    .ab-reasons__n { justify-self: start; font-size: 12px; }
-    .ab-aprocess__n { margin-bottom: 6px; font-size: 13px; }
+    /* Номер слева от текста и небольшой: отдельной строкой
+       в квадрате 42px он добавлял карточке полсотни пикселей. */
+    .ab-reasons__item { grid-template-columns: auto minmax(0, 1fr); gap: 4px 10px; align-items: start; }
+    .ab-reasons__n { width: 26px; height: 26px; border-radius: 8px; font-size: 12px; }
+    .ab-aprocess__n { margin-bottom: 4px; font-size: 12px; }
 }
 
 /* ---------- Кнопки под карточками курсов ----------
