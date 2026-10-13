@@ -22,6 +22,15 @@
             ['src' => '/assets/docs/svidetelstvo-en.jpg', 'caption' => 'Английская версия'],
         ];
 
+    /*
+     | Метка версии в адресе снимка.
+     |
+     | Бланки отдаются с кэшем на тридцать дней, а имя файла при замене
+     | не меняется — браузер месяц показывал бы старую картинку. Метка
+     | берётся из времени файла: заменили бланк — адрес изменился сам.
+     */
+    $stamp = fn (string $path) => @filemtime(public_path(ltrim($path, '/'))) ?: '1';
+
     $heading = $isClass ? 'Свидетельство о прохождении обучения' : 'Свидетельство о повышении квалификации';
 
     $lead = $isClass
@@ -49,7 +58,8 @@
                              «Сохранить картинку». Снимок остаётся <img> — ради
                              alt и отложенной загрузки. --}}
                         <span class="ab-cdoc__shot">
-                            <img src="{{ $paper['src'] }}" alt="{{ $heading }} — {{ $paper['caption'] }}"
+                            <img src="{{ $paper['src'] }}?v={{ $stamp($paper['src']) }}"
+                                 alt="{{ $heading }} — {{ $paper['caption'] }}"
                                  width="900" height="1283" loading="lazy" decoding="async"
                                  draggable="false">
                             <span class="ab-cdoc__shield" aria-hidden="true"></span>
