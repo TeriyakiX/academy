@@ -153,3 +153,32 @@
    «Для бизнеса» с той же сеткой, — на маленьком не читается надпись. */
 .ab-page--cert .ab-bus__intro { grid-template-columns: minmax(0, 1fr) minmax(0, 440px); }
 @media (max-width: 1000px) { .ab-page--cert .ab-bus__intro { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- Телефон ----------
+   Было: шаги во всю ширину по одному, вкладки столбиком, а в карточке
+   курса название зажималось между чекбоксом и ценой и рвалось на три
+   строки. Здесь всё плотнее: шаги в ряд, название и цена друг под другом. */
+@media (max-width: 760px) {
+    .ab-cw__steps { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+    .ab-cw__step-btn { gap: 8px; padding: 10px; }
+    .ab-cw__step-n { width: 26px; height: 26px; font-size: 13px; }
+    .ab-cw__step-text b { font-size: 13px; line-height: 1.2; }
+    /* Подпись шага («программы и стоимость») в узкой кнопке не помещается. */
+    .ab-cw__step-text i { display: none; }
+
+    .ab-cw__tabs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; margin-bottom: 14px; }
+    .ab-cw__tab { justify-content: center; padding: 9px 8px; font-size: 13px; }
+
+    .ab-cw__body { padding: 14px; }
+    .ab-cw__list { gap: 6px; }
+
+    /* Чекбокс слева, название и цена — в колонку справа от него. */
+    .ab-cw__course {
+        grid-template-columns: auto minmax(0, 1fr);
+        align-items: start; gap: 4px 10px; padding: 12px;
+    }
+    .ab-cw__check { margin-top: 2px; }
+    .ab-cw__course-title { font-size: 14px; line-height: 1.25; }
+    .ab-cw__course-meta { font-size: 12px; line-height: 1.35; }
+    .ab-cw__course-price { grid-column: 2; font-size: 15px; }
+}

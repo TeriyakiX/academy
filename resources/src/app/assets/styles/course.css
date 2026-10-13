@@ -1334,3 +1334,42 @@ ul.ab-cpage__facts b { font-size: 16px; font-weight: 700; color: var(--ab-dark);
    обе колонки видны сразу. Прячем их так, чтобы разметка не ломалась. */
 .ab-cmod__switch { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
 .ab-cmod__switches { display: none; }
+
+/* ---------- Навигатор по этапам на странице «Для бизнеса» ----------
+   Человек узнаёт себя по вопросу и попадает на нужную услугу,
+   не читая девять карточек подряд. */
+.ab-busnav { padding: 64px 0 0; }
+.ab-busnav__list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px; margin: 26px 0 0; padding: 0; list-style: none; counter-reset: none; }
+.ab-busnav__list a { display: grid; align-content: start; gap: 8px; height: 100%;
+    padding: 20px; border: 1px solid var(--ab-100); border-radius: 16px;
+    background: var(--ab-white); color: inherit; text-decoration: none;
+    transition: transform var(--ab-transition), border-color var(--ab-transition); }
+.ab-busnav__list a:hover { transform: translateY(-3px); border-color: var(--ab-300); }
+.ab-busnav__step { font-size: 11px; font-weight: 700; letter-spacing: .06em;
+    text-transform: uppercase; color: var(--ab-400); }
+.ab-busnav__q { font-size: 16px; font-weight: 800; line-height: 1.3; }
+.ab-busnav__a { display: inline-flex; align-items: center; gap: 6px; margin-top: auto;
+    padding-top: 10px; font-size: 14px; font-weight: 700; color: var(--ab-600); }
+.ab-busnav__a svg { width: 15px; height: 15px; }
+.ab-busnav__list a:hover .ab-busnav__a svg { transform: translateX(3px); }
+.ab-busnav__note { margin: 18px 0 0; font-size: 14px; color: var(--ab-500); }
+
+@media (max-width: 1000px) {
+    .ab-busnav__list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ab-busnav__list a:hover { transform: none; }
+}
+
+/* ---------- Этап и вопросы на странице услуги ---------- */
+.ab-cpage__tag--stage { margin-left: 8px; background: var(--ab-50, #f7f2ee); color: var(--ab-600); }
+
+.ab-srv__subtitle--first { margin-top: 20px; }
+
+.ab-srv__faq { display: grid; gap: 14px; margin: 0; }
+.ab-srv__faq > div { padding: 16px 18px; border: 1px solid var(--ab-100);
+    border-radius: 14px; background: var(--ab-white); }
+.ab-srv__faq dt { margin-bottom: 6px; font-size: 15px; font-weight: 800; }
+.ab-srv__faq dd { margin: 0; font-size: 14px; line-height: 1.6; color: var(--ab-500); }

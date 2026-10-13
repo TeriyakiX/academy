@@ -50,7 +50,7 @@
                              alt и отложенной загрузки. --}}
                         <span class="ab-cdoc__shot">
                             <img src="{{ $paper['src'] }}" alt="{{ $heading }} — {{ $paper['caption'] }}"
-                                 width="760" height="1102" loading="lazy" decoding="async"
+                                 width="900" height="1283" loading="lazy" decoding="async"
                                  draggable="false">
                             <span class="ab-cdoc__shield" aria-hidden="true"></span>
                         </span>

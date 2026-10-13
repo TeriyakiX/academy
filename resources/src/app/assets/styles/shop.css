@@ -376,11 +376,41 @@
     .ab-shop__sort select { width: 100%; max-width: 210px; font-size: 14px; }
 }
 
-/* Кнопка ждёт ответа сервера — показываем, что нажатие принято */
-.ab-shop__more-wrap .is-loading { opacity: .6; pointer-events: none; }
 
-/* Первая из добавленных карточек коротко подсвечивается:
-   иначе непонятно, где заканчивается уже просмотренное. */
-@keyframes ab-shop-new { from { box-shadow: 0 0 0 3px var(--ab-200); } to { box-shadow: 0 0 0 3px transparent; } }
-.ab-shop__card.is-new { animation: ab-shop-new 1.6s ease-out forwards; }
-@media (prefers-reduced-motion: reduce) { .ab-shop__card.is-new { animation: none; } }
+
+/* ---------- Страницы каталога ----------
+   Вместо кнопки «Показать ещё»: видно, сколько всего страниц,
+   и можно перейти сразу к нужной. Ссылки настоящие, работают
+   без скрипта, фильтры и сортировка сохраняются. */
+.ab-pager { display: flex; align-items: center; justify-content: center;
+    gap: 8px; margin-top: 32px; }
+
+.ab-pager__list { display: flex; align-items: center; gap: 6px;
+    margin: 0; padding: 0; list-style: none; }
+
+.ab-pager__page, .ab-pager__arrow {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 40px; height: 40px; padding: 0 10px;
+    border: 1px solid var(--ab-100); border-radius: 10px;
+    background: var(--ab-white);
+    font-size: 15px; font-weight: 700; color: var(--ab-dark);
+    text-decoration: none;
+    transition: border-color var(--ab-transition), background var(--ab-transition);
+}
+
+a.ab-pager__page:hover, .ab-pager__arrow:hover { border-color: var(--ab-600); }
+
+.ab-pager__page.is-current { border-color: var(--ab-600); background: var(--ab-600); color: #fff; }
+
+.ab-pager__arrow svg { width: 18px; height: 18px; }
+
+.ab-pager__gap { padding: 0 2px; color: var(--ab-400); }
+
+.ab-pager__note { margin: 12px 0 0; font-size: 14px; text-align: center; color: var(--ab-400); }
+
+@media (max-width: 760px) {
+    .ab-pager { gap: 6px; margin-top: 24px; }
+    .ab-pager__list { gap: 4px; }
+    .ab-pager__page, .ab-pager__arrow { min-width: 36px; height: 36px; padding: 0 8px; font-size: 14px; }
+    .ab-pager__note { font-size: 13px; }
+}

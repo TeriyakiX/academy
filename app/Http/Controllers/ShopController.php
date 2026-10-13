@@ -62,22 +62,30 @@ class ShopController extends Controller
             ->unique(fn ($p) => $p->variant_group ?: 'p' . $p->id)
             ->values();
 
-        /* Показываем каталог порциями: 12 карточек за раз.
-           Кнопка «Показать ещё» добавляет следующую порцию, а адрес
-           страницы остаётся рабочим и без JavaScript.
-           Было 24 — на телефоне это четыре экрана прокрутки до кнопки. */
+        /*
+         | Каталог разбит на страницы по 12 позиций.
+         |
+         | Была кнопка «Показать ещё»: к семидесяти позициям она добавляла
+         | порцию за порцией, и дойти до последних моделей можно было
+         | только шестью нажатиями подряд. Со страницами видно, сколько
+         | всего, и можно сразу перейти к нужной.
+         */
         $perPage = 12;
-        $shown = (int) $request->query('show', $perPage);
-        $shown = max($perPage, min($shown, $products->count()));
         $total = $products->count();
-        $products = $products->take($shown);
+        $pages = max(1, (int) ceil($total / $perPage));
+        $page = max(1, min((int) $request->query('page', 1), $pages));
+        $products = $products->slice(($page - 1) * $perPage, $perPage)->values();
 
         return view('pages.shop', [
             'seo' => [
-                'title'       => $this->pageTitle($brand, $current),
+                /* Со второй страницы заголовок и адрес свои, иначе
+                   в поиске это выглядит как дубли одной страницы. */
+                'title'       => $this->pageTitle($brand, $current)
+                    . ($page > 1 ? ' — страница ' . $page : ''),
                 'description' => 'Профессиональные кофемашины, кофемолки и аксессуары для кофеен. '
                     . 'То же оборудование, на котором проходит обучение в Академии Бариста.',
-                'canonical'   => 'https://academy-barista.ru/shop.html',
+                'canonical'   => 'https://academy-barista.ru/shop.html'
+                    . ($page > 1 ? '?page=' . $page : ''),
                 'body_attrs'  => ['class' => 'body'],
                 'css'         => [],
                 'js'          => [],
@@ -98,7 +106,8 @@ class ShopController extends Controller
             'sort'       => $sort,
             'products'   => $products,
             'total'      => $total,
-            'shown'      => $shown,
+            'page'       => $page,
+            'pages'      => $pages,
             'perPage'    => $perPage,
         ]);
     }

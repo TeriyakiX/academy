@@ -26,10 +26,8 @@
     .ab-dirs__cols,
     .ab-ev__list,
     .ab-steps__list,
-    .ab-reasons__list,
     .ab-team__grid,
-    .ab-near__list,
-    .ctor__list {
+    .ab-near__list {
         display: flex;
         grid-template-columns: none;
         gap: 14px;
@@ -48,20 +46,16 @@
     .ab-dirs__cols::-webkit-scrollbar,
     .ab-ev__list::-webkit-scrollbar,
     .ab-steps__list::-webkit-scrollbar,
-    .ab-reasons__list::-webkit-scrollbar,
     .ab-team__grid::-webkit-scrollbar,
-    .ab-near__list::-webkit-scrollbar,
-    .ctor__list::-webkit-scrollbar { display: none; }
+    .ab-near__list::-webkit-scrollbar { display: none; }
 
     .ab-tabs__grid > *,
     .ab-rv__list > *,
     .ab-dirs__cols > *,
     .ab-ev__list > *,
     .ab-steps__list > *,
-    .ab-reasons__list > *,
     .ab-team__grid > *,
-    .ab-near__list > *,
-    .ctor__list > * {
+    .ab-near__list > * {
         flex: 0 0 100%;
         min-width: 0;
         /* иначе паддинги карточки прибавляются к 100% и она вылезает */
@@ -598,9 +592,6 @@
    в один длинный столбец, и страница уезжала вниз на несколько экранов.
    Точки-индикаторы добавляет useSwipeDots. */
 @media (max-width: 760px) {
-    .ab-aprocess__grid,
-    .ab-aprof__grid,
-    .ab-partners__roles,
     .ab-evwhat__grid,
     .ab-cdoc__papers.is-pair {
         display: flex;
@@ -616,15 +607,9 @@
         max-width: none;
     }
 
-    .ab-aprocess__grid::-webkit-scrollbar,
-    .ab-aprof__grid::-webkit-scrollbar,
-    .ab-partners__roles::-webkit-scrollbar,
     .ab-evwhat__grid::-webkit-scrollbar,
     .ab-cdoc__papers.is-pair::-webkit-scrollbar { display: none; }
 
-    .ab-aprocess__grid > *,
-    .ab-aprof__grid > *,
-    .ab-partners__roles > *,
     .ab-evwhat__grid > *,
     .ab-cdoc__papers.is-pair > * {
         flex: 0 0 100%;
@@ -919,4 +904,99 @@
     }
 
     .ab-bus__actions, .ab-card__foot .ab-card__price { position: relative; z-index: 2; }
+}
+
+/* ---------- Навигатор по этапам: лентой ----------
+   Четыре карточки столбиком отодвигали услуги на экран вниз. */
+@media (max-width: 760px) {
+    .ab-busnav { padding-top: 44px; }
+    .ab-busnav__list {
+        display: flex; grid-template-columns: none; min-width: 0; gap: 10px;
+        margin-inline: 0; padding: 2px 0 10px; overflow-x: auto;
+        scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
+        -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    }
+    .ab-busnav__list::-webkit-scrollbar { display: none; }
+    .ab-busnav__list > * { flex: 0 0 76%; min-width: 0; box-sizing: border-box; scroll-snap-align: center; }
+    .ab-busnav__list a { padding: 16px; }
+    .ab-busnav__q { font-size: 15px; }
+
+    .ab-cpage__tag--stage { margin-left: 0; }
+    .ab-srv__faq > div { padding: 14px; }
+}
+
+/* ---------- Кнопки в карточке услуги ----------
+   «Оставить заявку» делила ширину пополам с «Подробнее» и рвалась
+   на две строки, из-за чего кнопки получались разной высоты.
+   Шрифт мельче и запрет переноса — обе встают в строку. */
+@media (max-width: 760px) {
+    .ab-bus__actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .ab-bus__actions > .ab-btn,
+    .ab-bus__actions > .ab-bus__toggle {
+        display: inline-flex; align-items: center; justify-content: center;
+        min-height: 44px; padding: 8px; font-size: 13px; white-space: nowrap;
+    }
+}
+
+/* ---------- Страница «О нас»: блоки плитками ----------
+   Лентами эти четыре блока листались по одной карточке и выглядели
+   пустовато. Плитки по две в ряд: видно весь блок целиком, а страница
+   не вытягивается в столбец. Нечётная последняя занимает строку. */
+@media (max-width: 760px) {
+    .ab-reasons__list,
+    .ab-aprocess__grid,
+    .ab-partners__roles,
+    .ab-aprof__grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+        margin-inline: 0;
+        padding: 0;
+        overflow: visible;
+        max-width: none;
+    }
+
+    .ab-reasons__list > *,
+    .ab-aprocess__grid > *,
+    .ab-partners__roles > *,
+    .ab-aprof__grid > * {
+        box-sizing: border-box;
+        min-width: 0;
+        max-width: none;
+        padding: 14px;
+    }
+
+    .ab-reasons__list > *:last-child:nth-child(odd),
+    .ab-aprocess__grid > *:last-child:nth-child(odd),
+    .ab-partners__roles > *:last-child:nth-child(odd),
+    .ab-aprof__grid > *:last-child:nth-child(odd) { grid-column: 1 / -1; }
+
+    /* В узкой плитке текст мельче, иначе он рвётся по слогам. */
+    .ab-reasons__title, .ab-aprocess__grid h3, .ab-aprof__grid h3 { font-size: 14px; line-height: 1.25; }
+    .ab-reasons__text, .ab-aprocess__grid p, .ab-aprof__grid p { font-size: 12.5px; line-height: 1.45; }
+    .ab-partners__roles b { font-size: 13px; }
+    .ab-partners__roles span { font-size: 12.5px; line-height: 1.4; }
+
+    /* Номер над заголовком, а не слева: сбоку он съедал треть плитки. */
+    .ab-reasons__item { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+    .ab-reasons__n { justify-self: start; font-size: 12px; }
+    .ab-aprocess__n { margin-bottom: 6px; font-size: 13px; }
+}
+
+/* ---------- Кнопки под карточками курсов ----------
+   Три кнопки делили ширину пополам, подписи переносились по-разному
+   и ряд выходил рваным. Главное действие — «Собрать свой курс» —
+   ставим первой строкой во всю ширину, две остальные под ней. */
+@media (max-width: 760px) {
+    .ab-tabs__more { gap: 8px; }
+
+    .ab-tabs__more > .ab-btn--dark { order: -1; grid-column: 1 / -1; }
+
+    .ab-tabs__more > .ab-btn {
+        display: inline-flex; align-items: center; justify-content: center;
+        min-height: 46px; padding: 10px 8px; font-size: 13px; white-space: nowrap;
+    }
+
+    /* Непарная кнопка больше не растягивается: ряд и так ровный. */
+    .ab-tabs__more > .ab-btn:last-child:nth-child(odd) { grid-column: auto; }
 }

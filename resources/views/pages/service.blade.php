@@ -30,16 +30,31 @@
                 <div class="ab-cpage__split">
                     <div>
                         <span class="ab-cpage__tag">Услуги для бизнеса</span>
+
+                        {{-- Этап пути: разобраться → сделать самому → передать
+                             целиком → управлять. Человеку сразу видно, на каком
+                             он шаге и чем эта услуга отличается от соседних. --}}
+                        @if (!empty($service['stage']))
+                            <span class="ab-cpage__tag ab-cpage__tag--stage">{{ $service['stage'] }}</span>
+                        @endif
+
                         <h1 class="ab-cpage__title">{{ $service['title'] }}</h1>
                         <p class="ab-cpage__lead">{{ $service['text'] }}</p>
+
+                        @if (!empty($service['intro']))
+                            <p class="ab-cpage__intro">{{ $service['intro'] }}</p>
+                        @endif
 
                         {{-- Характеристики как на странице курса: одинаковый
                              вид по всему сайту, значок подбирается по подписи. --}}
                         @php
                             $specs = array_filter([
-                                'стоимость' => !empty($service['price'])
+                                /* У курса «Менеджмент кофейни» две цены —
+                                   онлайн и очно, поэтому строку можно задать
+                                   в настройках услуги целиком. */
+                                'стоимость' => $service['price_note'] ?? (!empty($service['price'])
                                     ? 'от ' . number_format($service['price'], 0, '', ' ') . ' ₽'
-                                    : null,
+                                    : null),
                                 'сроки'  => $service['duration'] ?? null,
                                 /* Выездное обучение идёт только на территории
                                    заведения: онлайн тут обещать нельзя. */
@@ -97,6 +112,18 @@
                         <div class="ab-cmod__main">
                             <h2 class="ab-cmod__title">Что входит в работу</h2>
 
+                            @if (!empty($service['who']))
+                                <h3 class="ab-srv__subtitle ab-srv__subtitle--first">Для кого</h3>
+
+                                <ul class="ab-cmod__items ab-cmod__items--solo">
+                                    @foreach ($service['who'] as $line)
+                                        <li>{{ $line }}</li>
+                                    @endforeach
+                                </ul>
+
+                                <h3 class="ab-srv__subtitle">Что разбираем</h3>
+                            @endif
+
                             <ul class="ab-cmod__items ab-cmod__items--solo">
                                 @foreach ($service['points'] as $point)
                                     <li>{{ \Illuminate\Support\Str::ucfirst(trim($point)) }}</li>
@@ -122,13 +149,29 @@
                             @endif
 
                             @if (!empty($service['result']))
-                                <h3 class="ab-srv__subtitle">Что получает заведение</h3>
+                                <h3 class="ab-srv__subtitle">Что вы получаете на руки</h3>
 
                                 <ul class="ab-cmod__items ab-cmod__items--solo">
                                     @foreach ($service['result'] as $line)
                                         <li>{{ $line }}</li>
                                     @endforeach
                                 </ul>
+                            @endif
+
+                            {{-- Вопросы к самой услуге: разницу между пакетами
+                                 спрашивают чаще всего, и ответ должен стоять
+                                 рядом с описанием, а не в общем FAQ. --}}
+                            @if (!empty($service['faq']))
+                                <h3 class="ab-srv__subtitle">Вопросы, которые обычно задают</h3>
+
+                                <dl class="ab-srv__faq">
+                                    @foreach ($service['faq'] as $item)
+                                        <div>
+                                            <dt>{{ $item['q'] }}</dt>
+                                            <dd>{{ $item['a'] }}</dd>
+                                        </div>
+                                    @endforeach
+                                </dl>
                             @endif
                         </div>
 
@@ -158,9 +201,12 @@
                                     @endif
                                 </div>
 
-                                <b class="ab-cmod__card-title">Обсудить проект</b>
+                                {{-- У каждой услуги своя кнопка из методички:
+                                     «записаться на консультацию» и «обсудить
+                                     запуск под ключ» — это разные решения. --}}
+                                <b class="ab-cmod__card-title">{{ $service['action'] ?? 'Обсудить проект' }}</b>
                                 <p class="ab-cmod__card-note">
-                                    Расскажите про кофейню — посчитаем работу под ваш проект и сроки.
+                                    Расскажите про кофейню — обсудим ваш формат и посчитаем точный срок и бюджет.
                                 </p>
 
                                 <label class="ab-cmod__field">

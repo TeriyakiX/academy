@@ -42,7 +42,7 @@
         </div>
 
         <div class="site-footer__bottom">
-            <p class="site-footer__copy">&copy; Академия Бариста, 2020–{{ date('Y') }}</p>
+            <p class="site-footer__copy">&copy; Академия Бариста, 2019–{{ date("Y") }}</p>
             <ul class="site-footer__legal">
                 @foreach (config('nav.legal') as $l)
                     <li><a href="{{ $l['href'] }}">{{ $l['title'] }}</a></li>
