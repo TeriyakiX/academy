@@ -1300,7 +1300,9 @@ ul.ab-cpage__facts b { font-size: 16px; font-weight: 700; color: var(--ab-dark);
     .ab-evwhat__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
-@media (max-width: 560px) {
+/* На телефоне одной колонкой: описания по сто символов в узкой
+   плитке рвутся по словам. */
+@media (max-width: 760px) {
     .ab-evwhat__grid { grid-template-columns: minmax(0, 1fr); }
 }
 .ab-evwhat__grid article { padding: 22px; border: 1px solid var(--ab-100);
@@ -1308,10 +1310,12 @@ ul.ab-cpage__facts b { font-size: 16px; font-weight: 700; color: var(--ab-dark);
 .ab-evwhat__grid b { display: block; margin-bottom: 8px; font-size: 16px; font-weight: 800; }
 .ab-evwhat__grid p { margin: 0; font-size: 15px; line-height: 1.6; color: var(--ab-500); }
 
-@media (max-width: 640px) {
+@media (max-width: 760px) {
     .ab-evwhat { padding: 44px 0; }
-    .ab-evwhat__grid { gap: 12px; }
-    .ab-evwhat__grid article { padding: 18px; }
+    .ab-evwhat__grid { gap: 8px; }
+    .ab-evwhat__grid article { padding: 14px 16px; }
+    .ab-evwhat__grid b { margin-bottom: 6px; font-size: 15px; }
+    .ab-evwhat__grid p { font-size: 13.5px; line-height: 1.5; }
 }
 
 /* Плашки над формой: при длинной подписи («от 3 часов на занятие»)

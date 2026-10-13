@@ -18,14 +18,27 @@
         <div class="ctor__body">
             <!-- Курсы активной школы -->
             <ul class="ctor__list">
+                <!--
+                    Нажимается вся строка, а не только кружок с плюсом:
+                    целиться пальцем в кнопку 36px неудобно, а выбрать
+                    курс — единственное, что здесь можно сделать.
+                    Кнопка осталась ради клавиатуры и экранных читалок,
+                    своего обработчика ей не нужно — клик всплывает сюда.
+                -->
                 <li
                     v-for="course in schools[activeSchool]"
                     :key="course.id"
                     class="ctor__item"
                     :class="{ 'is-selected': isSelected(course.id) }"
+                    @click="toggle(course)"
                 >
-                    <button class="ctor__toggle" type="button" @click="toggle(course)">
-                        <span class="ctor__toggle-icon">{{ isSelected(course.id) ? '−' : '+' }}</span>
+                    <button
+                        class="ctor__toggle"
+                        type="button"
+                        :aria-pressed="isSelected(course.id)"
+                        :aria-label="isSelected(course.id) ? `Убрать «${course.title}»` : `Добавить «${course.title}»`"
+                    >
+                        <span class="ctor__toggle-icon" aria-hidden="true">{{ isSelected(course.id) ? '−' : '+' }}</span>
                     </button>
 
                     <div class="ctor__item-main">
