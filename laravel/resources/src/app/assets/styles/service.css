@@ -240,7 +240,6 @@
    страница сервиса растягивалась на пять экранов. Листаем вбок;
    точки-индикаторы добавляет useSwipeDots. */
 @media (max-width: 760px) {
-    .ab-srv-benefits__list,
     .ab-srv-works__grid {
         display: flex;
         grid-template-columns: none;
@@ -255,10 +254,8 @@
         scrollbar-width: none;
     }
 
-    .ab-srv-benefits__list::-webkit-scrollbar,
     .ab-srv-works__grid::-webkit-scrollbar { display: none; }
 
-    .ab-srv-benefits__list > *,
     .ab-srv-works__grid > * {
         flex: 0 0 100%;
         min-width: 0;
@@ -266,5 +263,77 @@
         scroll-snap-align: center;
     }
 
-    .ab-srv-benefits__list li { padding: 18px; }
+}
+
+/* ---------- Телефон: блоки плитками ----------
+   Лентой и столбцом страница сервиса растягивалась на пять экранов.
+   Плитки по две в ряд: блок виден целиком, листать не надо.
+   Нечётная последняя занимает строку, иначе рядом остаётся дыра. */
+@media (max-width: 760px) {
+    .ab-srv-price__list,
+    .ab-srv-equip__list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+        margin-inline: 0;
+        padding: 0;
+        overflow: visible;
+    }
+
+    /* Порядок работ стоит на тёмной подложке, поэтому своё поле ей
+       оставляем: с padding: 0 текст упирался в самый край блока. */
+    .ab-srv-steps {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px; padding: 14px;
+    }
+
+    .ab-srv-price__list > *,
+    .ab-srv-equip__list > *,
+    .ab-srv-steps > * {
+        box-sizing: border-box;
+        min-width: 0;
+        padding: 12px;
+    }
+
+    .ab-srv-price__list > *:last-child:nth-child(odd),
+    .ab-srv-equip__list > *:last-child:nth-child(odd),
+    .ab-srv-steps > *:last-child:nth-child(odd) { grid-column: 1 / -1; }
+
+    /* Обещания читаются как текст, а не как ярлыки: в двух колонках
+       строка выходила в три слова и карточка росла вниз. Одна колонка,
+       заголовок и текст рядом — блок стал ниже, чем плитками. */
+    .ab-srv-benefits__list { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+    .ab-srv-benefits__list li { padding: 14px 16px; }
+    .ab-srv-benefits__list b { font-size: 15px; line-height: 1.25; }
+    .ab-srv-benefits__list span { font-size: 13.5px; line-height: 1.5; }
+
+    /* Строка прайса была в ряд «название — примечание» с разделителем
+       снизу: в плитке ставим одно под другим и добавляем рамку. */
+    .ab-srv-price__list li {
+        display: block; border: 1px solid var(--ab-100);
+        border-radius: 12px; background: var(--ab-white);
+    }
+    .ab-srv-price__list b { font-size: 13.5px; line-height: 1.25; }
+    .ab-srv-price__list i { font-size: 12px; line-height: 1.4; }
+
+    /* Номер шага над заголовком: слева он съедал половину плитки. */
+    /* Шаг — плитка на тёмной подложке: без своей заливки пункты
+       сливались в сплошное полотно текста. */
+    .ab-srv-steps li {
+        grid-template-columns: minmax(0, 1fr); gap: 4px;
+        border: 1px solid rgba(255, 255, 255, .1); border-radius: 12px;
+        background: rgba(255, 255, 255, .05);
+    }
+    .ab-srv-steps__num { grid-column: 1; justify-self: start; }
+    .ab-srv-steps b { grid-column: 1; font-size: 14px; }
+    .ab-srv-steps span:not(.ab-srv-steps__num) { grid-column: 1; font-size: 12.5px; line-height: 1.45; }
+
+    .ab-srv-equip__list li { font-size: 13px; line-height: 1.35; }
+
+    /* Теги в шапке: переносим по строкам и делаем компактнее, чтобы
+       влезали по два в ряд. Прокрутку вбок не используем — обрезанная
+       метка не читается. */
+    .ab-srv-hero__grid > * { min-width: 0; }
+    .ab-srv-hero__list { flex-wrap: wrap; gap: 6px; margin-top: 16px; min-width: 0; }
+    .ab-srv-hero__list li { padding: 6px 10px; font-size: 11.5px; font-weight: 700; }
 }

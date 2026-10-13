@@ -254,18 +254,63 @@
                         @endforeach
                     </ul>
 
-                    @if ($shown < $total)
-                        {{-- Ссылка ведёт на первую из добавленных позиций, а не
-                             на начало списка: иначе после нажатия приходится
-                             заново пролистывать всё, что уже видел. Со скриптом
-                             страница вообще не перезагружается. --}}
-                        <div class="ab-shop__more-wrap" data-shop-more>
-                            <span class="ab-shop__counter">Показано {{ $shown }} из {{ $total }}</span>
-                            <a class="ab-btn ab-btn--outline"
-                               href="{{ request()->fullUrlWithQuery(['show' => $shown + $perPage]) }}#tovar-{{ $shown }}">
-                                Показать ещё
-                            </a>
-                        </div>
+                    @if ($pages > 1)
+                        {{-- Страницы каталога.
+
+                             Рядом с текущей показываем соседние, края списка
+                             всегда на месте: с семидесяти позиций до последней
+                             страницы иначе не дойти одним нажатием. Фильтры
+                             и сортировка сохраняются — меняется только page. --}}
+                        @php
+                            $url = fn ($n) => request()->fullUrlWithQuery(['page' => $n > 1 ? $n : null]) . '#tovary';
+
+                            /* Окно из страниц вокруг текущей: 1 … 4 5 6 … 9 */
+                            $window = collect(range(max(1, $page - 1), min($pages, $page + 1)))
+                                ->prepend(1)->push($pages)->unique()->sort()->values();
+                        @endphp
+
+                        <nav class="ab-pager" aria-label="Страницы каталога">
+                            @if ($page > 1)
+                                <a class="ab-pager__arrow" href="{{ $url($page - 1) }}" rel="prev" aria-label="Предыдущая страница">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor"
+                                              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </a>
+                            @endif
+
+                            <ul class="ab-pager__list">
+                                @php $prev = 0; @endphp
+                                @foreach ($window as $n)
+                                    @if ($n - $prev > 1)
+                                        <li class="ab-pager__gap" aria-hidden="true">…</li>
+                                    @endif
+
+                                    <li>
+                                        @if ($n === $page)
+                                            <span class="ab-pager__page is-current" aria-current="page">{{ $n }}</span>
+                                        @else
+                                            <a class="ab-pager__page" href="{{ $url($n) }}">{{ $n }}</a>
+                                        @endif
+                                    </li>
+
+                                    @php $prev = $n; @endphp
+                                @endforeach
+                            </ul>
+
+                            @if ($page < $pages)
+                                <a class="ab-pager__arrow" href="{{ $url($page + 1) }}" rel="next" aria-label="Следующая страница">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M9 6l6 6-6 6" fill="none" stroke="currentColor"
+                                              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </a>
+                            @endif
+                        </nav>
+
+                        <p class="ab-pager__note">
+                            Показано {{ $products->count() }} из {{ $total }} · страница {{ $page }} из {{ $pages }}
+                        </p>
                     @endif
                 @endif
             </div>

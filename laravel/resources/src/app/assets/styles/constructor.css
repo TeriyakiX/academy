@@ -96,3 +96,48 @@
 .ctor-cta__inner .ctor-cta__title { color: #fff; }
 .ctor-cta__inner .ctor-cta__description { color: #c9c9c8; }
 .docs__title { margin-bottom: 12px; }
+
+/* ---------- Телефон ----------
+   Карточка курса раскладывалась в три колонки: кнопка, текст, цена.
+   На узком экране текстовая колонка сжималась до трёх слов в строке,
+   а длинное описание растягивало карточку на пол-экрана. Здесь список
+   выбора: отметка и название в строке, под ними часы и цена. */
+@media (max-width: 760px) {
+    .ctor__tabs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-bottom: 18px; }
+    .ctor__tab { justify-content: center; padding: 10px 8px; font-size: 13px; }
+
+    .ctor__body { gap: 18px; }
+    .ctor__list { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; }
+
+    .ctor__item {
+        grid-template-columns: auto minmax(0, 1fr);
+        grid-template-areas: 'pick title' 'pick meta';
+        gap: 4px 12px; align-items: center; padding: 14px;
+    }
+
+    .ctor__toggle { grid-area: pick; }
+    .ctor__item-main { grid-area: title; }
+    .ctor__item-price { grid-area: meta; justify-self: start; text-align: left; font-size: 15px; }
+
+    .ctor__item-title { margin: 0; font-size: 15px; line-height: 1.25; }
+
+    /* Описание на телефоне прячем: для выбора хватает названия, часов
+       и цены, а полный текст есть на странице курса. */
+    .ctor__item-desc { display: none; }
+    .ctor__item-meta { margin-top: 2px; font-size: 12px; }
+
+    .ctor__item-old { display: inline; margin-right: 6px; font-size: 12px; }
+
+    /* Итог прилипает к низу экрана: иначе при выборе курсов сумма
+       оставалась где-то внизу страницы и её не было видно. */
+    .ctor__result { position: sticky; top: auto; bottom: 0; z-index: 5;
+        padding: 16px; border-radius: 14px 14px 0 0;
+        box-shadow: 0 -8px 24px rgba(26, 26, 26, .12); }
+    .ctor__result-title { margin-bottom: 10px; font-size: 15px; }
+    .ctor__chosen { gap: 7px; margin-bottom: 12px; }
+    .ctor__chosen-item { font-size: 13px; }
+    .ctor__stats { gap: 4px; margin-bottom: 10px; padding: 10px 0; }
+    .ctor__stats > div { font-size: 13px; }
+    .ctor__total { margin-bottom: 12px; }
+    .ctor__total-sum { font-size: 22px; }
+}
