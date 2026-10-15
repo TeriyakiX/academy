@@ -20,100 +20,6 @@
     .ab-h2 { margin-bottom: 12px; }
     .ab-lead { margin-bottom: 22px; }
 
-    /* Встречи: одна карточка в ряд. Плитки по две оказались мелкими —
-       дата и день недели в них не помещались, описание обрывалось. */
-    /* Вес селектора должен перебить общий отступ секций выше (main section),
-       иначе над заголовком остаётся пустая серая полоса. */
-    .ab-page--events section.ab-cpage__hero { padding: 14px 0 12px; }
-    .ab-page--events section.ab-events { padding-top: 16px; }
-    .ab-page--events .ab-cpage__tag { margin-bottom: 9px; }
-    .ab-page--events .ab-cpage__title { margin-bottom: 0; }
-
-    /* Месяцы и разделы — одной строкой с прокруткой вбок, как в каталоге:
-       два ряда переносов занимали пол-экрана до первой карточки. */
-    .ab-ev__tabs { display: flex; flex-wrap: nowrap; width: 100%; overflow-x: auto;
-        scrollbar-width: none; padding: 4px; margin-bottom: 10px; }
-    .ab-ev__tabs::-webkit-scrollbar { display: none; }
-    /* Край строки растворяется: видно, что её можно листать, а не что
-       надпись обрезали. */
-    .ab-ev__tabs { -webkit-mask-image: linear-gradient(to right, #000 82%, transparent);
-        mask-image: linear-gradient(to right, #000 82%, transparent); }
-    .ab-ev__tab { flex: 0 0 auto; padding: 9px 13px; font-size: 13px; }
-    .ab-ev__tabs--sections .ab-ev__tab { padding: 7px 12px; }
-    .ab-ev__tabs--sections { margin-top: 0; margin-bottom: 16px; }
-
-    /* Обложки: по одной в ряд — в половину экрана текст не читается. */
-    .ab-cov { grid-template-columns: 1fr; gap: 14px; }
-    .ab-cov__body { padding: 14px 15px 16px; }
-    .ab-cov__title { font-size: 18px; }
-    .ab-cov__text { -webkit-line-clamp: 2; font-size: 13px; }
-    .ab-cov__day b { font-size: 20px; }
-    .ab-cov--past { grid-template-columns: 1fr 1fr; }
-    .ab-cov--past .ab-cov__title { font-size: 14px; }
-    .ab-cov--past .ab-cov__when { font-size: 12px; margin: 0; }
-    /* Афиши: по одной в ряд, крупный кадр. */
-    .ab-pst { grid-template-columns: 1fr; gap: 12px; }
-    .ab-pst__item.is-wide { grid-column: auto; }
-    .ab-pst__item a, .ab-pst__item.is-wide a { aspect-ratio: 4 / 3; }
-    .ab-pst__title, .ab-pst__item.is-wide .ab-pst__title { font-size: 20px; }
-    .ab-pst__meta { font-size: 13px; }
-
-    /* Список и просмотр: на узком экране просмотр уходит вниз. */
-    .ab-split { grid-template-columns: 1fr; gap: 14px; }
-    .ab-split__text { padding: 15px 16px 18px; }
-    .ab-split__text h3 { font-size: 20px; }
-    .ab-split__facts li { padding: 9px 12px; }
-    .ab-split__pane img { aspect-ratio: 16 / 9; }
-
-    /* Строго текстом: дата и название в строку, цена под ними. */
-    .ab-plain__row { grid-template-columns: 52px minmax(0, 1fr); gap: 12px; padding: 14px 4px; }
-    .ab-plain__date b { font-size: 24px; }
-    .ab-plain__main b { font-size: 16px; }
-    .ab-plain__main em { font-size: 13px; }
-    .ab-plain__meta, .ab-plain__price { grid-column: 2; display: flex; gap: 10px; align-items: baseline; }
-    .ab-plain__meta b, .ab-plain__price b { font-size: 14px; }
-    .ab-plain__go { display: none; }
-    /* Календарь: клетки мельче, подпись времени прячем — не влезает. */
-    .ab-cal__grid-wrap { padding: 10px; }
-    .ab-cal__week, .ab-cal__grid { gap: 4px; }
-    .ab-cal__cell { font-size: 13px; border-radius: 8px; }
-    .ab-cal__cell.is-event span { display: none; }
-    .ab-cal__item { grid-template-columns: 48px minmax(0, 1fr); gap: 12px; padding: 11px 13px; }
-    .ab-cal__item .ab-btn, .ab-cal__done { grid-column: 1 / -1; width: 100%; text-align: center; }
-
-    /* Ближайшая крупно: снимок сверху, характеристики в столбик. */
-    .ab-evhero { grid-template-columns: 1fr; }
-    .ab-evhero__photo img { min-height: 0; aspect-ratio: 16 / 10; }
-    .ab-evhero__body { padding: 18px 16px 20px; }
-    .ab-evhero__title { font-size: 23px; }
-    .ab-evhero__text { font-size: 15px; margin-bottom: 16px; }
-    .ab-evhero__facts { gap: 10px; margin-bottom: 18px; }
-    .ab-evhero__facts dd { font-size: 14px; }
-    .ab-evhero__actions .ab-btn { width: 100%; }
-    .ab-evnext__list a { grid-template-columns: 1fr; gap: 4px; padding: 12px 14px; }
-
-    /* Лента времени: снимок над текстом, линия тоньше. */
-    .ab-tl__line { padding-left: 20px; }
-    .ab-tl__dot { left: -20px; top: 16px; width: 10px; height: 10px; }
-    .ab-tl__card { grid-template-columns: 1fr; gap: 12px; padding: 12px 13px; }
-    .ab-tl__photo { order: -1; }
-    .ab-tl__card h3 { font-size: 17px; }
-    .ab-tl__foot .ab-btn { margin-left: 0; width: 100%; }
-    /* Афиша: снимок сверху, под ним текст. */
-    .ab-poster__row { grid-template-columns: 1fr; gap: 13px; padding: 12px; }
-    .ab-poster__mname { font-size: 20px; margin-bottom: 12px; }
-    .ab-poster__title { font-size: 18px; }
-    .ab-poster__text { font-size: 14px; margin-bottom: 12px; }
-    .ab-poster__foot { gap: 10px; font-size: 13px; }
-    .ab-poster__foot .ab-btn { margin-left: 0; width: 100%; }
-    .ab-poster__past b { min-width: 66px; }
-
-    /* Расписание строками: дата и текст в строку, цена и кнопка под ними. */
-    .ab-evtab__row { grid-template-columns: 58px minmax(0, 1fr); gap: 12px; padding: 12px 13px; }
-    .ab-evtab__date b { font-size: 20px; }
-    .ab-evtab__side { grid-column: 2; justify-items: start; }
-    .ab-evtab__btn { grid-column: 1 / -1; width: 100%; }
-    .ab-evtab__main h3 { font-size: 16px; }
     /* Шапка списка: заголовок, короткий лид и ближайшая дата — в столбик. */
     .ab-evlist__head { padding-top: 16px; }
     .ab-evlist__top { grid-template-columns: 1fr; gap: 14px; padding-bottom: 16px; }
@@ -135,16 +41,31 @@
     .ab-evp__about { padding: 24px 0; }
     .ab-evp__cols { grid-template-columns: 1fr; gap: 16px; }
     .ab-evp__story p { font-size: 15px; }
-    .ab-ev__list { grid-template-columns: 1fr; gap: 14px; }
-    .ab-ev__photo { aspect-ratio: 16 / 9; }
-    .ab-ev__body { padding: 15px 16px 17px; }
-    .ab-ev__when { gap: 11px; margin-bottom: 8px; }
-    .ab-ev__day { font-size: 27px; }
-    .ab-ev__title { font-size: 17px; }
-    .ab-ev__text { -webkit-line-clamp: 2; }
-    .ab-ev__badge, .ab-ev__seats { top: 10px; }
-    .ab-ev__badge { left: 10px; max-width: calc(100% - 150px); }
-    .ab-ev__seats { right: 10px; }
+    /* Афиши: одна в ряд, кадр вытянут по высоте. Широкий кадр на телефоне
+       давал полоску, в которой текст наезжал на лица. */
+    .ab-pst { grid-template-columns: 1fr; gap: 12px; }
+    .ab-pst__item.is-wide { grid-column: auto; }
+    .ab-pst__item a, .ab-pst__item.is-wide a { aspect-ratio: 3 / 4; }
+    .ab-pst__item a::after { background: linear-gradient(to top, rgba(20,16,14,.92) 0%,
+        rgba(20,16,14,.55) 38%, rgba(20,16,14,.05) 70%); }
+
+    .ab-pst__date { top: 10px; left: 10px; padding: 7px 11px; }
+    .ab-pst__date b { font-size: 20px; }
+    .ab-pst__tags { top: 10px; right: 10px; max-width: calc(100% - 86px); }
+    .ab-pst__soon, .ab-pst__section { padding: 5px 10px; font-size: 10px; }
+
+    .ab-pst__body { left: 14px; right: 14px; bottom: 14px; gap: 4px; }
+    .ab-pst__title, .ab-pst__item.is-wide .ab-pst__title { font-size: 21px; line-height: 1.15; }
+    .ab-pst__meta { gap: 8px; font-size: 13px; }
+    .ab-pst__seats { font-size: 12px; }
+
+    .ab-pst__pastwrap { margin-top: 30px; padding-top: 20px; }
+    .ab-pst__pasthead { font-size: 19px; margin-bottom: 12px; }
+    .ab-pst--past { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .ab-pst--past .ab-pst__item a { aspect-ratio: 1 / 1; }
+    .ab-pst--past .ab-pst__title { font-size: 14px; }
+    .ab-pst--past .ab-pst__date { padding: 5px 8px; }
+    .ab-pst--past .ab-pst__date b { font-size: 15px; }
     /* ---------- Карточки листаются вбок ---------- */
     .ab-tabs__grid,
     .ab-rv__list,
