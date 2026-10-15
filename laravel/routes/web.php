@@ -236,9 +236,6 @@ Route::get('/shop/{slug}.html', [\App\Http\Controllers\ShopController::class, 's
 
 // Расписание мероприятий отдельной страницей
 Route::get('/events.html', fn () => view('pages.events', ['seo' => [
-    /* Варианты вида открываются как /events.html?v=..., и это тот же
-       материал: от поиска их закрываем, canonical ведёт на основной адрес. */
-    'robots'      => request()->has('v') ? 'noindex, follow' : null,
     'title'       => 'Расписание встреч и мероприятий — мастер-классы Академии Бариста',
     'description' => 'Однодневные мастер-классы, каппинги и открытые встречи Академии Бариста в Москве. Расписание ближайших мероприятий, стоимость и запись.',
     'canonical'   => 'https://academy-barista.ru/events.html',

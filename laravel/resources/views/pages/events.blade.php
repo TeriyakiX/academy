@@ -9,15 +9,11 @@
     @include('partials.site.header')
 
     @php
-        /* Варианты страницы на время выбора: ?v=a — афиша, ?v=b — строками,
-           без параметра — плитки с фильтрами. Когда вариант выберут,
-           здесь останется один. */
-        $variant = in_array(request('v'), ['a', 'e', 'f', 'g', 'h', 'j'], true) ? request('v') : 'c';
-
-        $all   = \App\Support\Meetings::all();
         $today = now()->format('Y-m-d');
-        $ahead = $all->filter(fn ($e) => ($e['date'] ?? '') >= $today)->sortBy('date');
-        $next  = $ahead->first();
+        $ahead = \App\Support\Meetings::all()
+            ->filter(fn ($e) => $e['date'] >= $today)
+            ->sortBy('date');
+        $next = $ahead->first();
     @endphp
 
     <main class="ab-page ab-page--events">
@@ -54,40 +50,9 @@
             </div>
         </section>
 
-        {{-- Временная панель выбора: на боевой сервер не уходит. --}}
-        @if (app()->environment('local') || request()->has('v'))
-            <div class="ab-container">
-                <div class="ab-vswitch">
-                    <span>Вариант страницы:</span>
-                    <a class="@if ($variant === 'c') is-active @endif" href="/events.html">1. Плитки с фильтрами</a>
-                    <a class="@if ($variant === 'a') is-active @endif" href="/events.html?v=a">2. Афиша по месяцам</a>
-                    <a class="@if ($variant === 'e') is-active @endif" href="/events.html?v=e">3. Ближайшая крупно</a>
-                    <a class="@if ($variant === 'f') is-active @endif" href="/events.html?v=f">4. Лента времени</a>
-                    <a class="@if ($variant === 'g') is-active @endif" href="/events.html?v=g">5. Афиши-постеры</a>
-                    <a class="@if ($variant === 'j') is-active @endif" href="/events.html?v=j">6. Обложки по две</a>
-                    <a class="@if ($variant === 'h') is-active @endif" href="/events.html?v=h">7. Список и просмотр</a>
-                </div>
-            </div>
-        @endif
-
         <section class="ab-events">
             <div class="ab-container">
-                @if ($variant === 'a')
-                    @include('partials.blocks.events-poster')
-                @elseif ($variant === 'e')
-                    @include('partials.blocks.events-hero')
-                @elseif ($variant === 'f')
-                    @include('partials.blocks.events-timeline')
-                @elseif ($variant === 'g')
-                    @include('partials.blocks.events-posters')
-                @elseif ($variant === 'h')
-                    @include('partials.blocks.events-split')
-                @elseif ($variant === 'j')
-                    @include('partials.blocks.events-covers')
-                @else
-                    <div data-island="EventsSchedule"
-                         data-props="{{ json_encode(['months' => \App\Support\Meetings::months()], JSON_UNESCAPED_UNICODE) }}"></div>
-                @endif
+                @include('partials.blocks.events-posters')
             </div>
         </section>
 

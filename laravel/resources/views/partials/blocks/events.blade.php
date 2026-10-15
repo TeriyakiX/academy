@@ -8,10 +8,11 @@
                     или просто <a href="#contacts">приходите на экскурсию</a>.
                 </p>
             </div>
-            <a class="ab-btn ab-btn--outline" href="/events.html">Расписание встреч</a>
+            <a class="ab-btn ab-btn--outline" href="/events.html">Все встречи</a>
         </div>
 
-        <div data-island="EventsSchedule"
-             data-props="{{ json_encode(['months' => \App\Support\Meetings::months()], JSON_UNESCAPED_UNICODE) }}"></div>
+        {{-- Тот же вид афиш, что и на странице встреч: на главной показываем
+             только ближайшие, прошедшие там ни к чему. --}}
+        @include('partials.blocks.events-posters', ['limit' => 3, 'withPast' => false])
     </div>
 </section>
