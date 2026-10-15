@@ -90,8 +90,30 @@ config(['site.pages' => $articles
     ])
     ->all() + config('site.pages', [])]);
 
+/*
+ | Страницы, которые пока закрыты заглушкой. Вёрстка и тексты остаются
+ | в проекте: чтобы вернуть страницу, достаточно убрать её адрес отсюда.
+ | Пока адрес в списке, он отдаёт заглушку, закрыт от индексации
+ | и не попадает в карту сайта.
+ */
+$underConstruction = [
+    '/service.html' => ['heading' => 'Сервис кофейного оборудования', 'text' => 'Раздел готовится — дополняем прайс и описание работ.'],
+];
+
 foreach (config('site.pages') as $uri => $page) {
     $routeName = 'page' . str_replace(['/', '.html', '.'], ['.', '', '_'], rtrim($uri, '/')) ?: 'home';
+
+    if (isset($underConstruction[$uri])) {
+        $stub = $underConstruction[$uri];
+
+        Route::get($uri, fn () => view('pages.under-construction', [
+            'seo'     => ['robots' => 'noindex, follow'] + $page,
+            'heading' => $stub['heading'],
+            'text'    => $stub['text'],
+        ]))->name($routeName);
+
+        continue;
+    }
 
     if ($articles->has($uri)) {
         Route::get($uri, fn () => view('pages.blog-article', [
@@ -214,13 +236,48 @@ Route::get('/shop/{slug}.html', [\App\Http\Controllers\ShopController::class, 's
 
 // Расписание мероприятий отдельной страницей
 Route::get('/events.html', fn () => view('pages.events', ['seo' => [
-    'title'       => 'Расписание мероприятий — мастер-классы и открытые встречи | Академия Бариста',
-    'description' => 'Однодневные мастер-классы и открытые встречи Академии Бариста в Москве. Расписание ближайших мероприятий, стоимость и запись.',
+    /* Варианты вида открываются как /events.html?v=..., и это тот же
+       материал: от поиска их закрываем, canonical ведёт на основной адрес. */
+    'robots'      => request()->has('v') ? 'noindex, follow' : null,
+    'title'       => 'Расписание встреч и мероприятий — мастер-классы Академии Бариста',
+    'description' => 'Однодневные мастер-классы, каппинги и открытые встречи Академии Бариста в Москве. Расписание ближайших мероприятий, стоимость и запись.',
     'canonical'   => 'https://academy-barista.ru/events.html',
     'body_attrs'  => ['class' => 'body'],
     'css'         => [],
     'js'          => [],
 ]]))->name('events');
+
+/*
+ | Страница одной встречи. Встречи приходят из CRM (а пока её нет — из файла),
+ | поэтому маршрут один на всех: адрес ищем по полю slug.
+ */
+Route::get('/events/{slug}.html', function (string $slug) {
+    $all = collect(config('home.events.months', []))->flatMap(fn ($list) => $list);
+    $event = $all->firstWhere('slug', $slug);
+
+    abort_if(!$event, 404);
+
+    /* Соседние встречи внизу: сначала те, что ещё впереди. */
+    $others = $all->where('slug', '!=', $slug)
+        ->sortBy(fn ($e) => [($e['date'] ?? '') < now()->format('Y-m-d'), $e['date'] ?? ''])
+        ->take(3)
+        ->values()
+        ->all();
+
+    return view('pages.event', [
+        'seo' => [
+            'title'       => $event['title'] . ' — встреча в Академии Бариста',
+            'description' => $event['text'] ?? '',
+            'canonical'   => 'https://academy-barista.ru/events/' . $slug . '.html',
+            'og_image'    => $event['photo'] ?? null,
+            'body_attrs'  => ['class' => 'body'],
+            'css'         => [],
+            'js'          => [],
+        ],
+        'event'  => $event,
+        'others' => $others,
+    ]);
+})->where('slug', '[a-z0-9-]+')->name('event.show');
 
 // Конструктор курсов
 Route::get('/constructor.html', fn () => view('pages.constructor', ['seo' => [
@@ -301,10 +358,20 @@ Route::get('/sitemap.xml', function () {
     };
 
     /* Снятые программы в карту сайта не попадают, даже если остались в CRM. */
-    $skip = array_merge(['/thank-you.html'], config('site.retired', []));
+    $skip = array_merge(['/thank-you.html', '/service.html'], config('site.retired', []));
 
     $urls = collect(array_keys(config('site.pages', [])))
         ->reject(fn ($uri) => in_array($uri, $skip, true));
+
+    /* Страницы встреч: адреса приходят вместе с самими встречами,
+       поэтому собираем их тут же, а не ведём списком. */
+    $urls = $urls->merge(
+        collect(config('home.events.months', []))
+            ->flatMap(fn ($list) => $list)
+            ->pluck('slug')
+            ->filter()
+            ->map(fn ($slug) => "/events/{$slug}.html")
+    );
 
     // каталог и карточки товаров
     $urls = $urls->merge(

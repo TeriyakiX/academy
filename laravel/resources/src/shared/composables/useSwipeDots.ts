@@ -14,7 +14,6 @@ const TRACKS = [
     '.ab-tabs__grid',
     '.ab-rv__list',
     '.ab-dirs__cols',
-    '.ab-ev__list',
     '.ab-steps__list',
     '.ab-team__grid',       // преподаватели
     '.ab-near__list',       // соседние программы на странице курса

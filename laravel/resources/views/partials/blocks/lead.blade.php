@@ -20,7 +20,7 @@
     ];
 @endphp
 
-<section class="ab-lead-block ab-reveal">
+<section class="ab-lead-block ab-reveal"@isset($anchor) id="{{ $anchor }}"@endisset>
     <div class="ab-container">
         <div class="ab-lead-block__inner">
 
