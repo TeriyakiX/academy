@@ -8,99 +8,86 @@
 <div class="wrapper">
     @include('partials.site.header')
 
+    @php
+        /* Варианты страницы на время выбора: ?v=a — афиша, ?v=b — строками,
+           без параметра — плитки с фильтрами. Когда вариант выберут,
+           здесь останется один. */
+        $variant = in_array(request('v'), ['a', 'e', 'f', 'g', 'h', 'j'], true) ? request('v') : 'c';
+
+        $all   = collect(config('home.events.months', []))->flatMap(fn ($list) => $list);
+        $today = now()->format('Y-m-d');
+        $ahead = $all->filter(fn ($e) => ($e['date'] ?? '') >= $today)->sortBy('date');
+        $next  = $ahead->first();
+    @endphp
+
     <main class="ab-page ab-page--events">
-        <section class="ab-cpage__hero">
+        <section class="ab-evlist__head">
             <div class="ab-container">
                 <nav class="ab-crumbs" aria-label="Хлебные крошки">
                     <a href="/">Главная</a>
                     <span>/</span>
-                    <b>Мероприятия</b>
+                    <b>Встречи</b>
                 </nav>
 
-                @php
-                    /* Цифры считаем по тем же встречам, что показаны ниже. */
-                    $events = collect(config('home.events.months', []))->flatMap(fn ($list) => $list);
-                    $from = $events->filter(fn ($e) => !empty($e['price']))->min('price');
-                    $n = $events->count();
-                    $word = ($n % 10 === 1 && $n % 100 !== 11) ? 'встреча'
-                        : (($n % 10 >= 2 && $n % 10 <= 4 && ($n % 100 < 10 || $n % 100 >= 20)) ? 'встречи' : 'встреч');
-                @endphp
-
-                {{-- Шапка со снимком и цифрами: раньше здесь была голая строка
-                     заголовка, и страница начиналась пустой полосой. --}}
-                <div class="ab-cpage__split">
+                <div class="ab-evlist__top">
                     <div>
-                        <span class="ab-cpage__tag">Мероприятия</span>
-                        <h1 class="ab-cpage__title">Расписание мероприятий</h1>
-                        <p class="ab-cpage__lead">
-                            Однодневные мастер-классы и открытые встречи Академии. Прийти можно
-                            без записи на курс — попробовать профессию и познакомиться со школой.
+                        <h1 class="ab-evlist__title">Встречи в Академии</h1>
+                        <p class="ab-evlist__lead">
+                            Мастер-классы, каппинги и открытые дни. Прийти можно без записи
+                            на курс — на один вечер, попробовать и познакомиться со школой.
                         </p>
+                    </div>
 
-                        <ul class="ab-cpage__nums">
-                            <li><b>{{ $n }}</b><span>{{ $word }} в афише</span></li>
-                            @if ($from)
-                                <li><b>от {{ number_format($from, 0, ',', ' ') }} ₽</b><span>участие</span></li>
+                    @if ($next)
+                        <a class="ab-evlist__next" href="/events/{{ $next['slug'] }}.html">
+                            <span class="ab-evlist__next-label">Ближайшая</span>
+                            <b>{{ $next['title'] }}</b>
+                            <span class="ab-evlist__next-date">
+                                {{ $next['day'] }} {{ $next['month'] }}, {{ $next['weekday'] }}, {{ $next['time'] }}
+                            </span>
+                            @if ($ahead->count() > 1)
+                                <span class="ab-evlist__next-more">и ещё {{ $ahead->count() - 1 }} впереди</span>
                             @endif
-                            <li><b>один день</b><span>без записи на курс</span></li>
-                            <li><b>до 10</b><span>человек в группе</span></li>
-                        </ul>
-                    </div>
-
-                    <div class="ab-cpage__media">
-                        <img src="/assets/master-class.webp" alt="Открытая встреча в Академии Бариста"
-                             width="573" height="470" loading="eager" decoding="async">
-                    </div>
+                        </a>
+                    @endif
                 </div>
             </div>
         </section>
+
+        {{-- Временная панель выбора: на боевой сервер не уходит. --}}
+        @if (app()->environment('local') || request()->has('v'))
+            <div class="ab-container">
+                <div class="ab-vswitch">
+                    <span>Вариант страницы:</span>
+                    <a class="@if ($variant === 'c') is-active @endif" href="/events.html">1. Плитки с фильтрами</a>
+                    <a class="@if ($variant === 'a') is-active @endif" href="/events.html?v=a">2. Афиша по месяцам</a>
+                    <a class="@if ($variant === 'e') is-active @endif" href="/events.html?v=e">3. Ближайшая крупно</a>
+                    <a class="@if ($variant === 'f') is-active @endif" href="/events.html?v=f">4. Лента времени</a>
+                    <a class="@if ($variant === 'g') is-active @endif" href="/events.html?v=g">5. Афиши-постеры</a>
+                    <a class="@if ($variant === 'j') is-active @endif" href="/events.html?v=j">6. Обложки по две</a>
+                    <a class="@if ($variant === 'h') is-active @endif" href="/events.html?v=h">7. Список и просмотр</a>
+                </div>
+            </div>
+        @endif
 
         <section class="ab-events">
             <div class="ab-container">
-                <div data-island="EventsSchedule"
-                     data-props="{{ json_encode(['months' => config('home.events.months')], JSON_UNESCAPED_UNICODE) }}"></div>
-            </div>
-        </section>
-
-        {{-- Под расписанием страница обрывалась на последней строке списка:
-             объясняем, что это за формат и чем он отличается от курса. --}}
-        <section class="ab-evwhat ab-reveal">
-            <div class="ab-container">
-                <h2 class="ab-h2">Что это за встречи</h2>
-
-                <div class="ab-evwhat__grid">
-                    <article>
-                        <b>Один вечер, без обязательств</b>
-                        <p>
-                            Встреча идёт три-четыре часа в выходной. Это не курс: записываться
-                            на программу и готовиться заранее не нужно.
-                        </p>
-                    </article>
-
-                    <article>
-                        <b>Можно прийти одному</b>
-                        <p>
-                            Группа небольшая, до десяти человек. Приходят и поодиночке,
-                            и парами, и компанией — заранее собирать своих не нужно.
-                        </p>
-                    </article>
-
-                    <article>
-                        <b>Всё за стойкой, руками</b>
-                        <p>
-                            Работаем на профессиональном оборудовании школы. Зерно, молоко
-                            и посуда — наши, приносить ничего не надо.
-                        </p>
-                    </article>
-
-                    <article>
-                        <b>Место бронируется заранее</b>
-                        <p>
-                            Мест немного, поэтому участие подтверждаем при записи.
-                            Если даты в афише не подходят — позвоните, подскажем ближайшие.
-                        </p>
-                    </article>
-                </div>
+                @if ($variant === 'a')
+                    @include('partials.blocks.events-poster')
+                @elseif ($variant === 'e')
+                    @include('partials.blocks.events-hero')
+                @elseif ($variant === 'f')
+                    @include('partials.blocks.events-timeline')
+                @elseif ($variant === 'g')
+                    @include('partials.blocks.events-posters')
+                @elseif ($variant === 'h')
+                    @include('partials.blocks.events-split')
+                @elseif ($variant === 'j')
+                    @include('partials.blocks.events-covers')
+                @else
+                    <div data-island="EventsSchedule"
+                         data-props="{{ json_encode(['months' => config('home.events.months')], JSON_UNESCAPED_UNICODE) }}"></div>
+                @endif
             </div>
         </section>
 

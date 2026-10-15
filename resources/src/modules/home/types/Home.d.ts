@@ -62,10 +62,21 @@ interface IEvent {
     weekday: string;
     time: string;
     title: string;
-    /** «до 10 человек». */
-    seats: string;
+    /** Адрес страницы встречи: /events/{slug}.html. */
+    slug?: string;
+    /** Дата по ISO: «2026-10-18». По ней считаем прошедшие и «через N дней». */
+    date?: string;
+    /** «до 10 человек» — старый формат, пока встречи ведём в файле. */
+    seats?: string;
+    /** Снимок на карточке. */
+    photo?: string;
+    /** Всего мест и сколько осталось: «6 из 8». */
+    seats_total?: number;
+    seats_left?: number;
     price: number;
     text: string;
+    /** Раздел встречи: «Каппинг», «Мастер-класс». */
+    section?: string;
 }
 
 /** Расписание по месяцам: «Май» → занятия. */

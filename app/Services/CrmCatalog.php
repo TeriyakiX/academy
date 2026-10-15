@@ -23,6 +23,7 @@ class CrmCatalog
     {
         $this->applyBlocks();
         $this->applyCourses();
+        $this->applyEvents();
         $this->applyArticles();
     }
 
@@ -62,6 +63,65 @@ class CrmCatalog
             if (is_array($value) && preg_match('/^(home|courses)\.[a-z_]+$/', $key)) {
                 config([$key => $value]);
             }
+        }
+    }
+
+    /**
+     * Встречи из CRM. Там их заводит школа: дата, места, раздел, текст
+     * страницы. Пустой ответ встречи из файла не стирает — иначе при
+     * недоступной CRM расписание на сайте пропало бы совсем.
+     */
+    private function applyEvents(): void
+    {
+        if (!config('crm.events')) {
+            return;
+        }
+
+        $events = $this->crm->cached('events')['events'] ?? [];
+
+        if (!$events) {
+            return;
+        }
+
+        $months = [];
+
+        foreach ($events as $event) {
+            if (empty($event['starts']) || empty($event['slug'])) {
+                continue;
+            }
+
+            $at = \Illuminate\Support\Carbon::parse($event['starts'])->locale('ru');
+
+            /* Ключ вкладки — месяц с большой буквы: «Октябрь». */
+            $month = mb_convert_case($at->translatedFormat('F'), MB_CASE_TITLE, 'UTF-8');
+
+            $months[$month][] = [
+                'slug'        => $event['slug'] ?? null,
+                'date'        => $at->format('Y-m-d'),
+                'day'         => $at->format('d'),
+                'month'       => $at->translatedFormat('M'),
+                'weekday'     => $at->translatedFormat('l'),
+                'time'        => $at->format('H:i'),
+                'title'       => $event['title'],
+                'section'     => $event['section'] ?? null,
+                'photo'       => $event['image'] ?: null,
+                'seats_total' => $event['seatsTotal'] ?? null,
+                'seats_left'  => $event['seats'] ?? null,
+                'price'       => (int) ($event['price'] ?? 0),
+                'duration'    => $event['duration'] ? $event['duration'] . ' мин' : null,
+                'place'       => $event['location'] ?? null,
+                'text'        => $event['summary'] ?? '',
+                /* Абзацы страницы: в CRM это одно поле, пустая строка — новый абзац. */
+                'about'       => array_values(array_filter(array_map(
+                    'trim',
+                    preg_split('/\R{2,}/', (string) ($event['about'] ?? '')),
+                ))),
+                'for_whom'    => $event['forWhom'] ?? null,
+            ];
+        }
+
+        if ($months) {
+            config(['home.events.months' => $months, 'home.events.demo' => false]);
         }
     }
 

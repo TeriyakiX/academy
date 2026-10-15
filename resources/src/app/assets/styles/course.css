@@ -44,6 +44,8 @@
     font-size: clamp(30px, 4vw, 50px); font-weight: 800; line-height: 1.08; }
 /* Длина строки для чтения, а не на всю колонку. */
 .ab-cpage__lead { max-width: 660px; margin: 0 0 30px; font-size: 17px; line-height: 1.6; color: var(--ab-500); }
+.ab-cpage__lead a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.ab-cpage__lead a:hover { text-decoration: none; }
 
 /* Характеристики курса: часы и уровень — наглядно, остальное строками. */
 .ab-cpage__facts { margin-top: 26px; padding: 22px 24px; border-radius: 18px;
