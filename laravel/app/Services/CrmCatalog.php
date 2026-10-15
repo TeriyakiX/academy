@@ -45,7 +45,7 @@ class CrmCatalog
      | было заводить дважды, и правка в файле на боевом просто не появлялась.
      | Тексты, которые школа правит сама (например home.faq), остаются в CRM.
      */
-    private const OWN_BLOCKS = ['home.lines'];
+    private const OWN_BLOCKS = ['home.lines', 'home.events'];
 
     /**
      * Тексты главной и скидки. Ключ блока в CRM совпадает с ключом

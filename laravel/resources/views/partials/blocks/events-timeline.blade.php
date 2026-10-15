@@ -2,7 +2,7 @@
      Видно последовательность: что было, что скоро, что потом. --}}
 @php
     $today = now()->format('Y-m-d');
-    $all   = collect(config('home.events.months', []))->flatMap(fn ($list) => $list)
+    $all   = \App\Support\Meetings::all()
         ->filter(fn ($e) => !empty($e['date']))
         ->sortBy('date')
         ->values();

@@ -2,7 +2,7 @@
      Минимум слов в плитке — всё остальное на странице встречи. --}}
 @php
     $today = now()->format('Y-m-d');
-    $all   = collect(config('home.events.months', []))->flatMap(fn ($list) => $list);
+    $all   = \App\Support\Meetings::all();
 
     $upcoming = $all->filter(fn ($e) => ($e['date'] ?? '') >= $today)->sortBy('date')->values();
     $past     = $all->filter(fn ($e) => ($e['date'] ?? '') < $today)->sortByDesc('date')->values();

@@ -2,7 +2,7 @@
      Переключение на радиокнопках, без скрипта. --}}
 @php
     $today = now()->format('Y-m-d');
-    $list  = collect(config('home.events.months', []))->flatMap(fn ($list) => $list)
+    $list  = \App\Support\Meetings::all()
         ->filter(fn ($e) => !empty($e['date']))
         ->sortBy(fn ($e) => [$e['date'] < $today, $e['date']])
         ->values();

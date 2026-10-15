@@ -252,7 +252,7 @@ Route::get('/events.html', fn () => view('pages.events', ['seo' => [
  | поэтому маршрут один на всех: адрес ищем по полю slug.
  */
 Route::get('/events/{slug}.html', function (string $slug) {
-    $all = collect(config('home.events.months', []))->flatMap(fn ($list) => $list);
+    $all = \App\Support\Meetings::all();
     $event = $all->firstWhere('slug', $slug);
 
     abort_if(!$event, 404);
@@ -366,7 +366,7 @@ Route::get('/sitemap.xml', function () {
     /* Страницы встреч: адреса приходят вместе с самими встречами,
        поэтому собираем их тут же, а не ведём списком. */
     $urls = $urls->merge(
-        collect(config('home.events.months', []))
+        collect(\App\Support\Meetings::months())
             ->flatMap(fn ($list) => $list)
             ->pluck('slug')
             ->filter()

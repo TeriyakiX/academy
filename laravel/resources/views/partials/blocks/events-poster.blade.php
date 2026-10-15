@@ -2,11 +2,11 @@
      Без фильтров: встреч в месяц немного, и листать проще, чем выбирать. --}}
 @php
     $today = now()->format('Y-m-d');
-    $months = collect(config('home.events.months', []))
+    $months = collect(\App\Support\Meetings::months())
         ->map(fn ($list) => collect($list)->filter(fn ($e) => ($e['date'] ?? '') >= $today)->values())
         ->filter(fn ($list) => $list->isNotEmpty());
 
-    $past = collect(config('home.events.months', []))
+    $past = collect(\App\Support\Meetings::months())
         ->flatMap(fn ($list) => $list)
         ->filter(fn ($e) => ($e['date'] ?? '') < $today)
         ->sortByDesc('date')

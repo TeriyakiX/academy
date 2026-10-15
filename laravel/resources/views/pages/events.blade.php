@@ -14,7 +14,7 @@
            здесь останется один. */
         $variant = in_array(request('v'), ['a', 'e', 'f', 'g', 'h', 'j'], true) ? request('v') : 'c';
 
-        $all   = collect(config('home.events.months', []))->flatMap(fn ($list) => $list);
+        $all   = \App\Support\Meetings::all();
         $today = now()->format('Y-m-d');
         $ahead = $all->filter(fn ($e) => ($e['date'] ?? '') >= $today)->sortBy('date');
         $next  = $ahead->first();
@@ -86,7 +86,7 @@
                     @include('partials.blocks.events-covers')
                 @else
                     <div data-island="EventsSchedule"
-                         data-props="{{ json_encode(['months' => config('home.events.months')], JSON_UNESCAPED_UNICODE) }}"></div>
+                         data-props="{{ json_encode(['months' => \App\Support\Meetings::months()], JSON_UNESCAPED_UNICODE) }}"></div>
                 @endif
             </div>
         </section>

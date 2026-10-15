@@ -12,6 +12,6 @@
         </div>
 
         <div data-island="EventsSchedule"
-             data-props="{{ json_encode(['months' => config('home.events.months')], JSON_UNESCAPED_UNICODE) }}"></div>
+             data-props="{{ json_encode(['months' => \App\Support\Meetings::months()], JSON_UNESCAPED_UNICODE) }}"></div>
     </div>
 </section>
