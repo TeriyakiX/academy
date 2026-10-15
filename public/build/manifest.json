@@ -49,7 +49,7 @@
     "isEntry": true
   },
   "resources/src/app/assets/styles/home-blocks.css": {
-    "file": "assets/home-blocks-PbOIl7nE.css",
+    "file": "assets/home-blocks-B-gHUQ6v.css",
     "name": "home-blocks",
     "names": [
       "home-blocks.css"
@@ -67,7 +67,7 @@
     "isEntry": true
   },
   "resources/src/app/assets/styles/mobile.css": {
-    "file": "assets/mobile-BKU8G7Gi.css",
+    "file": "assets/mobile-o61BwheM.css",
     "name": "mobile",
     "names": [
       "mobile.css"
@@ -121,7 +121,7 @@
     "isEntry": true
   },
   "resources/src/app/main.ts": {
-    "file": "assets/main-BPw8o3PP.js",
+    "file": "assets/main-BefKETsj.js",
     "name": "main",
     "src": "resources/src/app/main.ts",
     "isEntry": true,
@@ -135,7 +135,7 @@
     ]
   },
   "resources/src/modules/certificate/components/CertificateWizard.vue": {
-    "file": "assets/CertificateWizard-rQ_vkuqk.js",
+    "file": "assets/CertificateWizard-Bfa5j1Pp.js",
     "name": "CertificateWizard",
     "src": "resources/src/modules/certificate/components/CertificateWizard.vue",
     "isDynamicEntry": true,
@@ -145,7 +145,7 @@
     ]
   },
   "resources/src/modules/course/components/CourseConstructor.vue": {
-    "file": "assets/CourseConstructor-CVj4bhiJ.js",
+    "file": "assets/CourseConstructor-UYgfTEA2.js",
     "name": "CourseConstructor",
     "src": "resources/src/modules/course/components/CourseConstructor.vue",
     "isDynamicEntry": true,
@@ -155,7 +155,7 @@
     ]
   },
   "resources/src/modules/course/components/CourseTabs.vue": {
-    "file": "assets/CourseTabs-9D_-qSp7.js",
+    "file": "assets/CourseTabs-CQIhmpsf.js",
     "name": "CourseTabs",
     "src": "resources/src/modules/course/components/CourseTabs.vue",
     "isDynamicEntry": true,
@@ -164,7 +164,7 @@
     ]
   },
   "resources/src/modules/home/components/FaqAccordion.vue": {
-    "file": "assets/FaqAccordion-_io6EP4W.js",
+    "file": "assets/FaqAccordion-DWI-g71b.js",
     "name": "FaqAccordion",
     "src": "resources/src/modules/home/components/FaqAccordion.vue",
     "isDynamicEntry": true,
@@ -173,7 +173,7 @@
     ]
   },
   "resources/src/modules/home/components/Reviews.vue": {
-    "file": "assets/Reviews-BE227Bu1.js",
+    "file": "assets/Reviews-BMI9-18V.js",
     "name": "Reviews",
     "src": "resources/src/modules/home/components/Reviews.vue",
     "isDynamicEntry": true,
@@ -182,7 +182,7 @@
     ]
   },
   "resources/src/modules/home/components/StatsCounter.vue": {
-    "file": "assets/StatsCounter-i-zxoU70.js",
+    "file": "assets/StatsCounter-B2i0aDZ9.js",
     "name": "StatsCounter",
     "src": "resources/src/modules/home/components/StatsCounter.vue",
     "isDynamicEntry": true,

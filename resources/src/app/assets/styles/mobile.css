@@ -44,6 +44,8 @@
     /* Афиши: одна в ряд, кадр вытянут по высоте. Широкий кадр на телефоне
        давал полоску, в которой текст наезжал на лица. */
     .ab-pst { grid-template-columns: 1fr; gap: 12px; }
+    .ab-pst.ab-pst--row { gap: 12px; }
+    .ab-pst.ab-pst--row .ab-pst__item { flex: 0 0 100%; min-width: 0; box-sizing: border-box; }
     .ab-pst__item a { aspect-ratio: 3 / 4; }
     .ab-pst__item a::after { background: linear-gradient(to top, rgba(20,16,14,.92) 0%,
         rgba(20,16,14,.55) 38%, rgba(20,16,14,.05) 70%); }

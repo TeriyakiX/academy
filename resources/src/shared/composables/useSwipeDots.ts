@@ -11,6 +11,7 @@ import { onNextFrame } from '@/shared/utils';
  */
 
 const TRACKS = [
+    '.ab-pst--row',
     '.ab-tabs__grid',
     '.ab-rv__list',
     '.ab-dirs__cols',
