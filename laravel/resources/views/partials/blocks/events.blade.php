@@ -13,6 +13,6 @@
 
         {{-- Тот же вид афиш, что и на странице встреч: на главной показываем
              только ближайшие, прошедшие там ни к чему. --}}
-        @include('partials.blocks.events-posters', ['limit' => 3, 'withPast' => false])
+        @include('partials.blocks.events-posters', ['limit' => 6, 'withPast' => false, 'row' => true])
     </div>
 </section>

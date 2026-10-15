@@ -406,6 +406,14 @@ a.ab-rating__link:hover { border-color: var(--ab-600); transform: translateY(-3p
 .ab-evlist__next-date { font-size: 14px; color: var(--ab-500); }
 .ab-evlist__next-more { font-size: 13px; color: var(--ab-400); }
 
+/* Лента афиш на главной: там встречи — не главный раздел, и ряд
+   карточек листается вбок, а не занимает экран сеткой. */
+.ab-pst.ab-pst--row { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch;
+    padding: 2px 0 10px; scrollbar-width: none; }
+.ab-pst.ab-pst--row::-webkit-scrollbar { display: none; }
+.ab-pst.ab-pst--row .ab-pst__item { flex: 0 0 320px; scroll-snap-align: start; }
+
 /* ---------- Вариант «Афиши-постеры» ---------- */
 .ab-pst { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 18px;
     margin: 0; padding: 0; list-style: none; }

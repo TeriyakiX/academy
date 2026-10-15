@@ -10,11 +10,13 @@
     $limit    = $limit ?? null;
     $withPast = $withPast ?? true;
     $except   = $except ?? null;
+    $row      = $row ?? false;
 
     if ($except) {
         $all = $all->where('slug', '!=', $except);
     }
     $except   = $except ?? null;
+    $row      = $row ?? false;
 
     if ($except) {
         $all = $all->where('slug', '!=', $except);
@@ -49,7 +51,7 @@
         следующая встреча.
     </p>
 @else
-    <ul class="ab-pst">
+    <ul class="ab-pst @if ($row) ab-pst--row @endif">
         @foreach ($upcoming as $i => $e)
             <li class="ab-pst__item">
                 <a href="/events/{{ $e['slug'] }}.html">
