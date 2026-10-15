@@ -155,7 +155,10 @@
                                href="{{ $link($brand, null) }}">
                                 Все <b>{{ $allCount }}</b>
                             </a>
+                            {{-- Пустые разделы не показываем: при выбранной марке
+                                 они висели с нулём и вели в пустоту. --}}
                             @foreach ($categories as $c)
+                                @continue(!$catCounts[$c->slug] && !($current && $current->id === $c->id))
                                 <a class="ab-shop__filter @if ($current && $current->id === $c->id) is-active @endif"
                                    href="{{ $link($brand, $c->slug) }}">
                                     {{ $c->title }} <b>{{ $catCounts[$c->slug] }}</b>

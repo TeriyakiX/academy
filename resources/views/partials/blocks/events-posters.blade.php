@@ -9,6 +9,16 @@
 
     $limit    = $limit ?? null;
     $withPast = $withPast ?? true;
+    $except   = $except ?? null;
+
+    if ($except) {
+        $all = $all->where('slug', '!=', $except);
+    }
+    $except   = $except ?? null;
+
+    if ($except) {
+        $all = $all->where('slug', '!=', $except);
+    }
 
     $upcoming = $all->filter(fn ($e) => $e['date'] >= $today)->sortBy('date')->values();
     $past     = $all->filter(fn ($e) => $e['date'] < $today)->sortByDesc('date')->values();
@@ -41,7 +51,7 @@
 @else
     <ul class="ab-pst">
         @foreach ($upcoming as $i => $e)
-            <li class="ab-pst__item @if ($i === 0 && !$limit) is-wide @endif">
+            <li class="ab-pst__item">
                 <a href="/events/{{ $e['slug'] }}.html">
                     <img src="{{ $e['photo'] }}" alt="{{ $e['title'] }}"
                          width="820" height="620"
@@ -52,16 +62,15 @@
                         <i>{{ $e['month'] }}</i>
                     </span>
 
-                    <span class="ab-pst__tags">
-                        @if ($soon($e))
-                            <span class="ab-pst__soon">{{ $soon($e) }}</span>
-                        @endif
+                    @if ($soon($e))
+                        <span class="ab-pst__soon">{{ $soon($e) }}</span>
+                    @endif
+
+                    <span class="ab-pst__body">
                         @if ($e['section'])
                             <span class="ab-pst__section">{{ $e['section'] }}</span>
                         @endif
-                    </span>
 
-                    <span class="ab-pst__body">
                         <b class="ab-pst__title">{{ $e['title'] }}</b>
 
                         <span class="ab-pst__meta">

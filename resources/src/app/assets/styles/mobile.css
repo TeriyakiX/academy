@@ -33,29 +33,28 @@
     .ab-evp__hero { padding: 14px 0 24px; }
     .ab-evp__grid { grid-template-columns: 1fr; gap: 16px; }
     .ab-evp__media { order: -1; }
-    .ab-evp__media img { max-height: 210px; }
-    .ab-evp__facts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 16px 0; }
+    .ab-evp__media img { max-height: none; aspect-ratio: 4 / 3; object-position: center 20%; }
+    .ab-evp__facts { grid-template-columns: 1fr 1fr; gap: 8px; margin: 16px 0; }
     .ab-evp__facts li { padding: 10px 13px; }
     .ab-evp__facts li:last-child:nth-child(odd) { grid-column: 1 / -1; }
     .ab-evp__facts b { font-size: 15px; }
     .ab-evp__about { padding: 24px 0; }
-    .ab-evp__cols { grid-template-columns: 1fr; gap: 16px; }
+    .ab-evp__aside { grid-template-columns: 1fr; gap: 10px; margin-top: 18px; }
     .ab-evp__story p { font-size: 15px; }
     /* Афиши: одна в ряд, кадр вытянут по высоте. Широкий кадр на телефоне
        давал полоску, в которой текст наезжал на лица. */
     .ab-pst { grid-template-columns: 1fr; gap: 12px; }
-    .ab-pst__item.is-wide { grid-column: auto; }
-    .ab-pst__item a, .ab-pst__item.is-wide a { aspect-ratio: 3 / 4; }
+    .ab-pst__item a { aspect-ratio: 3 / 4; }
     .ab-pst__item a::after { background: linear-gradient(to top, rgba(20,16,14,.92) 0%,
         rgba(20,16,14,.55) 38%, rgba(20,16,14,.05) 70%); }
 
     .ab-pst__date { top: 10px; left: 10px; padding: 7px 11px; }
     .ab-pst__date b { font-size: 20px; }
-    .ab-pst__tags { top: 10px; right: 10px; max-width: calc(100% - 86px); }
-    .ab-pst__soon, .ab-pst__section { padding: 5px 10px; font-size: 10px; }
+    .ab-pst__soon { top: 10px; right: 10px; padding: 5px 10px; font-size: 10px; }
+    .ab-pst__section { padding: 4px 9px; font-size: 10px; }
 
     .ab-pst__body { left: 14px; right: 14px; bottom: 14px; gap: 4px; }
-    .ab-pst__title, .ab-pst__item.is-wide .ab-pst__title { font-size: 21px; line-height: 1.15; }
+    .ab-pst__title { font-size: 21px; line-height: 1.15; }
     .ab-pst__meta { gap: 8px; font-size: 13px; }
     .ab-pst__seats { font-size: 12px; }
 
