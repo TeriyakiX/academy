@@ -80,6 +80,7 @@ class Meetings
             'price'       => (int) ($e['price'] ?? 0),
             'duration'    => $e['duration'] ?? null,
             'place'       => $e['place']    ?? null,
+            'host'        => $e['host']     ?? null,
             'seats_total' => $e['seats_total'] ?? null,
             'seats_left'  => $e['seats_left']  ?? null,
             'about'       => (array) ($e['about'] ?? []),

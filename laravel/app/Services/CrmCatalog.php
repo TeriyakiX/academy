@@ -110,6 +110,7 @@ class CrmCatalog
                 'price'       => (int) ($event['price'] ?? 0),
                 'duration'    => $event['duration'] ? $event['duration'] . ' мин' : null,
                 'place'       => $event['location'] ?? null,
+                'host'        => $event['trainer'] ?? null,
                 'text'        => $event['summary'] ?? '',
                 /* Абзацы страницы: в CRM это одно поле, пустая строка — новый абзац. */
                 'about'       => array_values(array_filter(array_map(
