@@ -172,7 +172,9 @@
             <section class="ab-events ab-reveal">
                 <div class="ab-container">
                     <h2 class="ab-h2">Другие встречи</h2>
-                    @include('partials.blocks.events-posters', ['limit' => 3, 'withPast' => false, 'except' => $event['slug']])
+                    @include('partials.blocks.events-posters', [
+                        'limit' => 6, 'withPast' => false, 'row' => true, 'except' => $event['slug'],
+                    ])
                 </div>
             </section>
         @endif
