@@ -103,7 +103,7 @@
                             </div>
                         @endif
 
-                        @if ($product->summary)
+                        @if ($product->summary && $product->summary !== $product->description)
                             <p class="ab-lead ab-product__lead">{{ $product->summary }}</p>
                         @endif
 
@@ -114,17 +114,16 @@
                                     <s>{{ $product->old_price_label }}</s>
                                 @endif
                             </div>
-                            <span class="ab-shop__stock ab-shop__stock--{{ $product->availability }}">
-                                {{ $product->availability_label }}
-                                @if ($product->stock)
-                                    — {{ $product->stock }} шт.
-                                @endif
-                            </span>
+                            <span class="ab-shop__stock">{{ $product->availability_label }}</span>
                         </div>
 
                         <div class="ab-product__actions">
                             <button class="ab-btn ab-btn--primary ab-btn--lg js-open-modal" type="button"
-                                    data-modal-path="consultation">Оставить заявку</button>
+                                    data-modal-path="consultation"
+                                    data-modal-kind="equipment"
+                                    data-modal-item="{{ $product->title }}"
+                                    data-modal-item-label="Оборудование"
+                                    data-modal-source="Товар: {{ $product->title }}">Оставить заявку</button>
                             <a class="ab-btn ab-btn--outline ab-btn--lg"
                                href="{{ config('nav.contacts.phone_href') }}">{{ config('nav.contacts.phone') }}</a>
                         </div>
@@ -142,9 +141,33 @@
                 <div class="ab-container">
                     <div class="ab-product__details-grid">
                         @if ($product->description)
+                            @php
+                                /* В прайсе поставщика описание — это перечисление
+                                   через запятую без единой точки. Сплошной строкой
+                                   оно не читается, поэтому разбиваем на строки. */
+                                $isList = !str_contains($product->description, '.')
+                                    && substr_count($product->description, ',') >= 2;
+
+                                $parts = $isList
+                                    ? array_values(array_filter(array_map(
+                                        fn ($x) => mb_strtoupper(mb_substr(trim($x), 0, 1)) . mb_substr(trim($x), 1),
+                                        explode(',', $product->description),
+                                    )))
+                                    : [];
+                            @endphp
+
                             <div>
                                 <h2 class="ab-h2">Описание</h2>
-                                <p class="ab-product__text">{{ $product->description }}</p>
+
+                                @if ($parts)
+                                    <ul class="ab-product__list">
+                                        @foreach ($parts as $part)
+                                            <li>{{ $part }}</li>
+                                        @endforeach
+                                    </ul>
+                                @else
+                                    <p class="ab-product__text">{{ $product->description }}</p>
+                                @endif
                             </div>
                         @endif
 

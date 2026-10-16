@@ -21,12 +21,12 @@ class Product extends Model
         'is_active' => 'boolean',
     ];
 
-    /** Понятные подписи наличия — используются и в каталоге, и в карточке. */
-    public const AVAILABILITY = [
-        'in_stock'     => 'В наличии',
-        'on_order'     => 'Под заказ',
-        'out_of_stock' => 'Нет в наличии',
-    ];
+    /*
+     | Наличие на сайте не показываем числом и не делим на «в наличии» и
+     | «под заказ»: склад поставщика в онлайне не доступен, и любая цифра
+     | через день врёт. Договорённость со школой — одна подпись для всех.
+     */
+    public const AVAILABILITY_LABEL = 'Уточняйте наличие';
 
     public function getRouteKeyName(): string
     {
@@ -76,7 +76,7 @@ class Product extends Model
 
     public function getAvailabilityLabelAttribute(): string
     {
-        return self::AVAILABILITY[$this->availability] ?? 'Уточняйте';
+        return self::AVAILABILITY_LABEL;
     }
 
     /** Цена прописью для вёрстки: «230 000 ₽» либо «по запросу». */

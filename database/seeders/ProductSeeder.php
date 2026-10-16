@@ -22,7 +22,7 @@ class ProductSeeder extends Seeder
     public function run(): void
     {
         $categories = [
-            ['slug' => 'rozhkovye-kofemashiny', 'title' => 'Традиционные рожковые кофемашины',
+            ['slug' => 'rozhkovye-kofemashiny', 'title' => 'Рожковые кофемашины',
              'description' => 'Профессиональные эспрессо-машины для кофеен и баров.', 'sort' => 10],
             ['slug' => 'superavtomaty', 'title' => 'Суперавтоматические кофемашины',
              'description' => 'Автоматические кофемашины для офисов, отелей и точек самообслуживания.', 'sort' => 20],

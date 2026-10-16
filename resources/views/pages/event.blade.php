@@ -99,12 +99,18 @@
                                 когда объявим следующую.
                             </p>
                             <button class="ab-btn ab-btn--outline ab-btn--lg" type="button"
-                                    data-modal-path="events">
+                                    data-modal-path="events" data-modal-kind="event"
+                                    data-modal-item="{{ $event['title'] }}"
+                                    data-modal-item-label="Встреча {{ $event['day'] }} {{ $event['month'] }}, {{ $event['time'] }}"
+                                    data-modal-source="Встреча: {{ $event['title'] }} ({{ $event['day'] }} {{ $event['month'] }})">
                                 Сообщить о следующей
                             </button>
                         @else
                             <button class="ab-btn ab-btn--primary ab-btn--lg" type="button"
-                                    data-modal-path="events">
+                                    data-modal-path="events" data-modal-kind="event"
+                                    data-modal-item="{{ $event['title'] }}"
+                                    data-modal-item-label="Встреча {{ $event['day'] }} {{ $event['month'] }}, {{ $event['time'] }}"
+                                    data-modal-source="Встреча: {{ $event['title'] }} ({{ $event['day'] }} {{ $event['month'] }})">
                                 Записаться на встречу
                             </button>
                         @endif
@@ -149,7 +155,10 @@
                                 <b>Записаться</b>
                                 <p>Подтвердим место и напомним за день до встречи.</p>
                                 <button class="ab-btn ab-btn--primary" type="button"
-                                        data-modal-path="events">
+                                        data-modal-path="events" data-modal-kind="event"
+                                    data-modal-item="{{ $event['title'] }}"
+                                    data-modal-item-label="Встреча {{ $event['day'] }} {{ $event['month'] }}, {{ $event['time'] }}"
+                                    data-modal-source="Встреча: {{ $event['title'] }} ({{ $event['day'] }} {{ $event['month'] }})">
                                     Оставить заявку
                                 </button>
                             </div>

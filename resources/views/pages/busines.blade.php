@@ -26,7 +26,8 @@
                         </p>
                         <div class="ab-hero__actions">
                             <button class="ab-btn ab-btn--primary ab-btn--lg" type="button"
-                                    data-modal-path="consultation">Обсудить проект</button>
+                                    data-modal-path="consultation"
+                                    data-modal-kind="business">Обсудить проект</button>
                             <a class="ab-btn ab-btn--outline ab-btn--lg" href="{{ config('nav.contacts.phone_href') }}">
                                 {{ config('nav.contacts.phone') }}
                             </a>

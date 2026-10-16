@@ -11,6 +11,14 @@
             Перезвоним в течение 15 минут в рабочее время и поможем выбрать программу.
         </p>
 
+        {{-- Когда известно, о чём речь (курс, услуга, встреча, товар),
+             показываем это плашкой: спрашивать «какой курс интересует»
+             на странице курса незачем. Заполняется скриптом. --}}
+        <p class="ab-modal__item" hidden>
+            <span class="ab-modal__item-label"></span>
+            <b class="ab-modal__item-name"></b>
+        </p>
+
         <form class="ab-modal__form" method="post" action="/lead">
             @csrf
             @include('partials.form-guard')

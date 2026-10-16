@@ -210,3 +210,10 @@ body > .wrapper { overflow: clip; }
    со своим фоном, между ним и подвалом оставалась белая полоса.
    Своих полей у подвала хватает — отступ убираем. */
 .site-footer { margin-top: 0; }
+
+/* Плашка с выбранной позицией в окне заявки. */
+.ab-modal__item { display: grid; gap: 3px; margin: 0 0 18px; padding: 12px 15px;
+    border-radius: var(--ab-radius); background: var(--ab-50); }
+.ab-modal__item-label { font-size: 11px; font-weight: 700; letter-spacing: .05em;
+    text-transform: uppercase; color: var(--ab-400); }
+.ab-modal__item-name { font-size: 16px; font-weight: 800; color: var(--ab-dark); }
