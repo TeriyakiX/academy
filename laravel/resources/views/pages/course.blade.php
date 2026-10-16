@@ -150,7 +150,11 @@
                             </ul>
 
                             <button class="ab-btn ab-btn--primary ab-btn--block ab-btn--lg"
-                                    type="button" data-modal-path="consultation">
+                                    type="button" data-modal-path="consultation"
+                                    data-modal-kind="course"
+                                    data-modal-item="{{ $course['title'] }}"
+                                    data-modal-item-label="{{ ($course['school'] ?? '') === 'Мастер-классы' ? 'Мастер-класс' : 'Курс' }}"
+                                    data-modal-source="{{ ($course['school'] ?? '') === 'Мастер-классы' ? 'Мастер-класс' : 'Курс' }}: {{ $course['title'] }}">
                                 Записаться на {{ $isClass ? 'мастер-класс' : 'курс' }}
                             </button>
 

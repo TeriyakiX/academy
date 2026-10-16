@@ -16,6 +16,13 @@ class Navigation
     public static function main(): array
     {
         return array_map(static function (array $item) {
+            if (!empty($item['services'])) {
+                $item['children'] = self::services();
+                unset($item['services']);
+
+                return $item;
+            }
+
             if (empty($item['school'])) {
                 return $item;
             }
@@ -41,6 +48,18 @@ class Navigation
         }
 
         return $columns;
+    }
+
+    /** Услуги для бизнеса: в меню идут короткие названия. */
+    private static function services(): array
+    {
+        return array_map(
+            static fn (array $service) => [
+                'title' => $service['short'] ?? $service['title'],
+                'href'  => $service['url'],
+            ],
+            config('business.items', [])
+        );
     }
 
     /** @return array<int, array{title: string, href: string}> */

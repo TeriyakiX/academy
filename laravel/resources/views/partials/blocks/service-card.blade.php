@@ -29,7 +29,11 @@
 
         <div class="ab-bus__actions">
             <a class="ab-btn ab-btn--primary ab-btn--sm" href="{{ $service['url'] }}">Подробнее</a>
-            <button class="ab-bus__toggle" type="button" data-modal-path="consultation">Оставить заявку</button>
+            <button class="ab-bus__toggle" type="button" data-modal-path="consultation"
+                    data-modal-kind="business"
+                    data-modal-item="{{ $service['short'] ?? $service['title'] }}"
+                    data-modal-item-label="Услуга"
+                    data-modal-source="Услуга: {{ $service['title'] }}">Оставить заявку</button>
         </div>
     </div>
 </article>

@@ -1,4 +1,5 @@
 import useModalStore from '@/shared/store/useModalStore';
+import { applyModalContext } from '@/modules/layout/composables/useModalContext';
 import { qs, qsa } from '@/shared/utils/dom';
 
 /**
@@ -13,7 +14,8 @@ export function useRequestModal(): void {
 
     if (!modals.length) return;
 
-    const open = (modal: HTMLElement) => {
+    const open = (modal: HTMLElement, button?: HTMLElement) => {
+        applyModalContext(modal, button);
         modal.hidden = false;
         document.body.classList.add('site-no-scroll');
         qs<HTMLInputElement>('input:not([type=hidden])', modal)?.focus();
@@ -32,7 +34,7 @@ export function useRequestModal(): void {
                 qs(`[data-modal-target="${button.dataset.modalPath}"]`) ??
                 qs('[data-modal-target="consultation"]');
 
-            if (target) open(target);
+            if (target) open(target, button as HTMLElement);
         });
     });
 

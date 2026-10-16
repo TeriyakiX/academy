@@ -93,9 +93,7 @@
 .ab-shop__more::after { content: '→'; transition: transform .2s ease; }
 .ab-shop__card:hover .ab-shop__more::after { transform: translateX(3px); }
 
-.ab-shop__stock--in_stock     { color: #2e7d32; }
-.ab-shop__stock--on_order     { color: #8a6d3b; }
-.ab-shop__stock--out_of_stock { color: #b3261e; }
+.ab-shop__stock { color: var(--ab-500); }
 .ab-shop__empty { font-size: 16px; color: var(--ab-700); }
 
 /* ---------- Карточка товара ---------- */
@@ -352,6 +350,7 @@
 .ab-shop__found { font-size: 15px; font-weight: 700; color: var(--ab-500); }
 
 .ab-shop__sort { display: inline-flex; align-items: center; gap: 10px; }
+.ab-shop__sort .ab-dd { min-width: 215px; }
 .ab-shop__sort-label { font-size: 14px; color: var(--ab-400); white-space: nowrap; }
 .ab-shop__sort select {
     padding: 10px 38px 10px 14px;
@@ -414,3 +413,40 @@ a.ab-pager__page:hover, .ab-pager__arrow:hover { border-color: var(--ab-600); }
     .ab-pager__page, .ab-pager__arrow { min-width: 36px; height: 36px; padding: 0 8px; font-size: 14px; }
     .ab-pager__note { font-size: 13px; }
 }
+
+/* ================= Свой выпадающий список =================
+   Системный select на телефоне открывается диалогом прошивки — чужие
+   шрифты и цвета. Родной select остаётся в разметке и работает без
+   скрипта, а видимый список рисуем сами.
+*/
+.ab-dd { position: relative; }
+/* Вес селектора должен перебить .ab-shop__select select из блока выше. */
+.ab-dd__native.ab-dd__native { position: absolute; width: 1px; height: 1px; min-width: 0;
+    padding: 0; border: none; opacity: 0; pointer-events: none; }
+.ab-dd__btn { display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    width: 100%; padding: 12px 15px; border: 1px solid var(--ab-100); border-radius: var(--ab-radius);
+    background: var(--ab-white); font: inherit; font-size: 15px; font-weight: 700;
+    color: var(--ab-dark); text-align: left; cursor: pointer; }
+.ab-dd__btn::after { content: ''; flex: none; width: 9px; height: 9px; margin-left: auto;
+    border-right: 2px solid var(--ab-400); border-bottom: 2px solid var(--ab-400);
+    transform: rotate(45deg) translate(-2px, -2px); transition: transform var(--ab-transition); }
+.ab-dd.is-open .ab-dd__btn { border-color: var(--ab-600); }
+.ab-dd.is-open .ab-dd__btn::after { transform: rotate(-135deg) translate(-3px, -3px); }
+.ab-dd__value { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.ab-dd__list { display: none; position: absolute; z-index: 30; top: calc(100% + 6px); left: 0; right: 0;
+    max-height: 320px; overflow-y: auto; margin: 0; padding: 6px; list-style: none;
+    border: 1px solid var(--ab-100); border-radius: var(--ab-radius);
+    background: var(--ab-white); box-shadow: 0 18px 40px rgba(26,26,26,.14); }
+.ab-dd.is-open .ab-dd__list { display: block; }
+.ab-dd__option { display: block; width: 100%; padding: 11px 12px; border: none; border-radius: 8px;
+    background: transparent; font: inherit; font-size: 15px; color: var(--ab-500);
+    text-align: left; cursor: pointer; }
+.ab-dd__option:hover { background: var(--ab-50); }
+.ab-dd__option.is-active { background: var(--ab-600); color: var(--ab-white); font-weight: 700; }
+
+.ab-product__list { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.ab-product__list li { position: relative; padding-left: 18px; font-size: 15px;
+    line-height: 1.5; color: var(--ab-500); }
+.ab-product__list li::before { content: ''; position: absolute; top: 9px; left: 0;
+    width: 6px; height: 6px; border-radius: 50%; background: var(--ab-300, #c9bfb8); }
