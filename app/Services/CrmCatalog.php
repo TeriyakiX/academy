@@ -60,7 +60,10 @@ class CrmCatalog
                 continue;
             }
 
-            if (is_array($value) && preg_match('/^(home|courses)\.[a-z_]+$/', $key)) {
+            /* Тексты страниц тоже переехали в CRM: кроме главной и курсов
+               принимаем «для бизнеса», сервис и контакты. Ключ блока
+               совпадает с ключом настройки, поэтому шаблоны не трогаем. */
+            if (is_array($value) && preg_match('/^(home|courses|business|service|nav)\.[a-z_]+$/', $key)) {
                 config([$key => $value]);
             }
         }
