@@ -64,9 +64,51 @@ class CrmCatalog
                принимаем «для бизнеса», сервис и контакты. Ключ блока
                совпадает с ключом настройки, поэтому шаблоны не трогаем. */
             if (is_array($value) && preg_match('/^(home|courses|business|service|nav)\.[a-z_]+$/', $key)) {
+                /* Строку выгружали обёрткой {"value": "…"} - разворачиваем
+                   обратно, иначе в шаблон приходит массив. */
+                if (array_keys($value) === ['value']) {
+                    config([$key => $value['value']]);
+                    continue;
+                }
+
+                if ($key === 'nav.main') {
+                    $value = self::menu($value);
+
+                    /* Пустое меню не ставим: лучше прежнее, чем шапка без ссылок. */
+                    if ($value === []) {
+                        continue;
+                    }
+                }
+
                 config([$key => $value]);
             }
         }
+    }
+
+    /*
+     | Меню школа переставляет в CRM. Пункт без названия или без адреса
+     | уводит в никуда, поэтому такие выбрасываем, а признаки разметки
+     | (выпадающий список услуг, направление курсов) берём из файла по
+     | адресу: в CRM их никто не заполняет.
+     */
+    private static function menu(array $items): array
+    {
+        $own = collect(config('nav.main'))->keyBy('href');
+
+        return collect($items)
+            ->filter(fn ($item) => is_array($item) && trim((string) ($item['title'] ?? '')) !== ''
+                /* Адрес должен быть адресом: «Курсы» без косой черты ведёт в никуда. */
+                && preg_match('~^(/|https?://)~', trim((string) ($item['href'] ?? ''))) === 1)
+            ->map(function (array $item) use ($own) {
+                $file = $own->get($item['href'], []);
+
+                return array_merge(
+                    array_intersect_key($file, array_flip(['school', 'accent', 'services'])),
+                    ['title' => $item['title'], 'href' => $item['href']],
+                );
+            })
+            ->values()
+            ->all();
     }
 
     /**
@@ -161,12 +203,12 @@ class CrmCatalog
                 }
 
                 /*
-                 | Тексты курсов ведём в файлах сайта: их источник — методички
-                 | школы, а в CRM таких полей пока нет. Поэтому местное значение
-                 | главнее, из CRM берём то, чего в файлах нет: ближайшие группы
-                 | и всё, что школа заполнила сама.
+                 | Тексты курсов школа правит в CRM, поэтому заполненное там
+                 | главнее. Файл остаётся запасным: поля, которые в CRM пусты
+                 | (а это почти все тексты из методичек, пока их не перенесли),
+                 | берутся из него, и страница не пустеет.
                  */
-                $pages[$url] = ($pages[$url] ?? []) + array_filter([
+                $pages[$url] = array_filter([
                     'title'   => $course['title'],
                     'lead'    => $course['lead'],
                     'facts'   => $this->facts($course['facts'] ?: ($pages[$url]['facts'] ?? []), (int) $course['price']),
@@ -174,7 +216,7 @@ class CrmCatalog
                     'days'    => $course['days'],
                     'learn'   => $course['learn'],
                     'gallery' => $course['gallery'],
-                ]) + ['groups' => $course['groups'] ?? []];
+                ]) + ($pages[$url] ?? []) + ['groups' => $course['groups'] ?? []];
 
                 $pages[$url]['groups'] = $course['groups'] ?? [];
 
