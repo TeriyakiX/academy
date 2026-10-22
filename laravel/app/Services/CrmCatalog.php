@@ -45,7 +45,7 @@ class CrmCatalog
      | было заводить дважды, и правка в файле на боевом просто не появлялась.
      | Тексты, которые школа правит сама (например home.faq), остаются в CRM.
      */
-    private const OWN_BLOCKS = ['home.lines', 'home.events'];
+    private const OWN_BLOCKS = ['home.events'];
 
     /**
      * Тексты главной и скидки. Ключ блока в CRM совпадает с ключом
@@ -60,15 +60,54 @@ class CrmCatalog
                 continue;
             }
 
+            /* Из `site.*` школе доверяем только заголовки и описания
+               страниц. Редиректы и снятые программы держат индексацию,
+               их правит разработчик. */
+            if ($key === 'site.pages' && is_array($value)) {
+                $pages = config('site.pages', []);
+
+                foreach ($value as $url => $page) {
+                    if (!is_array($page)) {
+                        continue;
+                    }
+
+                    /* Берём только заголовок и описание: canonical,
+                       robots и og-поля остаются файловыми. */
+                    $pages[$url] = array_filter([
+                        'title'       => $page['title'] ?? null,
+                        'description' => $page['description'] ?? null,
+                    ]) + ($pages[$url] ?? []);
+                }
+
+                config(['site.pages' => $pages]);
+                continue;
+            }
+
             /* Тексты страниц тоже переехали в CRM: кроме главной и курсов
                принимаем «для бизнеса», сервис и контакты. Ключ блока
                совпадает с ключом настройки, поэтому шаблоны не трогаем. */
-            if (is_array($value) && preg_match('/^(home|courses|business|service|nav)\.[a-z_]+$/', $key)) {
+            if (is_array($value) && preg_match('/^(home|courses|business|service|nav|documents)\.[a-z_]+$/', $key)) {
                 /* Строку выгружали обёрткой {"value": "…"} - разворачиваем
                    обратно, иначе в шаблон приходит массив. */
                 if (array_keys($value) === ['value']) {
                     config([$key => $value['value']]);
                     continue;
+                }
+
+                if ($key === 'nav.footer') {
+                    $value = self::columns($value);
+
+                    if ($value === []) {
+                        continue;
+                    }
+                }
+
+                if ($key === 'nav.legal') {
+                    $value = self::links($value);
+
+                    if ($value === []) {
+                        continue;
+                    }
                 }
 
                 if ($key === 'nav.main') {
@@ -91,6 +130,44 @@ class CrmCatalog
      | (выпадающий список услуг, направление курсов) берём из файла по
      | адресу: в CRM их никто не заполняет.
      */
+    /*
+     | Подвал: колонка - либо список ссылок, либо название направления
+     | (тогда сайт сам подставит его программы). Пустую колонку не
+     | показываем: заголовок без ссылок выглядит как ошибка.
+     */
+    private static function columns(array $value): array
+    {
+        $columns = [];
+
+        foreach ($value as $title => $links) {
+            if (trim((string) $title) === '') {
+                continue;
+            }
+
+            if (is_string($links)) {
+                $columns[$title] = $links;
+                continue;
+            }
+
+            if (is_array($links) && ($clean = self::links($links)) !== []) {
+                $columns[$title] = $clean;
+            }
+        }
+
+        return $columns;
+    }
+
+    /** Ссылки без названия или с нерабочим адресом выбрасываем. */
+    private static function links(array $items): array
+    {
+        return collect($items)
+            ->filter(fn ($item) => is_array($item)
+                && trim((string) ($item['title'] ?? '')) !== ''
+                && preg_match('~^(/|https?://)~', trim((string) ($item['href'] ?? ''))) === 1)
+            ->map(fn (array $item) => ['title' => $item['title'], 'href' => $item['href']])
+            ->values()
+            ->all();
+    }
     private static function menu(array $items): array
     {
         $own = collect(config('nav.main'))->keyBy('href');

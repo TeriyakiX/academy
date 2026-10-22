@@ -59,16 +59,53 @@ class BlocksExportCommand extends Command
         'courses.path'      => 'Курсы: с чего начать',
         'courses.path_note' => 'Курсы: примечание к пути',
 
+        /* Из блока документов на страницах живёт только карточка
+           лицензии: номер, дата, кем выдана. Остальные ключи файла
+           шаблоны не читают, в CRM их показывать незачем. */
+        'documents.items' => 'Лицензия: номер, дата, выписка',
+
+        'site.pages' => 'Заголовки и описания страниц для поисковиков',
+
         'nav.main'     => 'Меню сайта: порядок и названия',
+        'nav.footer'   => 'Подвал: колонки со ссылками',
+        'nav.legal'    => 'Подвал: правовые документы',
         'nav.contacts' => 'Контакты: телефон, почта, адрес, часы',
         'nav.socials'  => 'Контакты: соцсети',
     ];
+    /**
+     * Тексты страниц для поисковиков: только заголовок вкладки и
+     * описание. Служебные поля (canonical, robots, og) остаются в файле:
+     * ими держится индексация, и правит их разработчик.
+     */
+    private static function seo(): array
+    {
+        $pages = [];
+
+        foreach (config('site.pages', []) as $url => $page) {
+            /* Статьи и курсы правятся в своих разделах CRM, здесь они
+               только мешали бы: одних статей два десятка. */
+            if (preg_match('~^/(blog|courses|master-class)/~', $url)) {
+                continue;
+            }
+
+            $seo = array_filter([
+                'title'       => $page['title'] ?? null,
+                'description' => $page['description'] ?? null,
+            ]);
+
+            if ($seo) {
+                $pages[$url] = $seo;
+            }
+        }
+
+        return $pages;
+    }
     public function handle(): int
     {
         $blocks = [];
 
         foreach (self::BLOCKS as $key => $title) {
-            $value = config($key);
+            $value = $key === 'site.pages' ? self::seo() : config($key);
 
             /* Пустую настройку не выгружаем: в CRM появился бы блок,
                который нечем заполнить. */
