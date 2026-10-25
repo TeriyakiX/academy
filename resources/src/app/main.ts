@@ -5,6 +5,7 @@ import { setupPlugins } from '@/app/config/plugins';
 import { setupLayout } from '@/modules/layout';
 import { setupLead } from '@/modules/lead';
 import { setupShop } from '@/modules/shop';
+import { useCookies } from '@/shared/composables/useCookies';
 import { usePromo } from '@/shared/composables/usePromo';
 import { useRail } from '@/shared/composables/useRail';
 import { useReveal } from '@/shared/composables/useReveal';
@@ -47,6 +48,7 @@ function bootstrap(): void {
     setupShop();
 
     useRail();
+    useCookies();
     usePromo();
     useReveal();
     useSelect();

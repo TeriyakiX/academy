@@ -49,7 +49,7 @@
     "isEntry": true
   },
   "resources/src/app/assets/styles/home-blocks.css": {
-    "file": "assets/home-blocks-B-gHUQ6v.css",
+    "file": "assets/home-blocks-BQn76qO6.css",
     "name": "home-blocks",
     "names": [
       "home-blocks.css"
@@ -121,7 +121,7 @@
     "isEntry": true
   },
   "resources/src/app/main.ts": {
-    "file": "assets/main-BwUO7gvc.js",
+    "file": "assets/main-qg_ppMAw.js",
     "name": "main",
     "src": "resources/src/app/main.ts",
     "isEntry": true,
@@ -135,7 +135,7 @@
     ]
   },
   "resources/src/modules/certificate/components/CertificateWizard.vue": {
-    "file": "assets/CertificateWizard-dOrZ2ERt.js",
+    "file": "assets/CertificateWizard-BXHCj9N3.js",
     "name": "CertificateWizard",
     "src": "resources/src/modules/certificate/components/CertificateWizard.vue",
     "isDynamicEntry": true,
@@ -145,7 +145,7 @@
     ]
   },
   "resources/src/modules/course/components/CourseConstructor.vue": {
-    "file": "assets/CourseConstructor-BnyeV3M8.js",
+    "file": "assets/CourseConstructor-wrX5wPY4.js",
     "name": "CourseConstructor",
     "src": "resources/src/modules/course/components/CourseConstructor.vue",
     "isDynamicEntry": true,
@@ -155,7 +155,7 @@
     ]
   },
   "resources/src/modules/course/components/CourseTabs.vue": {
-    "file": "assets/CourseTabs-CQJpmp8x.js",
+    "file": "assets/CourseTabs-BAtzLoMD.js",
     "name": "CourseTabs",
     "src": "resources/src/modules/course/components/CourseTabs.vue",
     "isDynamicEntry": true,
@@ -164,7 +164,7 @@
     ]
   },
   "resources/src/modules/home/components/FaqAccordion.vue": {
-    "file": "assets/FaqAccordion-C_Xu1q7_.js",
+    "file": "assets/FaqAccordion-D4ry9D03.js",
     "name": "FaqAccordion",
     "src": "resources/src/modules/home/components/FaqAccordion.vue",
     "isDynamicEntry": true,
@@ -173,7 +173,7 @@
     ]
   },
   "resources/src/modules/home/components/Reviews.vue": {
-    "file": "assets/Reviews-BAVSQwQX.js",
+    "file": "assets/Reviews-DqSKwAEq.js",
     "name": "Reviews",
     "src": "resources/src/modules/home/components/Reviews.vue",
     "isDynamicEntry": true,
@@ -182,7 +182,7 @@
     ]
   },
   "resources/src/modules/home/components/StatsCounter.vue": {
-    "file": "assets/StatsCounter-DqGIQ-qa.js",
+    "file": "assets/StatsCounter-BkkyuLDM.js",
     "name": "StatsCounter",
     "src": "resources/src/modules/home/components/StatsCounter.vue",
     "isDynamicEntry": true,

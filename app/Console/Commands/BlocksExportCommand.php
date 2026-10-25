@@ -31,6 +31,7 @@ class BlocksExportCommand extends Command
     private const BLOCKS = [
         'home.hero'             => 'Главная: первый экран',
         'home.promo'            => 'Всплывающее предложение',
+        'home.cookies'          => 'Плашка про cookie',
         'home.lines'            => 'Главная: чем занимается школа',
         'home.reasons'          => 'Главная: почему мы',
         'home.about'            => 'Главная: об академии',
