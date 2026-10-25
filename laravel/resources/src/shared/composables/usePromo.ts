@@ -14,13 +14,14 @@ import { claim, qs } from '@/shared/utils/dom';
 
 const PROMO = '[data-promo]';
 const KEY = 'ab-promo-closed';
-const WEEK = 7 * 24 * 60 * 60 * 1000;
+const DAY = 24 * 60 * 60 * 1000;
 
-function closedRecently(): boolean {
+/** Закрыли - молчим столько дней, сколько задано в настройках. */
+function closedRecently(days: number): boolean {
     try {
         const at = Number(localStorage.getItem(KEY));
 
-        return Boolean(at) && Date.now() - at < WEEK;
+        return Boolean(at) && Date.now() - at < days * DAY;
     } catch {
         return false;
     }
@@ -34,7 +35,10 @@ function remember(): void {
 
 export function usePromo(): void {
     const promo = qs(PROMO);
-    if (!promo || !claim(promo, 'promoReady') || closedRecently()) return;
+    if (!promo || !claim(promo, 'promoReady')) return;
+
+    const repeat = Number(promo.dataset.promoRepeat ?? 7);
+    if (closedRecently(repeat)) return;
 
     const delay = Number(promo.dataset.promoDelay ?? 14) * 1000;
     const depth = Number(promo.dataset.promoScroll ?? 0.3);

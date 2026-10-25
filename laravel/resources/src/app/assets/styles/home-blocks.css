@@ -1441,3 +1441,34 @@ a.ab-ev__closed:hover { background: var(--ab-100); }
 
 /* Курсив в процентах скидки не нужен: это число, а не акцент в тексте. */
 .ab-ctor__points i { font-style: normal; }
+
+/* ---------- Уведомление о cookie ----------
+ | Полоса снизу, над всем остальным: по закону она должна быть видна
+ | сразу. Предложение в углу живёт выше по z-index, но плашка шире,
+ | поэтому они не наезжают друг на друга.
+ */
+.ab-cookies { position: fixed; left: 50%; bottom: 20px; z-index: 70;
+    display: flex; align-items: center; gap: 18px;
+    width: min(880px, calc(100vw - 40px)); padding: 16px 20px;
+    transform: translate(-50%, 16px);
+    border: 1px solid var(--ab-100); border-radius: 18px; background: var(--ab-white);
+    box-shadow: 0 20px 50px rgba(12,9,9,.24);
+    opacity: 0; transition: opacity .28s ease, transform .28s ease; }
+.ab-cookies.is-open { opacity: 1; transform: translate(-50%, 0); }
+
+.ab-cookies__text { margin: 0; color: var(--ab-700); font-size: 13px; line-height: 1.55; }
+.ab-cookies__text a { color: var(--ab-brand); text-decoration: underline; }
+
+.ab-cookies__actions { flex-shrink: 0; }
+
+@media (max-width: 760px) {
+    .ab-cookies { left: 10px; right: 10px; bottom: 10px; width: auto;
+        flex-direction: column; align-items: stretch; gap: 12px;
+        padding: 14px 16px; border-radius: 14px; transform: translateY(16px); }
+    .ab-cookies.is-open { transform: translateY(0); }
+    .ab-cookies__text { font-size: 12.5px; }
+    .ab-cookies__actions .ab-btn { width: 100%; }
+
+    /* Предложение поднимаем, чтобы плашка его не накрыла. */
+    .ab-cookies:not([hidden]) ~ .ab-promo { bottom: 120px; }
+}

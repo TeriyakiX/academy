@@ -12,6 +12,7 @@
     <aside class="ab-promo" data-promo
            data-promo-delay="{{ $promo['delay'] ?? 14 }}"
            data-promo-scroll="{{ $promo['scroll'] ?? 0.3 }}"
+           data-promo-repeat="{{ $promo['repeat_days'] ?? 7 }}"
            aria-label="Предложение" hidden>
 
         <button class="ab-promo__close" type="button" data-promo-close aria-label="Закрыть предложение">
