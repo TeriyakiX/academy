@@ -14,6 +14,10 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         /* Тестовая копия не должна попадать в поиск: она мешает боевому сайту. */
         $middleware->append(\App\Http\Middleware\NoIndexOnStaging::class);
+
+        /* Сигнал из CRM приходит с ключом, а не из браузера: проверка
+           формы здесь только мешала бы. */
+        $middleware->validateCsrfTokens(except: ['crm/refresh']);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(

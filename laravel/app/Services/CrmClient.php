@@ -25,6 +25,29 @@ class CrmClient
         return (bool) (config('crm.url') && config('crm.token'));
     }
 
+    /*
+     | Номер версии кэша.
+     |
+     | Школа правит текст в CRM и хочет видеть его на сайте сразу, а не
+     | через пять минут. CRM после сохранения дёргает адрес обновления,
+     | мы увеличиваем номер - и все прежние ключи перестают находиться,
+     | то есть данные запрашиваются заново. Это дешевле, чем чистить
+     | кэш целиком: запасные копии остаются на случай, если CRM ляжет.
+     */
+    public static function version(): int
+    {
+        return (int) Cache::get('crm:version', 1);
+    }
+
+    /** Сбросить кэш ответов CRM: следующий запрос пойдёт за свежими. */
+    public static function refresh(): int
+    {
+        $next = self::version() + 1;
+
+        Cache::forever('crm:version', $next);
+
+        return $next;
+    }
     /** Данные из CRM с кэшем; null — если их нет ни свежих, ни запасных. */
     public function cached(string $path, array $query = []): ?array
     {
@@ -32,7 +55,13 @@ class CrmClient
             return null;
         }
 
-        $key = 'crm:' . md5($path . '?' . http_build_query($query));
+        $id = md5($path . '?' . http_build_query($query));
+
+        /* Свежий ответ привязан к версии кэша, запасная копия - нет:
+           она должна пережить сброс, иначе при лежащей CRM сайт
+           останется без данных. */
+        $key = 'crm:' . self::version() . ':' . $id;
+        $staleKey = 'crm:stale:' . $id;
 
         $fresh = Cache::get($key);
         if ($fresh !== null) {
@@ -41,7 +70,7 @@ class CrmClient
         }
 
         $data = $this->get($path, $query);
-        $stale = Cache::get($key . ':stale');
+        $stale = Cache::get($staleKey);
 
         if ($data === null) {
             // Пока CRM лежит, отдаём последнее, что получили.
@@ -51,7 +80,7 @@ class CrmClient
         }
 
         Cache::put($key, $data, config('crm.ttl'));
-        Cache::forever($key . ':stale', $data);
+        Cache::forever($staleKey, $data);
 
         return $data;
     }

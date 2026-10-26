@@ -342,6 +342,34 @@ Route::post('/lead', function (
 | данных, по которым строится сайт, и устареть не может.
 */
 
+/*
+ | Сброс кэша по сигналу из CRM.
+ |
+ | Школа правит текст, курс или товар и ждёт, что на сайте он появится
+ | сразу. Раньше приходилось ждать, пока истечёт кэш ответов CRM.
+ | Теперь CRM после сохранения дёргает этот адрес, мы помечаем кэш
+ | устаревшим, и следующая страница собирается на свежих данных.
+ |
+ | Адрес закрыт тем же ключом, что и запросы к CRM: посторонний сбросить
+ | кэш не может.
+ */
+Route::post('/crm/refresh', function (\Illuminate\Http\Request $request) {
+    $token = (string) config('crm.token');
+
+    if (!$token || !hash_equals($token, (string) $request->bearerToken())) {
+        abort(403);
+    }
+
+    $version = \App\Services\CrmClient::refresh();
+
+    /* Товары лежат в таблицах сайта: их переносит отдельная команда.
+       Запускаем её только по сигналу про каталог - она тяжелее прочих. */
+    if ($request->boolean('catalog')) {
+        \Illuminate\Support\Facades\Artisan::call('site:catalog-sync');
+    }
+
+    return response()->json(['ok' => true, 'version' => $version]);
+})->name('crm.refresh');
 Route::get('/sitemap.xml', function () {
     $base = rtrim(config('seo.domain'), '/');
 
