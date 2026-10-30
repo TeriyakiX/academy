@@ -119,9 +119,25 @@ class CrmCatalog
                     }
                 }
 
+                /* Блок из CRM кладём поверх файлового, но технические
+                   ключи, которых в панели нет (например, через сколько
+                   дней повторить предложение), не теряем. Списки
+                   заменяем целиком: дополнять их нечем. */
+                $current = config($key);
+
+                if (self::named($value) && self::named($current)) {
+                    $value += $current;
+                }
+
                 config([$key => $value]);
             }
         }
+    }
+
+    /** Массив с именами ключей, а не список. */
+    private static function named($value): bool
+    {
+        return is_array($value) && $value !== [] && array_keys($value) !== range(0, count($value) - 1);
     }
 
     /*
