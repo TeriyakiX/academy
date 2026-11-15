@@ -1,4 +1,5 @@
 import { claim, qs } from '@/shared/utils/dom';
+import { COOKIES_DONE, cookiesAccepted } from '@/shared/composables/useCookies';
 
 /*
  | Всплывающее предложение в углу экрана.
@@ -47,6 +48,13 @@ export function usePromo(): void {
 
     const show = (): void => {
         if (shown) return;
+
+        /* Плашка о cookie главнее: ждём согласия и показываемся после него. */
+        if (!cookiesAccepted()) {
+            document.addEventListener(COOKIES_DONE, () => setTimeout(show, 1200), { once: true });
+
+            return;
+        }
 
         /* Человек заполняет форму — не мешаем. */
         const active = document.activeElement;

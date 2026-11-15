@@ -12,7 +12,11 @@ import { claim, qs } from '@/shared/utils/dom';
 const BANNER = '[data-cookies]';
 const KEY = 'ab-cookies-accepted';
 
-function accepted(): boolean {
+/** Событие о принятом согласии. */
+export const COOKIES_DONE = 'ab:cookies-accepted';
+
+/** Согласие уже дано: промо-плашка ждёт этого, чтобы не лезть поверх. */
+export function cookiesAccepted(): boolean {
     try {
         if (localStorage.getItem(KEY)) return true;
     } catch { /* приватный режим */ }
@@ -34,7 +38,7 @@ function remember(years: number): void {
 export function useCookies(): void {
     const banner = qs(BANNER);
 
-    if (!banner || !claim(banner, 'cookiesReady') || accepted()) return;
+    if (!banner || !claim(banner, 'cookiesReady') || cookiesAccepted()) return;
 
     const years = Number(banner.dataset.cookiesYears ?? 1);
 
@@ -46,6 +50,9 @@ export function useCookies(): void {
     qs('[data-cookies-accept]', banner)?.addEventListener('click', () => {
         remember(years);
         banner.classList.remove('is-open');
+
+        /* Сообщаем остальным: теперь показывать своё окно можно. */
+        document.dispatchEvent(new CustomEvent(COOKIES_DONE));
 
         setTimeout(() => { banner.hidden = true; }, 250);
     });
