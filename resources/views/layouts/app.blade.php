@@ -46,6 +46,7 @@
 @endforeach
 @include('partials.site.modal')
 @include('partials.site.cookies')
+@include('partials.site.mobile-bar')
 
 @stack('scripts')
 

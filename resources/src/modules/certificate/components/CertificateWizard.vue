@@ -140,17 +140,26 @@
                         </label>
                     </div>
 
+                    <!-- Согласие на обработку данных: по закону отдельное
+                         действие и отдельный документ, галочка снята. -->
+                    <label class="ab-consent ab-cw__consent">
+                        <input v-model="consent" class="ab-consent__box" type="checkbox"
+                               name="consent" value="1" required>
+
+                        <span class="ab-consent__text">
+                            Я даю
+                            <a :href="soglasie" target="_blank" rel="noopener">согласие на обработку персональных данных</a>
+                            и принимаю
+                            <a href="/privacy-policy.html" target="_blank" rel="noopener">политику конфиденциальности</a>
+                        </span>
+                    </label>
+
                     <!-- Кнопка серая, пока не заполнено всё обязательное:
-                         имя получателя, ваше имя и телефон. -->
+                         имя получателя, ваше имя, телефон и согласие. -->
                     <button class="ab-btn ab-btn--primary ab-btn--lg ab-btn--block" type="submit"
                             :disabled="!canSend">
                         Отправить заявку
                     </button>
-
-                    <p class="ab-cw__note">
-                        Нажимая кнопку, вы соглашаетесь с
-                        <a href="/privacy-policy.html" target="_blank">политикой конфиденциальности</a>
-                    </p>
                 </form>
             </section>
         </div>
@@ -212,7 +221,8 @@
             </p>
 
             <p v-else-if="step === 2 && !canSend" class="ab-cw__last">
-                Заполните имя получателя, ваше имя и телефон — тогда кнопка отправки станет активной.
+                Заполните имя получателя, ваше имя и телефон и отметьте согласие —
+                тогда кнопка отправки станет активной.
             </p>
         </aside>
     </div>
@@ -253,10 +263,17 @@ const recipient = reactive<ICertificateRecipient>({ name: '', from: '', wish: ''
    а нам нужно знать, можно ли уже включать кнопку отправки. */
 const contact = reactive({ name: '', phone: '' });
 
+/* Согласие на обработку данных: по закону галочка снята по умолчанию
+   и ставится человеком. Адрес документа держим рядом с ней. */
+const consent = ref(false);
+const soglasie = '/docs/' + encodeURIComponent('Согласие_обработки_ПД_Академии_бариста.pdf');
+
 /* Отправка доступна, когда собрано всё нужное: программа, имя
-   получателя и контакты. Иначе менеджеру придёт нечего обрабатывать. */
+   получателя, контакты и согласие. Иначе менеджеру придёт нечего
+   обрабатывать, а заявку без согласия сервер и не примет. */
 const canSend = computed(
-    () => picked.value.length > 0 && recipient.name.length > 0 && contactReady.value,
+    () => picked.value.length > 0 && recipient.name.length > 0
+        && contactReady.value && consent.value,
 );
 
 const contactReady = computed(

@@ -218,14 +218,11 @@
                             <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required autocomplete="tel">
                         </label>
 
+                        @include('partials.site.consent', ['class' => 'ab-lead-form__consent'])
+
                         <button class="ab-btn ab-btn--primary ab-btn--block ab-btn--lg" type="submit">
                             Получить расчёт
                         </button>
-
-                        <p class="ab-lead-form__note">
-                            Нажимая кнопку, вы соглашаетесь с
-                            <a href="/privacy-policy.html">политикой конфиденциальности</a>
-                        </p>
                     </form>
                 </div>
             </div>

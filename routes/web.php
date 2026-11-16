@@ -300,6 +300,12 @@ Route::post('/lead', function (
     $data = $request->validate([
         'name'      => ['required', 'string', 'max:120'],
         'phone'     => ['required', 'string', 'max:40'],
+
+        /* Согласие на обработку данных: по 152-ФЗ без него заявку
+           принимать нельзя. Проверяем на сервере, а не только галочкой
+           в браузере — её легко обойти. */
+        'consent'   => ['accepted'],
+
         'email'     => ['nullable', 'email', 'max:120'],
         'source'    => ['nullable', 'string', 'max:200'],
         'page'      => ['nullable', 'string', 'max:200'],
