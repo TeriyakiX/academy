@@ -8,7 +8,7 @@
 
         <h2 class="ab-modal__title" id="ab-modal-title">Оставить заявку</h2>
         <p class="ab-modal__text">
-            Перезвоним в течение 15 минут в рабочее время и поможем выбрать программу.
+            Свяжемся с вами в течение рабочего дня и поможем выбрать программу.
         </p>
 
         {{-- Когда известно, о чём речь (курс, услуга, встреча, товар),
@@ -41,12 +41,9 @@
                 <textarea name="comment" rows="2" placeholder="Какой курс интересует"></textarea>
             </label>
 
-            <button class="ab-btn ab-btn--primary ab-btn--block ab-btn--lg" type="submit">Отправить</button>
+            @include('partials.site.consent', ['class' => 'ab-modal__consent'])
 
-            <p class="ab-modal__note">
-                Нажимая кнопку, вы соглашаетесь с
-                <a href="/privacy-policy.html" target="_blank">политикой конфиденциальности</a>
-            </p>
+            <button class="ab-btn ab-btn--primary ab-btn--block ab-btn--lg" type="submit">Отправить</button>
         </form>
     </div>
 </div>

@@ -196,3 +196,43 @@ input, textarea, select, button { box-sizing: border-box; }
     .ab-empty__text { font-size: 15px; }
     .ab-empty .ab-btn { width: 100%; }
 }
+
+/*
+ | Согласие на обработку данных.
+ |
+ | Галочка обязательна по 152-ФЗ и снята по умолчанию, поэтому она
+ | должна быть заметной и удобной для пальца: сама клетка 20 на 20,
+ | а нажимается вся строка с текстом. Текст приглушён, но не мельче
+ | 14 пикселей - на телефоне иначе не прочитать.
+ */
+.ab-consent {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin: 0 0 14px;
+    cursor: pointer;
+    /* Строка целиком - область нажатия, но не меньше пальца. */
+    min-height: 44px;
+    padding: 4px 0;
+}
+.ab-consent__box {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    margin: 2px 0 0;
+    accent-color: var(--ab-accent, #8a6a4b);
+    cursor: pointer;
+}
+.ab-consent__text {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ab-500, #6b6b6b);
+}
+.ab-consent__text a { color: inherit; text-decoration: underline; }
+.ab-consent__text a:hover { text-decoration: none; }
+
+/* На тёмных подложках - первый экран и окно заявки - текст светлее. */
+.ab-hero__form-consent .ab-consent__text,
+.ab-lead-form__consent .ab-consent__text { color: var(--ab-400, #9a9a9a); }
+.ab-hero__form-consent .ab-consent__text a,
+.ab-lead-form__consent .ab-consent__text a { color: var(--ab-cream, #f2ece4); }
