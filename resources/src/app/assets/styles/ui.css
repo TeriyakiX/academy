@@ -236,3 +236,11 @@ input, textarea, select, button { box-sizing: border-box; }
 .ab-lead-form__consent .ab-consent__text { color: var(--ab-400, #9a9a9a); }
 .ab-hero__form-consent .ab-consent__text a,
 .ab-lead-form__consent .ab-consent__text a { color: var(--ab-cream, #f2ece4); }
+
+/*
+ | Плашка о cookie закреплена внизу и накрывает низ страницы - вместе
+ | с юридическими ссылками в подвале, которые из-за этого не
+ | нажимались. Высоту плашки ставит скрипт, здесь - отступ под неё.
+ | На телефоне к этому добавляется высота нижней панели (mobile.css).
+ */
+body { padding-bottom: var(--ab-cookies-h, 0px); }

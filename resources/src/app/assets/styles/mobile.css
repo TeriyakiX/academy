@@ -1094,7 +1094,7 @@
     .ab-bar__btn--lead { background: var(--c-brown, #8a6a4b); color: #fff; }
 
     /* Низ страницы отодвигаем, чтобы панель ничего не закрывала. */
-    body { padding-bottom: var(--ab-bar-h); }
+    body { padding-bottom: calc(var(--ab-bar-h) + var(--ab-cookies-h, 0px)); }
 
     /* Плашка о cookie и предложение сертификата встают над панелью,
        иначе кнопка «Принимаю» оказывается под ней. */
