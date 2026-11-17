@@ -987,7 +987,7 @@
                 <textarea id="userComment" name="comment" rows="3" placeholder="Ваши пожелания или вопросы"></textarea>
             </div>
 
-            <div class="event-modal-buttons">
+            @include('partials.site.consent')<div class="event-modal-buttons">
                 <button type="button" class="btn-cancel">Отмена</button>
                 <button type="submit" class="btn-submit">Записаться</button>
             </div>

@@ -44,8 +44,26 @@ export function useCookies(): void {
 
     banner.hidden = false;
 
+    /*
+     | Плашка закреплена внизу экрана и накрывает собой низ страницы.
+     | В подвале там как раз юридические ссылки - они переставали
+     | нажиматься, потому что курсор попадал в плашку. Пока плашка
+     | висит, отодвигаем низ страницы на её высоту.
+     */
+    const otstup = (): void => {
+        document.documentElement.style.setProperty(
+            '--ab-cookies-h', `${Math.ceil(banner.getBoundingClientRect().height)}px`,
+        );
+    };
+
     /* Класс ставим следующим кадром, иначе появление не проигрывается. */
-    requestAnimationFrame(() => banner.classList.add('is-open'));
+    requestAnimationFrame(() => {
+        banner.classList.add('is-open');
+        otstup();
+    });
+
+    /* Текст переносится по-разному - на узком экране плашка выше. */
+    window.addEventListener('resize', otstup, { passive: true });
 
     qs('[data-cookies-accept]', banner)?.addEventListener('click', () => {
         remember(years);
@@ -53,6 +71,9 @@ export function useCookies(): void {
 
         /* Сообщаем остальным: теперь показывать своё окно можно. */
         document.dispatchEvent(new CustomEvent(COOKIES_DONE));
+
+        window.removeEventListener('resize', otstup);
+        document.documentElement.style.removeProperty('--ab-cookies-h');
 
         setTimeout(() => { banner.hidden = true; }, 250);
     });

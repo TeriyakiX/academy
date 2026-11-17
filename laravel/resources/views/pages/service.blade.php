@@ -219,6 +219,8 @@
                                     <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required autocomplete="tel">
                                 </label>
 
+                                @include('partials.site.consent')
+
                                 <button class="ab-btn ab-btn--primary ab-btn--block ab-btn--lg" type="submit">
                                     Отправить заявку
                                 </button>

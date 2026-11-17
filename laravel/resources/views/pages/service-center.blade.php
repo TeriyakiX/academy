@@ -68,6 +68,8 @@
                                       placeholder="Например: суперавтомат Jura, не набирает воду"></textarea>
                         </label>
 
+                        @include('partials.site.consent')
+
                         <button class="ab-btn ab-btn--primary ab-btn--block ab-btn--lg" type="submit">
                             Отправить заявку
                         </button>
