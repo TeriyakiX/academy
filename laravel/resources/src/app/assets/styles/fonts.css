@@ -1,4 +1,14 @@
 /*
+ | Шрифт Involve отключён.
+ |
+ | Три файла Involve-*.woff2 битые: в них нет заголовка woff2,
+ | браузер их отбрасывает с ошибкой и берёт запасной шрифт. То есть
+ | сайт и так показывался шрифтом Circe, но 180 КБ качались впустую
+ | на каждой странице. Сами файлы оставлены в public/assets - если
+ | найдутся целые, достаточно вернуть сюда три описания.
+ */
+
+/*
  | Шрифты сайта.
  |
  | Раньше @font-face лежал только внутри старых постраничных бандлов
@@ -67,30 +77,6 @@
 @font-face {
     src:local(Montserrat),url(/assets/Montserrat-Regular.woff2) format("woff2");
     font-family:Montserrat;
-    font-weight:400;
-    font-style:normal;
-    font-display:swap
-}
-
-@font-face {
-    src:local(Involve),url(/assets/Involve-Bold.woff2) format("woff2");
-    font-family:Involve;
-    font-weight:700;
-    font-style:normal;
-    font-display:swap
-}
-
-@font-face {
-    src:local(Involve),url(/assets/Involve-Medium.woff2) format("woff2");
-    font-family:Involve;
-    font-weight:500;
-    font-style:normal;
-    font-display:swap
-}
-
-@font-face {
-    src:local(Involve),url(/assets/Involve-Regular.woff2) format("woff2");
-    font-family:Involve;
     font-weight:400;
     font-style:normal;
     font-display:swap
