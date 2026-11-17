@@ -1,3 +1,6 @@
+{{-- Нет встреч — нет и блока: пустой раздел с заголовком «Приходите
+     на встречи» выглядит хуже, чем его отсутствие. --}}
+@if (\App\Support\Meetings::all()->isNotEmpty())
 <section class="ab-events ab-reveal">
     <div class="ab-container">
         <div class="ab-events__head">
@@ -16,3 +19,4 @@
         @include('partials.blocks.events-posters', ['limit' => 6, 'withPast' => false, 'row' => true])
     </div>
 </section>
+@endif
